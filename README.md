@@ -22,6 +22,7 @@ npm run build --report
 
  * [Vuejs 2.0](https://vuejs.org/)
  * [Webpack](https://webpack.js.org/)
+ * [PouchDB](https://pouchdb.com/)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
