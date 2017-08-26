@@ -1,0 +1,76 @@
+<template>
+<div id="app-content" class="rounded">
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Welcome Back!</strong> You last logged in at {{ lastLoginDate }}
+</div>
+	<div class="jumbotron bg-transparent">
+		<div class="container">
+			<h1 class="display-3">{{ title }}</h1>
+			<p>This is a template for a simple marketing or informational
+				website. It includes a large callout called a jumbotron and three
+				supporting pieces of content. Use it as a starting point to create
+				something more unique.</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="#" role="button">New Post &raquo;</a>
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Blog Post 1</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				<p>
+					<a class="btn btn-secondary" href="#" role="button">View
+						post &raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Blog Post 2</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				<p>
+					<a class="btn btn-secondary" href="#" role="button">View
+						post &raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Blog Post 3</h2>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
+					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
+					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+					nibh, ut fermentum massa justo sit amet risus.</p>
+				<p>
+					<a class="btn btn-secondary" href="#" role="button">View
+						post &raquo;</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'app-content',
+  data () {
+    return {
+      title: 'Hello World!',
+      lastLoginDate: ''+ new Date().toLocaleString()
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>

@@ -2,23 +2,29 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import Router from './router'
 import PouchDB from 'pouchdb-browser'
 
 // Bootstrap
-window.$ = window.jQuery = require('jquery')
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'font-awesome/css/font-awesome.min.css'
 
 // Components
 import Navbar from './components/Navbar';
-Vue.component('navbar', Navbar);
+Vue.component('app-navbar', Navbar);
+import Sidebar from './components/Sidebar';
+Vue.component('app-sidebar', Sidebar);
+import Footer from './components/Footer';
+Vue.component('app-footer', Footer);
+import Content from './components/Content';
+Vue.component('app-content', Content);
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  Router,
   template: '<App/>',
   components: { App }
 })
