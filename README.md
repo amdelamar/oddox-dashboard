@@ -1,5 +1,6 @@
 # Rant-Dashboard
 
+[![Build](https://img.shields.io/travis/RamblingWare/Rant-Dashboard.svg)](https://travis-ci.org/RamblingWare/Rant-Dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/RamblingWare/Rant-Dashboard.svg)](https://codecov.io/gh/RamblingWare/Rant-Dashboard)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/RamblingWare/Rant-Dashboard/blob/master/LICENSE)
 
