@@ -3,6 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import PouchDB from 'pouchdb-browser'
+
+// Bootstrap
+window.$ = window.jQuery = require('jquery')
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+// Components
+import Navbar from './components/Navbar';
+Vue.component('navbar', Navbar);
 
 Vue.config.productionTip = false
 
