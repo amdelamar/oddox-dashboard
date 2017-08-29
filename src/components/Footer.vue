@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       copyright: 'RamblingWare 2014-2017',
-      update: 'Last Updated: 8-26-2017'
+      update: 'Last Updated: 8-29-2017'
     }
   }
 }
