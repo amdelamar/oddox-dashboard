@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       title: 'Hello World!',
-      lastLoginDate: ''+ new Date().toLocaleString()
+      lastLoginDate: '' + new Date().toLocaleString()
     }
   }
 }

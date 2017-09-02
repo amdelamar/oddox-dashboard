@@ -7,11 +7,11 @@ cache:
     - "node_modules"
 
 install:
- - npm install -g codecov
+ - npm install
 
 script:
- - npm install
- - npm test
+ - npm run build
+ - npm run unit
 
 after_success:
 # - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
