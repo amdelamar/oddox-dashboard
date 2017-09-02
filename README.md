@@ -5,7 +5,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/RamblingWare/Rant-Dashboard.svg)](https://codecov.io/gh/RamblingWare/Rant-Dashboard)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/RamblingWare/Rant-Dashboard/blob/master/LICENSE)
 
-Blog management dashboard for the [Rant](https://github.com/RamblingWare/Rant) system.
+Blog management dashboard on CouchDB. This is a web client for the [Rant](https://github.com/RamblingWare/Rant) system.
 
 > Live Example: coming soon...
 
@@ -19,16 +19,16 @@ Blog management dashboard for the [Rant](https://github.com/RamblingWare/Rant) s
 ## Planned Features
 
  * Containerize with Docker
- * Offline-first Vuejs+PouchDB dashboard
+ * Offline-first Vuejs + PouchDB dashboard
  * Freemarker Theme Templates
 
 ## Usage
 
 This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete.
 
-Please use the [Rant](https://github.com/RamblingWare/Rant) project for full deployment details. 
+Please use see [Rant](https://github.com/RamblingWare/Rant) project README for full deployment details. 
 
-## Manually Build
+### Manually Build
 
 ``` bash
 # install dependencies
@@ -42,18 +42,27 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 ```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Technologies Used
 
  * [Vuejs 2.0](https://vuejs.org/) JavaScript Framework
- * [PouchDB 6.3.4](https://pouchdb.com/) NoSQL Database
  * [Bootstrap 4.0.0-beta](https://getbootstrap.com/) CSS Framework
  * [Font Awesome 4.7](http://fontawesome.io/) Icons
  * [Webpack 3.5](https://webpack.js.org/) Module Bundler
- * [Node.js] for testing
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+ * [PouchDB 6.3.4](https://pouchdb.com/) NoSQL Database
+ * [Node.js 8.4] for dev and testing
 
 ## License
 
