@@ -1,7 +1,6 @@
 <template>
 <div class="h-100">
-  <h1>TEST</h1>
-    <app-navbar></app-navbar>
+	<app-navbar></app-navbar>
 	<main class="container-fluid h-100">
 	<div class="row">
 		<div class="col-sm-3 col-md-3 col-lg-2 px-0">
@@ -24,6 +23,11 @@ import Content from '@/components/Content'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+	  msg: 'Dashboard'
+	}
+  },
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
@@ -35,5 +39,4 @@ export default {
 </script>
 
 <style>
-
 </style>

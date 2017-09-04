@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="login">
     <h1>{{ msg }}</h1>
 
     <form action="/manage/login" method="post">
