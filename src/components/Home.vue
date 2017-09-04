@@ -23,11 +23,6 @@ import Content from '@/components/Content'
 
 export default {
   name: 'Home',
-  data () {
-    return {
-	  msg: 'Dashboard'
-	}
-  },
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
