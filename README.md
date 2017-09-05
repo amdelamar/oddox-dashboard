@@ -5,7 +5,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/RamblingWare/Rant-Dashboard.svg)](https://codecov.io/gh/RamblingWare/Rant-Dashboard)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/RamblingWare/Rant-Dashboard/blob/master/LICENSE)
 
-Blog management dashboard on CouchDB. This is a web client for the [Rant](https://github.com/RamblingWare/Rant) system.
+Blog management dashboard on CouchDB.
 
 > Live Example: coming soon...
 
@@ -24,11 +24,11 @@ Blog management dashboard on CouchDB. This is a web client for the [Rant](https:
 
 ## Usage
 
-This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete.
+This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete. Essentially, this is a web client for the [Rant](https://github.com/RamblingWare/Rant) system.
 
-Please use see [Rant](https://github.com/RamblingWare/Rant) project README for full deployment details. 
+Please use see [Rant's README](https://github.com/RamblingWare/Rant) for full deployment details. 
 
-### Manually Build
+### Getting Started
 
 ``` bash
 # install dependencies
@@ -57,12 +57,12 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## Technologies Used
 
- * [Vuejs 2.0](https://vuejs.org/) JavaScript Framework
- * [Bootstrap 4.0.0-beta](https://getbootstrap.com/) CSS Framework
+ * [Vuejs 2.4.2](https://vuejs.org/) JavaScript Framework
+ * [PouchDB 6.3.4](https://pouchdb.com/) NoSQL Database
+ * [Bootstrap 4.0.0](https://getbootstrap.com/) CSS Framework
  * [Font Awesome 4.7](http://fontawesome.io/) Icons
  * [Webpack 3.5](https://webpack.js.org/) Module Bundler
- * [PouchDB 6.3.4](https://pouchdb.com/) NoSQL Database
- * [Node.js 8.4] for dev and testing
+ * [Node.js 8.4](https://nodejs.org/) for local dev and testing
 
 ## License
 
