@@ -1,11 +1,11 @@
-# Rant-Dashboard
+# dashboard
 
-[![Build](https://img.shields.io/travis/RamblingWare/Rant-Dashboard.svg)](https://travis-ci.org/RamblingWare/Rant-Dashboard)
-[![Code Climate](https://img.shields.io/codeclimate/github/RamblingWare/Rant-Dashboard.svg)](https://codeclimate.com/github/RamblingWare/Rant-Dashboard)
-[![Codecov](https://img.shields.io/codecov/c/github/RamblingWare/Rant-Dashboard.svg)](https://codecov.io/gh/RamblingWare/Rant-Dashboard)
-[![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/RamblingWare/Rant-Dashboard/blob/master/LICENSE)
+[![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
+[![Code Climate](https://img.shields.io/codeclimate/github/oddoxorg/dashboard.svg)](https://codeclimate.com/github/oddoxorg/dashboard)
+[![Codecov](https://img.shields.io/codecov/c/github/oddoxorg/dashboard.svg)](https://codecov.io/gh/oddoxorg/dashboard)
+[![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
 
-Blog management dashboard on CouchDB.
+Oddox admin dashboard.
 
 > Live Example: coming soon...
 
@@ -14,19 +14,18 @@ Blog management dashboard on CouchDB.
  *  Multi-Author blog system with editable roles (Author, Editor, Owner, Admin)
  *  Organize blog posts by Tags, Categories, Featured, Authors, and Dates
  *  SEO & Social Media ready with Facebook (OpenGraph), Twitter, Google+ tags
- *  2FA security and pbkdf2 hashed passwords
- 
+ *  HTTP/2, HTTPS, and pbkdf2 ([RFC2898](https://www.ietf.org/rfc/rfc2898.txt)) hashed passwords
+
 ## Planned Features
 
- * Containerize with Docker
- * Offline-first Vuejs + PouchDB dashboard
- * Freemarker Theme Templates
+* Offline-first dashboard for authors to manage blog
+* Freemarker Theme Templates
 
 ## Usage
 
-This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete. Essentially, this is a web client for the [Rant](https://github.com/RamblingWare/Rant) system.
+This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete. Essentially, this is a admin console for the [Rant](https://github.com/oddoxorg/oddox) blog platform.
 
-Please use see [Rant's README](https://github.com/RamblingWare/Rant) for full deployment details. 
+Please use see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
 ### Getting Started
 
@@ -66,4 +65,4 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## License
 
-[Apache 2.0](https://github.com/RamblingWare/Rant-Dashboard/blob/master/LICENSE)
+[Apache 2.0](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)

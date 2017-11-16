@@ -1,7 +1,7 @@
 {
-  "name": "rant-dashboard",
+  "name": "dashboard",
   "version": "1.0.0",
-  "description": "A dashboard for Rant authors",
+  "description": "Oddox admin dashboard",
   "author": "@amdelamar",
   "private": true,
   "scripts": {
