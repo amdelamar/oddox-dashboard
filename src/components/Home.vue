@@ -30,7 +30,6 @@ export default {
     'app-footer': Footer
   }
 }
-
 </script>
 
 <style>

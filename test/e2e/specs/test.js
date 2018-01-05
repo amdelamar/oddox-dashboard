@@ -11,8 +11,8 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('#login')
-      .assert.containsText('h1', 'Login')
+      .assert.containsText('h1', 'To-Dos')
+      .assert.elementCount('img', 1)
       .end()
   }
 }

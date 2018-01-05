@@ -1,8 +1,9 @@
-# dashboard
+# Oddox Dashboard
 
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
-[![Code Climate](https://img.shields.io/codeclimate/github/oddoxorg/dashboard.svg)](https://codeclimate.com/github/oddoxorg/dashboard)
+[![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/oddoxorg/dashboard.svg)](https://codecov.io/gh/oddoxorg/dashboard)
+[![Docker Pulls](https://img.shields.io/docker/pulls/oddoxorg/dashboard.svg)](https://hub.docker.com/r/oddoxorg/dashboard/)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
 
 Oddox admin dashboard.
@@ -23,7 +24,7 @@ Oddox admin dashboard.
 
 ## Usage
 
-This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. I plan to make a self-installing version once the main features are complete. Essentially, this is a admin console for the [Rant](https://github.com/oddoxorg/oddox) blog platform.
+This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. A self-installing version will be made available once the main features are complete. "Dashboard" is a admin console for the [Oddox](https://github.com/oddoxorg/oddox) blogging platform.
 
 Please use see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
@@ -56,8 +57,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## Technologies Used
 
- * [Vuejs 2.4.2](https://vuejs.org/) JavaScript Framework
- * [PouchDB 6.3.4](https://pouchdb.com/) NoSQL Database
+ * [Vuejs 2.5.2](https://vuejs.org/) JavaScript Framework
+ * [PouchDB 6.4.1](https://pouchdb.com/) NoSQL Database
  * [Bootstrap 4.0.0](https://getbootstrap.com/) CSS Framework
  * [Font Awesome 4.7](http://fontawesome.io/) Icons
  * [Webpack 3.5](https://webpack.js.org/) Module Bundler
