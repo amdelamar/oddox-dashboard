@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'login',
   data () {
     return {
       msg: 'Login'

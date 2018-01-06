@@ -1,5 +1,5 @@
 <template>
-<div class="h-100">
+<div id="home" class="h-100">
 	<app-navbar></app-navbar>
 	<main class="container-fluid h-100">
 	<div class="row">
@@ -22,7 +22,7 @@ import Footer from '@/components/Footer'
 import Content from '@/components/Content'
 
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,

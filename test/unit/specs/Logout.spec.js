@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import Logout from '@/views/Login'
+import Logout from '@/views/Logout'
 
-describe('Login.vue', () => {
+describe('Logout.vue', () => {
   it('should render correct contents', () => {
     const Constructor = Vue.extend(Logout)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('#login h1').textContent)
-      .toEqual('Login')
+    expect(vm.$el.querySelector('#logout h1').textContent)
+      .toEqual('Logout')
   })
 })

@@ -4,7 +4,7 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-  <strong>Welcome Back!</strong> You last logged in at {{ lastLoginDate }}
+  <b>Welcome Back!</b> You last logged in at {{ lastLoginDate }}
 </div>
 	<div class="jumbotron bg-transparent">
 		<div class="container">
