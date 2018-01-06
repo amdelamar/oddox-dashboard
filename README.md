@@ -6,25 +6,15 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/oddoxorg/dashboard.svg)](https://hub.docker.com/r/oddoxorg/dashboard/)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
 
-Oddox admin dashboard.
+Offline-first dashboard for authors to manage their Oddox blog
 
 > Live Example: coming soon...
 
-## Features
-
- *  Multi-Author blog system with editable roles (Author, Editor, Owner, Admin)
- *  Organize blog posts by Tags, Categories, Featured, Authors, and Dates
- *  SEO & Social Media ready with Facebook (OpenGraph), Twitter, Google+ tags
- *  HTTP/2, HTTPS, and pbkdf2 ([RFC2898](https://www.ietf.org/rfc/rfc2898.txt)) hashed passwords
-
-## Planned Features
-
-* Offline-first dashboard for authors to manage blog
-* Freemarker Theme Templates
-
 ## Usage
 
-This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. A self-installing version will be made available once the main features are complete. "Dashboard" is a admin console for the [Oddox](https://github.com/oddoxorg/oddox) blogging platform.
+Dashboard is a console for authors using the [Oddox](https://github.com/oddoxorg/oddox) blogging platform to write, sync, and manage their blog.
+
+This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. A self-installing version will be made available once the main features are complete.
 
 Please use see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
