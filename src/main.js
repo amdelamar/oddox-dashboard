@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import Router from './router'
-// import PouchDB from 'pouchdb-browser'
 
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
