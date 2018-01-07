@@ -5,7 +5,7 @@ describe('Login.vue', () => {
   it('should render correct contents', () => {
     const Constructor = Vue.extend(Login)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('#login h1').textContent)
+    expect(vm.$el.querySelector('#login h4').textContent)
       .toEqual('Login')
   })
 })
