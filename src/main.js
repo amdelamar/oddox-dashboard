@@ -4,10 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import Router from './router'
 
-// Bootstrap
-import 'bootstrap/dist/css/bootstrap.css'
-import 'font-awesome/css/font-awesome.min.css'
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -14,10 +14,6 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-beta",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.3",
     "pouchdb-browser": "^6.4.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
