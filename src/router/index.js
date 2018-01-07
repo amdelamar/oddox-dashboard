@@ -11,6 +11,22 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      component: Home,
+      children: [
+        {
+          path: 'post/:id',
+          component: Home
+        }
+      ]
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Home
+    },
+    {
+      path: '/profile',
+      name: 'profile',
       component: Home
     },
     {

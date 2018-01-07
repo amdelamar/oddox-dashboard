@@ -1,28 +1,33 @@
 <template>
-<div id="app-sidebar" class="container-fluid h-100">
-	<a href="#" class="btn btn-primary btn-block my-2" role="button">New
-		Post &raquo;</a>
-	<ul class="list-group border-0">
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Drafts
-				<sup class="badge badge-pill badge-light">1</sup></a></li>
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-archive"></i>&nbsp;&nbsp;All
-				Posts</a></li>
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-star"></i>&nbsp;&nbsp;Featured</a></li>
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-tag"></i>&nbsp;&nbsp;Tags</a></li>
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-folder"></i>&nbsp;&nbsp;Categories</a></li>
-		<li class="list-group-item border-0"><a href="#"
-			class="btn-block text-dark"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Years</a></li>
-		<li
-			class="list-group-item border border-bottom-0 border-left-0 border-right-0"><a
-			href="#" class="btn-block text-dark"><i class="fa fa-trash"></i>&nbsp;&nbsp;Trash
-				<sup class="badge badge-pill badge-light">2</sup></a></li>
-	</ul>
-</div>
+  <nav id="app-sidebar" class="border-right">
+
+    <div class="contextbar row padding">
+      <button class="full-width button button-blue" v-on:click="newpost">New Post</button>
+    </div>
+
+    <div class="nav-list padding padding-bottom-large">
+        <a class="nav-item" href="/#/posts">Posts</a>
+        <a class="nav-item" href="/#/drafts">Drafts</a>
+        <a class="nav-item" href="/#/featured">Featured</a>
+        <a class="nav-item" href="/#/category">By Category</a>
+        <a class="nav-item" href="/#/tags">By Tags</a>
+        <a class="nav-item" href="/#/years">By Year</a>
+        <a class="nav-item" href="/#/trash">Trash</a>
+        <a class="nav-item" href="/#/all-posts">All Posts</a>
+        <span class="nav-item border-bottom"></span>
+        <a class="nav-item" href="/#/settings">Settings</a>
+        <span class="nav-item border-bottom"></span>
+    </div>
+
+    <div id="footer" class="padding full-width text-center">
+        <p title="Total disk size of your database">
+          Storage: <code>{{ dbsize }}</code>
+        </p>
+        <span class="text-small border-top padding-top">
+          <em><a :href="link">{{ name }} {{ version }}</a></em>
+        </span>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -30,11 +35,37 @@ export default {
   name: 'app-sidebar',
   data () {
     return {
-      label: 'Sidebar'
+      name: 'Oddox',
+      link: 'https://oddox.org/',
+      version: 'v1.0.0',
+      dbsize: '15 MB'
+    }
+  },
+  methods: {
+    newpost () {
+      console.log('new post')
     }
   }
 }
 </script>
 
 <style>
+#app-sidebar {
+  height: 100%;
+  max-width: 100%;
+}
+#app-sidebar a {
+  color: initial;
+}
+#footer, #footer a {
+  color: grey;
+}
+#footer:hover, #footer a:hover {
+  color: initial;
+}
+#footer {
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
 </style>
