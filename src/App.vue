@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div id="app" class="background-solid-grey">
   <router-view></router-view>
 </div>
 </template>
@@ -34,5 +34,15 @@ body {
 }
 .text-capitalize {
   text-transform: capitalize;
+}
+.background-solid-white {
+  background-color: #ffffff;
+}
+.background-solid-grey {
+  background-color: #fafafa;
+}
+.background-gradient-grey {
+  background-color: unset;
+  background-image: linear-gradient(180deg, #ffffff 50%, #fafafa 100%);
 }
 </style>

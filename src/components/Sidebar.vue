@@ -1,5 +1,5 @@
 <template>
-  <nav id="app-sidebar" class="border-right">
+  <nav id="app-sidebar" class="border-right background-solid-grey">
 
     <div class="contextbar row padding">
       <button class="full-width button button-blue" v-on:click="newpost">New Post</button>

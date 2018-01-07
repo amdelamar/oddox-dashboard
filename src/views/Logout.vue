@@ -1,8 +1,8 @@
 <template>
 <div id="logout" class="padding-top-large full-width full-height animated fadeIn">
 
-  <div class="row">
-    <div class="four columns offset-by-four padding-large border round">
+  <div class="row section">
+    <div class="four columns offset-by-four padding-large border round background-solid-white">
       <h4>{{title}}</h4>
       <div class="row">
         <p>You have been logged out.</p>

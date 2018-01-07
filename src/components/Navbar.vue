@@ -1,5 +1,5 @@
 <template>
-  <nav id="app-navbar" class="navbar border-bottom">
+  <nav id="app-navbar" class="navbar border-bottom background-gradient-grey">
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">

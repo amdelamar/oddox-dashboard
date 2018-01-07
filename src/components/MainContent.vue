@@ -1,7 +1,7 @@
 <template>
 <div id="app-main-content" class="row">
 
-  <div class="contextbar row padding border-bottom">
+  <div class="contextbar row padding border-bottom background-solid-grey">
     <div class="text-right">
       <button class="button" onclick="#save">Save</button>&nbsp;
       <button class="button button-blue" onclick="#publish">Publish</button>&nbsp;
@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="row full-height padding-large scrollable animated fadeIn">
+  <div class="row full-height padding-large scrollable background-solid-white animated fadeIn">
     <h1 id="post-title">{{ title }}</h1>
     <p id="post-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere risus urna, lobortis semper est iaculis eu. In maximus rutrum dolor ac ullamcorper. Fusce id consectetur odio. Etiam finibus urna ullamcorper, ultricies lectus nec, imperdiet est.
       Curabitur nec justo vel urna finibus mattis aliquam ut enim. Donec posuere lectus sed arcu sodales, vel commodo felis placerat. Vestibulum eu sem eu mauris pharetra porttitor.

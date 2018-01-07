@@ -1,7 +1,7 @@
 <template>
   <div id="app-side-content" class="row border-right animated fadeIn">
 
-    <div class="contextbar row padding border-bottom">
+    <div class="contextbar row padding border-bottom background-solid-grey">
       <div class="margin-none left">
         <input type="text" class="full-width" placeholder="Search within view..." v-model="text" />
       </div>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="row full-height scrollable text-left">
+    <div class="row background-solid-white full-height scrollable text-left">
       <!-- placeholder for now -->
       <a :href="'/#/post/' + post._id" v-for="post in posts">
         <div class="row padding border-bottom margin-none hover-shadow">
