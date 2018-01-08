@@ -12,10 +12,10 @@
 
     <div id="list" class="background-solid-white full-height scrollable text-left">
       <!-- placeholder for now -->
-      <a :href="'/#/post/' + post._id" v-for="post in posts">
+      <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
         <div class="row padding border-bottom margin-none hover-shadow">
-          <span class="text-capitalize">{{ post.title }}</span><br/>
-          <small>{{ post.description }} | <code>{{ post.date }}</code></small>
+          <p class="text-capitalize margin-none">{{ post.title | shortTitle }}</p>
+          <small>{{ post.description | shortDesc }}</small>
         </div>
       </a>
     </div>
@@ -24,26 +24,47 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   name: 'app-side-content',
   data () {
     return {
-      title: 'Hello World!',
       text: '',
-      // junk posts for now
-      posts: [
-        { _id: 'hello-world', title: 'Hello World!', description: 'This is a test.', date: 'Mar 2nd, 2017' },
-        { _id: 'something-cool', title: 'Something cool', description: 'This is a test.', date: 'Mar 2nd, 2017' },
-        { _id: 'bvs-was-bad', title: 'Batman v Superman was Bad', description: 'This is a test.', date: 'Mar 2nd, 2017' },
-        { _id: 'oddox-blogging', title: 'Oddox blogging platform', description: 'This is a test.', date: 'Mar 2nd, 2017' },
-        { _id: 'javascript-tips', title: 'JavaScript tips and tricks', description: 'This is a test.', date: 'Mar 2nd, 2017' },
-        { _id: 'first', title: 'First!', description: 'This is a test.', date: 'Mar 2nd, 2017' }
-      ]
+      posts: []
     }
+  },
+  created () {
+    store.loadPosts(this, 'posts')
+    text: ''
   },
   methods: {
     search () {
+      this.text = this.text.toLowerCase()
       console.log('search for: ' + this.text)
+      let newPosts = []
+      for (let i = 0; i < this.posts.length; i++) {
+        if (this.posts[i].title.toLowerCase().indexOf(this.text) !== -1) {
+          newPosts.push(this.posts[i])
+        }
+      }
+      this.posts = newPosts
+    }
+  },
+  filters: {
+    shortTitle: function (string) {
+      if (string.length > 45) {
+        return string.substring(0, 45) + '...'
+      } else {
+        return string
+      }
+    },
+    shortDesc: function (string) {
+      if (string.length > 60) {
+        return string.substring(0, 60) + '...'
+      } else {
+        return string
+      }
     }
   }
 }
@@ -55,5 +76,8 @@ export default {
 }
 #list {
   height: calc(100% - 6.5rem);
+}
+.overflow-none {
+  overflow: none;
 }
 </style>

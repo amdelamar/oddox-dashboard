@@ -32,7 +32,9 @@ store.loadPosts = (obj, prop) => {
   store.allPosts().then(docs => {
     obj[prop] = []
     for (let i = 0; i < docs.total_rows; i++) {
-      obj[prop].push(docs.rows[i].doc)
+      if (docs.rows[i].doc.title !== undefined) {
+        obj[prop].push(docs.rows[i].doc)
+      }
     }
   })
 }
