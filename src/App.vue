@@ -1,5 +1,5 @@
 <template>
-<div id="app" class="background-solid-grey">
+<div id="app">
   <router-view></router-view>
 </div>
 </template>
@@ -19,15 +19,15 @@ export default {
   height: 100%;
 }
 #app {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
-}
-body {
-  margin: 0;
-  height: 100%;
   overflow: hidden;
+}
+html, body {
+  height: 100%;
+  width: 100%;
 }
 .hover-shadow:hover {
   box-shadow: 0 0 8px 5px #efefef;
@@ -44,5 +44,8 @@ body {
 .background-gradient-grey {
   background-color: unset;
   background-image: linear-gradient(180deg, #ffffff 50%, #fafafa 100%);
+}
+input:hover, input:active, input:focus {
+  background-color: #ffffff;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <nav id="app-sidebar" class="border-right background-solid-grey">
 
-    <div class="contextbar row padding">
+    <div class="contextbar padding">
       <button class="full-width button button-blue" v-on:click="newpost">New Post</button>
     </div>
 
@@ -19,14 +19,14 @@
         <span class="nav-item border-bottom"></span>
     </div>
 
-    <div id="footer" class="padding full-width text-center">
+    <footer class="padding full-width text-center">
         <p title="Total disk size of your database">
           Storage: <code>{{ dbsize }}</code>
         </p>
         <span class="text-small border-top padding-top">
           <em><a :href="link">{{ name }} {{ version }}</a></em>
         </span>
-    </div>
+    </footer>
   </nav>
 </template>
 
@@ -52,18 +52,17 @@ export default {
 <style>
 #app-sidebar {
   height: 100%;
-  max-width: 100%;
 }
 #app-sidebar a {
   color: initial;
 }
-#footer, #footer a {
+#app-sidebar footer, #app-sidebar footer a {
   color: grey;
 }
-#footer:hover, #footer a:hover {
+#app-sidebar footer:hover, #app-sidebar footer a:hover {
   color: initial;
 }
-#footer {
+#app-sidebar footer {
   left: 0;
   bottom: 0;
   margin: auto;

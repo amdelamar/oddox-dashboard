@@ -1,21 +1,21 @@
 <template>
-<div id="home">
+  <div id="home">
 
   <app-navbar></app-navbar>
 
-  <main id="main" class="row full-height" role="main">
-    <div class="two columns full-height margin-none">
+  <main id="main" role="main">
+    <section class="two columns full-height">
       <app-sidebar></app-sidebar>
-    </div>
-    <div id="sideColumn" class="three columns full-height">
+    </section>
+    <section id="side-content" class="three columns full-height">
       <app-side-content></app-side-content>
-    </div>
-    <div id="mainColumn" class="seven columns full-height">
+    </section>
+    <section id="main-content" class="seven columns full-height">
       <app-main-content></app-main-content>
-    </div>
+    </section>
   </main>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -38,17 +38,22 @@ export default {
 <style>
 #home {
   height: 100%;
+  width: 100%;
 }
-#sideColumn {
+#main {
+  height: calc(100% - 6.5rem);
+  width: 100%;
+}
+#side-content {
   width: 26%;
   margin: 0;
 }
-#mainColumn {
+#main-content {
   width: 60.6666666667%;
   margin: 0;
 }
 .contextbar {
-  min-height: 7rem;
+  min-height: 6.5rem;
   width: 100%;
 }
 </style>

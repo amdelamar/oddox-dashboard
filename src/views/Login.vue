@@ -1,5 +1,5 @@
 <template>
-<div id="login" class="padding-top-large full-height full-width">
+<div id="login" class="padding-top-large full-height full-width background-solid-grey">
 
   <form action="/#/" method="post">
     <div class="row section">

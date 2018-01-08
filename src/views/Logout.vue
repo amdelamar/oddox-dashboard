@@ -1,5 +1,5 @@
 <template>
-<div id="logout" class="padding-top-large full-width full-height animated fadeIn">
+<div id="logout" class="padding-top-large full-width full-height animated fadeIn background-solid-grey">
 
   <div class="row section">
     <div class="four columns offset-by-four padding-large border round background-solid-white">
