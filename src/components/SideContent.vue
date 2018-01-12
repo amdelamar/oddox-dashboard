@@ -6,7 +6,8 @@
         <input type="text" class="full-width" placeholder="Search within view..." v-model="text" />
       </div>
       <div class="text-right">
-        <button class="button" v-on:click="search">Search</button>
+        <button class="button" v-on:click="search">Search</button>&nbsp;
+        <button class="button" v-on:click="close" v-if="text !== null">X</button>
       </div>
     </div>
 
@@ -18,6 +19,10 @@
           <small>{{ post.description | shortDesc }}</small>
         </div>
       </a>
+
+      <p class="padding-top text-center" v-if="posts === null || posts.length < 1">
+        <em>No posts found.</em>
+      </p>
     </div>
 
   </div>
@@ -30,15 +35,19 @@ export default {
   name: 'app-side-content',
   data () {
     return {
-      text: '',
-      posts: []
+      text: null,
+      posts: null
     }
   },
   created () {
     store.loadPosts(this, 'posts')
-    text: ''
+    this.text = null
   },
   methods: {
+    close () {
+      store.loadPosts(this, 'posts')
+      this.text = null
+    },
     search () {
       this.text = this.text.toLowerCase()
       console.log('search for: ' + this.text)

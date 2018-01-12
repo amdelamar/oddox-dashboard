@@ -2,17 +2,20 @@
 <div class="full-height">
 
   <div class="contextbar padding border-bottom background-solid-grey">
-    <div class="text-right">
-
+    <div class="text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-
       <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
       <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <button class="button button-red" v-on:click="remove">Delete</button>
+      <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button" v-on:click="close">X</button>
     </div>
   </div>
 
-  <div id="content" class="padding-large scrollable background-solid-white animated fadeIn">
+  <p class="padding-top text-center" v-if="post === null">
+    <em>Nothing to show.</em>
+  </p>
+
+  <div id="content" class="padding-large scrollable background-solid-white animated fadeIn"  v-if="post !== null">
 
     <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
 
@@ -49,7 +52,7 @@ export default {
 
   created () {
     this.read()
-    status: ''
+    this.status = ''
   },
 
   watch: {
@@ -61,6 +64,9 @@ export default {
       store.readPost(this.$route.params.id).then((doc) => {
         this.post = doc
       })
+    },
+    close () {
+      this.post = null
     },
     publish () {
       this.status = 'Published'

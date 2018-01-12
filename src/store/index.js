@@ -39,4 +39,33 @@ store.loadPosts = (obj, prop) => {
   })
 }
 
+store.synchronize = () => {
+  let remotedb = 'https://admin:admin@localhost:6984'
+  let opts = { live: true, retry: false }
+
+  applicationdb.sync(remotedb + '/application', opts).then(function (info) {
+    console.log('sync application complete')
+  }).catch(function (err) {
+    console.log('Error: ' + err)
+  })
+
+  authorsdb.sync(remotedb + '/authors', opts).then(function (info) {
+    console.log('sync authors complete')
+  }).catch(function (err) {
+    console.log('Error: ' + err)
+  })
+
+  postsdb.sync(remotedb + '/posts', opts).then(function (info) {
+    console.log('sync posts complete')
+  }).catch(function (err) {
+    console.log('Error: ' + err)
+  })
+
+  viewsdb.sync(remotedb + '/views', opts).then(function (info) {
+    console.log('sync views complete')
+  }).catch(function (err) {
+    console.log('Error: ' + err)
+  })
+}
+
 export default store

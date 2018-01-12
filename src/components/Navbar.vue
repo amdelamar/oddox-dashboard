@@ -26,19 +26,31 @@
             </div>
           </a>
 
-          <button class="button margin-left" onclick="/#/sync">Sync Now</button>
+          <button class="button margin-left" v-on:click="sync">Sync Now</button>
         </div>
     	</div>
   </nav>
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   name: 'app-navbar',
   data () {
     return {
       title: 'Dashboard',
-      username: 'username'
+      username: 'username',
+      status: ''
+    }
+  },
+  created () {
+    this.status = 'Offline'
+  },
+  methods: {
+    sync () {
+      console.log('Attempting to syncrhonize databases...')
+      store.synchronize()
     }
   }
 }
