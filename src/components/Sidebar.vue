@@ -1,25 +1,27 @@
 <template>
   <nav id="app-sidebar" class="border-right background-solid-grey">
 
-    <div class="contextbar padding">
-      <button class="full-width button button-blue" v-on:click="newpost">New Post</button>
+    <div class="full-width">
+      <div class="contextbar padding">
+        <button class="full-width button button-blue" v-on:click="newpost">New Post</button>
+      </div>
+
+      <div class="nav-list padding padding-bottom-large">
+          <a class="nav-item" href="/#/posts">Posts</a>
+          <a class="nav-item" href="/#/drafts">Drafts</a>
+          <a class="nav-item" href="/#/featured">Featured</a>
+          <a class="nav-item" href="/#/category">By Category</a>
+          <a class="nav-item" href="/#/tags">By Tags</a>
+          <a class="nav-item" href="/#/years">By Year</a>
+          <a class="nav-item" href="/#/trash">Trash</a>
+          <a class="nav-item" href="/#/all-posts">All Posts</a>
+          <span class="nav-item border-bottom"></span>
+          <a class="nav-item" href="/#/settings">Settings</a>
+          <span class="nav-item border-bottom"></span>
+      </div>
     </div>
 
-    <div class="nav-list padding padding-bottom-large">
-        <a class="nav-item" href="/#/posts">Posts</a>
-        <a class="nav-item" href="/#/drafts">Drafts</a>
-        <a class="nav-item" href="/#/featured">Featured</a>
-        <a class="nav-item" href="/#/category">By Category</a>
-        <a class="nav-item" href="/#/tags">By Tags</a>
-        <a class="nav-item" href="/#/years">By Year</a>
-        <a class="nav-item" href="/#/trash">Trash</a>
-        <a class="nav-item" href="/#/all-posts">All Posts</a>
-        <span class="nav-item border-bottom"></span>
-        <a class="nav-item" href="/#/settings">Settings</a>
-        <span class="nav-item border-bottom"></span>
-    </div>
-
-    <footer class="padding full-width text-center">
+    <footer class="padding margin full-width text-center">
         <p title="Total disk size of your database">
           Storage: <code>{{ dbsize }}</code>
         </p>
@@ -52,6 +54,10 @@ export default {
 <style>
 #app-sidebar {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 #app-sidebar a {
   color: initial;
@@ -61,10 +67,5 @@ export default {
 }
 #app-sidebar footer:hover, #app-sidebar footer a:hover {
   color: initial;
-}
-#app-sidebar footer {
-  left: 0;
-  bottom: 0;
-  margin: auto;
 }
 </style>

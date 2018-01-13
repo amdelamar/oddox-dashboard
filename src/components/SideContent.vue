@@ -1,5 +1,5 @@
 <template>
-  <div class="full-height border-right animated fadeIn">
+  <div class="full-height border-right">
 
     <div class="contextbar padding border-bottom background-solid-grey">
       <div class="margin-none left">
@@ -11,41 +11,42 @@
       </div>
     </div>
 
-    <div id="list" class="background-solid-white full-height scrollable text-left">
-      <!-- placeholder for now -->
+    <div id="list" class="background-solid-white full-height scrollable text-left animated fadeIn">
+
+      <p class="padding-top text-center" v-if="posts === null || posts.length < 1">
+        <em>No posts found.</em>
+      </p>
+
       <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
         <div class="row padding border-bottom margin-none hover-shadow">
           <p class="text-capitalize margin-none">{{ post.title | shortTitle }}</p>
           <small>{{ post.description | shortDesc }}</small>
         </div>
       </a>
-
-      <p class="padding-top text-center" v-if="posts === null || posts.length < 1">
-        <em>No posts found.</em>
-      </p>
     </div>
 
   </div>
 </template>
 
 <script>
-import store from '../store'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app-side-content',
   data () {
     return {
-      text: null,
-      posts: null
+      text: null
     }
   },
+  computed: mapGetters({
+    posts: 'allPosts'
+  }),
   created () {
-    store.loadPosts(this, 'posts')
+    this.$store.dispatch('allPosts')
     this.text = null
   },
   methods: {
     close () {
-      store.loadPosts(this, 'posts')
       this.text = null
     },
     search () {

@@ -1,14 +1,14 @@
 <template>
-<div id="logout" class="padding-top-large full-width full-height animated fadeIn background-solid-grey">
+<div id="logout" class="padding-top-large full-width full-height background-solid-grey">
 
   <div class="row section">
-    <div class="four columns offset-by-four padding-large border round background-solid-white">
+    <div class="four columns offset-by-four padding-large border round background-solid-white animated fadeIn">
       <h4>{{title}}</h4>
       <div class="row">
         <p>You have been logged out.</p>
       </div>
       <div class="row padding-top margin-top">
-        <a class="button button-blue full-width" href="/#/login">Login back in</a>
+        <button class="button button-blue full-width" v-on:click="returnToLogin">Login back in</button>
       </div>
     </div>
   </div>
@@ -22,6 +22,12 @@ export default {
   data () {
     return {
       title: 'Logout'
+    }
+  },
+  methods: {
+    returnToLogin () {
+      console.log('login again')
+      this.$router.push('/login')
     }
   }
 }

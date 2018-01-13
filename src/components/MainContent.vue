@@ -11,27 +11,30 @@
     </div>
   </div>
 
-  <p class="padding-top text-center" v-if="post === null">
-    <em>Nothing to show.</em>
-  </p>
+  <div id="content" class="background-solid-white scrollable animated fadeIn">
 
-  <div id="content" class="padding-large scrollable background-solid-white animated fadeIn"  v-if="post !== null">
-
-    <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
-
-    <h1>{{ post.title }}</h1>
-    <div v-html="post.content"></div>
-    <hr/>
-    <p class="padding-bottom-large left">
-      Author: <code>{{ post.authorId }}</code><br/>
-      Category: <code>{{ post.category }}</code><br/>
-      Tags: <code v-for="tag in post.tags">{{ tag }}</code>
+    <p class="padding-top text-center" v-if="post === null">
+      <em>Nothing to show.</em>
     </p>
-    <p class="padding-bottom-large right">
-      Created: {{ post.createDate }}<br/>
-      Modified: {{ post.modifyDate }}<br/>
-      Published: {{ post.publishDate }}<br/>
-    </p>
+
+    <div class="full-height padding-large" v-if="post !== null">
+      <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
+
+      <h1>{{ post.title }}</h1>
+      <div v-html="post.content"></div>
+      <hr/>
+      <p class="padding-bottom-large left">
+        Author: <code>{{ post.authorId }}</code><br/>
+        Category: <code>{{ post.category }}</code><br/>
+        Tags: <code v-for="tag in post.tags">{{ tag }}</code>
+      </p>
+      <p class="padding-bottom-large right">
+        Created: {{ post.createDate }}<br/>
+        Modified: {{ post.modifyDate }}<br/>
+        Published: {{ post.publishDate }}<br/>
+      </p>
+    </div>
+
   </div>
 </div>
 
@@ -39,8 +42,6 @@
 </template>
 
 <script>
-import store from '../store'
-
 export default {
   name: 'app-main-content',
   data () {
@@ -49,21 +50,18 @@ export default {
       status: ''
     }
   },
-
   created () {
     this.read()
     this.status = ''
   },
-
   watch: {
     '$route': 'read'
   },
-
   methods: {
     read () {
-      store.readPost(this.$route.params.id).then((doc) => {
-        this.post = doc
-      })
+      // todo
+      // this.$route.params.id
+      this.post = null
     },
     close () {
       this.post = null
@@ -92,10 +90,8 @@ export default {
         'description': this.post.description,
         'content': this.post.content
       }
-      store.updatePost(data).then(() => {
-        store.readPost(data._id).then((doc) => {
-          this.post = doc
-        })
+      this.$store.dispatch('updatePost', data).then(() => {
+        // todo
         this.status = 'Successfully Saved.'
       }).catch((err) => {
         console.log(err)

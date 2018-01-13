@@ -13,7 +13,7 @@
           <a class="nav-item" href="#all-posts">All Posts</a>
       </div>
       <div class="padding-top-large full-width text-center">
-          <p class="text-small"><em>© <a href="https://austindelamar.com">Austin Delamar</a> - 2017</em></p>
+          <p class="text-small"><em>© <a href="https://oddox.org">Oddox</a> - 2017</em></p>
       </div>
   </nav>
 </template>
@@ -23,7 +23,7 @@ export default {
   name: 'app-menu',
   data () {
     return {
-      label: 'Menu'
+      title: 'Menu'
     }
   }
 }

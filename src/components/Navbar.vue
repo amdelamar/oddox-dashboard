@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import store from '../store'
-
 export default {
   name: 'app-navbar',
   data () {
@@ -50,7 +48,7 @@ export default {
   methods: {
     sync () {
       console.log('Attempting to syncrhonize databases...')
-      store.synchronize()
+      this.$store.dispatch('synchronize')
     }
   }
 }
