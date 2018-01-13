@@ -8,7 +8,7 @@
         <p>You have been logged out.</p>
       </div>
       <div class="row padding-top margin-top">
-        <button class="button button-blue full-width" v-on:click="returnToLogin">Login back in</button>
+        <button class="button button-blue full-width" v-on:click="returnToLogin" autofocus>Login back in</button>
       </div>
     </div>
   </div>
@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     returnToLogin () {
-      console.log('login again')
       this.$router.push('/login')
     }
   }

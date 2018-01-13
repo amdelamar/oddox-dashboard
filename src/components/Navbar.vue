@@ -3,10 +3,10 @@
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
-            <a href="/#/">
+            <router-link to="/">
               <img class="margin-right" src="static/logo.png" height="35px" width="35px" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title }}</span>
-            </a>
+            </router-link>
         </div>
         <div class="nav-small-menu">
             <a class="nav-item" title="Open Menu" href="javascript:openSidebar()">
@@ -15,16 +15,16 @@
         </div>
 
         <div class="nav-group nav-large-menu">
-          <a class="nav-item text-capitalize" href="#"><code>Offline</code></a>
+          <span class="nav-item text-capitalize"><code>Offline</code></span>
 
-          <a class="button dropdown margin" href="/#/">Username &#9662;
+          <router-link class="button dropdown margin" to="/">Username &#9662;
             <div class="dropdown-body border">
               <span class="text-capitalize border-bottom">Signed in as <em>{{ username }}</em></span>
-              <a href="/#/profile" class="">My Profile</a>
-              <a href="/#/settings" class="">Settings</a>
-              <a href="/#/logout" class="">Logout</a>
+              <router-link to="/profile" class="">My Profile</router-link>
+              <router-link to="/settings" class="">Settings</router-link>
+              <router-link to="/logout" class="">Logout</router-link>
             </div>
-          </a>
+          </router-link>
 
           <button class="button margin-left" v-on:click="sync">Sync Now</button>
         </div>

@@ -4,11 +4,13 @@ export const FORGOT = 'FORGOT'
 export const SYNC = 'SYNC'
 
 export const SET_POSTS = 'SET_POSTS'
+export const SET_POST = 'SET_POST'
 export const NEW_POST = 'NEW_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 
 export const SET_AUTHORS = 'SET_AUTHORS'
+export const SET_AUTHOR = 'SET_AUTHOR'
 export const NEW_AUTHOR = 'NEW_AUTHOR'
 export const UPDATE_AUTHOR = 'UPDATE_AUTHOR'
 export const DELETE_AUTHOR = 'DELETE_AUTHOR'

@@ -8,8 +8,8 @@
       <app-sidebar></app-sidebar>
     </section>
     <section id="settings-content" class="ten columns full-height">
-      <div class="full-height full-width scrollable">
-        <h1 class="padding-top">My Profile</h1>
+      <div class="padding full-height full-width scrollable">
+        <h1>My Profile</h1>
         <p>Change your profile settings. Click 'save' when finished.</p>
         <hr/>
 

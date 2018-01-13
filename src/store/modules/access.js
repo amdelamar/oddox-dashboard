@@ -17,6 +17,10 @@ const actions = {
     database.synchronize(status => {
       commit(types.SYNC, { status })
     })
+  },
+
+  clearLocalStorage () {
+    window.localStorage.clear()
   }
 }
 

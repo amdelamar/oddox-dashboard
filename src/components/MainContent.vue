@@ -6,7 +6,11 @@
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
       <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
+      <div class="button button-red dropdown">&#8416;
+        <div class="dropdown-body padding-none">
+          <button class="button button-red" v-on:click="remove">Are you sure?</button>
+        </div>
+      </div>&nbsp;
       <button class="button" v-on:click="close">X</button>
     </div>
   </div>
@@ -42,16 +46,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'app-main-content',
   data () {
     return {
-      post: null,
       status: ''
     }
   },
+  computed: mapGetters({
+    post: 'currentPost'
+  }),
   created () {
-    this.read()
+    if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
+      this.$store.dispatch('openPost', this.$route.params.id)
+    }
     this.status = ''
   },
   watch: {
@@ -59,19 +69,19 @@ export default {
   },
   methods: {
     read () {
-      // todo
-      // this.$route.params.id
-      this.post = null
+      if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
+        this.$store.dispatch('openPost', this.$route.params.id)
+      }
     },
     close () {
-      this.post = null
+      this.$store.dispatch('closePost')
     },
     publish () {
       this.status = 'Published'
-      console.log('published')
+      console.log('published post')
     },
     save () {
-      this.status = 'Saving...'
+      this.status = ''
       const data = {
         '_id': this.post._id,
         '_rev': this.post._rev,
@@ -92,7 +102,8 @@ export default {
       }
       this.$store.dispatch('updatePost', data).then(() => {
         // todo
-        this.status = 'Successfully Saved.'
+        console.log('saved post')
+        this.status = 'Saved'
       }).catch((err) => {
         console.log(err)
         this.status = err

@@ -7,16 +7,17 @@
       </div>
 
       <div class="nav-list padding padding-bottom-large">
-          <a class="nav-item" href="/#/posts">Posts</a>
-          <a class="nav-item" href="/#/drafts">Drafts</a>
-          <a class="nav-item" href="/#/featured">Featured</a>
-          <a class="nav-item" href="/#/category">By Category</a>
-          <a class="nav-item" href="/#/tags">By Tags</a>
-          <a class="nav-item" href="/#/years">By Year</a>
-          <a class="nav-item" href="/#/trash">Trash</a>
-          <a class="nav-item" href="/#/all-posts">All Posts</a>
+          <router-link class="nav-item" to="/">Posts</router-link>
+          <router-link class="nav-item" to="/drafts">Drafts</router-link>
+          <router-link class="nav-item" to="/featured">Featured</router-link>
+          <router-link class="nav-item" to="/category">By Category</router-link>
+          <router-link class="nav-item" to="/tags">By Tags</router-link>
+          <router-link class="nav-item" to="/years">By Year</router-link>
+          <router-link class="nav-item" to="/trash">Trash</router-link>
+          <router-link class="nav-item" to="/">All Posts</router-link>
           <span class="nav-item border-bottom"></span>
-          <a class="nav-item" href="/#/settings">Settings</a>
+          <router-link class="nav-item" to="/profile">My Profile</router-link>
+          <router-link class="nav-item" to="/settings">Settings</router-link>
           <span class="nav-item border-bottom"></span>
       </div>
     </div>

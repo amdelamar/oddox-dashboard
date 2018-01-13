@@ -8,12 +8,22 @@
       <app-sidebar></app-sidebar>
     </section>
     <section id="settings-content" class="ten columns full-height">
-      <div class="full-height full-width scrollable">
-        <h1 class="padding-top">Settings</h1>
+      <div class="padding full-height full-width scrollable">
+        <h1>Settings</h1>
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
         <hr/>
 
-        <div class="row">
+        <button class="button button-blue">Save Changes</button>
+
+        <div class="button button-red dropdown">&#8416; Delete everything
+          <div class="dropdown-body padding-none">
+            <button class="button button-red" v-on:click="clearLocalStorage">Are you sure?</button>
+          </div>
+        </div>
+
+        <hr/>
+
+        <div class="row padding-top">
           <div class="three columns">
             <label for="in1" class="">Text Input</label>
             <input type="text" id="in1" value="12345" />
@@ -124,6 +134,15 @@ export default {
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar
+  },
+  methods: {
+    clearLocalStorage () {
+      this.status = ''
+      if (confirm('Are you sure you want to delete everything?\nIt cannot be undone if you do.')) {
+        this.$store.dispatch('clearLocalStorage')
+        console.log('Deleted all databases.')
+      }
+    }
   }
 }
 </script>
