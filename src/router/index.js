@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
+import Profile from '@/views/Profile'
+import Settings from '@/views/Settings'
 
 Vue.use(Router)
 
@@ -22,12 +24,12 @@ export default new Router({
     {
       path: '/settings',
       name: 'settings',
-      component: Home
+      component: Settings
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Home
+      component: Profile
     },
     {
       path: '/login',
