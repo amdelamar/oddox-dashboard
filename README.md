@@ -49,8 +49,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
  * [Vuejs 2.5.2](https://vuejs.org/) JavaScript Framework
  * [PouchDB 6.4.1](https://pouchdb.com/) NoSQL Database
- * [Bootstrap 4.0.0](https://getbootstrap.com/) CSS Framework
- * [Font Awesome 4.7](http://fontawesome.io/) Icons
+ * [Osseous 1.2.0](https://austindelamar.com/osseous/) CSS Framework
+ * [Icomoon](http://icomoon.io/) Icons
  * [Webpack 3.5](https://webpack.js.org/) Module Bundler
  * [Node.js 8.4](https://nodejs.org/) for local dev and testing
 

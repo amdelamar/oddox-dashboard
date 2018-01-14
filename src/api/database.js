@@ -55,53 +55,74 @@ export default {
     })
   },
 
-  synchronize (cb, errcb) {
-    let remotedb = 'https://admin:admin@localhost:6984'
-    let opts = { live: true, retry: false }
-    let errFlag = false
-
-    if (!errFlag) {
-      applicationdb.sync(remotedb + '/application', opts).then(function (info) {
-        console.log('sync application complete')
-      }).catch(function (err) {
-        errFlag = true
-        console.log('Error: ' + err)
-        errcb(err)
-      })
-    }
-
-    if (!errFlag) {
-      authorsdb.sync(remotedb + '/authors', opts).then(function (info) {
-        console.log('sync authors complete')
-      }).catch(function (err) {
-        errFlag = true
-        console.log('Error: ' + err)
-        errcb(err)
-      })
-    }
-
-    if (!errFlag) {
-      postsdb.sync(remotedb + '/posts', opts).then(function (info) {
-        console.log('sync posts complete')
-      }).catch(function (err) {
-        errFlag = true
-        console.log('Error: ' + err)
-        errcb(err)
-      })
-    }
-
-    if (!errFlag) {
-      viewsdb.sync(remotedb + '/views', opts).then(function (info) {
-        console.log('sync views complete')
-      }).catch(function (err) {
-        errFlag = true
-        console.log('Error: ' + err)
-        errcb(err)
-      })
+  login (access, cb, errcb) {
+    // Create full url: 'https://admin:admin@localhost:6984'
+    let http = 'http://'
+    let host = ''
+    if (access.url.startsWith('https')) {
+      http = 'https://'
+      host = access.url.substr(8)
     } else {
-      cb()
+      host = access.url.substr(7)
     }
-    // end of synchronize
+    let remoteUrl = http + access.username + ':' + access.password + '@' + host
+
+    // test connection
+    let remotedb = new PouchDB(remoteUrl + '/posts')
+    remotedb.allDocs().then(res => {
+      access.fullUrl = remoteUrl
+      cb(access)
+    }).catch(err => {
+      errcb(err.message)
+    })
+  },
+
+  destroy (cb, errcb) {
+    applicationdb.destroy().then(res => {
+      authorsdb.destroy().then(res => {
+        postsdb.destroy().then(res => {
+          viewsdb.destroy().then(res => {
+            cb()
+          }).catch(err => {
+            errcb(err)
+          })
+        }).catch(err => {
+          errcb(err)
+        })
+      }).catch(err => {
+        errcb(err)
+      })
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  synchronize (access, cb, errcb) {
+    let remotedb = access.fullUrl
+    console.log('Sync: ' + access.url)
+    let opts = { live: false, retry: true }
+
+    applicationdb.sync(remotedb + '/application', opts).then(res => {
+      console.log('sync application complete')
+      authorsdb.sync(remotedb + '/authors', opts).then(res => {
+        console.log('sync authors complete')
+        postsdb.sync(remotedb + '/posts', opts).then(res => {
+          console.log('sync posts complete')
+          viewsdb.sync(remotedb + '/views', opts).then(res => {
+            console.log('sync views complete')
+            cb()
+          }).catch(err => {
+            errcb(err)
+          })
+        }).catch(err => {
+          errcb(err)
+        })
+      }).catch(err => {
+        errcb(err)
+      })
+    }).catch(err => {
+      errcb(err)
+    })
   }
 
 }

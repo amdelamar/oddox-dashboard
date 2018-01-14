@@ -56,12 +56,10 @@ export default {
     }
   },
   computed: mapGetters({
-    post: 'currentPost'
+    post: 'getCurrentPost'
   }),
   created () {
-    if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
-      this.$store.dispatch('openPost', this.$route.params.id)
-    }
+    this.read()
     this.status = ''
   },
   watch: {
@@ -70,11 +68,11 @@ export default {
   methods: {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
-        this.$store.dispatch('openPost', this.$route.params.id)
+        this.$store.dispatch('setCurrentPost', this.$route.params.id)
       }
     },
     close () {
-      this.$store.dispatch('closePost')
+      this.$store.dispatch('setCurrentPost', null)
     },
     publish () {
       this.status = 'Published'

@@ -141,6 +141,7 @@ export default {
       if (confirm('Are you sure you want to delete everything?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('clearLocalStorage')
         console.log('Deleted all databases.')
+        this.$router.push('/')
       }
     }
   }

@@ -1,7 +1,9 @@
-export const LOGIN = 'LOGIN'
-export const LOGOUT = 'LOGOUT'
-export const FORGOT = 'FORGOT'
-export const SYNC = 'SYNC'
+export const SET_ACCESS = 'SET_ACCESS'
+export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN'
+export const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR'
+export const SET_IS_SYNCED = 'SET_IS_SYNCED'
+export const SET_SYNC_ERROR = 'SET_SYNC_ERROR'
+export const SET_SYNC_TIME = 'SET_SYNC_TIME'
 
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST = 'SET_POST'

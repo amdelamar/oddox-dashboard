@@ -9,8 +9,8 @@ const state = {
 
 // getters
 const getters = {
-  allPosts: state => state.posts,
-  currentPost: state => state.post
+  getAllPosts: state => state.posts,
+  getCurrentPost: state => state.post
 }
 
 // actions
@@ -18,29 +18,28 @@ const actions = {
 
   allPosts ({ commit }) {
     database.allPosts(posts => {
-      console.log('all posts count ' + posts.length)
-      commit(types.SET_POSTS, { posts })
+      commit(types.SET_POSTS, posts)
     })
   },
 
-  openPost ({ commit }, id) {
-    database.readPost(id, post => {
-      console.log('open post: ' + post._id)
-      commit(types.SET_POST, { post })
-    }, err => {
-      console.log('Error: ' + err)
+  setCurrentPost ({ commit }, id) {
+    if (id === null) {
       commit(types.SET_POST, null)
-    })
-  },
-
-  closePost ({ commit }) {
-    commit(types.SET_POST, null)
+    } else {
+      database.readPost(id, post => {
+        console.log('open post: ' + post._id)
+        commit(types.SET_POST, post)
+      }, err => {
+        console.log('Error: ' + err)
+        commit(types.SET_POST, null)
+      })
+    }
   },
 
   updatePost ({ commit }, data) {
     database.updatePost(data, post => {
       console.log('updated post: ' + post.title)
-      commit(types.SET_POST, { post })
+      commit(types.SET_POST, post)
     }, err => {
       console.log('Error: ' + err)
     })
@@ -50,10 +49,10 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.SET_POSTS] (state, { posts }) {
+  [types.SET_POSTS] (state, posts) {
     state.posts = posts
   },
-  [types.SET_POST] (state, { post }) {
+  [types.SET_POST] (state, post) {
     state.post = post
   }
 }

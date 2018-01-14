@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: mapGetters({
-    posts: 'allPosts'
+    posts: 'getAllPosts'
   }),
   created () {
     this.$store.dispatch('allPosts')
