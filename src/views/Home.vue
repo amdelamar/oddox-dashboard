@@ -34,11 +34,11 @@ export default {
     'app-side-content': SideContent
   },
   computed: mapGetters({
-    loggedIn: 'isLoggedIn'
+    loggedIn: 'isAuthenticated'
   }),
   created () {
     if (!this.loggedIn) {
-      console.log('User is not logged in. Redirecting to login page')
+      console.log('User is not logged in. Redirecting to login page.')
       this.$router.push('/login')
     }
   }

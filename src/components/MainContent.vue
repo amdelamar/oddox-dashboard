@@ -15,13 +15,13 @@
     </div>
   </div>
 
-  <div id="content" class="background-solid-white scrollable animated fadeIn">
+  <div id="content" class="background-solid-white scrollable">
 
     <p class="padding-top text-center" v-if="post === null">
       <em>Nothing to show.</em>
     </p>
 
-    <div class="full-height padding-large" v-if="post !== null">
+    <div class="full-height padding-large animated fadeIn" v-if="post !== null">
       <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
 
       <h1>{{ post.title }}</h1>
@@ -69,6 +69,9 @@ export default {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentPost', this.$route.params.id)
         this.status = 'Opened'
+      } else {
+        this.$store.dispatch('setCurrentPost', null)
+        this.status = ''
       }
     },
     close () {

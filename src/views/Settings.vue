@@ -13,11 +13,15 @@
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
         <hr/>
 
-        <button class="button button-blue">Save Changes</button>
-
-        <div class="button button-red dropdown">Delete everything
+        <div class="button button-red dropdown">Destroy Databases
           <div class="dropdown-body padding-none">
-            <button class="button button-red" v-on:click="clearLocalStorage">Are you sure?</button>
+            <button class="button button-red" v-on:click="destroyDatabases">Are you sure?</button>
+          </div>
+        </div>
+
+        <div class="button button-red dropdown">Destroy everything
+          <div class="dropdown-body padding-none">
+            <button class="button button-red" v-on:click="destroyEverything">Are you sure?</button>
           </div>
         </div>
 
@@ -126,6 +130,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 
@@ -135,12 +140,28 @@ export default {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar
   },
+  computed: mapGetters({
+    loggedIn: 'isAuthenticated'
+  }),
+  created () {
+    if (!this.loggedIn) {
+      console.log('User is not logged in. Redirecting to login page.')
+      this.$router.push('/login')
+    }
+  },
   methods: {
-    clearLocalStorage () {
+    destroyDatabases () {
+      this.status = ''
+      if (confirm('Are you sure you want to delete all local databases?\nIt cannot be undone if you do.')) {
+        this.$store.dispatch('destroyDatabases')
+        console.log('Deleted all databases.')
+      }
+    },
+    destroyEverything () {
       this.status = ''
       if (confirm('Are you sure you want to delete everything?\nIt cannot be undone if you do.')) {
-        this.$store.dispatch('clearLocalStorage')
-        console.log('Deleted all databases.')
+        this.$store.dispatch('destroyEverything')
+        console.log('Deleted everything.')
         this.$router.push('/')
       }
     }

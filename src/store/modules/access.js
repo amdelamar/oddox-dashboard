@@ -4,12 +4,7 @@ import moment from 'moment'
 
 // initial state
 const state = {
-  access: {
-    url: '',
-    username: '',
-    password: ''
-  },
-  loggedIn: false,
+  token: localStorage.getItem('access-token') || '',
   loginError: '',
   synced: false,
   syncError: '',
@@ -18,8 +13,8 @@ const state = {
 
 // getters
 const getters = {
-  getAccess: state => state.access,
-  isLoggedIn: state => state.loggedIn,
+  getAccessToken: state => state.token,
+  isAuthenticated: state => !!state.token,
   getLoginError: state => state.loginError,
   isSynced: state => state.synced,
   getSyncError: state => state.syncError,
@@ -30,11 +25,11 @@ const getters = {
 const actions = {
   synchronize ({ commit }) {
     return new Promise((resolve, reject) => {
-      database.synchronize(state.access, result => {
+      database.synchronize(state.token, result => {
         commit(types.SET_IS_SYNCED, true)
         commit(types.SET_SYNC_ERROR, '')
         commit(types.SET_SYNC_TIME, moment.now())
-        resolve('Success!')
+        resolve('Sync Success.')
       }, err => {
         commit(types.SET_IS_SYNCED, false)
         commit(types.SET_SYNC_ERROR, err)
@@ -44,35 +39,54 @@ const actions = {
     })
   },
 
-  login ({ commit }, access) {
+  login ({ commit }, token) {
     return new Promise((resolve, reject) => {
-      database.login(access, result => {
-        commit(types.SET_ACCESS, result)
-        commit(types.SET_IS_LOGGED_IN, true)
+      database.login(token, result => {
+        localStorage.setItem('access-token', result)
+        commit(types.SET_ACCESS_TOKEN, result)
         commit(types.SET_LOGIN_ERROR, '')
-        resolve('Success!')
+        resolve('Login Success.')
       }, err => {
         commit(types.SET_LOGIN_ERROR, err)
-        commit(types.SET_IS_LOGGED_IN, false)
         reject(err)
       })
     })
   },
 
-  clearLocalStorage ({ commit }) {
-    database.destroy(result => {
-      commit(types.SET_ACCESS, {
-        url: '',
-        username: '',
-        password: '' })
-      commit(types.SET_IS_LOGGED_IN, false)
-      commit(types.SET_LOGIN_ERROR, '')
-      window.localStorage.clear()
+  logout ({ commit }) {
+    localStorage.removeItem('access-token')
+    commit(types.SET_ACCESS_TOKEN, '')
+    commit(types.SET_LOGIN_ERROR, '')
+  },
+
+  destroyDatabases ({ commit }) {
+    return new Promise((resolve, reject) => {
+      database.destroy(result => {
+        commit(types.SET_POST, null)
+        commit(types.SET_POSTS, null)
+        resolve('Destroy Databases Success.')
+      }, err => {
+        reject(err)
+      })
     })
   },
 
-  setLoggedIn ({ commit }, bool) {
-    commit(types.SET_IS_LOGGED_IN, bool)
+  destroyEverything ({ commit }) {
+    return new Promise((resolve, reject) => {
+      database.destroy(result => {
+        commit(types.SET_POST, null)
+        commit(types.SET_POSTS, null)
+        commit(types.SET_ACCESS_TOKEN, '')
+        window.localStorage.clear()
+        resolve('Clear LocalStorage Success.')
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+
+  setAccessToken ({ commit }, token) {
+    commit(types.SET_TOKEN, token)
   },
   setLoginError ({ commit }, error) {
     commit(types.SET_LOGIN_ERROR, error)
@@ -90,11 +104,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.SET_ACCESS] (state, access) {
-    state.access = access
-  },
-  [types.SET_IS_LOGGED_IN] (state, loggedIn) {
-    state.loggedIn = loggedIn
+  [types.SET_ACCESS_TOKEN] (state, token) {
+    state.token = token
   },
   [types.SET_LOGIN_ERROR] (state, loginError) {
     state.loginError = loginError

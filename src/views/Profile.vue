@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 
@@ -42,6 +43,15 @@ export default {
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar
+  },
+  computed: mapGetters({
+    loggedIn: 'isAuthenticated'
+  }),
+  created () {
+    if (!this.loggedIn) {
+      console.log('User is not logged in. Redirecting to login page.')
+      this.$router.push('/login')
+    }
   }
 }
 </script>

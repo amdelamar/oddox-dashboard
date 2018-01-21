@@ -46,8 +46,15 @@ export default {
     }
   },
   computed: mapGetters({
+    loggedIn: 'isAuthenticated',
     status: 'getLoginError'
   }),
+  created () {
+    if (this.loggedIn) {
+      console.log('User is already logged in. Redirecting to home page.')
+      this.$router.push('/')
+    }
+  },
   methods: {
     login () {
       this.flag = true

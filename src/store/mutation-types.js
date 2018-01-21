@@ -1,5 +1,5 @@
-export const SET_ACCESS = 'SET_ACCESS'
-export const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN'
+export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN'
+export const SET_TOKEN = 'SET_TOKEN'
 export const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR'
 export const SET_IS_SYNCED = 'SET_IS_SYNCED'
 export const SET_SYNC_ERROR = 'SET_SYNC_ERROR'

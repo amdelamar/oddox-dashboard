@@ -20,13 +20,13 @@
           <router-link class="button dropdown margin" to="/">Username &#9662;
             <div class="dropdown-body nav-list border">
               <div class="margin-none padding full-width text-center">
-                Welcome, <span class="text-bold">{{ access.username }}</span>
-                <span class="text-lowercase">{{ access.url }}</span>
+                Welcome, <span class="text-bold">{{ token.username }}</span>
+                <span class="text-lowercase">{{ token.url }}</span>
               </div>
 
               <router-link to="/profile" class="nav-item">My Profile</router-link>
               <router-link to="/settings" class="nav-item">Settings</router-link>
-              <router-link class="nav-item button full-width" to="/logout">Logout</router-link>
+              <a class="nav-item button full-width" v-on:click="logout">Logout</a>
             </div>
           </router-link>
 
@@ -50,7 +50,7 @@ export default {
     }
   },
   computed: mapGetters({
-    access: 'getAccess',
+    token: 'getAccessToken',
     status: 'getSyncError',
     time: 'getSyncTime'
   }),
@@ -65,12 +65,12 @@ export default {
       this.message = 'Syncing...'
       this.$store.dispatch('synchronize').then(result => {
         // on successful sync
-
         console.log('Syncrhonized at ' + moment(this.time).format())
         this.message = 'Synced ' + moment(this.time).fromNow()
         // delay for a second
         setTimeout(() => {
           this.flag = false
+          this.$store.dispatch('allPosts')
         }, 10)
       }).catch(err => {
         // failed login
@@ -78,10 +78,18 @@ export default {
         this.flag = false
       })
     },
-    logoutNow () {
+    logout () {
       console.log('logging out')
-      this.$router.push('/logout')
-      // this.$store.dispatch('setLoggedIn', false)
+      this.$store.dispatch('logout').then(result => {
+        // on successful logout
+        // delay for a second
+        setTimeout(() => {
+          this.$router.push('/logout')
+        }, 10)
+      }).catch(err => {
+        // failed logout
+        console.log(err)
+      })
     }
   }
 }
