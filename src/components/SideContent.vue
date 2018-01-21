@@ -6,8 +6,8 @@
         <input type="text" class="full-width" placeholder="Search within view..." v-model="text" v-on:keyup="search" />
       </div>
       <div class="text-right">
-        <button class="button" v-on:click="search">Search</button>&nbsp;
-        <button class="button" v-on:click="close" v-if="text !== null">X</button>
+        <button class="button" v-on:click="search" v-if="text == null">Search</button>&nbsp;
+        <button class="button" v-on:click="close" v-if="text !== null">Clear</button>
       </div>
     </div>
 
@@ -18,8 +18,8 @@
       </p>
 
       <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
-        <div class="row padding border-bottom margin-none hover-background-solid-grey">
-          <p class="text-capitalize margin-none">{{ post.title | shortTitle }}</p>
+        <div class="row padding border-bottom margin-none hover-background-solid-grey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
+          <p class="margin-none">{{ post.title | shortTitle }}</p>
           <small>{{ post.description | shortDesc }}</small>
         </div>
       </a>
@@ -40,7 +40,7 @@ export default {
   },
   computed: mapGetters({
     posts: 'getAllPosts',
-    post: 'getCurrentPost'
+    currentPost: 'getCurrentPost'
   }),
   created () {
     this.close()
@@ -88,5 +88,12 @@ export default {
 }
 .overflow-none {
   overflow: none;
+}
+.row.active {
+  color: #FFFFFF;
+  background: var(--blue);
+}
+.row.active:hover {
+  background: var(--light-blue);
 }
 </style>

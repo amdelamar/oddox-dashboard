@@ -11,22 +11,8 @@
       <div class="padding full-height full-width scrollable">
         <h1>Settings</h1>
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
-        <hr/>
 
-        <div class="button button-red dropdown">Destroy Databases
-          <div class="dropdown-body padding-none">
-            <button class="button button-red" v-on:click="destroyDatabases">Are you sure?</button>
-          </div>
-        </div>
-
-        <div class="button button-red dropdown">Destroy everything
-          <div class="dropdown-body padding-none">
-            <button class="button button-red" v-on:click="destroyEverything">Are you sure?</button>
-          </div>
-        </div>
-
-        <hr/>
-
+        <div class="nine columns">
         <div class="row padding-top">
           <div class="three columns">
             <label for="in1" class="">Text Input</label>
@@ -120,6 +106,27 @@
               <option value="1">Option 1</option>
             </select>
           </div>
+        </div>
+        </div>
+
+        <div class="twelve columns">
+        <hr/>
+        <h2>Danger Zone</h2>
+        <p>Careful! These settings may permanently destroy data.</p>
+
+        <div class="button button-red dropdown">Destroy Databases
+          <div class="dropdown-body padding-none">
+            <button class="button button-red" v-on:click="destroyDatabases">Are you sure?</button>
+          </div>
+        </div>
+
+        <div class="button button-red dropdown">Destroy everything
+          <div class="dropdown-body padding-none">
+            <button class="button button-red" v-on:click="destroyEverything">Are you sure?</button>
+          </div>
+        </div>
+
+        <br/><br/><br/>
         </div>
 
       </div>

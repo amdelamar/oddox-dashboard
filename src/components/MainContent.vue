@@ -6,7 +6,7 @@
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
       <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <div class="button button-red dropdown">&#8416;
+      <div class="button button-red dropdown">Delete
         <div class="dropdown-body padding-none">
           <button class="button button-red" v-on:click="remove">Are you sure?</button>
         </div>
