@@ -15,17 +15,18 @@
         </div>
 
         <div class="nav-group nav-large-menu">
-          <span class="nav-item text-capitalize"><code>{{ status }}{{ message }}</code></span>
+          <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ status }}{{ message }}</code></span>
 
           <router-link class="button dropdown margin" to="/">Username &#9662;
-            <div class="dropdown-body border background-gradient-grey">
+            <div class="dropdown-body nav-list border">
               <div class="margin-none padding full-width text-center">
-                Welcome, <span class="text-bolder">{{ access.username }}</span>
-                <span class="text-lowercase text-small">{{ access.url }}</span>
+                Welcome, <span class="text-bold">{{ access.username }}</span>
+                <span class="text-lowercase">{{ access.url }}</span>
               </div>
-              <router-link to="/profile" class="padding border-top border-bottom">My Profile</router-link>
-              <router-link to="/settings" class="padding border-bottom">Settings</router-link>
-              <button class="button full-width" v-on:click="logout">Logout</button>
+
+              <router-link to="/profile" class="nav-item">My Profile</router-link>
+              <router-link to="/settings" class="nav-item">Settings</router-link>
+              <router-link class="nav-item button full-width" to="/logout">Logout</router-link>
             </div>
           </router-link>
 
@@ -77,7 +78,7 @@ export default {
         this.flag = false
       })
     },
-    logout () {
+    logoutNow () {
       console.log('logging out')
       this.$router.push('/logout')
       // this.$store.dispatch('setLoggedIn', false)

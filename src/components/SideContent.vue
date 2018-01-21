@@ -18,7 +18,7 @@
       </p>
 
       <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
-        <div class="row padding border-bottom margin-none hover-shadow">
+        <div class="row padding border-bottom margin-none hover-background-solid-grey">
           <p class="text-capitalize margin-none">{{ post.title | shortTitle }}</p>
           <small>{{ post.description | shortDesc }}</small>
         </div>
@@ -39,14 +39,15 @@ export default {
     }
   },
   computed: mapGetters({
-    posts: 'getAllPosts'
+    posts: 'getAllPosts',
+    post: 'getCurrentPost'
   }),
   created () {
-    this.$store.dispatch('allPosts')
-    this.text = null
+    this.close()
   },
   methods: {
     close () {
+      this.$store.dispatch('allPosts')
       this.text = null
     },
     search () {

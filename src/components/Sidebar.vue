@@ -7,28 +7,28 @@
       </div>
 
       <div class="nav-list padding padding-bottom-large">
-          <router-link class="nav-item" to="/">Posts</router-link>
-          <router-link class="nav-item" to="/drafts">Drafts</router-link>
-          <router-link class="nav-item" to="/featured">Featured</router-link>
-          <router-link class="nav-item" to="/category">By Category</router-link>
-          <router-link class="nav-item" to="/tags">By Tags</router-link>
-          <router-link class="nav-item" to="/years">By Year</router-link>
-          <router-link class="nav-item" to="/trash">Trash</router-link>
-          <router-link class="nav-item" to="/">All Posts</router-link>
+        <router-link class="nav-item round hover-shadow" to="/">Posts</router-link>
+        <router-link class="nav-item round hover-shadow" to="/drafts">Drafts</router-link>
+        <router-link class="nav-item round hover-shadow" to="/featured">Featured</router-link>
+        <router-link class="nav-item round hover-shadow" to="/category">By Category</router-link>
+        <router-link class="nav-item round hover-shadow" to="/tags">By Tags</router-link>
+        <router-link class="nav-item round hover-shadow" to="/years">By Year</router-link>
+        <router-link class="nav-item round hover-shadow" to="/trash">Trash</router-link>
+        <router-link class="nav-item round hover-shadow" to="/">All Posts</router-link>
           <span class="nav-item border-bottom"></span>
-          <router-link class="nav-item" to="/profile">My Profile</router-link>
-          <router-link class="nav-item" to="/settings">Settings</router-link>
+        <router-link class="nav-item round hover-shadow" to="/profile">My Profile</router-link>
+        <router-link class="nav-item round hover-shadow" to="/settings">Settings</router-link>
           <span class="nav-item border-bottom"></span>
       </div>
     </div>
 
     <footer class="padding margin full-width text-center">
-        <p title="Total disk size of your database">
-          Storage: <code>{{ dbsize }}</code>
-        </p>
-        <span class="text-small border-top padding-top">
-          <em><a :href="link">{{ name }} {{ version }}</a></em>
-        </span>
+      <p title="Total disk size of your database">
+        Storage: <code>{{ dbsize }}</code>
+      </p>
+      <span class="text-small border-top padding-top">
+        <em><a :href="link">{{ name }} {{ version }}</a></em>
+      </span>
     </footer>
   </nav>
 </template>

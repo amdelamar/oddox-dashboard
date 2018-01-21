@@ -11,7 +11,7 @@
           <button class="button button-red" v-on:click="remove">Are you sure?</button>
         </div>
       </div>&nbsp;
-      <button class="button" v-on:click="close">X</button>
+      <button class="button" v-on:click="close">Close</button>
     </div>
   </div>
 
@@ -60,7 +60,6 @@ export default {
   }),
   created () {
     this.read()
-    this.status = ''
   },
   watch: {
     '$route': 'read'
@@ -69,10 +68,13 @@ export default {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentPost', this.$route.params.id)
+        this.status = 'Opened'
       }
     },
     close () {
+      this.status = ''
       this.$store.dispatch('setCurrentPost', null)
+      this.$router.push('/')
     },
     publish () {
       this.status = 'Published'

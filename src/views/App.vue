@@ -29,19 +29,29 @@ html, body {
   height: 100%;
   width: 100%;
 }
-.hover-shadow:hover {
+.shadow, .hover-shadow:hover {
   box-shadow: 0 0 8px 5px #efefef;
+}
+.dropdown-body {
+  font-size: initial;
+  font-weight: initial;
+  line-height: initial;
+  letter-spacing: initial;
+  text-transform: initial;
 }
 .text-capitalize {
   text-transform: capitalize;
 }
-.background-solid-white {
+.background-solid-white, .hover-background-solid-white:hover {
   background-color: #ffffff;
 }
-.background-solid-grey {
+.background-solid-grey, .hover-background-solid-grey:hover {
   background-color: #fafafa;
 }
-.background-gradient-grey {
+.background-solid-darkgrey, .hover-background-solid-darkgrey:hover {
+  background-color: #d3d3d3;
+}
+.background-gradient-grey, .hover-background-gradient-grey:hover {
   background-color: unset;
   background-image: linear-gradient(180deg, #ffffff 50%, #fafafa 100%);
 }

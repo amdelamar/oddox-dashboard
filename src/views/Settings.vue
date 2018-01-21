@@ -15,7 +15,7 @@
 
         <button class="button button-blue">Save Changes</button>
 
-        <div class="button button-red dropdown">&#8416; Delete everything
+        <div class="button button-red dropdown">Delete everything
           <div class="dropdown-body padding-none">
             <button class="button button-red" v-on:click="clearLocalStorage">Are you sure?</button>
           </div>
