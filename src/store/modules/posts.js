@@ -22,6 +22,24 @@ const actions = {
     })
   },
 
+  searchPosts ({ commit }, text) {
+    return new Promise((resolve, reject) => {
+      if (text === null || text.length < 1) {
+        this.allPosts()
+        resolve()
+      } else {
+        database.searchPosts(text, posts => {
+          commit(types.SET_POSTS, posts)
+          resolve()
+        }, err => {
+          console.log('Error: ' + err)
+          commit(types.SET_POSTS, null)
+          reject(err)
+        })
+      }
+    })
+  },
+
   setCurrentPost ({ commit }, id) {
     if (id === null) {
       commit(types.SET_POST, null)

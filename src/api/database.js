@@ -23,6 +23,22 @@ export default {
     })
   },
 
+  searchPosts (text, cb, errcb) {
+    postsdb.allDocs({include_docs: true}).then(results => {
+      let temp = []
+      for (let i = 0; i < results.total_rows; i++) {
+        if (results.rows[i].doc.title !== undefined) {
+          if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+            temp.push(results.rows[i].doc)
+          }
+        }
+      }
+      cb(temp)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
   createPost (post, cb, errcb) {
     postsdb.put(post).then(result => {
       cb(result)

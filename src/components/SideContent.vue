@@ -3,7 +3,7 @@
 
     <div class="contextbar padding border-bottom background-solid-grey">
       <div class="margin-none left">
-        <input type="text" class="full-width" placeholder="Search within view..." v-model="text" />
+        <input type="text" class="full-width" placeholder="Search within view..." v-model="text" v-on:keyup="search" />
       </div>
       <div class="text-right">
         <button class="button" v-on:click="search">Search</button>&nbsp;
@@ -52,14 +52,12 @@ export default {
     },
     search () {
       this.text = this.text.toLowerCase()
-      console.log('search for: ' + this.text)
-      let newPosts = []
-      for (let i = 0; i < this.posts.length; i++) {
-        if (this.posts[i].title.toLowerCase().indexOf(this.text) !== -1) {
-          newPosts.push(this.posts[i])
-        }
-      }
-      this.posts = newPosts
+      this.$store.dispatch('searchPosts', this.text).then(result => {
+        // successful search
+      }).catch(err => {
+        // failed search
+        console.log(err)
+      })
     }
   },
   filters: {
