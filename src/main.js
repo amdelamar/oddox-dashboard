@@ -5,6 +5,10 @@ import App from './views/App'
 import Router from './router'
 import store from './store'
 
+import './assets/vendor/osseous/1.2.0/osseous.min.css'
+import './assets/vendor/animate/3.5.2/animate.min.css'
+import './assets/vendor/highlight/9.12.0/styles/default.min.css'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
