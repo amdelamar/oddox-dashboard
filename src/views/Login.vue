@@ -12,16 +12,20 @@
 
         <small class="red animated jello">{{status}}</small>
       </div>
-      <div class="row padding-top padding-bottom border-bottom text-center"></div>
+
       <div class="row padding-top margin-top">
         <input type="submit" class="button button-blue full-width" v-on:submit="login" :disabled="flag" value="Login" />
+      </div>
+      <div class="row padding-top margin-top left">
+        <input type="checkbox" id="c1" v-model="rememberMe" class="full-width" />
+        <label for="c1" class="text-darkgrey">Remember Me</label>
       </div>
       </form>
     </div>
     <div class="twelve columns">
       <p class="text-center">
-        <a href="/#/forgot?type=username">Forgot Username?</a>&nbsp;|&nbsp;
-        <a href="/#/forgot?type=password">Forgot Password?</a>
+        <a href="/#/forgot/username">Forgot Username?</a>&nbsp;|&nbsp;
+        <a href="/#/forgot/password">Forgot Password?</a>
       </p>
     </div>
   </div>
@@ -38,9 +42,10 @@ export default {
       title: 'Login',
       authToken: {
         url: 'https://localhost:6984/',
-        username: 'admin',
+        username: '',
         password: ''
       },
+      rememberMe: true,
       flag: false,
       message: null
     }
@@ -53,6 +58,18 @@ export default {
     if (this.isAuthenticated) {
       console.log('User is already logged in. Redirecting to home page.')
       this.$router.push('/')
+    }
+
+    // recover username from localstorage
+    let savedUsername = localStorage.getItem('auth-username')
+    if (savedUsername !== null) {
+      this.authToken.username = savedUsername
+    }
+
+    // recover url from localstorage
+    let savedUrl = localStorage.getItem('auth-url')
+    if (savedUrl !== null) {
+      this.authToken.url = savedUrl
     }
   },
   methods: {
@@ -77,6 +94,16 @@ export default {
         this.message = 'Password is empty.'
       }
       if (!errFlag) {
+
+        // remember me
+        if (this.rememberMe) {
+          localStorage.setItem('auth-username', this.authToken.username)
+          localStorage.setItem('auth-url', this.authToken.url)
+        } else {
+          localStorage.removeItem('auth-username')
+          localStorage.removeItem('auth-url')
+        }        
+
         this.$store.dispatch('login', this.authToken).then(result => {
           // on successful login
           console.log(result)
