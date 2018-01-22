@@ -17,19 +17,19 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <router-link class="button dropdown margin" to="/">Username &#9662;
+          <a href="javascript: void(0)" class="button dropdown margin">Username &#9662;
             <div class="dropdown-body nav-list border">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
 
-              <router-link to="/profile" class="nav-item">My Profile</router-link>
+              <router-link to="/my-profile" class="nav-item">My Profile</router-link>
               <router-link to="/settings" class="nav-item">Settings</router-link>
               <a class="nav-item button full-width" v-on:click="logout">Logout</a>
             </div>
-          </router-link>
+          </a>
 
-          <button class="button margin-left" v-on:click="sync" :disabled="flag">{{ syncButton }}</button>
+          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag">{{ syncButton }}</button>
         </div>
     	</div>
   </nav>
@@ -83,18 +83,20 @@ export default {
       })
     },
     logout () {
-      console.log('Logging out...')
-      this.$store.dispatch('logout').then(result => {
-        // on successful logout
-        console.log('Logged out.')
-        // delay for a second
-        setTimeout(() => {
-          this.$router.push('/logout')
-        }, 10)
-      }).catch(err => {
-        // failed logout
-        console.log(err)
-      })
+      if (confirm('Are you sure you want to logout?\nYou\'ll need an internet connection to log back in.')) {
+        console.log('Logging out...')
+        this.$store.dispatch('logout').then(result => {
+          // on successful logout
+          console.log('Logged out.')
+          // delay for a second
+          setTimeout(() => {
+            this.$router.push('/logout')
+          }, 10)
+        }).catch(err => {
+          // failed logout
+          console.log(err)
+        })
+      }
     }
   }
 }

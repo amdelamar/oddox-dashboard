@@ -1,19 +1,18 @@
 <template>
   <div class="full-height">
 
-    <div class="contextbar padding border-bottom background-solid-lightgrey">
-      <div class="margin-none left">
-        <input type="text" class="full-width" placeholder="Search within view..." v-model="text" v-on:keyup="search" />
-      </div>
-      <div class="right">
-        <button class="button" v-on:click="clearSearch" v-if="text !== null">Clear Search</button>
+    <div class="contextbar border-bottom background-solid-lightgrey">
+      <div class="padding full-width">
+        <input type="text" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
+        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text !== null">&#10006;</button>
       </div>
     </div>
 
     <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
-        <em>No authors found.</em>
+        <em v-if="text === null">No posts found.</em>
+        <em v-if="text !== null">No results found for '{{ text }}'.</em>
       </p>
 
       <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">

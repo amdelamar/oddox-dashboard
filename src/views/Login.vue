@@ -1,8 +1,8 @@
 <template>
-<div id="login" class="padding-top-large full-width full-height background-solid-grey">
+<div id="login" class="padding-top-large full-width full-height background-solid-lightgrey">
 
   <div class="row section">
-    <div class="four columns offset-by-four padding-large border round background-solid-white">
+    <div class="four columns offset-by-four padding-large shadow border round background-solid-white">
       <h4 class="text-center">{{ title }}</h4>
       <form v-on:submit="login">
       <div class="row">

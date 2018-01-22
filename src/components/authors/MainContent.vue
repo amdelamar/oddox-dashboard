@@ -1,12 +1,12 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar padding border-bottom background-solid-lightgrey">
-    <div class="text-right" v-if="author !== null">
+  <div class="contextbar border-bottom background-solid-lightgrey">
+    <div class="padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
       <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
-      <button class="button" v-on:click="close">Close</button>
+      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close">&#10006;</button>
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="profile">
+  <div id="my-profile">
 
   <app-navbar></app-navbar>
 
@@ -7,7 +7,7 @@
     <section class="two columns full-height border-right">
       <app-sidebar></app-sidebar>
     </section>
-    <section id="profile-content" class="ten columns border-top full-height">
+    <section id="my-profile-content" class="ten columns border-top full-height">
       <div class="padding padding-left-large full-height full-width scrollable">
         <h1>My Profile</h1>
         <p>Change your profile settings. Click 'save' when finished.</p>
@@ -133,7 +133,7 @@ export default {
 </script>
 
 <style>
-#profile {
+#my-profile {
   height: 100%;
   width: 100%;
 }
@@ -141,7 +141,7 @@ export default {
   height: calc(100% - 6.5rem);
   width: 100%;
 }
-#profile-content {
+#my-profile-content {
   width: 86.6666666667%;
   margin: 0;
 }

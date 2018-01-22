@@ -42,8 +42,8 @@ input:hover, input:active, input:focus {
   letter-spacing: initial;
   text-transform: initial;
 }
+.background-transparent { background: transparent; }
 .text-capitalize { text-transform: capitalize; }
-
 .text-lightgrey { color: #fafafa; }
 .text-grey { color: #d3d3d3; }
 .text-darkgrey { color: #8c8c8c; }
@@ -60,9 +60,12 @@ input:hover, input:active, input:focus {
 .background-solid-darkgrey, .hover-background-solid-darkgrey:hover {
   background-color: #8c8c8c;
 }
-
 .background-gradient-grey, .hover-background-gradient-grey:hover {
   background-color: unset;
   background-image: linear-gradient(180deg, #ffffff 50%, #fafafa 100%);
 }
+
+.button-blue-outline { background: transparent; color: var(--blue); }
+.button-red-outline { background: transparent; color: var(--red); }
+.button-green-outline { background: transparent; color: var(--green); }
 </style>

@@ -1,14 +1,14 @@
 <template>
-<div id="logout" class="padding-top-large full-width full-height background-solid-lightgrey">
+<div id="404" class="padding-top-large full-width full-height background-solid-lightgrey">
 
   <div class="row section">
     <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated fadeIn">
       <h4>{{title}}</h4>
       <div class="row">
-        <p>You have been logged out.</p>
+        <p>Oops. The page you are looking for is not found or has been moved.</p>
       </div>
       <div class="row padding-top margin-top">
-        <button class="button button-blue full-width" v-on:click="returnToLogin" autofocus>Login back in</button>
+        <button class="button button-blue full-width" v-on:click="returnToHome" autofocus>Dashboard</button>
       </div>
     </div>
   </div>
@@ -18,15 +18,15 @@
 
 <script>
 export default {
-  name: 'logout',
+  name: 'not-found',
   data () {
     return {
-      title: 'Logout'
+      title: '404 Not Found'
     }
   },
   methods: {
-    returnToLogin () {
-      this.$router.push('/login')
+    returnToHome () {
+      this.$router.push('/')
     }
   }
 }

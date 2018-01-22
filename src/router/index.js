@@ -4,8 +4,9 @@ import Posts from '@/views/Posts'
 import Authors from '@/views/Authors'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
-import Profile from '@/views/Profile'
+import MyProfile from '@/views/MyProfile'
 import Settings from '@/views/Settings'
+import NotFound from '@/views/error/404'
 
 Vue.use(Router)
 
@@ -52,9 +53,9 @@ export default new Router({
       component: Settings
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
+      path: '/my-profile',
+      name: 'my-profile',
+      component: MyProfile
     },
     {
       path: '/login',
@@ -65,6 +66,11 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: Logout
+    },
+    {
+      path: '*',
+      name: 'error',
+      component: NotFound
     }
   ]
 })
