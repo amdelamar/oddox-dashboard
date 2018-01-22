@@ -1,17 +1,13 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar padding border-bottom background-solid-grey">
+  <div class="contextbar padding border-bottom background-solid-lightgrey">
     <div class="text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-small" v-on:click="save">Save</button>&nbsp;
-      <button class="button button-small" v-on:click="publish">Publish</button>&nbsp;
-      <div class="button button-red dropdown button-small">Delete
-        <div class="dropdown-body padding-none">
-          <button class="button button-red button-small" v-on:click="remove">Are you sure?</button>
-        </div>
-      </div>&nbsp;
-      <button class="button button-small" v-on:click="close">Close</button>
+      <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
+      <button class="button" v-on:click="publish">Publish</button>&nbsp;
+      <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button" v-on:click="close">Close</button>
     </div>
   </div>
 
@@ -69,15 +65,16 @@ export default {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentPost', this.$route.params.id)
         this.status = 'Opened'
+        document.getElementById('content').scrollTop = 0
       } else {
-        this.$store.dispatch('setCurrentPost', null)
-        this.status = ''
+        // this.$store.dispatch('setCurrentPost', null)
+        // this.status = ''
       }
     },
     close () {
       this.status = ''
       this.$store.dispatch('setCurrentPost', null)
-      this.$router.push('/')
+      this.$router.push('/post')
     },
     publish () {
       this.status = 'Published'
@@ -114,7 +111,7 @@ export default {
     },
     remove () {
       this.status = ''
-      if (confirm('Are you sure you want to delete?')) {
+      if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
         console.log('deleted post')
         this.status = 'Deleted'
       }

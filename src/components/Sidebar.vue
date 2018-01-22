@@ -1,5 +1,5 @@
 <template>
-  <nav id="app-sidebar" class="background-solid-grey">
+  <nav id="app-sidebar" class="background-solid-lightgrey">
 
     <div class="full-width">
       <div class="contextbar padding">

@@ -1,16 +1,12 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar padding border-bottom background-solid-grey">
+  <div class="contextbar padding border-bottom background-solid-lightgrey">
     <div class="text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-small" v-on:click="save">Save</button>&nbsp;
-      <div class="button button-red dropdown button-small">Delete
-        <div class="dropdown-body padding-none">
-          <button class="button button-red button-small" v-on:click="remove">Are you sure?</button>
-        </div>
-      </div>&nbsp;
-      <button class="button button-small" v-on:click="close">Close</button>
+      <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
+      <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button" v-on:click="close">Close</button>
     </div>
   </div>
 
@@ -67,9 +63,10 @@ export default {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentAuthor', this.$route.params.id)
         this.status = 'Opened'
+        document.getElementById('content').scrollTop = 0
       } else {
-        this.$store.dispatch('setCurrentAuthor', null)
-        this.status = ''
+        // this.$store.dispatch('setCurrentAuthor', null)
+        // this.status = ''
       }
     },
     close () {
@@ -108,7 +105,7 @@ export default {
     },
     remove () {
       this.status = ''
-      if (confirm('Are you sure you want to delete?')) {
+      if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
         console.log('deleted author')
         this.status = 'Deleted'
       }

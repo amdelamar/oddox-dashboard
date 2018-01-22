@@ -1,5 +1,5 @@
 <template>
-  <nav id="app-navbar" class="navbar background-gradient-grey">
+  <nav id="app-navbar" class="navbar background-solid-lightgrey">
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
@@ -19,9 +19,8 @@
 
           <router-link class="button dropdown margin" to="/">Username &#9662;
             <div class="dropdown-body nav-list border">
-              <div class="margin-none padding full-width text-center">
-                Welcome, <span class="text-bold">{{ authToken.username }}</span>
-                <span class="text-lowercase">{{ authToken.url }}</span>
+              <div class="margin-none padding full-width text-center text-darkgrey">
+                Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
 
               <router-link to="/profile" class="nav-item">My Profile</router-link>
