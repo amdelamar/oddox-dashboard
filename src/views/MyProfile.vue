@@ -16,6 +16,15 @@
         <div class="row padding-left">
           <div class="six columns">
             <div class="row">
+              <div class="two columns">
+                <img v-if="author.thumbnail.length > 0" class="shadow round" height="65" width="65" alt="" :src="author.thumbnail" />
+              </div>
+              <div class="ten columns">
+                <label for="pp1" class="">Profile Picture</label>
+                <input type="text" id="pp1" class="full-width" v-model="author.thumbnail" />
+              </div>
+            </div>
+            <div class="row padding-top">
               <label for="f1" class="">Full Name</label>
               <input type="text" id="f1" class="full-width" v-model="author.name" />
             </div>
@@ -43,12 +52,10 @@
               <textarea id="t1" class="full-width" placeholder="A short description about me...">{{ author.description }}</textarea>
             </div>
             <div class="row padding-top">
-              <div class="six columns">
-                <p>Created: {{ author.createDate }}</p>
-              </div>
-              <div class="six columns">
-                <p>Modified: {{ author.modifyDate }}</p>
-              </div>
+              <p>
+                Created: {{ author.createDate }}<br/>
+                Modified: {{ author.modifyDate }}
+              </p>
             </div>
 
           </div>
