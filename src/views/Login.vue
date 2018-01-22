@@ -2,7 +2,7 @@
 <div id="login" class="padding-top-large full-width full-height background-solid-lightgrey">
 
   <div class="row section">
-    <div class="four columns offset-by-four padding-large shadow border round background-solid-white">
+    <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated fadeIn">
       <h4 class="text-center">{{ title }}</h4>
       <form v-on:submit="login">
       <div class="row">
@@ -10,11 +10,11 @@
         <input class="full-width margin-top" placeholder="Username" v-model="authToken.username" type="text" required autofocus autocapitalize="off" autocorrect="off" />
         <input class="full-width margin-top" placeholder="Password" v-model="authToken.password" type="password" required />
 
-        <small class="red animated jello">{{status}}</small>
+        <small class="text-red text-bold" v-bind:class="{ 'animated fadeIn': message.length > 1 }">{{message}}</small>
       </div>
 
       <div class="row padding-top margin-top">
-        <input type="submit" class="button button-blue full-width" v-on:submit="login" :disabled="flag" value="Login" />
+        <input type="submit" class="button button-blue full-width" v-on:submit="login" :disabled="disableLogin" value="Login" />
       </div>
       <div class="row padding-top margin-top left">
         <input type="checkbox" id="c1" v-model="rememberMe" class="full-width" />
@@ -22,7 +22,7 @@
       </div>
       </form>
     </div>
-    <div class="twelve columns">
+    <div class="twelve columns animated fadeInUp">
       <p class="text-center">
         <a href="/#/forgot/username">Forgot Username?</a>&nbsp;|&nbsp;
         <a href="/#/forgot/password">Forgot Password?</a>
@@ -46,13 +46,12 @@ export default {
         password: ''
       },
       rememberMe: true,
-      flag: false,
-      message: null
+      disableLogin: false,
+      message: ''
     }
   },
   computed: mapGetters({
-    isAuthenticated: 'isAuthenticated',
-    status: 'getAuthError'
+    isAuthenticated: 'isAuthenticated'
   }),
   created () {
     if (this.isAuthenticated) {
@@ -74,8 +73,8 @@ export default {
   },
   methods: {
     login () {
-      this.flag = true
-      this.$store.dispatch('setAuthError', '')
+      this.disableLogin = true
+      this.message = ''
       let errFlag = false
 
       this.authToken.url = this.authToken.url.toLowerCase()
@@ -94,29 +93,33 @@ export default {
         this.message = 'Password is empty.'
       }
       if (!errFlag) {
-
-        // remember me
         if (this.rememberMe) {
+          // remember me
           localStorage.setItem('auth-username', this.authToken.username)
           localStorage.setItem('auth-url', this.authToken.url)
         } else {
+          // or forget me
           localStorage.removeItem('auth-username')
           localStorage.removeItem('auth-url')
-        }        
+        }
 
         this.$store.dispatch('login', this.authToken).then(result => {
-          // on successful login
+          // successful login
           console.log(result)
-          // delay for a second
-          setTimeout(() => {
-            this.flag = false
-            this.$router.push('/')
-          }, 10)
+          this.message = result
+          this.disableLogin = false
+          this.$router.push('/post')
         }).catch(err => {
           // failed login
           console.log(err)
+          this.message = err
           this.authToken.password = ''
-          this.flag = false
+          this.disableLogin = false
+
+          // disappear after 5 seconds
+          setTimeout(() => {
+            this.message = ''
+          }, 5000)
         })
       }
     }
@@ -125,7 +128,7 @@ export default {
 </script>
 
 <style>
-.red {
-  color: red;
+.text-red {
+  color: var(--red);
 }
 </style>

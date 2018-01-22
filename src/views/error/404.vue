@@ -2,7 +2,7 @@
 <div id="404" class="padding-top-large full-width full-height background-solid-lightgrey">
 
   <div class="row section">
-    <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated fadeIn">
+    <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated bounce">
       <h4>{{title}}</h4>
       <div class="row">
         <p>Oops! The page you are looking for is not found or has been moved.</p>

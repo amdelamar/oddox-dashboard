@@ -1,6 +1,5 @@
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN'
 export const SET_AUTH_TIME = 'SET_AUTH_TIME'
-export const SET_AUTH_ERROR = 'SET_AUTH_ERROR'
 export const SET_IS_SYNCED = 'SET_IS_SYNCED'
 export const SET_SYNC_ERROR = 'SET_SYNC_ERROR'
 export const SET_SYNC_TIME = 'SET_SYNC_TIME'

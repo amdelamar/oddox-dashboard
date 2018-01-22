@@ -6,7 +6,6 @@ import moment from 'moment'
 const state = {
   authToken: localStorage.getItem('auth-token') || '',
   authTime: null,
-  authError: '',
   synced: false,
   syncError: '',
   syncTime: null
@@ -17,7 +16,6 @@ const getters = {
   getAuthToken: state => state.authToken,
   isAuthenticated: state => !!state.authToken,
   getAuthTime: state => state.authTime,
-  getAuthError: state => state.authError,
   isSynced: state => state.synced,
   getSyncError: state => state.syncError,
   getSyncTime: state => state.syncTime
@@ -46,11 +44,9 @@ const actions = {
       database.login(token, result => {
         localStorage.setItem('auth-token', result)
         commit(types.SET_AUTH_TOKEN, result)
-        commit(types.SET_AUTH_ERROR, '')
         commit(types.SET_AUTH_TIME, moment.now())
         resolve('Login Success.')
       }, err => {
-        commit(types.SET_AUTH_ERROR, err)
         reject(err)
       })
     })
@@ -59,7 +55,6 @@ const actions = {
   logout ({ commit }) {
     localStorage.removeItem('auth-token')
     commit(types.SET_AUTH_TOKEN, '')
-    commit(types.SET_AUTH_ERROR, '')
   },
 
   destroyDatabases ({ commit }) {
@@ -88,9 +83,6 @@ const actions = {
     })
   },
 
-  setAuthError ({ commit }, error) {
-    commit(types.SET_AUTH_ERROR, error)
-  },
   setSyncError ({ commit }, error) {
     commit(types.SET_SYNC_ERROR, error)
   }
@@ -103,9 +95,6 @@ const mutations = {
   },
   [types.SET_AUTH_TIME] (state, authTime) {
     state.authTime = authTime
-  },
-  [types.SET_AUTH_ERROR] (state, authError) {
-    state.authError = authError
   },
   [types.SET_IS_SYNCED] (state, isSynced) {
     state.synced = isSynced
