@@ -6,9 +6,9 @@
       <h4 class="text-center">{{ title }}</h4>
       <form v-on:submit="login">
       <div class="row">
-        <input class="full-width" placeholder="Database URL" v-model="access.url" type="text" required autocapitalize="off" autocorrect="off" autocomplete="off" />
-        <input class="full-width margin-top" placeholder="Username" v-model="access.username" type="text" required autofocus autocapitalize="off" autocorrect="off" />
-        <input class="full-width margin-top" placeholder="Password" v-model="access.password" type="password" required />
+        <input class="full-width" placeholder="Database URL" v-model="authToken.url" type="text" required autocapitalize="off" autocorrect="off" autocomplete="off" />
+        <input class="full-width margin-top" placeholder="Username" v-model="authToken.username" type="text" required autofocus autocapitalize="off" autocorrect="off" />
+        <input class="full-width margin-top" placeholder="Password" v-model="authToken.password" type="password" required />
 
         <small class="red animated jello">{{status}}</small>
       </div>
@@ -36,8 +36,8 @@ export default {
   data () {
     return {
       title: 'Login',
-      access: {
-        url: 'https://localhost:6984',
+      authToken: {
+        url: 'https://localhost:6984/',
         username: 'admin',
         password: ''
       },
@@ -46,11 +46,11 @@ export default {
     }
   },
   computed: mapGetters({
-    loggedIn: 'isAuthenticated',
-    status: 'getLoginError'
+    isAuthenticated: 'isAuthenticated',
+    status: 'getAuthError'
   }),
   created () {
-    if (this.loggedIn) {
+    if (this.isAuthenticated) {
       console.log('User is already logged in. Redirecting to home page.')
       this.$router.push('/')
     }
@@ -58,26 +58,26 @@ export default {
   methods: {
     login () {
       this.flag = true
-      this.$store.dispatch('setLoginError', '')
+      this.$store.dispatch('setAuthError', '')
       let errFlag = false
 
-      this.access.url = this.access.url.toLowerCase()
-      this.access.username = this.access.username.toLowerCase()
+      this.authToken.url = this.authToken.url.toLowerCase()
+      this.authToken.username = this.authToken.username.toLowerCase()
 
-      if (this.access.url.length <= 10) {
+      if (this.authToken.url.length <= 10) {
         errFlag = true
         this.message = 'Your blog\'s CouchDB address. (E.g. https://127.0.0.1:6984/)'
       }
-      if (this.access.username.length <= 0) {
+      if (this.authToken.username.length <= 0) {
         errFlag = true
         this.message = 'Username is empty.'
       }
-      if (this.access.password.length <= 0) {
+      if (this.authToken.password.length <= 0) {
         errFlag = true
         this.message = 'Password is empty.'
       }
       if (!errFlag) {
-        this.$store.dispatch('login', this.access).then(result => {
+        this.$store.dispatch('login', this.authToken).then(result => {
           // on successful login
           console.log(result)
           // delay for a second
@@ -88,6 +88,7 @@ export default {
         }).catch(err => {
           // failed login
           console.log(err)
+          this.authToken.password = ''
           this.flag = false
         })
       }

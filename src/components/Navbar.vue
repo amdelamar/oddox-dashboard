@@ -15,13 +15,13 @@
         </div>
 
         <div class="nav-group nav-large-menu">
-          <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ status }}{{ message }}</code></span>
+          <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
           <router-link class="button dropdown margin" to="/">Username &#9662;
             <div class="dropdown-body nav-list border">
               <div class="margin-none padding full-width text-center">
-                Welcome, <span class="text-bold">{{ token.username }}</span>
-                <span class="text-lowercase">{{ token.url }}</span>
+                Welcome, <span class="text-bold">{{ authToken.username }}</span>
+                <span class="text-lowercase">{{ authToken.url }}</span>
               </div>
 
               <router-link to="/profile" class="nav-item">My Profile</router-link>
@@ -30,7 +30,7 @@
             </div>
           </router-link>
 
-          <button class="button margin-left" v-on:click="sync" :disabled="flag">Sync Now</button>
+          <button class="button margin-left" v-on:click="sync" :disabled="flag">{{ syncButton }}</button>
         </div>
     	</div>
   </nav>
@@ -44,29 +44,32 @@ export default {
   data () {
     return {
       title: 'Dashboard',
-      username: 'username',
       message: '',
+      syncButton: 'Sync Now',
       flag: false
     }
   },
   computed: mapGetters({
-    token: 'getAccessToken',
+    authToken: 'getAuthToken',
     status: 'getSyncError',
-    time: 'getSyncTime'
+    syncTime: 'getSyncTime'
   }),
   created () {
-    if (this.time !== null) {
-      this.message = 'Synced ' + moment(this.time).fromNow()
+    if (this.syncTime !== null) {
+      this.message = 'Synced ' + moment(this.syncTime).fromNow()
     }
   },
   methods: {
     sync () {
+      console.log('Syncing...')
+      this.message = ''
+      this.syncButton = 'Syncing...'
       this.flag = true
-      this.message = 'Syncing...'
       this.$store.dispatch('synchronize').then(result => {
         // on successful sync
-        console.log('Syncrhonized at ' + moment(this.time).format())
-        this.message = 'Synced ' + moment(this.time).fromNow()
+        console.log('Syncrhonized at ' + moment(this.syncTime).format())
+        this.message = 'Synced ' + moment(this.syncTime).fromNow()
+        this.syncButton = 'Sync Now'
         // delay for a second
         setTimeout(() => {
           this.flag = false
@@ -76,12 +79,14 @@ export default {
         // failed login
         console.log(err)
         this.flag = false
+        this.syncButton = 'Sync Now'
       })
     },
     logout () {
-      console.log('logging out')
+      console.log('Logging out...')
       this.$store.dispatch('logout').then(result => {
         // on successful logout
+        console.log('Logged out.')
         // delay for a second
         setTimeout(() => {
           this.$router.push('/logout')

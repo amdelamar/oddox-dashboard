@@ -4,8 +4,9 @@ import moment from 'moment'
 
 // initial state
 const state = {
-  token: localStorage.getItem('access-token') || '',
-  loginError: '',
+  authToken: localStorage.getItem('auth-token') || '',
+  authTime: null,
+  authError: '',
   synced: false,
   syncError: '',
   syncTime: null
@@ -13,9 +14,10 @@ const state = {
 
 // getters
 const getters = {
-  getAccessToken: state => state.token,
-  isAuthenticated: state => !!state.token,
-  getLoginError: state => state.loginError,
+  getAuthToken: state => state.authToken,
+  isAuthenticated: state => !!state.authToken,
+  getAuthTime: state => state.authTime,
+  getAuthError: state => state.authError,
   isSynced: state => state.synced,
   getSyncError: state => state.syncError,
   getSyncTime: state => state.syncTime
@@ -25,7 +27,7 @@ const getters = {
 const actions = {
   synchronize ({ commit }) {
     return new Promise((resolve, reject) => {
-      database.synchronize(state.token, result => {
+      database.synchronize(state.authToken, result => {
         commit(types.SET_IS_SYNCED, true)
         commit(types.SET_SYNC_ERROR, '')
         commit(types.SET_SYNC_TIME, moment.now())
@@ -42,21 +44,22 @@ const actions = {
   login ({ commit }, token) {
     return new Promise((resolve, reject) => {
       database.login(token, result => {
-        localStorage.setItem('access-token', result)
-        commit(types.SET_ACCESS_TOKEN, result)
-        commit(types.SET_LOGIN_ERROR, '')
+        localStorage.setItem('auth-token', result)
+        commit(types.SET_AUTH_TOKEN, result)
+        commit(types.SET_AUTH_ERROR, '')
+        commit(types.SET_AUTH_TIME, moment.now())
         resolve('Login Success.')
       }, err => {
-        commit(types.SET_LOGIN_ERROR, err)
+        commit(types.SET_AUTH_ERROR, err)
         reject(err)
       })
     })
   },
 
   logout ({ commit }) {
-    localStorage.removeItem('access-token')
-    commit(types.SET_ACCESS_TOKEN, '')
-    commit(types.SET_LOGIN_ERROR, '')
+    localStorage.removeItem('auth-token')
+    commit(types.SET_AUTH_TOKEN, '')
+    commit(types.SET_AUTH_ERROR, '')
   },
 
   destroyDatabases ({ commit }) {
@@ -76,7 +79,7 @@ const actions = {
       database.destroy(result => {
         commit(types.SET_POST, null)
         commit(types.SET_POSTS, null)
-        commit(types.SET_ACCESS_TOKEN, '')
+        commit(types.SET_AUTH_TOKEN, '')
         window.localStorage.clear()
         resolve('Clear LocalStorage Success.')
       }, err => {
@@ -85,33 +88,27 @@ const actions = {
     })
   },
 
-  setAccessToken ({ commit }, token) {
-    commit(types.SET_TOKEN, token)
-  },
-  setLoginError ({ commit }, error) {
-    commit(types.SET_LOGIN_ERROR, error)
-  },
-  setSynced ({ commit }, bool) {
-    commit(types.SET_IS_SYNCED, bool)
+  setAuthError ({ commit }, error) {
+    commit(types.SET_AUTH_ERROR, error)
   },
   setSyncError ({ commit }, error) {
     commit(types.SET_SYNC_ERROR, error)
-  },
-  setSyncTime ({ commit }, time) {
-    commit(types.SET_SYNC_TIME, time)
   }
 }
 
 // mutations
 const mutations = {
-  [types.SET_ACCESS_TOKEN] (state, token) {
-    state.token = token
+  [types.SET_AUTH_TOKEN] (state, authToken) {
+    state.authToken = authToken
   },
-  [types.SET_LOGIN_ERROR] (state, loginError) {
-    state.loginError = loginError
+  [types.SET_AUTH_TIME] (state, authTime) {
+    state.authTime = authTime
   },
-  [types.SET_IS_SYNCED] (state, synced) {
-    state.synced = synced
+  [types.SET_AUTH_ERROR] (state, authError) {
+    state.authError = authError
+  },
+  [types.SET_IS_SYNCED] (state, isSynced) {
+    state.synced = isSynced
   },
   [types.SET_SYNC_ERROR] (state, syncError) {
     state.syncError = syncError
