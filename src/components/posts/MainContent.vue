@@ -4,14 +4,14 @@
   <div class="contextbar padding border-bottom background-solid-grey">
     <div class="text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
-      <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <div class="button button-red dropdown">Delete
+      <button class="button button-blue button-small" v-on:click="save">Save</button>&nbsp;
+      <button class="button button-small" v-on:click="publish">Publish</button>&nbsp;
+      <div class="button button-red dropdown button-small">Delete
         <div class="dropdown-body padding-none">
-          <button class="button button-red" v-on:click="remove">Are you sure?</button>
+          <button class="button button-red button-small" v-on:click="remove">Are you sure?</button>
         </div>
       </div>&nbsp;
-      <button class="button" v-on:click="close">Close</button>
+      <button class="button button-small" v-on:click="close">Close</button>
     </div>
   </div>
 
@@ -126,5 +126,11 @@ export default {
 <style>
 #content {
   height: calc(100% - 6.5rem);
+}
+.button-small {
+  font-size: .75em;
+  height: 3rem;
+  padding: 0 1em;
+  line-height: 2.8rem;
 }
 </style>

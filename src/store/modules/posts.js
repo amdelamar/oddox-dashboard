@@ -32,7 +32,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       if (text === null || text.length < 1) {
         // if empty search, return all
-        this.allPosts()
         resolve()
       } else {
         // otherwise do normal search

@@ -1,5 +1,5 @@
 <template>
-  <nav id="app-sidebar" class="border-right background-solid-grey">
+  <nav id="app-sidebar" class="background-solid-grey">
 
     <div class="full-width">
       <div class="contextbar padding">
@@ -8,7 +8,7 @@
 
       <div class="nav-list padding padding-bottom-large">
         <router-link class="nav-item round hover-shadow" to="/">Posts</router-link>
-        <router-link class="nav-item round hover-shadow" to="/drafts">Drafts</router-link>
+        <router-link class="nav-item round hover-shadow" to="/draft">Drafts</router-link>
         <router-link class="nav-item round hover-shadow" to="/featured">Featured</router-link>
         <router-link class="nav-item round hover-shadow" to="/category">By Category</router-link>
         <router-link class="nav-item round hover-shadow" to="/tags">By Tags</router-link>
@@ -16,6 +16,7 @@
         <router-link class="nav-item round hover-shadow" to="/trash">Trash</router-link>
         <router-link class="nav-item round hover-shadow" to="/">All Posts</router-link>
           <span class="nav-item border-bottom"></span>
+          <router-link class="nav-item round hover-shadow" to="/author">All Authors</router-link>
         <router-link class="nav-item round hover-shadow" to="/profile">My Profile</router-link>
         <router-link class="nav-item round hover-shadow" to="/settings">Settings</router-link>
           <span class="nav-item border-bottom"></span>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home'
+import Posts from '@/views/Posts'
+import Authors from '@/views/Authors'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import Profile from '@/views/Profile'
@@ -12,12 +13,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'posts',
+      component: Posts,
       children: [
         {
           path: 'post/:id',
-          component: Home
+          component: Posts
+        }
+      ]
+    },
+    {
+      path: '/author',
+      name: 'authors',
+      component: Authors,
+      children: [
+        {
+          path: ':id',
+          component: Authors
         }
       ]
     },

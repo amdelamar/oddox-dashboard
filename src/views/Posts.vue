@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="posts">
 
   <app-navbar></app-navbar>
 
@@ -22,8 +22,8 @@
 import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import MainContent from '@/components/MainContent'
-import SideContent from '@/components/SideContent'
+import MainContent from '@/components/posts/MainContent'
+import SideContent from '@/components/posts/SideContent'
 
 export default {
   name: 'home',
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style>
-#home {
+#posts {
   height: 100%;
   width: 100%;
 }
