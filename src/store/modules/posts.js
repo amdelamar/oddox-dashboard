@@ -17,22 +17,29 @@ const getters = {
 const actions = {
 
   allPosts ({ commit }) {
-    database.allPosts(posts => {
-      commit(types.SET_POSTS, posts)
+    return new Promise((resolve, reject) => {
+      database.allPosts(posts => {
+        commit(types.SET_POSTS, posts)
+        resolve()
+      }, err => {
+        commit(types.SET_POSTS, null)
+        reject(err)
+      })
     })
   },
 
   searchPosts ({ commit }, text) {
     return new Promise((resolve, reject) => {
       if (text === null || text.length < 1) {
+        // if empty search, return all
         this.allPosts()
         resolve()
       } else {
+        // otherwise do normal search
         database.searchPosts(text, posts => {
           commit(types.SET_POSTS, posts)
           resolve()
         }, err => {
-          console.log('Error: ' + err)
           commit(types.SET_POSTS, null)
           reject(err)
         })
@@ -41,25 +48,52 @@ const actions = {
   },
 
   setCurrentPost ({ commit }, id) {
-    if (id === null) {
-      commit(types.SET_POST, null)
-    } else {
-      database.readPost(id, post => {
-        console.log('open post: ' + post._id)
-        commit(types.SET_POST, post)
-      }, err => {
-        console.log('Error: ' + err)
+    return new Promise((resolve, reject) => {
+      if (id === null) {
         commit(types.SET_POST, null)
+        resolve()
+      } else {
+        database.readPost(id, post => {
+          commit(types.SET_POST, post)
+          resolve()
+        }, err => {
+          commit(types.SET_POST, null)
+          reject(err)
+        })
+      }
+    })
+  },
+
+  createPost ({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      database.createPost(data, post => {
+        commit(types.SET_POST, post)
+        resolve()
+      }, err => {
+        reject(err)
       })
-    }
+    })
   },
 
   updatePost ({ commit }, data) {
-    database.updatePost(data, post => {
-      console.log('updated post: ' + post.title)
-      commit(types.SET_POST, post)
-    }, err => {
-      console.log('Error: ' + err)
+    return new Promise((resolve, reject) => {
+      database.updatePost(data, post => {
+        commit(types.SET_POST, post)
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+
+  deletePost ({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      database.deletePost(data, post => {
+        commit(types.SET_POST, null)
+        resolve()
+      }, err => {
+        reject(err)
+      })
     })
   }
 
