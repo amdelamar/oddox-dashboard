@@ -126,6 +126,15 @@
           </div>
         </div>
 
+        <br/>
+
+        <pre><code>authToken: {
+  url: '{{ authToken.url || 'undefined' }}',
+  username: '{{ authToken.username || 'undefined' }}',
+  password: '{{ authToken.password || 'undefined' }}',
+  fullUrl: '{{ authToken.fullUrl || 'undefined' }}',
+}</code></pre>
+
         <br/><br/><br/>
         </div>
 
@@ -148,7 +157,8 @@ export default {
     'app-sidebar': Sidebar
   },
   computed: mapGetters({
-    isAuthenticated: 'isAuthenticated'
+    isAuthenticated: 'isAuthenticated',
+    authToken: 'getAuthToken'
   }),
   created () {
     if (!this.isAuthenticated) {

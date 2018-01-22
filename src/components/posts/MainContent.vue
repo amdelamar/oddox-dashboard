@@ -17,7 +17,7 @@
 
   <div id="content" class="background-solid-white scrollable">
 
-    <p class="padding-top text-center" v-if="post === null">
+    <p class="super-center text-center" v-if="post === null">
       <em>Nothing to show.</em>
     </p>
 

@@ -12,7 +12,7 @@
 
     <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
-      <p class="padding-top text-center" v-if="posts === null || posts.length < 1">
+      <p class="super-center text-center" v-if="posts === null || posts.length < 1">
         <em>No posts found.</em>
       </p>
 

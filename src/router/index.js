@@ -13,11 +13,20 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: Posts
+    },
+    {
+      path: '/post',
       name: 'posts',
       component: Posts,
       children: [
         {
-          path: 'post/:id',
+          path: 'new',
+          component: Posts
+        },
+        {
+          path: ':id',
           component: Posts
         }
       ]
@@ -27,6 +36,10 @@ export default new Router({
       name: 'authors',
       component: Authors,
       children: [
+        {
+          path: 'new',
+          component: Authors
+        },
         {
           path: ':id',
           component: Authors

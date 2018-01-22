@@ -74,6 +74,7 @@ export default {
         setTimeout(() => {
           this.flag = false
           this.$store.dispatch('allPosts')
+          this.$store.dispatch('allAuthors')
         }, 10)
       }).catch(err => {
         // failed login
@@ -108,5 +109,14 @@ export default {
 #app-navbar .dropdown-body {
   min-width: 23rem;
   left: -0.1rem;
+}
+#app-navbar .router-link-active, #app-navbar .router-link-exact-active {
+  text-decoration: none;
+}
+#app-navbar .router-link-active:hover, #app-navbar .router-link-exact-active:hover {
+  text-decoration: none;
+}
+#app-navbar .nav-item-logo:hover {
+  opacity: 0.75;
 }
 </style>

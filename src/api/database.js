@@ -52,8 +52,13 @@ export default {
   },
 
   synchronize (authToken, cb, errcb) {
-    if (authToken === null) {
-      errcb('AuthToken cannot be null.')
+    if (authToken === null || authToken.fullUrl === undefined) {
+      console.log('authToken.url = ' + authToken.url)
+      console.log('authToken.fullUrl = ' + authToken.fullUrl)
+      console.log('authToken.username = ' + authToken.username)
+      console.log('authToken.password = ' + authToken.password)
+      errcb('Not logged in.')
+      return
     }
     let remotedb = authToken.fullUrl
     console.log('Sync: ' + authToken.fullUrl)

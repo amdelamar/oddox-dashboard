@@ -16,7 +16,7 @@
 
   <div id="content" class="background-solid-white scrollable">
 
-    <p class="padding-top text-center" v-if="author === null">
+    <p class="super-center text-center" v-if="author === null">
       <em>Nothing to show.</em>
     </p>
 
@@ -121,10 +121,12 @@ export default {
 #content {
   height: calc(100% - 6.5rem);
 }
-.button-small {
-  font-size: .75em;
-  height: 3rem;
-  padding: 0 1em;
-  line-height: 2.8rem;
+.super-center {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -100px;
 }
 </style>
