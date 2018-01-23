@@ -8,10 +8,10 @@
       <app-sidebar></app-sidebar>
     </section>
     <section id="side-content" class="three columns full-height">
-      <app-side-content></app-side-content>
+      <post-list-content></post-list-content>
     </section>
     <section id="main-content" class="seven columns full-height">
-      <app-main-content></app-main-content>
+      <post-view-content></post-view-content>
     </section>
   </main>
 
@@ -22,16 +22,16 @@
 import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import MainContent from '@/components/posts/MainContent'
-import SideContent from '@/components/posts/SideContent'
+import ViewContent from '@/components/posts/ViewContent'
+import ListContent from '@/components/posts/ListContent'
 
 export default {
   name: 'home',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
-    'app-main-content': MainContent,
-    'app-side-content': SideContent
+    'post-list-content': ListContent,
+    'post-view-content': ViewContent
   },
   computed: mapGetters({
     isAuthenticated: 'isAuthenticated'

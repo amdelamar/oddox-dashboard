@@ -45,7 +45,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'app-main-content',
+  name: 'post-view-content',
   data () {
     return {
       status: ''

@@ -3,22 +3,22 @@
 
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="padding full-width">
-        <input type="text" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
+        <input type="text" class="margin-none" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
         <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text !== null">&#10006;</button>
       </div>
     </div>
 
     <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
-      <p class="super-center text-center" v-if="authors === null || authors.length < 1">
+      <p class="super-center text-center" v-if="posts === null || posts.length < 1">
         <em v-if="text === null">No posts found.</em>
         <em v-if="text !== null">No results found for '{{ text }}'.</em>
       </p>
 
-      <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">
-        <div class="row padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
-          <p class="margin-none">{{ author.name | shortTitle }}</p>
-          <small>{{ author.description | shortDesc }}</small>
+      <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
+        <div class="row padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
+          <p class="margin-none">{{ post.title | shortTitle }}</p>
+          <small>{{ post.description | shortDesc }}</small>
         </div>
       </a>
     </div>
@@ -30,22 +30,22 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'app-side-content',
+  name: 'post-list-content',
   data () {
     return {
       text: null
     }
   },
   computed: mapGetters({
-    authors: 'getAllAuthors',
-    currentAuthor: 'getCurrentAuthor'
+    posts: 'getAllPosts',
+    currentPost: 'getCurrentPost'
   }),
   created () {
     this.clearSearch()
   },
   methods: {
     clearSearch () {
-      this.$store.dispatch('allAuthors')
+      this.$store.dispatch('allPosts')
       this.text = null
     },
     search () {
@@ -56,7 +56,7 @@ export default {
         this.clearSearch()
       }
 
-      this.$store.dispatch('searchAuthors', this.text).then(result => {
+      this.$store.dispatch('searchPosts', this.text).then(result => {
         // successful search
       }).catch(err => {
         // failed search
@@ -99,5 +99,8 @@ export default {
 }
 .row.active:hover {
   background: var(--light-blue);
+}
+.margin-none {
+  margin: 0 !important;
 }
 </style>
