@@ -16,7 +16,7 @@
         <router-link class="nav-item" to="/trash">Trash</router-link>
         <router-link class="nav-item" to="/all">All Posts</router-link>
           <span class="nav-item border-bottom"></span>
-          <router-link class="nav-item" to="/author">All Authors</router-link>
+        <router-link class="nav-item" to="/author">All Authors</router-link>
         <router-link class="nav-item" to="/my-profile">My Profile</router-link>
         <router-link class="nav-item" to="/settings">Settings</router-link>
           <span class="nav-item border-bottom"></span>

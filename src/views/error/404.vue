@@ -1,5 +1,5 @@
 <template>
-<div id="404" class="padding-top-large full-width full-height background-solid-lightgrey">
+<div id="not-found" class="padding-top-large full-width full-height background-solid-lightgrey">
 
   <div class="row section">
     <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated bounce">
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style>
-#logout {
+#not-found {
   margin: 0;
   align-content: center;
 }
