@@ -1,5 +1,5 @@
 <template>
-  <div id="posts">
+  <div id="new-author">
 
   <app-navbar></app-navbar>
 
@@ -7,11 +7,8 @@
     <section class="two columns full-height">
       <app-sidebar></app-sidebar>
     </section>
-    <section class="side-content columns full-height">
-      <post-list-content></post-list-content>
-    </section>
-    <section class="main-content columns full-height">
-      <post-view-content></post-view-content>
+    <section class="full-main-content columns full-height">
+      <author-edit-content></author-edit-content>
     </section>
   </main>
 
@@ -22,16 +19,16 @@
 import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import ViewContent from '@/components/posts/ViewContent'
-import ListContent from '@/components/posts/ListContent'
+import EditContent from '@/components/authors/EditContent'
+import ListContent from '@/components/authors/ListContent'
 
 export default {
-  name: 'posts',
+  name: 'new-author',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
-    'post-list-content': ListContent,
-    'post-view-content': ViewContent
+    'author-list-content': ListContent,
+    'author-edit-content': EditContent
   },
   computed: mapGetters({
     isAuthenticated: 'isAuthenticated'
@@ -46,7 +43,7 @@ export default {
 </script>
 
 <style>
-#posts {
+#new-author {
   height: 100%;
   width: 100%;
 }

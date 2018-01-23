@@ -3,9 +3,7 @@
 
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="author !== null">
-      <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue" v-on:click="save">Save</button>&nbsp;
-      <button class="button button-red" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button" v-on:click="edit">Edit</button>&nbsp;
       <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close">&#10006;</button>
     </div>
   </div>
@@ -44,11 +42,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'author-view-content',
-  data () {
-    return {
-      status: ''
-    }
-  },
   computed: mapGetters({
     author: 'getCurrentAuthor'
   }),
@@ -62,53 +55,17 @@ export default {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentAuthor', this.$route.params.id)
-        this.status = 'Opened'
         document.getElementById('content').scrollTop = 0
       } else {
         // this.$store.dispatch('setCurrentAuthor', null)
-        // this.status = ''
       }
     },
     close () {
-      this.status = ''
       this.$store.dispatch('setCurrentAuthor', null)
       this.$router.push('/author')
     },
-    save () {
-      this.status = ''
-      const data = {
-        '_id': this.author._id,
-        '_rev': this.author._rev,
-        'title': this.author.title,
-        'authorId': this.author.authorId,
-        'category': this.author.category,
-        'tags': this.author.tags,
-        'featured': this.author.featured,
-        'published': this.author.published,
-        'createDate': this.author.createDate,
-        'modifiyDate': new Date().toJSON(),
-        'publishDate': this.author.publishDate,
-        'thumbnail': this.author.thumbnail,
-        'banner': this.author.banner,
-        'bannerCaption': this.author.bannerCaption,
-        'description': this.author.description,
-        'content': this.author.content
-      }
-      this.$store.dispatch('updateAuthor', data).then(() => {
-        // todo
-        console.log('saved author')
-        this.status = 'Saved'
-      }).catch((err) => {
-        console.log(err)
-        this.status = err
-      })
-    },
-    remove () {
-      this.status = ''
-      if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
-        console.log('deleted author')
-        this.status = 'Deleted'
-      }
+    edit () {
+      this.$router.push('/edit-author/' + this.author._id)
     }
   }
 }

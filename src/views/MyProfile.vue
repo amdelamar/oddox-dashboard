@@ -7,7 +7,7 @@
     <section class="two columns full-height border-right">
       <app-sidebar></app-sidebar>
     </section>
-    <section id="my-profile-content" class="ten columns border-top full-height">
+    <section class="full-main-content columns border-top full-height">
       <div class="padding padding-left-large full-height full-width scrollable">
         <h1>My Profile</h1>
         <p>Change your profile settings. Click 'save' when finished.</p>
@@ -20,36 +20,32 @@
                 <img v-if="author.thumbnail.length > 0" class="shadow round" height="65" width="65" alt="" :src="author.thumbnail" />
               </div>
               <div class="ten columns">
-                <label for="pp1" class="">Profile Picture</label>
-                <input type="text" id="pp1" class="full-width" v-model="author.thumbnail" />
+                <label for="thumbnail">Profile Picture</label>
+                <input type="text" id="thumbnail" class="full-width" v-model="author.thumbnail" />
               </div>
             </div>
             <div class="row padding-top">
-              <label for="f1" class="">Full Name</label>
-              <input type="text" id="f1" class="full-width" v-model="author.name" />
+              <label for="name">Display Name</label>
+              <input type="text" id="name" class="full-width" v-model="author.name" />
             </div>
             <div class="row padding-top">
-              <label for="e1" class="">Email Address</label>
-              <input type="text" id="e1" class="full-width" v-model="author.email" />
+              <label for="email">Email Address</label>
+              <input type="text" id="email" class="full-width" v-model="author.email" />
             </div>
             <div class="row padding-top">
               <div class="six columns">
-                <label for="u1" class="">Username</label>
-                <input type="text" id="u1" class="full-width" v-model="author._id" />
+                <label for="username">Username</label>
+                <input type="text" id="username" class="full-width" v-model="author._id" />
               </div>
               <div class="six columns">
-                <label for="r1" class="">Role</label>
-                <select id="r1" class="full-width" v-model="author.roleId">
+                <label for="role">Role</label>
+                <select id="role" class="full-width" v-model="author.roleId">
                   <option value="owner">Owner</option>
                   <option value="admin">Admin</option>
                   <option value="author">Author</option>
                   <option value="editor">Editor</option>
                 </select>
               </div>
-            </div>
-            <div class="row padding-top">
-              <label for="t1" class="">Quick Bio</label>
-              <textarea id="t1" class="full-width" placeholder="A short description about me...">{{ author.description }}</textarea>
             </div>
             <div class="row padding-top">
               <p>
@@ -62,6 +58,7 @@
           <div class="twelve columns">
             <br/>
             <button class="button button-green" v-on:click="saveChanges">Save Changes</button>
+            <button class="button" v-on:click="editBio">Edit Biography</button>
             <button class="button" v-on:click="close">Cancel</button>
           </div>
         </div>
@@ -92,7 +89,7 @@ import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 
 export default {
-  name: 'home',
+  name: 'my-profile',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar
@@ -115,6 +112,9 @@ export default {
     },
     close () {
       this.$router.push('/post')
+    },
+    editBio () {
+      this.$router.push('/edit-author/' + this.author._id)
     },
     saveChanges () {
       console.log('Saved Changes.')
@@ -142,18 +142,6 @@ export default {
 <style>
 #my-profile {
   height: 100%;
-  width: 100%;
-}
-#main {
-  height: calc(100% - 6.5rem);
-  width: 100%;
-}
-#my-profile-content {
-  width: 86.6666666667%;
-  margin: 0;
-}
-.contextbar {
-  min-height: 6.5rem;
   width: 100%;
 }
 </style>

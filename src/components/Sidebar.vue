@@ -47,7 +47,9 @@ export default {
   },
   methods: {
     newpost () {
-      console.log('new post')
+      console.log('New Post')
+      this.$store.dispatch('setCurrentPost', null)
+      this.$router.push('/new-post')
     }
   }
 }

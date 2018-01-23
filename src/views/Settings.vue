@@ -7,7 +7,7 @@
     <section class="two columns full-height border-right">
       <app-sidebar></app-sidebar>
     </section>
-    <section id="settings-content" class="ten columns border-top full-height">
+    <section class="full-main-content columns border-top full-height">
       <div class="padding padding-left-large full-height full-width scrollable">
         <h1>Settings</h1>
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
@@ -180,7 +180,7 @@ import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 
 export default {
-  name: 'home',
+  name: 'settings',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar
@@ -239,18 +239,6 @@ export default {
 <style>
 #settings {
   height: 100%;
-  width: 100%;
-}
-#main {
-  height: calc(100% - 6.5rem);
-  width: 100%;
-}
-#settings-content {
-  width: 86.6666666667%;
-  margin: 0;
-}
-.contextbar {
-  min-height: 6.5rem;
   width: 100%;
 }
 .text-normal {

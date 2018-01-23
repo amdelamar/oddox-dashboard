@@ -25,9 +25,29 @@ export default {
   padding: 0;
   overflow: hidden;
 }
+#main {
+  height: calc(100% - 6.5rem);
+  width: 100%;
+}
 html, body {
   height: 100%;
   width: 100%;
+}
+.contextbar {
+  min-height: 6.5rem;
+  width: 100%;
+}
+.side-content {
+  width: 26%;
+  margin: 0;
+}
+.main-content {
+  width: 60.6666666667%;
+  margin: 0;
+}
+.full-main-content {
+  width: 86.6666666667%;
+  margin: 0;
 }
 input:hover, input:active, input:focus {
   background-color: #ffffff;

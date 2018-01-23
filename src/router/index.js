@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Posts from '@/views/Posts'
+import NewPost from '@/views/NewPost'
+// import EditPost from '@/views/NewPost'
 import Authors from '@/views/Authors'
+import NewAuthor from '@/views/NewAuthor'
+// import EditAuthor from '@/views/NewAuthor'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import MyProfile from '@/views/MyProfile'
@@ -23,14 +27,20 @@ export default new Router({
       component: Posts,
       children: [
         {
-          path: 'new',
-          component: Posts
-        },
-        {
           path: ':id',
           component: Posts
         }
       ]
+    },
+    {
+      path: '/new-post',
+      name: 'new-post',
+      component: NewPost
+    },
+    {
+      path: '/edit-post/:id',
+      name: 'edit-post',
+      component: NewPost
     },
     {
       path: '/author',
@@ -38,14 +48,20 @@ export default new Router({
       component: Authors,
       children: [
         {
-          path: 'new',
-          component: Authors
-        },
-        {
           path: ':id',
           component: Authors
         }
       ]
+    },
+    {
+      path: '/new-author',
+      name: 'new-author',
+      component: NewAuthor
+    },
+    {
+      path: '/edit-author/:id',
+      name: 'edit-author',
+      component: NewAuthor
     },
     {
       path: '/settings',

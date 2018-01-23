@@ -3,10 +3,7 @@
 
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="post !== null">
-      <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save">Save</button>&nbsp;
-      <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <button class="button button-red button-red-outline" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button" v-on:click="edit">Edit</button>&nbsp;
       <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close">&#10006;</button>
     </div>
   </div>
@@ -46,11 +43,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'post-view-content',
-  data () {
-    return {
-      status: ''
-    }
-  },
   computed: mapGetters({
     post: 'getCurrentPost'
   }),
@@ -64,57 +56,18 @@ export default {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentPost', this.$route.params.id)
-        this.status = 'Opened'
         document.getElementById('content').scrollTop = 0
       } else {
         // this.$store.dispatch('setCurrentPost', null)
-        // this.status = ''
       }
     },
     close () {
-      this.status = ''
       this.$store.dispatch('setCurrentPost', null)
       this.$router.push('/post')
     },
-    publish () {
-      this.status = 'Published'
-      console.log('published post')
-    },
-    save () {
+    edit () {
       this.status = ''
-      const data = {
-        '_id': this.post._id,
-        '_rev': this.post._rev,
-        'title': this.post.title,
-        'authorId': this.post.authorId,
-        'category': this.post.category,
-        'tags': this.post.tags,
-        'featured': this.post.featured,
-        'published': this.post.published,
-        'createDate': this.post.createDate,
-        'modifiyDate': new Date().toJSON(),
-        'publishDate': this.post.publishDate,
-        'thumbnail': this.post.thumbnail,
-        'banner': this.post.banner,
-        'bannerCaption': this.post.bannerCaption,
-        'description': this.post.description,
-        'content': this.post.content
-      }
-      this.$store.dispatch('updatePost', data).then(() => {
-        // todo
-        console.log('saved post')
-        this.status = 'Saved'
-      }).catch((err) => {
-        console.log(err)
-        this.status = err
-      })
-    },
-    remove () {
-      this.status = ''
-      if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
-        console.log('deleted post')
-        this.status = 'Deleted'
-      }
+      this.$router.push('/edit-post/' + this.post._id)
     }
   }
 }
