@@ -45,9 +45,9 @@
 
     </div>
     <div class="twelve columns animated fadeInUp">
-      <p class="text-center">
-        <a href="/#/forgot/username">Forgot Username?</a>&nbsp;|&nbsp;
-        <a href="/#/forgot/password">Forgot Password?</a>
+      <p class="text-center text-darkgrey">
+        <a class="text-darkgrey" href="/#/forgot/username">Forgot Username?</a>&nbsp;/
+        <a class="text-darkgrey" href="/#/forgot/password">Forgot Password?</a>
       </p>
     </div>
   </div>

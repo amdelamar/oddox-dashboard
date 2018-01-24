@@ -13,7 +13,7 @@
         <p>Change your profile settings. Click 'save' when finished.</p>
         <hr/>
 
-        <div class="row padding-left">
+        <div v-if="author !== null" class="row padding-left">
           <div class="six columns">
             <div class="row">
               <div class="two columns">
@@ -93,15 +93,10 @@ export default {
     'app-sidebar': Sidebar
   },
   computed: mapGetters({
-    isAuthenticated: 'isAuthenticated',
     authToken: 'getAuthToken',
     author: 'getCurrentAuthor'
   }),
   created () {
-    if (!this.isAuthenticated) {
-      console.log('User is not logged in. Redirecting to login page.')
-      this.$router.push('/login')
-    }
     this.getProfile()
   },
   methods: {

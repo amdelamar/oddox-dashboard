@@ -20,12 +20,7 @@
 
 <script>
 export default {
-  name: 'app-menu',
-  data () {
-    return {
-      title: 'Menu'
-    }
-  }
+  name: 'app-menu'
 }
 </script>
 

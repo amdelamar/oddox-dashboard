@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import EditContent from '@/components/posts/EditContent'
@@ -29,15 +28,6 @@ export default {
     'app-sidebar': Sidebar,
     'post-list-content': ListContent,
     'post-edit-content': EditContent
-  },
-  computed: mapGetters({
-    isAuthenticated: 'isAuthenticated'
-  }),
-  created () {
-    if (!this.isAuthenticated) {
-      console.log('User is not logged in. Redirecting to login page.')
-      this.$router.push('/login')
-    }
   }
 }
 </script>

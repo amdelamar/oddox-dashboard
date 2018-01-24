@@ -3,7 +3,7 @@
 
   <div class="row section">
     <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated bounce">
-      <h3>{{title}}</h3>
+      <h3>404 Not Found</h3>
       <div class="row">
         Oops! The page you are looking for is not found or has been moved.</p>
       </div>
@@ -23,12 +23,6 @@
 
 <script>
 export default {
-  name: 'not-found',
-  data () {
-    return {
-      title: '404 Not Found'
-    }
-  },
   methods: {
     returnToHome () {
       this.$router.push('/')

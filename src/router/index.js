@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
+
+// Views
 import Posts from '@/views/Posts'
 import NewPost from '@/views/NewPost'
 // import EditPost from '@/views/NewPost'
@@ -14,64 +17,84 @@ import NotFound from '@/views/error/404'
 
 Vue.use(Router)
 
+const mustBeAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  console.log('User is not logged in. Redirecting to login page.')
+  next('/login')
+}
+
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Posts
+      component: Posts,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/post',
       name: 'posts',
       component: Posts,
+      beforeEnter: mustBeAuthenticated,
       children: [
         {
           path: ':id',
-          component: Posts
+          component: Posts,
+          beforeEnter: mustBeAuthenticated
         }
       ]
     },
     {
       path: '/new-post',
       name: 'new-post',
-      component: NewPost
+      component: NewPost,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/edit-post/:id',
       name: 'edit-post',
-      component: NewPost
+      component: NewPost,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/author',
       name: 'authors',
       component: Authors,
+      beforeEnter: mustBeAuthenticated,
       children: [
         {
           path: ':id',
-          component: Authors
+          component: Authors,
+          beforeEnter: mustBeAuthenticated
         }
       ]
     },
     {
       path: '/new-author',
       name: 'new-author',
-      component: NewAuthor
+      component: NewAuthor,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/edit-author/:id',
       name: 'edit-author',
-      component: NewAuthor
+      component: NewAuthor,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/settings',
       name: 'settings',
-      component: Settings
+      component: Settings,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/my-profile',
       name: 'my-profile',
-      component: MyProfile
+      component: MyProfile,
+      beforeEnter: mustBeAuthenticated
     },
     {
       path: '/login',

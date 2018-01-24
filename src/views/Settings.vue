@@ -204,15 +204,8 @@ export default {
     }
   },
   computed: mapGetters({
-    isAuthenticated: 'isAuthenticated',
     authToken: 'getAuthToken'
   }),
-  created () {
-    if (!this.isAuthenticated) {
-      console.log('User is not logged in. Redirecting to login page.')
-      this.$router.push('/login')
-    }
-  },
   methods: {
     close () {
       this.$router.push('/post')
