@@ -3,8 +3,8 @@
 
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="post !== null">
-      <button class="button" v-on:click="edit">Edit</button>&nbsp;
-      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close">&#10006;</button>
+      <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>&nbsp;
+      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close"><i class="icon-cross"></i></button>
     </div>
   </div>
 
@@ -21,9 +21,9 @@
       <div v-html="post.content"></div>
       <hr/>
       <p class="padding-bottom-large left">
-        Author: <code>{{ post.authorId }}</code><br/>
-        Category: <code>{{ post.category }}</code><br/>
-        Tags: <code v-for="tag in post.tags">{{ tag }}</code>
+        <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId }}</code><br/>
+        <i class="icon-folder-open"></i>&nbsp;Category: <code>{{ post.category }}</code><br/>
+        <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag }}</code>
       </p>
       <p class="padding-bottom-large right">
         Created: {{ post.createDate }}<br/>

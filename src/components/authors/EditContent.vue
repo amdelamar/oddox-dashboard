@@ -4,8 +4,8 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save">Save</button>&nbsp;
-      <button class="button button-red button-red-outline" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
+      <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
       <button class="button" v-on:click="close">Cancel</button>&nbsp;
     </div>
   </div>

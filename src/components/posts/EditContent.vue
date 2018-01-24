@@ -4,9 +4,9 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save">Save</button>&nbsp;
-      <button class="button" v-on:click="publish">Publish</button>&nbsp;
-      <button class="button button-red button-red-outline" v-on:click="remove">Delete</button>&nbsp;
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
+      <button class="button" v-on:click="publish"><i class="icon-clock"></i>&nbsp;Publish</button>&nbsp;
+      <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
       <button class="button" v-on:click="close">Cancel</button>&nbsp;
     </div>
   </div>
@@ -63,9 +63,9 @@
       </div>
       <div class="row padding-top">
         <p class="padding-bottom-large left">
-          Author: <code>{{ post.authorId }}</code><br/>
-          Published: <code>{{ post.published }}</code><br/>
-          Deleted: <code>{{ post.deleted }}</code>
+          <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId }}</code><br/>
+          <i class="icon-clock"></i>&nbsp;Published: <code>{{ post.published }}</code><br/>
+          <i class="icon-bin"></i>&nbsp;Deleted: <code>{{ post.deleted }}</code>
         </p>
         <p class="padding-bottom-large right">
           Created: {{ post.createDate }}<br/>

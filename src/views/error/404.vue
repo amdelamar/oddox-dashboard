@@ -3,16 +3,16 @@
 
   <div class="row section">
     <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated bounce">
-      <h4>{{title}}</h4>
+      <h3>{{title}}</h3>
       <div class="row">
-        <p>Oops! The page you are looking for is not found or has been moved.</p>
+        Oops! The page you are looking for is not found or has been moved.</p>
       </div>
       <div class="row padding-top margin-top">
         <div class="six columns">
-          <button class="button full-width" v-on:click="goBack">Go Back</button>
+          <button class="button full-width" v-on:click="goBack"><i class="icon-arrow-left2"></i>&nbsp;Go Back</button>
         </div>
         <div class="six columns">
-          <button class="button button-blue full-width" v-on:click="returnToHome" autofocus>Open Dashboard</button>
+          <button class="button button-blue full-width" v-on:click="returnToHome" autofocus><i class="icon-home"></i>&nbsp; Dashboard</button>
         </div>
       </div>
     </div>

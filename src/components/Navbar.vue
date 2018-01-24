@@ -17,19 +17,19 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <a href="javascript: void(0)" class="button dropdown margin">Username &#9662;
+          <a href="javascript: void(0)" class="button dropdown margin"><i class="icon-user"></i>&nbsp;{{ authToken.username }} &#9662;
             <div class="dropdown-body nav-list border">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
 
-              <router-link to="/my-profile" class="nav-item">My Profile</router-link>
-              <router-link to="/settings" class="nav-item">Settings</router-link>
+              <router-link to="/my-profile" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
+              <router-link to="/settings" class="nav-item"><i class="icon-cog"></i>&nbsp;Settings</router-link>
               <a class="nav-item button full-width" v-on:click="logout">Logout</a>
             </div>
           </a>
 
-          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag">{{ syncButton }}</button>
+          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag"><i class="icon-loop2"></i>&nbsp;{{ syncButton }}</button>
         </div>
     	</div>
   </nav>

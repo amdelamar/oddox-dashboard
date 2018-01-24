@@ -12,11 +12,6 @@
         <h1>Settings</h1>
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
 
-        <div class="row padding-bottom padding-bottom-large">
-          <button class="button button-green" v-on:click="saveChanges">Save Changes</button>
-          <button class="button" v-on:click="close">Cancel</button>
-        </div>
-
         <div class="row padding-bottom-large">
           <div class="nine columns">
 
@@ -75,6 +70,9 @@
                 </select>
               </div>
             </div>
+              <div class="row padding-top padding-bottom text-right">
+                <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+              </div>
             </div>
 
             <div class="row padding-top-large padding-bottom-large border-top">
@@ -111,7 +109,9 @@
                 <span class="text-darkgrey">https://{{ domain }}{{ tagName || '/tag/' }}fluff</span>
               </div>
             </div>
-
+              <div class="row padding-top padding-bottom text-right">
+                <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+              </div>
             </div>
 
 
@@ -145,6 +145,9 @@
                 <label class="text-normal" for="c4">Track Referring links</label>
               </div>
             </div>
+              <div class="row padding-top padding-bottom text-right">
+                <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+              </div>
             </div>
 
 
@@ -152,12 +155,12 @@
             <div class="row padding-top-large padding-bottom-large border-top">
             <h3>Danger Zone</h3>
               <p>Careful! These actions may permanently destroy data.</p>
-              <div class="button button-red dropdown">Destroy Databases
+              <div class="button button-red dropdown"><i class="icon-database"></i>&nbsp;Destroy Databases
                 <div class="dropdown-body padding-none">
                   <button class="button button-red" v-on:click="destroyDatabases">Are you sure?</button>
                 </div>
               </div>
-              <div class="button button-red dropdown">Destroy everything
+              <div class="button button-red dropdown"><i class="icon-fire"></i>&nbsp;Destroy everything
                 <div class="dropdown-body padding-none">
                   <button class="button button-red" v-on:click="destroyEverything">Are you sure?</button>
                 </div>

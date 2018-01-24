@@ -27,7 +27,11 @@ export default {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+}
+@media (max-width:550px){
+  #app {
+    overflow: auto;
+  }
 }
 #main {
   height: calc(100% - 6.5rem);

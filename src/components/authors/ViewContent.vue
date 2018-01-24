@@ -3,8 +3,8 @@
 
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="author !== null">
-      <button class="button" v-on:click="edit">Edit</button>&nbsp;
-      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close">&#10006;</button>
+      <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>&nbsp;
+      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close"><i class="icon-cross"></i></button>
     </div>
   </div>
 
@@ -21,9 +21,9 @@
       <div v-html="author.content"></div>
       <hr/>
       <p class="padding-bottom-large left">
-        Username: <code>{{ author._id }}</code><br/>
-        Email: <code>{{ author.email }}</code><br/>
-        Role: <code>{{ author.roleId }}</code>
+        <i class="icon-user"></i>&nbsp;Username: <code>{{ author._id }}</code><br/>
+        <i class="icon-envelop"></i>&nbsp;Email: <code>{{ author.email }}</code><br/>
+        <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.roleId }}</code>
       </p>
       <p class="padding-bottom-large right">
         Created: {{ author.createDate }}<br/>

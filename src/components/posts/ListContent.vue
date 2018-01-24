@@ -4,7 +4,7 @@
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="padding full-width">
         <input type="text" class="margin-none" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
-        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text !== null">&#10006;</button>
+        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text !== null"><i class="icon-cross"></i></button>
       </div>
     </div>
 

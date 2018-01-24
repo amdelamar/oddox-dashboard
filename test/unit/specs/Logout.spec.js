@@ -5,7 +5,7 @@ describe('Logout.vue', () => {
   it('should render correct contents', () => {
     const Constructor = Vue.extend(Logout)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('#logout h4').textContent)
-      .toEqual('Logout')
+    expect(vm.$el.querySelector('#logout h3').textContent)
+      .toEqual('Goodbye!')
   })
 })

@@ -10,6 +10,7 @@ import './assets/vendor/osseous/1.2.0/osseous.min.css'
 import './assets/vendor/animate/3.5.2/animate.min.css'
 // import './assets/vendor/highlight/9.12.0/highlight.pack.js'
 import './assets/vendor/highlight/9.12.0/styles/default.min.css'
+import './assets/vendor/icomoon/icomoon.min.css'
 
 Vue.config.productionTip = false
 

@@ -53,22 +53,20 @@
                 Modified: {{ author.modifyDate }}
               </p>
             </div>
-
-          </div>
-          <div class="twelve columns">
-            <br/>
-            <button class="button button-green" v-on:click="saveChanges">Save Changes</button>
-            <button class="button" v-on:click="editBio">Edit Biography</button>
-            <button class="button" v-on:click="close">Cancel</button>
+            <div class="row padding-top padding-bottom text-right">
+              <button class="button" v-on:click="editBio"><i class="icon-quill"></i>&nbsp;Edit Biography</button>
+              <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+            </div>
           </div>
         </div>
 
 
+
         <hr/>
-        <h2>Danger Zone</h2>
+        <h3>Danger Zone</h3>
         <p>Careful! These actions may permanently destroy data.</p>
 
-        <div class="button button-red dropdown">Delete Account
+        <div class="button button-red dropdown"><i class="icon-cross"></i>&nbsp;Delete Account
           <div class="dropdown-body padding-none">
             <button class="button button-red" v-on:click="deleteAccount">Are you sure?</button>
           </div>
