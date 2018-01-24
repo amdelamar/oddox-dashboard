@@ -4,7 +4,7 @@ import moment from 'moment'
 
 // initial state
 const state = {
-  authToken: localStorage.getItem('auth-token') || '',
+  authToken: JSON.parse(localStorage.getItem('auth-token')) || '',
   authTime: null,
   synced: false,
   syncError: '',
@@ -42,7 +42,7 @@ const actions = {
   login ({ commit }, token) {
     return new Promise((resolve, reject) => {
       database.login(token, result => {
-        localStorage.setItem('auth-token', result)
+        localStorage.setItem('auth-token', JSON.stringify(result))
         commit(types.SET_AUTH_TOKEN, result)
         commit(types.SET_AUTH_TIME, moment.now())
         resolve('Login Success.')

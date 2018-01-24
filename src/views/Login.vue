@@ -59,16 +59,11 @@ export default {
       this.$router.push('/')
     }
 
-    // recover username from localstorage
-    let savedUsername = localStorage.getItem('auth-username')
-    if (savedUsername !== null) {
-      this.authToken.username = savedUsername
-    }
-
-    // recover url from localstorage
-    let savedUrl = localStorage.getItem('auth-url')
-    if (savedUrl !== null) {
-      this.authToken.url = savedUrl
+    // recover url and username from localstorage
+    let rememberMeToken = JSON.parse(localStorage.getItem('remember-me'))
+    if (rememberMeToken !== null) {
+      this.authToken.username = rememberMeToken.username
+      this.authToken.url = rememberMeToken.url
     }
   },
   methods: {
@@ -95,12 +90,14 @@ export default {
       if (!errFlag) {
         if (this.rememberMe) {
           // remember me
-          localStorage.setItem('auth-username', this.authToken.username)
-          localStorage.setItem('auth-url', this.authToken.url)
+          let newRememberMeToken = {
+            'username': this.authToken.username,
+            'url': this.authToken.url
+          }
+          localStorage.setItem('remember-me', JSON.stringify(newRememberMeToken))
         } else {
           // or forget me
-          localStorage.removeItem('auth-username')
-          localStorage.removeItem('auth-url')
+          localStorage.removeItem('remember-me')
         }
 
         this.$store.dispatch('login', this.authToken).then(result => {

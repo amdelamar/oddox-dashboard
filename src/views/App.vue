@@ -15,6 +15,10 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.scollable-none {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 .full-height {
   height: 100%;
 }
@@ -32,6 +36,7 @@ export default {
 html, body {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 .contextbar {
   min-height: 6.5rem;
