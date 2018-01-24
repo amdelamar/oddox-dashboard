@@ -29,7 +29,7 @@
             </div>
           </a>
 
-          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag"><i class="icon-loop2"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag"><i v-if="!flag" class="icon-loop2"></i><i v-if="flag" v-bind:class="{ 'text-medium animated spin': flag }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
         </div>
     	</div>
   </nav>
@@ -119,5 +119,30 @@ export default {
 }
 #app-navbar .nav-item-logo:hover {
   opacity: 0.75;
+}
+.animated.spin {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@-moz-keyframes spin {
+  from {-moz-transform:rotate(0deg);}
+  to { -moz-transform:rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from {-webkit-transform:rotate(0deg);}
+  to {-webkit-transform:rotate(360deg);}
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+i.animated.spin, span.animated.spin {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  height: 16px !important;
+  width: 16px !important;
 }
 </style>
