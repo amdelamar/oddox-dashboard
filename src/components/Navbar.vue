@@ -17,19 +17,21 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <a href="javascript: void(0)" class="button dropdown margin"><i class="icon-user"></i>&nbsp;{{ authToken.username }} &#9662;
-            <div class="dropdown-body nav-list border">
+          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="flag"><i v-if="!flag" class="icon-loop2"></i><i v-if="flag" v-bind:class="{ 'text-medium animated spin': flag }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
+
+          <a href="javascript: void(0)" class="button dropdown border-none hover-shadow hover-background-solid-white margin"><i class="icon-user"></i>&nbsp;&#9662;
+            <div class="dropdown-body round shadow nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
 
               <router-link to="/my-profile" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
               <router-link to="/settings" class="nav-item"><i class="icon-cog"></i>&nbsp;Settings</router-link>
-              <a class="nav-item button full-width" v-on:click="logout">Logout</a>
+              <hr class="margin"/>
+              <button class="nav-item button button-red full-width" v-on:click="logout">Logout</button>
             </div>
           </a>
 
-          <button class="button button-green button-green-outline margin-left" v-on:click="sync" :disabled="flag"><i v-if="!flag" class="icon-loop2"></i><i v-if="flag" v-bind:class="{ 'text-medium animated spin': flag }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
         </div>
     	</div>
   </nav>
@@ -68,13 +70,16 @@ export default {
         // on successful sync
         console.log('Syncrhonized at ' + moment(this.syncTime).format())
         this.message = 'Synced ' + moment(this.syncTime).fromNow()
-        this.syncButton = 'Sync Now'
+        this.syncButton = 'Synced'
         // delay for a second
         setTimeout(() => {
           this.flag = false
           this.$store.dispatch('allPosts')
           this.$store.dispatch('allAuthors')
-        }, 10)
+          this.$store.dispatch('loadAppConfig')
+          this.$store.dispatch('loadAppFirewall')
+          this.syncButton = 'Sync Now'
+        }, 2000)
       }).catch(err => {
         // failed login
         console.log(err)
@@ -108,8 +113,8 @@ export default {
   display: block;
 }
 #app-navbar .dropdown-body {
-  min-width: 23rem;
-  left: -0.1rem;
+  min-width: 21rem;
+  left: -15.6rem;
 }
 #app-navbar .router-link-active, #app-navbar .router-link-exact-active {
   text-decoration: none;

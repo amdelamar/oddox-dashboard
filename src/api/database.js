@@ -209,6 +209,22 @@ export default {
     }).catch(err => {
       errcb(err)
     })
+  },
+
+  readAppDoc (id, cb, errcb) {
+    applicationdb.get(id).then(result => {
+      cb(result)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  updateAppDoc (doc, cb, errcb) {
+    applicationdb.put(doc).then(result => {
+      cb(result)
+    }).catch(err => {
+      errcb(err)
+    })
   }
 
 }

@@ -7,18 +7,18 @@
       </div>
 
       <nav class="nav-list padding padding-bottom-large">
-        <router-link class="nav-item" to="/post"><i class="icon-drawer2"></i>&nbsp;Posts</router-link>
-        <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;Drafts</router-link>
-        <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;Featured</router-link>
-        <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;Categories</router-link>
-        <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;Tags</router-link>
-        <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;Years</router-link>
-        <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;Trash</router-link>
-        <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;All Posts</router-link>
+        <router-link class="nav-item" to="/post"><i class="icon-drawer2"></i>&nbsp;&nbsp;Posts</router-link>
+        <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;Drafts</router-link>
+        <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;Featured</router-link>
+        <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;Categories</router-link>
+        <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;&nbsp;Tags</router-link>
+        <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;Years</router-link>
+        <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;&nbsp;Trash</router-link>
+        <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;All Posts</router-link>
           <span class="nav-item border-bottom"></span>
-        <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;All Authors</router-link>
-        <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
-        <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;Settings</router-link>
+        <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;All Authors</router-link>
+        <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;&nbsp;My Profile</router-link>
+        <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;Settings</router-link>
           <span class="nav-item border-bottom"></span>
       </nav>
     </div>

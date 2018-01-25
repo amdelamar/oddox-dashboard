@@ -20,25 +20,25 @@
             <div class="row padding-top">
               <div class="five columns">
                 <label for="name">Blog Name</label>
-                <input type="text" id="name" class="full-width" maxlength="200" placeholder="My Oddox Blog" v-model="name" />
+                <input type="text" id="name" class="full-width" maxlength="200" placeholder="My Oddox Blog" v-model="appConfig.settings.name" />
               </div>
               <div class="four columns">
                 <label for="domain">Domain</label>
-                <input type="text" id="domain" class="full-width" maxlength="200" placeholder="mywebsite.com" v-model="domain" />
+                <input type="text" id="domain" class="full-width" maxlength="200" placeholder="mywebsite.com" v-model="appConfig.settings.domain" />
               </div>
               <div class="three columns">
                 <label for="lastUpdated">Last Updated</label>
-                <input type="date" id="lastUpdated" v-model="lastUpdated" />
+                <input type="date" id="lastUpdated" v-model="appConfig.settings.lastUpdated" />
               </div>
             </div>
             <div class="row padding-top">
               <div class="six columns">
                 <label for="description">Description</label>
-                <input type="text" id="description" class="full-width" maxlength="200" placeholder="This is my Oddox Blog." v-model="description" />
+                <input type="text" id="description" class="full-width" maxlength="200" placeholder="This is my Oddox Blog." v-model="appConfig.settings.description" />
               </div>
               <div class="six columns">
                 <label for="keywords">Keywords</label>
-                <input type="text" id="keywords" class="full-width" maxlength="200" placeholder="blog,oddox,offline,first" v-model="keywords" />
+                <input type="text" id="keywords" class="full-width" maxlength="200" placeholder="blog,oddox,offline,first" v-model="appConfig.settings.keywords" />
               </div>
             </div>
             <div class="row padding-top">
@@ -58,7 +58,7 @@
               </div>
               <div class="four columns">
                 <label for="rpp">Results per Page</label>
-                <select class="full-width" id="rpp" v-model="rpp">
+                <select class="full-width" id="rpp" v-model="appConfig.settings.rpp">
                   <option value="4">4</option>
                   <option value="6">6</option>
                   <option value="10">10</option>
@@ -80,14 +80,14 @@
             <div class="row padding-top">
               <div class="four columns">
                 <label>Application Context</label>
-                <input type="radio" id="ar1" name="radiogroup2" value="1" v-model="contextRoot" />
+                <input type="radio" id="ar1" name="radiogroup2" value="1" v-model="appConfig.settings.contextRoot" />
                 <label class="text-normal" for="ar1">Use Root "/"</label>
 
-                <input type="radio" id="ar2" name="radiogroup2" value="2" v-model="contextRoot" />
+                <input type="radio" id="ar2" name="radiogroup2" value="2" v-model="appConfig.settings.contextRoot" />
                 <label class="text-normal" for="ar2">Use Blog "/blog/"</label>
 
-                <input type="radio" id="ar3" name="radiogroup2" value="3" v-model="contextRoot" />
-                <label class="text-normal" for="ar3">Use Other: <input type="text" maxlength="25" placeholder="/comics/" v-model="contextOther" /></label>
+                <input type="radio" id="ar3" name="radiogroup2" value="3" v-model="appConfig.settings.contextRoot" />
+                <label class="text-normal" for="ar3">Use Other: <input type="text" maxlength="25" placeholder="/comics/" v-model="appConfig.settings.contextOther" /></label>
               </div>
             </div>
             <p><i>Example:</i>&nbsp;&nbsp;<a class="text-darkgrey" href="javascript: void(0)">https://{{ domain }}{{ contextOther || '/blog/' }}welcome-to-oddox</a></p>
@@ -95,17 +95,17 @@
             <div class="row padding-top">
               <div class="twelve columns">
                 <label for="featured">Featured identifier</label>
-                <input type="text" id="featured" maxlength="20" placeholder="/featured/" v-model="featuredName" />
+                <input type="text" id="featured" maxlength="20" placeholder="/featured/" v-model="appConfig.settings.featuredName" />
                 <span class="text-darkgrey">https://{{ domain }}{{ featuredName || '/featured/' }}</span>
               </div>
               <div class="twelve columns">
                 <label for="category">Category identifier</label>
-                <input type="text" id="category" maxlength="20" placeholder="/category/" v-model="categoryName" />
+                <input type="text" id="category" maxlength="20" placeholder="/category/" v-model="appConfig.settings.categoryName" />
                 <span class="text-darkgrey">https://{{ domain }}{{ categoryName || '/category/' }}reports</span>
               </div>
               <div class="twelve columns">
                 <label for="tag">Tag identifier</label>
-                <input type="text" id="tag" maxlength="20" placeholder="/tag/" v-model="tagName" />
+                <input type="text" id="tag" maxlength="20" placeholder="/tag/" v-model="appConfig.settings.tagName" />
                 <span class="text-darkgrey">https://{{ domain }}{{ tagName || '/tag/' }}fluff</span>
               </div>
             </div>
@@ -204,8 +204,14 @@ export default {
     }
   },
   computed: mapGetters({
-    authToken: 'getAuthToken'
+    authToken: 'getAuthToken',
+    appConfig: 'getAppConfig',
+    appFirewall: 'getAppFirewall'
   }),
+  created () {
+    this.$store.dispatch('loadAppConfig')
+    this.$store.dispatch('loadAppFirewall')
+  },
   methods: {
     close () {
       this.$router.push('/post')

@@ -4,15 +4,16 @@
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="padding full-width">
         <input type="text" class="margin-none" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
-        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text !== null"><i class="icon-cross"></i></button>
+        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
       </div>
     </div>
 
     <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
-        <em v-if="text === null">No posts found.</em>
-        <em v-if="text !== null">No results found for '{{ text }}'.</em>
+        <i class="icon-search text-grey text-largest"></i><br/>
+        <em class="text-darkgrey" v-if="text === null">No authors found.</em>
+        <em class="text-darkgrey" v-if="text !== null">No results found for '{{ text }}'.</em>
       </p>
 
       <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">
@@ -33,7 +34,7 @@ export default {
   name: 'author-list-content',
   data () {
     return {
-      text: null
+      text: ''
     }
   },
   computed: mapGetters({
@@ -46,7 +47,7 @@ export default {
   methods: {
     clearSearch () {
       this.$store.dispatch('allAuthors')
-      this.text = null
+      this.text = ''
     },
     search () {
       this.text = this.text.toLowerCase()

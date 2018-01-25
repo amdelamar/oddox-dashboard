@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import authentication from './modules/authentication'
 import authors from './modules/authors'
 import posts from './modules/posts'
+import settings from './modules/settings'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     authentication,
     authors,
-    posts
+    posts,
+    settings
   },
   strict: debug
 })
