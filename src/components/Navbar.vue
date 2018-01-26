@@ -4,7 +4,7 @@
 
         <div class="nav-item-logo">
             <router-link to="/">
-              <img class="margin-right" src="static/logo.png" height="35px" width="35px" alt="Logo" />
+              <img class="margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title }}</span>
             </router-link>
         </div>
@@ -112,6 +112,15 @@ export default {
   position: relative;
   display: block;
 }
+#app-navbar .nav-item-logo {
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.5s ease;
+}
+#app-navbar .nav-item-logo:hover, #app-navbar .nav-item-logo:focus {
+  filter: grayscale(0%);
+  opacity: 1;
+}
 #app-navbar .dropdown-body {
   min-width: 21rem;
   left: -15.6rem;
@@ -121,33 +130,5 @@ export default {
 }
 #app-navbar .router-link-active:hover, #app-navbar .router-link-exact-active:hover {
   text-decoration: none;
-}
-#app-navbar .nav-item-logo:hover {
-  opacity: 0.75;
-}
-.animated.spin {
-  animation-name: spin;
-  animation-duration: 1000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-@-moz-keyframes spin {
-  from {-moz-transform:rotate(0deg);}
-  to { -moz-transform:rotate(360deg); }
-}
-@-webkit-keyframes spin {
-  from {-webkit-transform:rotate(0deg);}
-  to {-webkit-transform:rotate(360deg);}
-}
-@keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
-}
-i.animated.spin, span.animated.spin {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  height: 16px !important;
-  width: 16px !important;
 }
 </style>

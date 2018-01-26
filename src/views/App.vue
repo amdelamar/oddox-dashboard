@@ -19,6 +19,9 @@ export default {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+.overflow-none {
+  overflow: none;
+}
 .full-height {
   height: 100%;
 }
@@ -57,6 +60,23 @@ html, body {
 .full-main-content {
   width: 86.6666666667%;
   margin: 0;
+}
+.button {
+  transition: all 0.1s ease;
+}
+.button-small {
+  font-size: .75em;
+  height: 3rem;
+  padding: 0 1em;
+  line-height: 2.8rem;
+}
+.super-center {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -100px;
 }
 input:hover, input:active, input:focus {
   background-color: #ffffff;
@@ -97,4 +117,30 @@ input:hover, input:active, input:focus {
 .button-blue-outline { background: transparent; color: var(--blue); }
 .button-red-outline { background: transparent; color: var(--red); }
 .button-green-outline { background: transparent; color: var(--green); }
+
+.animated.spin {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@-moz-keyframes spin {
+  from {-moz-transform:rotate(0deg);}
+  to { -moz-transform:rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from {-webkit-transform:rotate(0deg);}
+  to {-webkit-transform:rotate(360deg);}
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+i.animated.spin, span.animated.spin {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  height: 16px !important;
+  width: 16px !important;
+}
 </style>

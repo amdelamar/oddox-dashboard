@@ -14,7 +14,8 @@
   <div id="content" class="border-left background-solid-white scrollable">
 
     <p class="super-center text-center" v-if="post === null">
-      <em>Nothing to show.</em>
+      <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
+      <em class="text-grey">Nothing to show.</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null">

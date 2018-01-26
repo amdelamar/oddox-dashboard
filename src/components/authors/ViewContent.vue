@@ -76,12 +76,4 @@ export default {
 #content {
   height: calc(100% - 6.5rem);
 }
-.super-center {
-  position: relative;
-  width: 200px;
-  height: 50px;
-  top: 50%;
-  left: 50%;
-  margin: -25px 0 0 -100px;
-}
 </style>

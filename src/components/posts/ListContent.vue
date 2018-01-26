@@ -3,12 +3,12 @@
 
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="padding full-width">
-        <input type="text" class="margin-none" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
+        <input type="text" style="margin:0;" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
         <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
       </div>
     </div>
 
-    <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="post-list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="posts === null || posts.length < 1">
         <i class="icon-search text-grey text-largest"></i><br/>
@@ -17,7 +17,7 @@
       </p>
 
       <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
-        <div class="row padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
+        <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
           <p class="margin-none">{{ post.title | shortTitle }}</p>
           <small>{{ post.description | shortDesc }}</small>
         </div>
@@ -85,23 +85,20 @@ export default {
 </script>
 
 <style>
-#list a {
+#post-list a {
   color: initial;
 }
-#list {
+#post-list {
   height: calc(100% - 6.5rem);
 }
-.overflow-none {
-  overflow: none;
+#post-list .item {
+  transition: all 0.3s ease;
 }
-.row.active {
+.item.active {
   color: #FFFFFF;
   background: var(--blue);
 }
-.row.active:hover {
+.item.active:hover {
   background: var(--light-blue);
-}
-.margin-none {
-  margin: 0 !important;
 }
 </style>

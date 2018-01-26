@@ -78,10 +78,4 @@ export default {
 #content {
   height: calc(100% - 6.5rem);
 }
-.button-small {
-  font-size: .75em;
-  height: 3rem;
-  padding: 0 1em;
-  line-height: 2.8rem;
-}
 </style>

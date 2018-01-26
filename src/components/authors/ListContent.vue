@@ -3,12 +3,12 @@
 
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="padding full-width">
-        <input type="text" class="margin-none" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
+        <input type="text" style="margin:0;" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
         <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
       </div>
     </div>
 
-    <div id="list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="author-list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
         <i class="icon-search text-grey text-largest"></i><br/>
@@ -17,7 +17,7 @@
       </p>
 
       <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">
-        <div class="row padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
+        <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
           <p class="margin-none">{{ author.name | shortTitle }}</p>
           <small>{{ author.description | shortDesc }}</small>
         </div>
@@ -85,20 +85,20 @@ export default {
 </script>
 
 <style>
-#list a {
+#author-list a {
   color: initial;
 }
-#list {
+#author-list {
   height: calc(100% - 6.5rem);
 }
-.overflow-none {
-  overflow: none;
+#author-list .item {
+  transition: all 0.3s ease;
 }
-.row.active {
+.item.active {
   color: #FFFFFF;
   background: var(--blue);
 }
-.row.active:hover {
+.item.active:hover {
   background: var(--light-blue);
 }
 </style>
