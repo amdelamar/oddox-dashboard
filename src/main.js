@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './views/App'
 import Router from './router'
 import store from './store'
-
+import { shorten } from './filters/shorten'
 import './assets/vendor/osseous/1.2.0/osseous.min.css'
 // import './assets/vendor/osseous/1.2.0/osseous.min.js'
 import './assets/vendor/animate/3.5.2/animate.min.css'
@@ -13,6 +13,7 @@ import './assets/vendor/highlight/9.12.0/styles/default.min.css'
 import './assets/vendor/icomoon/icomoon.min.css'
 
 Vue.config.productionTip = false
+Vue.filter('shorten', shorten)
 
 /* eslint-disable no-new */
 new Vue({

@@ -17,10 +17,10 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="flag"><i v-if="!flag" class="icon-loop2"></i><i v-if="flag" v-bind:class="{ 'text-medium animated spin': flag }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'text-medium animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
 
           <a href="javascript: void(0)" class="button dropdown border-none hover-shadow hover-background-solid-white margin"><i class="icon-user"></i>&nbsp;&#9662;
-            <div class="dropdown-body round shadow nav-list">
+            <div class="dropdown-body round border nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
@@ -47,7 +47,8 @@ export default {
       title: 'Dashboard',
       message: '',
       syncButton: 'Sync Now',
-      flag: false
+      iconSpin: false,
+      disableFlag: false
     }
   },
   computed: mapGetters({
@@ -65,25 +66,28 @@ export default {
       console.log('Syncing...')
       this.message = ''
       this.syncButton = 'Syncing...'
-      this.flag = true
+      this.disableFlag = true
+      this.iconSpin = true
       this.$store.dispatch('synchronize').then(result => {
         // on successful sync
         console.log('Syncrhonized at ' + moment(this.syncTime).format())
         this.message = 'Synced ' + moment(this.syncTime).fromNow()
         this.syncButton = 'Synced'
+        this.iconSpin = false
         // delay for a second
         setTimeout(() => {
-          this.flag = false
+          this.disableFlag = false
           this.$store.dispatch('allPosts')
           this.$store.dispatch('allAuthors')
           this.$store.dispatch('loadAppConfig')
           this.$store.dispatch('loadAppFirewall')
           this.syncButton = 'Sync Now'
-        }, 2000)
+        }, 5000)
       }).catch(err => {
         // failed login
         console.log(err)
-        this.flag = false
+        this.disableFlag = false
+        this.iconSpin = false
         this.syncButton = 'Sync Now'
       })
     },

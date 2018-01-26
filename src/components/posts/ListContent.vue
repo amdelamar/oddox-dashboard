@@ -18,8 +18,8 @@
 
       <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
         <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
-          <p class="margin-none">{{ post.title | shortTitle }}</p>
-          <small>{{ post.description | shortDesc }}</small>
+          <p class="margin-none text-nowrap">{{ post.title | shorten(45) }}</p>
+          <span class="text-small text-nowrap">{{ post.description | shorten(60) }}</span>
         </div>
       </a>
     </div>
@@ -64,22 +64,6 @@ export default {
         console.log(err)
       })
     }
-  },
-  filters: {
-    shortTitle: function (string) {
-      if (string.length > 45) {
-        return string.substring(0, 45) + '...'
-      } else {
-        return string
-      }
-    },
-    shortDesc: function (string) {
-      if (string.length > 60) {
-        return string.substring(0, 60) + '...'
-      } else {
-        return string
-      }
-    }
   }
 }
 </script>
@@ -94,11 +78,11 @@ export default {
 #post-list .item {
   transition: all 0.3s ease;
 }
-.item.active {
+#post-list .item.active {
   color: #FFFFFF;
   background: var(--blue);
 }
-.item.active:hover {
+#post-list .item.active:hover {
   background: var(--light-blue);
 }
 </style>
