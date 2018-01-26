@@ -1,14 +1,16 @@
 <template>
-<div id="logout" class="padding-top-large full-width full-height background-solid-lightgrey">
+<div id="logout" class="background-solid-lightgrey">
 
-  <div class="row section">
-    <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated fadeIn">
+  <app-logobar></app-logobar>
+
+  <div class="row section padding-top-large ">
+    <div id="logout-dialog" class="padding-large shadow border round background-solid-white animated fadeIn">
       <h3>Goodbye!</h3>
       <div class="row">
         <p>You have been logged out.</p>
       </div>
-      <div class="row padding-top margin-top">
-        <button class="button button-blue full-width" v-on:click="returnToLogin" autofocus>Return to Login</button>
+      <div class="row">
+        <button class="button button-blue margin-top full-width" v-on:click="returnToLogin" autofocus>Return to Login</button>
       </div>
     </div>
   </div>
@@ -17,8 +19,12 @@
 </template>
 
 <script>
+import Logobar from '@/components/Logobar'
 export default {
   name: 'logout',
+  components: {
+    'app-logobar': Logobar,
+  },
   methods: {
     returnToLogin () {
       this.$router.push('/login')
@@ -29,7 +35,15 @@ export default {
 
 <style>
 #logout {
+  height: 100%;
+  width: 100%;
   margin: 0;
   align-content: center;
+}
+#logout-dialog {
+  min-width: 25rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

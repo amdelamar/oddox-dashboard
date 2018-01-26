@@ -1,8 +1,10 @@
 <template>
-<div id="login" class="padding-top-large full-width full-height background-solid-lightgrey">
+<div id="login" class="background-solid-lightgrey">
 
-  <div class="row section">
-    <div class="four columns offset-by-four padding-large shadow border round background-solid-white animated fadeIn">
+  <app-logobar></app-logobar>
+
+  <div class="row section padding-top-large">
+    <div id="login-dialog" class="padding-large shadow border round background-solid-white animated fadeIn">
       <h3 class="text-center">{{ title }}</h3>
 
       <form v-on:submit="login">
@@ -30,12 +32,12 @@
           <input class="full-width" placeholder="Password" v-model="authToken.password" type="password" required />
         </div>
       </div>
-      <div class="row text-center">
-        <span class="text-red" v-bind:class="{ 'animated fadeIn': message.length > 1 }"><span v-if="message.length > 1" class="icon-blocked"></span>&nbsp;{{message}}</span>
+      <div class="row text-center" v-if="message.length > 1">
+        <span class="text-red text-bold" v-bind:class="{ 'animated fadeIn': message.length > 1 }"><span class="icon-blocked"></span>&nbsp;{{message}}</span>
       </div>
 
-      <div class="row padding-top">
-        <input type="submit" class="button button-blue full-width" v-on:submit="login" :disabled="disableLogin" value="Login" />
+      <div class="row">
+        <input type="submit" class="button button-blue full-width margin-top" v-on:submit="login" :disabled="disableLogin" value="Login" />
       </div>
       <div class="row padding-top margin-top left">
         <input type="checkbox" id="c1" v-model="rememberMe" class="full-width" />
@@ -57,8 +59,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Logobar from '@/components/Logobar'
 export default {
   name: 'login',
+  components: {
+    'app-logobar': Logobar,
+  },
   data () {
     return {
       title: 'Login',
@@ -147,6 +153,12 @@ export default {
 </script>
 
 <style>
+#login {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  align-content: center;
+}
 .text-red {
   color: var(--red);
 }
@@ -157,5 +169,11 @@ export default {
   font-size: 1em;
   margin-top: 1rem;
   padding-top: .8rem;
+}
+#login-dialog {
+  min-width: 25rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
