@@ -23,7 +23,7 @@ import Logobar from '@/components/Logobar'
 export default {
   name: 'logout',
   components: {
-    'app-logobar': Logobar,
+    'app-logobar': Logobar
   },
   methods: {
     returnToLogin () {

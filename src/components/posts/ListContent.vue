@@ -2,9 +2,9 @@
   <div class="full-height">
 
     <div class="contextbar border-bottom background-solid-lightgrey">
-      <div class="padding full-width">
+      <div class="row padding">
         <input type="text" style="margin:0;" placeholder="Search within view..." v-model="text" v-on:keyup="search" />&nbsp;
-        <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+        <button class="button button-small border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
       </div>
     </div>
 
@@ -29,7 +29,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 export default {
   name: 'post-list-content',
   data () {

@@ -61,6 +61,9 @@ html, body {
   width: 86.6666666667%;
   margin: 0;
 }
+.text-red {
+  color: var(--red);
+}
 .button {
   transition: all 0.1s ease;
 }

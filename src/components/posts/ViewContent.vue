@@ -4,7 +4,7 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="padding text-right" v-if="post !== null">
       <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>&nbsp;
-      <button class="button button-small border-none hover-shadow hover-background-solid-white" v-on:click="close"><i class="icon-cross"></i></button>
+      <button class="button button-small border-none background-solid-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>
     </div>
   </div>
 

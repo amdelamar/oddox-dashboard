@@ -63,7 +63,7 @@ import Logobar from '@/components/Logobar'
 export default {
   name: 'login',
   components: {
-    'app-logobar': Logobar,
+    'app-logobar': Logobar
   },
   data () {
     return {
@@ -158,9 +158,6 @@ export default {
   width: 100%;
   margin: 0;
   align-content: center;
-}
-.text-red {
-  color: var(--red);
 }
 #login i {
   vertical-align: middle;

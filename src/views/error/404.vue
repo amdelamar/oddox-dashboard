@@ -27,7 +27,7 @@
 import Logobar from '@/components/Logobar'
 export default {
   components: {
-    'app-logobar': Logobar,
+    'app-logobar': Logobar
   },
   methods: {
     returnToHome () {

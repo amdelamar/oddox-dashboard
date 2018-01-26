@@ -3,10 +3,10 @@
 
     <div class="full-width">
       <div class="contextbar padding">
-        <button class="full-width button button-blue" v-on:click="newpost">New Post</button>
+        <button class="full-width button button-blue" v-on:click="newPost">New Post</button>
       </div>
 
-      <nav class="nav-list padding padding-bottom-large">
+      <nav class="nav-list padding">
         <router-link class="nav-item" to="/post"><i class="icon-drawer2"></i>&nbsp;&nbsp;Posts</router-link>
         <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;Drafts</router-link>
         <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;Featured</router-link>
@@ -15,21 +15,20 @@
         <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;Years</router-link>
         <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;&nbsp;Trash</router-link>
         <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;All Posts</router-link>
-          <span class="nav-item border-bottom"></span>
+          <span class="nav-item"><hr class="margin-none"/></span>
         <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;All Authors</router-link>
         <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;&nbsp;My Profile</router-link>
         <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;Settings</router-link>
-          <span class="nav-item border-bottom"></span>
+
       </nav>
     </div>
 
-    <footer class="padding margin full-width text-darkgrey text-center">
-      <p title="Total disk size of your database">
+    <footer class="full-width text-darkgrey text-center">
+      <p class="text-nowrap" title="Total disk size of your database">
         Storage: <code>{{ dbsize }}</code>
+        <br/>
+        <em class="text-small"><a class="text-darkgrey" :href="link">{{ name }} {{ version }}</a></em>
       </p>
-      <span class="text-small border-top padding-top">
-        <em><a class="text-darkgrey" :href="link">{{ name }} {{ version }}</a></em>
-      </span>
     </footer>
   </nav>
 </template>
@@ -46,8 +45,7 @@ export default {
     }
   },
   methods: {
-    newpost () {
-      console.log('New Post')
+    newPost () {
       this.$store.dispatch('setCurrentPost', null)
       this.$router.push('/new-post')
     }

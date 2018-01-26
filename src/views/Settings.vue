@@ -12,10 +12,12 @@
         <h1>Settings</h1>
         <p>Change the configuration and settings of your blog. Click 'save' when finished.</p>
 
+        <hr class="margin"/>
+
         <div class="row padding-bottom-large">
           <div class="nine columns">
 
-            <div class="row padding-top-large padding-bottom-large border-top">
+            <div class="row padding-top padding-bottom">
             <h3>Configuration</h3>
             <div class="row padding-top">
               <div class="five columns">
@@ -75,7 +77,9 @@
               </div>
             </div>
 
-            <div class="row padding-top-large padding-bottom-large border-top">
+            <hr class="margin"/>
+
+            <div class="row padding-top padding-bottom">
             <h3>Networking</h3>
             <div class="row padding-top">
               <div class="four columns">
@@ -114,9 +118,9 @@
               </div>
             </div>
 
+            <hr class="margin"/>
 
-
-            <div class="row padding-top-large padding-bottom-large border-top">
+            <div class="row padding-top padding-bottom">
             <h3>Security</h3>
             <div class="row padding-top">
               <div class="four columns">
@@ -150,9 +154,9 @@
               </div>
             </div>
 
+            <hr class="margin"/>
 
-
-            <div class="row padding-top-large padding-bottom-large border-top">
+            <div class="row padding-top padding-bottom">
             <h3>Danger Zone</h3>
               <p>Careful! These actions may permanently destroy data.</p>
               <div class="button button-red dropdown"><i class="icon-database"></i>&nbsp;Destroy Databases

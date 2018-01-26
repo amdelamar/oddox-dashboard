@@ -6,7 +6,7 @@
             <a v-on:click="sync" :disabled="disableFlag">
               <img v-if="!iconSpin" class="margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
               <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
-              <span class="text-medium text-thin text-uppercase text-wide">{{ title }}</span>
+              <span class="text-medium text-thin text-uppercase text-wide">{{ title | shorten(15) }}</span>
             </a>
         </div>
         <div class="nav-small-menu margin-right">
@@ -18,9 +18,9 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
 
-          <a href="javascript: void(0)" class="button dropdown border-none hover-shadow hover-background-solid-white margin"><i class="icon-user"></i>&nbsp;&#9662;
+          <a href="javascript: void(0)" class="button dropdown hover-background-solid-white hover-shadow margin"><i class="icon-user"></i>&nbsp;&#9662;
             <div class="dropdown-body round border nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
@@ -53,6 +53,7 @@ export default {
     }
   },
   computed: mapGetters({
+    appConfig: 'getAppConfig',
     authToken: 'getAuthToken',
     status: 'getSyncError',
     syncTime: 'getSyncTime'
@@ -60,6 +61,9 @@ export default {
   created () {
     if (this.syncTime !== null) {
       this.message = 'Synced ' + moment(this.syncTime).fromNow()
+    }
+    if (this.appConfig !== null && this.appConfig.settings.name !== null) {
+      this.title = this.appConfig.settings.name
     }
   },
   methods: {
