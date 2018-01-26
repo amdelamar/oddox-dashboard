@@ -124,6 +124,12 @@ input:hover, input:active, input:focus {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
+.animated.rewind {
+  animation-name: rewind;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
 @-moz-keyframes spin {
   from {-moz-transform:rotate(0deg);}
   to { -moz-transform:rotate(360deg); }
@@ -136,7 +142,19 @@ input:hover, input:active, input:focus {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
 }
-i.animated.spin, span.animated.spin {
+@-moz-keyframes rewind {
+  from {-moz-transform:rotate(360deg);}
+  to { -moz-transform:rotate(0deg); }
+}
+@-webkit-keyframes rewind {
+  from {-webkit-transform:rotate(360deg);}
+  to {-webkit-transform:rotate(0deg);}
+}
+@keyframes rewind {
+  from {transform:rotate(360deg);}
+  to {transform:rotate(0deg);}
+}
+i.animated.spin, span.animated.spin, i.animated.rewind, span.animated.rewind {
   display: inline-block;
   vertical-align: middle;
   text-align: center;

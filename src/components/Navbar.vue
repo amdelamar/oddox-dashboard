@@ -3,12 +3,13 @@
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
-            <router-link to="/">
-              <img class="margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
+            <a v-on:click="sync" :disabled="disableFlag">
+              <img v-if="!iconSpin" class="margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
+              <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title }}</span>
-            </router-link>
+            </a>
         </div>
-        <div class="nav-small-menu">
+        <div class="nav-small-menu margin-right">
             <a class="nav-item" title="Open Menu" href="javascript:openSidebar()">
                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M0 7h16v2H0V7zm0-6h16v2H0V1zm0 12h16v2H0v-2z" fill-rule="evenodd"></path></svg>
             </a>
@@ -17,7 +18,7 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'text-medium animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button border-none hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
 
           <a href="javascript: void(0)" class="button dropdown border-none hover-shadow hover-background-solid-white margin"><i class="icon-user"></i>&nbsp;&#9662;
             <div class="dropdown-body round border nav-list">
@@ -112,17 +113,21 @@ export default {
 </script>
 
 <style>
-.navbar {
+#app-navbar.navbar {
   position: relative;
   display: block;
 }
 #app-navbar .nav-item-logo {
-  filter: grayscale(100%);
+  /* filter: grayscale(100%); */
   opacity: 0.8;
   transition: all 0.5s ease;
 }
+#app-navbar .nav-item-logo a {
+  text-decoration: none;
+  cursor: pointer;
+}
 #app-navbar .nav-item-logo:hover, #app-navbar .nav-item-logo:focus {
-  filter: grayscale(0%);
+  /* filter: grayscale(0%); */
   opacity: 1;
 }
 #app-navbar .dropdown-body {
@@ -134,5 +139,9 @@ export default {
 }
 #app-navbar .router-link-active:hover, #app-navbar .router-link-exact-active:hover {
   text-decoration: none;
+}
+.greyscale {
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
 }
 </style>
