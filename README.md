@@ -1,4 +1,4 @@
-# Oddox Dashboard
+# <img src="https://oddox.org/assets/logo.png" width="280px" alt="Oddox" /> Dashboard
 
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
@@ -12,11 +12,11 @@ Offline-first dashboard for authors to manage their Oddox blog
 
 ## Usage
 
-Dashboard is a console for authors using the [Oddox](https://github.com/oddoxorg/oddox) blogging platform to write, sync, and manage their blog.
+Dashboard is a GUI for authors with an [Oddox](https://github.com/oddoxorg/oddox) blog to write, sync, and manage their content.
 
 This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. A self-installing version will be made available once the main features are complete.
 
-Please use see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
+Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
 ### Getting Started
 
