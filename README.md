@@ -1,9 +1,8 @@
-# <img src="https://oddox.org/assets/logo.png" width="280px" alt="Oddox" /> Dashboard
+# <img src="https://oddox.org/assets/logo-dark.png" width="150px" alt="Oddox" /> DASHBOARD
 
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/oddoxorg/dashboard.svg)](https://codecov.io/gh/oddoxorg/dashboard)
-[![Docker Pulls](https://img.shields.io/docker/pulls/oddoxorg/dashboard.svg)](https://hub.docker.com/r/oddoxorg/dashboard/)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
 
 Offline-first dashboard for authors to manage their Oddox blog
