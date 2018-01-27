@@ -133,6 +133,7 @@ export default {
           console.log(result)
           this.message = result
           this.disableLogin = false
+          this.$store.dispatch('synchronize')
           this.$router.push('/post')
         }).catch(err => {
           // failed login
