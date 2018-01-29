@@ -2,7 +2,11 @@
 <div class="full-height">
 
   <div class="contextbar border-bottom background-solid-lightgrey">
-    <div class="padding text-right" v-if="author !== null">
+    <div class="four columns tabs">
+      <router-link class="tab button" :to="{ name: 'edit-author-content', params: { id: author._id }}">Content</router-link>
+      <router-link class="tab button" :to="{ name: 'edit-author-advanced', params: { id: author._id }}">Advanced</router-link>
+    </div>
+    <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
       <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
@@ -10,7 +14,7 @@
     </div>
   </div>
 
-  <div id="content" class="border-left background-solid-white scrollable">
+  <div id="author-edit" class="border-left background-solid-white scrollable">
 
     <p class="super-center text-center" v-if="author === null">
       <i class="icon-notification text-red text-largest"></i><br/>
@@ -28,8 +32,8 @@
       <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
 
       <br/><br/>
-      <label for="content">Full Page Bio</label>
-      <textarea id="content" class="full-width full-height" v-model="author.content"></textarea>
+      <label for="cont">Full Page Bio</label>
+      <textarea id="cont" class="full-width" v-model="author.content"></textarea>
 
       <hr/>
       <p class="padding-bottom-large right">
@@ -48,7 +52,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'author-view-content',
+  name: 'author-edit',
   data () {
     return {
       status: 'Opened',
@@ -108,15 +112,7 @@ export default {
 </script>
 
 <style>
-#content {
+#author-edit {
   height: calc(100% - 6.5rem);
-}
-.super-center {
-  position: relative;
-  width: 200px;
-  height: 50px;
-  top: 50%;
-  left: 50%;
-  margin: -25px 0 0 -100px;
 }
 </style>

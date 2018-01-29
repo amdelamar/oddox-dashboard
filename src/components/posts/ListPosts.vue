@@ -30,7 +30,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'post-list-content',
+  name: 'post-list',
   data () {
     return {
       text: ''

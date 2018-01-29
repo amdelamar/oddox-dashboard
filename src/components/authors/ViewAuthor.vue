@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="content" class="background-solid-white scrollable">
+  <div id="author-view" class="background-solid-white scrollable">
 
     <p class="super-center text-center" v-if="author === null">
       <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
@@ -42,7 +42,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'author-view-content',
+  name: 'author-view',
   computed: mapGetters({
     author: 'getCurrentAuthor'
   }),
@@ -66,14 +66,14 @@ export default {
       this.$router.push('/author')
     },
     edit () {
-      this.$router.push('/edit-author/content/' + this.author._id)
+      this.$router.push('/edit-author/' + this.author._id)
     }
   }
 }
 </script>
 
 <style>
-#content {
+#author-view {
   height: calc(100% - 6.5rem);
 }
 </style>

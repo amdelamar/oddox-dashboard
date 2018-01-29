@@ -31,7 +31,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'author-list-content',
+  name: 'author-list',
   data () {
     return {
       text: ''

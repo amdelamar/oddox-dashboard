@@ -8,10 +8,10 @@
       <app-sidebar></app-sidebar>
     </section>
     <section class="side-content columns full-height">
-      <post-list-content></post-list-content>
+      <post-list></post-list>
     </section>
     <section class="main-content columns full-height">
-      <post-view-content></post-view-content>
+      <post-view></post-view>
     </section>
   </main>
 
@@ -21,16 +21,16 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import ViewContent from '@/components/posts/ViewContent'
-import ListContent from '@/components/posts/ListContent'
+import ViewPost from '@/components/posts/ViewPost'
+import ListPosts from '@/components/posts/ListPosts'
 
 export default {
   name: 'posts',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
-    'post-list-content': ListContent,
-    'post-view-content': ViewContent
+    'post-list': ListPosts,
+    'post-view': ViewPost
   }
 }
 </script>

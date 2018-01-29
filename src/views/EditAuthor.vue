@@ -1,5 +1,5 @@
 <template>
-  <div id="new-post">
+  <div id="edit-author">
 
   <app-navbar></app-navbar>
 
@@ -8,7 +8,7 @@
       <app-sidebar></app-sidebar>
     </section>
     <section class="full-main-content columns full-height">
-      <post-edit-content></post-edit-content>
+      <author-edit></author-edit>
     </section>
   </main>
 
@@ -18,22 +18,22 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import EditContent from '@/components/posts/EditContent'
-import ListContent from '@/components/posts/ListContent'
+import EditAuthor from '@/components/authors/EditAuthor'
+import ListAuthors from '@/components/authors/ListAuthors'
 
 export default {
-  name: 'new-post',
+  name: 'authors',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
-    'post-list-content': ListContent,
-    'post-edit-content': EditContent
+    'author-list': ListAuthors,
+    'author-edit': EditAuthor
   }
 }
 </script>
 
 <style>
-#new-post {
+#edit-author {
   height: 100%;
   width: 100%;
 }

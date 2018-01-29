@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="content" class="background-solid-white scrollable">
+  <div id="post-view" class="background-solid-white scrollable">
 
     <p class="super-center text-center" v-if="post === null">
       <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
@@ -41,9 +41,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 export default {
-  name: 'post-view-content',
+  name: 'post-view',
   computed: mapGetters({
     post: 'getCurrentPost'
   }),
@@ -68,14 +67,14 @@ export default {
     },
     edit () {
       this.status = ''
-      this.$router.push('/edit-post/content/' + this.post._id)
+      this.$router.push('/edit-post/' + this.post._id)
     }
   }
 }
 </script>
 
 <style>
-#content {
+#post-view {
   height: calc(100% - 6.5rem);
 }
 </style>

@@ -8,10 +8,10 @@
       <app-sidebar></app-sidebar>
     </section>
     <section class="side-content columns full-height">
-      <author-list-content></author-list-content>
+      <author-list></author-list>
     </section>
     <section class="main-content columns full-height">
-      <author-view-content></author-view-content>
+      <author-view></author-view>
     </section>
   </main>
 
@@ -21,16 +21,16 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-import ViewContent from '@/components/authors/ViewContent'
-import ListContent from '@/components/authors/ListContent'
+import ViewAuthor from '@/components/authors/ViewAuthor'
+import ListAuthors from '@/components/authors/ListAuthors'
 
 export default {
   name: 'authors',
   components: {
     'app-navbar': Navbar,
     'app-sidebar': Sidebar,
-    'author-list-content': ListContent,
-    'author-view-content': ViewContent
+    'author-list': ListAuthors,
+    'author-view': ViewAuthor
   }
 }
 </script>
