@@ -7,7 +7,7 @@
       </div>
 
       <nav class="nav-list padding">
-        <router-link class="nav-item" to="/post"><i class="icon-drawer2"></i>&nbsp;&nbsp;Posts</router-link>
+        <router-link class="nav-item" to="/post"><i class="icon-stack"></i>&nbsp;&nbsp;Posts</router-link>
         <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;Drafts</router-link>
         <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;Featured</router-link>
         <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;Categories</router-link>

@@ -2,7 +2,12 @@
 <div class="full-height">
 
   <div class="contextbar border-bottom background-solid-lightgrey">
-    <div class="padding text-right" v-if="post !== null">
+    <div class="four columns tabs">
+      <router-link class="tab button" :to="{ name: 'edit-post-content', params: { id: post._id }}">Content</router-link>
+      <router-link class="tab button" :to="{ name: 'edit-post-sharing', params: { id: post._id }}">Sharing</router-link>
+      <router-link class="tab button" :to="{ name: 'edit-post-advanced', params: { id: post._id }}">Advanced</router-link>
+    </div>
+    <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
       <button class="button" v-on:click="publish"><i class="icon-clock"></i>&nbsp;Publish</button>&nbsp;
@@ -59,8 +64,8 @@
         </div>
       </div>
       <div class="row padding-top">
-        <label for="content">Content</label>
-        <textarea id="content" class="full-width full-height" v-model="post.content"></textarea>
+        <label for="cont">Content</label>
+        <textarea id="cont" class="full-width" v-model="post.content"></textarea>
       </div>
       <div class="row padding-top">
         <p class="padding-bottom-large left">
@@ -90,7 +95,7 @@ export default {
   name: 'post-view-content',
   data () {
     return {
-      status: 'Opened'
+      status: ''
     }
   },
   computed: mapGetters({
@@ -158,11 +163,5 @@ export default {
 <style>
 #content {
   height: calc(100% - 6.5rem);
-}
-.button-small {
-  font-size: .75em;
-  height: 3rem;
-  padding: 0 1em;
-  line-height: 2.8rem;
 }
 </style>

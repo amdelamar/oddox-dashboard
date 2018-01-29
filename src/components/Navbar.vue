@@ -18,9 +18,9 @@
         <div class="nav-group nav-large-menu">
           <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
 
-          <button class="button hover-shadow hover-background-solid-white" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button hover-shadow" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner2"></i>&nbsp;{{ syncButton }}</button>
 
-          <a href="javascript: void(0)" class="button dropdown hover-background-solid-white hover-shadow margin"><i class="icon-user"></i>&nbsp;&#9662;
+          <a href="javascript: void(0)" class="button dropdown hover-shadow margin"><i class="icon-user"></i>&nbsp;&#9662;
             <div class="dropdown-body round border nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold">{{ authToken.username }}</span>

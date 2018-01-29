@@ -82,7 +82,7 @@ html, body {
   margin: -25px 0 0 -100px;
 }
 input:hover, input:active, input:focus {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 .shadow, .hover-shadow:hover {
   box-shadow: 0 0 8px 5px #efefef;
@@ -101,7 +101,7 @@ input:hover, input:active, input:focus {
 .text-darkgrey { color: #8c8c8c; }
 
 .background-solid-white, .hover-background-solid-white:hover {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 .background-solid-lightgrey, .hover-background-solid-lightgrey:hover {
   background-color: #fafafa;
@@ -114,7 +114,7 @@ input:hover, input:active, input:focus {
 }
 .background-gradient-grey, .hover-background-gradient-grey:hover {
   background-color: unset;
-  background-image: linear-gradient(180deg, #ffffff 50%, #fafafa 100%);
+  background-image: linear-gradient(180deg, var(--white) 50%, #fafafa 100%);
 }
 
 .button-blue-outline { background: transparent; color: var(--blue); }
@@ -163,5 +163,35 @@ i.animated.spin, span.animated.spin, i.animated.rewind, span.animated.rewind {
   text-align: center;
   height: 16px !important;
   width: 16px !important;
+}
+.tabs {
+  padding: 0;
+  margin: auto;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 6.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.tabs .tab {
+  background: transparent;
+  border: 1px solid var(--grey);
+  border-bottom: unset;
+  border-right: unset;
+  margin: 0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.tabs .tab:last-child {
+  border-right: 1px solid var(--grey);
+}
+.tabs .tab:hover {
+  background: var(--white) !important;
+}
+.tabs .tab.router-link-exact-active {
+  background: var(--white);
 }
 </style>

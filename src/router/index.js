@@ -42,8 +42,8 @@ export default new Router({
       children: [
         {
           path: ':id',
-          component: Posts,
-          beforeEnter: mustBeAuthenticated
+          name: 'view-post',
+          component: Posts
         }
       ]
     },
@@ -54,10 +54,26 @@ export default new Router({
       beforeEnter: mustBeAuthenticated
     },
     {
-      path: '/edit-post/:id',
-      name: 'edit-post',
+      path: '/edit-post',
       component: NewPost,
-      beforeEnter: mustBeAuthenticated
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: 'content/:id',
+          name: 'edit-post-content',
+          component: NewPost
+        },
+        {
+          path: 'sharing/:id',
+          name: 'edit-post-sharing',
+          component: NewPost
+        },
+        {
+          path: 'advanced/:id',
+          name: 'edit-post-advanced',
+          component: NewPost
+        }
+      ]
     },
     {
       path: '/author',
@@ -79,10 +95,21 @@ export default new Router({
       beforeEnter: mustBeAuthenticated
     },
     {
-      path: '/edit-author/:id',
-      name: 'edit-author',
+      path: '/edit-author',
       component: NewAuthor,
-      beforeEnter: mustBeAuthenticated
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: 'content/:id',
+          name: 'edit-author-content',
+          component: NewAuthor
+        },
+        {
+          path: 'advanced/:id',
+          name: 'edit-author-advanced',
+          component: NewAuthor
+        }
+      ]
     },
     {
       path: '/settings',

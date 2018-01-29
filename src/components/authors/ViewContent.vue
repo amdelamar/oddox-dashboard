@@ -66,7 +66,7 @@ export default {
       this.$router.push('/author')
     },
     edit () {
-      this.$router.push('/edit-author/' + this.author._id)
+      this.$router.push('/edit-author/content/' + this.author._id)
     }
   }
 }

@@ -68,7 +68,7 @@ export default {
     },
     edit () {
       this.status = ''
-      this.$router.push('/edit-post/' + this.post._id)
+      this.$router.push('/edit-post/content/' + this.post._id)
     }
   }
 }
