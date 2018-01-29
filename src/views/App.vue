@@ -28,7 +28,8 @@ export default {
 #app {
   height: 100%;
   width: 100%;
-  margin: 0;
+  max-width: 1800px;
+  margin: 0 auto;
   padding: 0;
 }
 @media (max-width:550px){
@@ -44,6 +45,9 @@ html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  align-items: center;
+  align-content: center;
+  background-color: #fafafa;
 }
 .contextbar {
   min-height: 6.5rem;

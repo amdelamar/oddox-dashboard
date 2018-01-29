@@ -4,13 +4,13 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Content</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Sharing</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Details</button>
       <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Advanced</button>
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
-      <button class="button" v-on:click="publish"><i class="icon-clock"></i>&nbsp;Publish</button>&nbsp;
+      <button class="button" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;Publish</button>&nbsp;
       <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
       <button class="button" v-on:click="close">Cancel</button>&nbsp;
     </div>
@@ -18,9 +18,9 @@
 
   <div id="post-edit" class="border-left background-solid-white scrollable">
 
-    <p class="super-center text-center animated fadeIn" v-if="loading">
-      <i class="icon-spinner6 animated rewind"></i><br/>
-      <em class="text-bold">Loading...</em>
+    <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
+      <i class="icon-spinner9 animated spin"></i><br/>
+      <em>Loading...</em>
     </p>
     <p class="super-center text-center animated fadeIn" v-if="post === null && status.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
@@ -42,26 +42,34 @@
         </div>
       </div>
       <div v-if="tab == 1">
-        <!-- Sharing -->
+        <!-- Details -->
         <h5>{{ post.title | shorten(45) }}</h5>
+        <div class="row">
+          <label for="cat"><i class="icon-folder-open"></i>&nbsp;Category</label><span class="text-darkgrey">Single keyword to group similar posts together.</span><br/>
+          <input type="text" id="cat" class="" v-model="post.category" />
+        </div>
         <div class="row padding-top">
-          <label for="desc">Description</label>
+          <label for="tags"><i class="icon-price-tag"></i>&nbsp;Tags</label><span class="text-darkgrey">Comma separated list of keywords.</span>
+          <input type="text" id="tags" class="full-width" v-model="post.tags" />
+        </div>
+        <div class="row padding-top">
+          <label for="desc">Description</label><span class="text-darkgrey">A short one or two sentences to describe your post.</span>
           <input type="text" id="desc" class="full-width" v-model="post.description" />
         </div>
-        <div class="row">
+        <div class="row padding-top">
           <div class="twelve columns">
-            <label for="thumbnail">Thumbnail</label>
+            <label for="thumbnail"><i class="icon-image"></i>&nbsp;Thumbnail</label><span class="text-darkgrey">An image to represent your post, e.g. on social media.</span>
             <input type="text" id="thumbnail" class="full-width" v-model="post.thumbnail" />
           </div>
         </div>
         <div class="row padding-top">
           <div class="twelve columns">
-            <label for="banner">Banner</label>
+            <label for="banner"><i class="icon-image"></i>&nbsp;Banner</label><span class="text-darkgrey">A large image at the top of your post, usually above the title.</span>
             <input type="text" id="banner" class="full-width" v-model="post.banner" />
           </div>
         </div>
         <div class="row padding-top">
-          <label for="bannerCaption">Banner Caption</label>
+          <label for="bannerCaption">Banner Caption</label><span class="text-darkgrey">Captioning or alternative text for your banner image.</span>
           <input type="text" id="bannerCaption" class="full-width" v-model="post.bannerCaption" />
         </div>
       </div>
@@ -69,30 +77,33 @@
         <!-- Advanced -->
         <h5>{{ post.title | shorten(45) }}</h5>
         <div class="row padding-top">
-          <div class="six columns">
-            <label for="cat"><i class="icon-folder-open"></i>&nbsp;Category</label>
-            <input type="text" id="cat" class="full-width" v-model="post.category" />
-          </div>
-          <div class="six columns">
-            <label for="tags"><i class="icon-price-tag"></i>&nbsp;Tags</label>
-            <input type="text" id="tags" class="full-width" v-model="post.tags" />
-          </div>
+          <label for="uri"><i class="icon-link"></i>&nbsp;Post path</label>
+          <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" style="width:25rem;" v-model="post._id" />
         </div>
         <div class="row">
-          <label for="uri">Post path</label>
-          <span class="text-darkgrey">https://{{ appConfig.settings.domain || 'mydomain.com' }}/blog/</span><input type="text" id="uri" style="width:25rem;" v-model="post._id" />
+          <label>Set Featured</label>
+          <div class="row">
+            <div class="two columns">
+              <input type="radio" id="feat1" name="featradiogroup" value="false" v-model="post.featured" />
+              <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;No</label>
+            </div>
+            <div class="one column">
+              <input type="radio" id="feat2" name="featradiogroup" value="true" v-model="post.featured" />
+              <label class="text-normal" for="feat2"><i class="icon-star-full"></i>&nbsp;Yes</label>
+            </div>
+          </div>
         </div>
         <div class="row padding-top">
           <p class="padding-bottom-large left">
             <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
             <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
-            <i class="icon-clock"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
+            <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
             <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
           </p>
           <p class="padding-bottom-large right">
-            Created: {{ post.createDate }}<br/>
-            Modified: {{ post.modifyDate }}<br/>
-            Published: {{ post.publishDate }}<br/>
+            <i class="icon-clock"></i>&nbsp;Created: {{ post.createDate }}<br/>
+            <i class="icon-clock"></i>&nbsp;Modified: {{ post.modifyDate }}<br/>
+            <i class="icon-clock2"></i>&nbsp;Published: {{ post.publishDate }}<br/>
           </p>
         </div>
       </div>
@@ -119,7 +130,6 @@ export default {
     }
   },
   computed: mapGetters({
-    appConfig: 'getAppConfig',
     currentPost: 'getCurrentPost'
   }),
   created () {

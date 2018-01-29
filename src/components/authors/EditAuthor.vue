@@ -17,9 +17,9 @@
 
   <div id="author-edit" class="border-left background-solid-white scrollable">
 
-    <p class="super-center text-center animated fadeIn" v-if="loading">
-      <i class="icon-spinner6 animated rewind"></i><br/>
-      <em class="text-bold">Loading...</em>
+    <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
+      <i class="icon-spinner9 animated spin"></i><br/>
+      <em>Loading...</em>
     </p>
     <p class="super-center text-center animated fadeIn" v-if="author === null && status.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
@@ -29,8 +29,11 @@
     <div class="full-height padding-large animated fadeIn" v-if="author !== null">
 
       <div v-if="tab == 0">
-        <!-- Account -->
-        <h4>{{ author.name }}</h4>
+        <!-- Profile -->
+        <div class="row">
+          <label for="name">Display Name</label>
+          <input type="text" id="name" class="full-width" v-model="author.name" />
+        </div>
         <div class="row">
           <label for="desc">Short Bio</label>
           <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
@@ -41,32 +44,29 @@
         </div>
       </div>
       <div v-if="tab == 1">
-        <!-- Profile -->
-        <div class="row padding-top">
-          <div class="two columns">
-            <img v-if="author.thumbnail.length > 0" class="shadow round" height="65" width="65" alt="" :src="author.thumbnail" />
-          </div>
-          <div class="ten columns">
-            <label for="thumbnail">Profile Picture</label>
-            <input type="text" id="thumbnail" class="full-width" v-model="author.thumbnail" />
-          </div>
+        <!-- Account -->
+        <h4>{{ author.name }}</h4>
+        <div class="row">
+          <img v-if="author.thumbnail.length > 0" class="round border margin-right left" height="65" width="65" alt="" :src="author.thumbnail" />
+          <label for="thumbnail"><i class="icon-image"></i>&nbsp;Profile Picture</label>
+          <input type="text" id="thumbnail" style="width:25rem;" v-model="author.thumbnail" />
         </div>
         <div class="row padding-top">
-          <label for="name">Display Name</label>
-          <input type="text" id="name" class="full-width" v-model="author.name" />
-        </div>
-        <div class="row padding-top">
-          <label for="email">Email Address</label>
+          <label for="email"><i class="icon-envelop"></i>&nbsp;Email Address</label>
           <input type="text" id="email" class="full-width" v-model="author.email" />
         </div>
         <div class="row padding-top">
           <div class="six columns">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="full-width" v-model="author._id" />
+            <label for="username"><i class="icon-user"></i>&nbsp;Username</label>
+            <input type="text" id="username" class="" v-model="author._id" />
+            <br/>
+            <span class="text-darkgrey">https://{{ 'mydomain.com/author/' }}{{ author._id || ''}}</span>
+            <br/><br/>
+            <button class="button">Change Password</button>
           </div>
           <div class="six columns">
-            <label for="role">Role</label>
-            <select id="role" class="full-width" v-model="author.roleId">
+            <label for="role"><i class="icon-clipboard"></i>&nbsp;Role</label>
+            <select id="role" class="" v-model="author.roleId">
               <option value="owner">Owner</option>
               <option value="admin">Admin</option>
               <option value="author">Author</option>
@@ -81,9 +81,18 @@
         <h4>{{ author.name }}</h4>
         <div class="row">
           <p>
-            Created: {{ author.createDate }}<br/>
-            Modified: {{ author.modifyDate }}<br/>
+            <i class="icon-clock"></i>&nbsp;Created: {{ author.createDate }}<br/>
+            <i class="icon-clock"></i>&nbsp;Modified: {{ author.modifyDate }}<br/>
           </p>
+        </div>
+        <div class="row padding-top padding-bottom">
+          <h3>Danger Zone</h3>
+          <p>Careful! These actions may permanently destroy data.</p>
+          <div class="button button-red dropdown"><i class="icon-cross"></i>&nbsp;Delete Account
+            <div class="dropdown-body padding-none">
+              <button class="button button-red" v-on:click="remove">Are you sure?</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

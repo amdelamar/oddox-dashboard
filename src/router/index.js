@@ -61,16 +61,6 @@ export default new Router({
           path: ':id',
           name: 'edit-post',
           component: EditPost
-        },
-        {
-          path: 'sharing/:id',
-          name: 'edit-post-sharing',
-          component: EditPost
-        },
-        {
-          path: 'advanced/:id',
-          name: 'edit-post-advanced',
-          component: EditPost
         }
       ]
     },
@@ -101,11 +91,6 @@ export default new Router({
         {
           path: ':id',
           name: 'edit-author',
-          component: EditAuthor
-        },
-        {
-          path: 'advanced/:id',
-          name: 'edit-author-advanced',
           component: EditAuthor
         }
       ]

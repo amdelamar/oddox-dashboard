@@ -7,25 +7,25 @@
       </div>
 
       <nav class="nav-list padding">
-        <router-link class="nav-item" to="/post"><i class="icon-stack"></i>&nbsp;&nbsp;Posts</router-link>
-        <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;Drafts</router-link>
-        <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;Featured</router-link>
-        <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;Categories</router-link>
-        <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;&nbsp;Tags</router-link>
-        <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;Years</router-link>
-        <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;&nbsp;Trash</router-link>
-        <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;All Posts</router-link>
+        <router-link class="nav-item" to="/post"><i class="icon-stack"></i>&nbsp;&nbsp;<span>Posts</span></router-link>
+        <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;<span>Drafts</span></router-link>
+        <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;<span>Featured</span></router-link>
+        <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;<span>Categories</span></router-link>
+        <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;&nbsp;<span>Tags</span></router-link>
+        <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;<span>Years</span></router-link>
+        <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;&nbsp;<span>Trash</span></router-link>
+        <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;<span>All Posts</span></router-link>
           <span class="nav-item"><hr class="margin-none"/></span>
-        <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;All Authors</router-link>
-        <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;&nbsp;My Profile</router-link>
-        <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;Settings</router-link>
+        <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;<span>All Authors</span></router-link>
+        <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;&nbsp;<span>My Profile</span></router-link>
+        <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;<span>Settings</span></router-link>
 
       </nav>
     </div>
 
     <footer class="full-width text-darkgrey text-center">
       <p class="text-nowrap" title="Total disk size of your database">
-        Storage: <code>{{ dbsize }}</code>
+        <span>Storage:</span> <code>{{ dbsize }}</code>
         <br/>
         <em class="text-small"><a class="text-darkgrey" :href="link">{{ name }} {{ version }}</a></em>
       </p>
@@ -60,6 +60,19 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+@media (max-width:550px){
+  #app-sidebar {
+    height: auto;
+  }
+}
+@media (min-width:550px) and (max-width:800px){
+  #app-sidebar nav .nav-item span {
+    display: none;
+  }
+  #app-sidebar footer span {
+    display: none;
+  }
 }
 #app-sidebar nav a, #app-sidebar nav a:visited {
   color: initial;
