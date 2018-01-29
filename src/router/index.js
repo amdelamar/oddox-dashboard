@@ -4,19 +4,18 @@ import store from '@/store'
 
 // Views
 import Posts from '@/views/Posts'
-import NewPost from '@/views/NewPost'
-// import EditPost from '@/views/NewPost'
+import EditPost from '@/views/EditPost'
 import Authors from '@/views/Authors'
-import NewAuthor from '@/views/NewAuthor'
-// import EditAuthor from '@/views/NewAuthor'
-import Login from '@/views/Login'
-import Logout from '@/views/Logout'
+import EditAuthor from '@/views/EditAuthor'
 import MyProfile from '@/views/MyProfile'
 import Settings from '@/views/Settings'
+import Login from '@/views/Login'
+import Logout from '@/views/Logout'
 import NotFound from '@/views/error/404'
 
 Vue.use(Router)
 
+// Route logic to check for authentication.
 const mustBeAuthenticated = (to, from, next) => {
   if (store.getters.isAuthenticated) {
     next()
@@ -50,28 +49,28 @@ export default new Router({
     {
       path: '/new-post',
       name: 'new-post',
-      component: NewPost,
+      component: EditPost,
       beforeEnter: mustBeAuthenticated
     },
     {
       path: '/edit-post',
-      component: NewPost,
+      component: EditPost,
       beforeEnter: mustBeAuthenticated,
       children: [
         {
-          path: 'content/:id',
-          name: 'edit-post-content',
-          component: NewPost
+          path: ':id',
+          name: 'edit-post',
+          component: EditPost
         },
         {
           path: 'sharing/:id',
           name: 'edit-post-sharing',
-          component: NewPost
+          component: EditPost
         },
         {
           path: 'advanced/:id',
           name: 'edit-post-advanced',
-          component: NewPost
+          component: EditPost
         }
       ]
     },
@@ -91,23 +90,23 @@ export default new Router({
     {
       path: '/new-author',
       name: 'new-author',
-      component: NewAuthor,
+      component: EditAuthor,
       beforeEnter: mustBeAuthenticated
     },
     {
       path: '/edit-author',
-      component: NewAuthor,
+      component: EditAuthor,
       beforeEnter: mustBeAuthenticated,
       children: [
         {
-          path: 'content/:id',
-          name: 'edit-author-content',
-          component: NewAuthor
+          path: ':id',
+          name: 'edit-author',
+          component: EditAuthor
         },
         {
           path: 'advanced/:id',
           name: 'edit-author-advanced',
-          component: NewAuthor
+          component: EditAuthor
         }
       ]
     },
