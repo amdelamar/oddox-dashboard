@@ -3,8 +3,9 @@
 
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="four columns tabs">
-      <router-link class="tab button" :to="{ name: 'edit-author-content', params: { id: author._id }}">Content</router-link>
-      <router-link class="tab button" :to="{ name: 'edit-author-advanced', params: { id: author._id }}">Advanced</router-link>
+      <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Profile</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Account</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Advanced</button>
     </div>
     <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
@@ -16,30 +17,75 @@
 
   <div id="author-edit" class="border-left background-solid-white scrollable">
 
-    <p class="super-center text-center" v-if="author === null">
+    <p class="super-center text-center animated fadeIn" v-if="loading">
+      <i class="icon-spinner6 animated rewind"></i><br/>
+      <em class="text-bold">Loading...</em>
+    </p>
+    <p class="super-center text-center animated fadeIn" v-if="author === null && status.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
       <em class="text-red text-bold">Oops! Nothing to show.</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="author !== null">
-      <img v-if="author.thumbnail.length > 0" class="margin-bottom-large shadow round left margin-right-large" height="65" width="65" alt="" :src="author.thumbnail" />
-      <h3>{{ author.name }}</h3>
-      <span class="text-darkgrey">Note: Name and other fields can only be changed in 'My Profile'.</span>
 
-      <br/><br/>
+      <div v-if="tab == 0">
+        <!-- Account -->
+        <h4>{{ author.name }}</h4>
+        <div class="row">
+          <label for="desc">Short Bio</label>
+          <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
+        </div>
+        <div class="row padding-top">
+          <label for="cont">Full Page Bio</label>
+          <textarea id="cont" class="full-width" style="height:30rem;" v-model="author.content"></textarea>
+        </div>
+      </div>
+      <div v-if="tab == 1">
+        <!-- Profile -->
+        <div class="row padding-top">
+          <div class="two columns">
+            <img v-if="author.thumbnail.length > 0" class="shadow round" height="65" width="65" alt="" :src="author.thumbnail" />
+          </div>
+          <div class="ten columns">
+            <label for="thumbnail">Profile Picture</label>
+            <input type="text" id="thumbnail" class="full-width" v-model="author.thumbnail" />
+          </div>
+        </div>
+        <div class="row padding-top">
+          <label for="name">Display Name</label>
+          <input type="text" id="name" class="full-width" v-model="author.name" />
+        </div>
+        <div class="row padding-top">
+          <label for="email">Email Address</label>
+          <input type="text" id="email" class="full-width" v-model="author.email" />
+        </div>
+        <div class="row padding-top">
+          <div class="six columns">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="full-width" v-model="author._id" />
+          </div>
+          <div class="six columns">
+            <label for="role">Role</label>
+            <select id="role" class="full-width" v-model="author.roleId">
+              <option value="owner">Owner</option>
+              <option value="admin">Admin</option>
+              <option value="author">Author</option>
+              <option value="editor">Editor</option>
+            </select>
+          </div>
+        </div>
 
-      <label for="desc">Short Bio</label>
-      <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
-
-      <br/><br/>
-      <label for="cont">Full Page Bio</label>
-      <textarea id="cont" class="full-width" v-model="author.content"></textarea>
-
-      <hr/>
-      <p class="padding-bottom-large right">
-        Created: {{ author.createDate }}<br/>
-        Modified: {{ author.modifyDate }}<br/>
-      </p>
+      </div>
+      <div v-if="tab == 2">
+        <!-- Advanced -->
+        <h4>{{ author.name }}</h4>
+        <div class="row">
+          <p>
+            Created: {{ author.createDate }}<br/>
+            Modified: {{ author.modifyDate }}<br/>
+          </p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -55,12 +101,15 @@ export default {
   name: 'author-edit',
   data () {
     return {
-      status: 'Opened',
+      author: null,
+      tab: 0,
+      status: '',
+      loading: true,
       preview: false
     }
   },
   computed: mapGetters({
-    author: 'getCurrentAuthor'
+    currentAuthor: 'getCurrentAuthor'
   }),
   created () {
     this.read()
@@ -71,10 +120,17 @@ export default {
   methods: {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
-        this.$store.dispatch('setCurrentAuthor', this.$route.params.id)
-      } else {
-        // this.$store.dispatch('setCurrentAuthor', null)
+        this.$store.dispatch('setCurrentAuthor', this.$route.params.id).then(() => {
+          this.loading = false
+          this.author = JSON.parse(JSON.stringify(this.currentAuthor))
+        }).catch((err) => {
+          this.loading = false
+          this.status = err
+        })
       }
+    },
+    setTab (tabIndex) {
+      this.tab = tabIndex
     },
     close () {
       this.$router.push('/author/' + this.author._id)

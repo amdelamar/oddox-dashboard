@@ -64,6 +64,9 @@ html, body {
 .text-red {
   color: var(--red);
 }
+.text-theme {
+  color: #67d9b8;
+}
 .button {
   transition: all 0.1s ease;
 }
@@ -191,7 +194,7 @@ i.animated.spin, span.animated.spin, i.animated.rewind, span.animated.rewind {
 .tabs .tab:hover {
   background: var(--white) !important;
 }
-.tabs .tab.router-link-exact-active {
+.tabs .tab.router-link-exact-active, .tabs .tab.active {
   background: var(--white);
 }
 </style>
