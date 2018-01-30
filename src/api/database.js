@@ -53,25 +53,20 @@ export default {
 
   synchronize (authToken, cb, errcb) {
     if (authToken === null || authToken.fullUrl === undefined) {
-      console.log('authToken.url = ' + authToken.url)
-      console.log('authToken.fullUrl = ' + authToken.fullUrl)
-      console.log('authToken.username = ' + authToken.username)
-      console.log('authToken.password = ' + authToken.password)
       errcb('Not logged in.')
       return
     }
     let remotedb = authToken.fullUrl
-    console.log('Sync: ' + authToken.fullUrl)
     let opts = { live: false, retry: true }
 
     applicationdb.sync(remotedb + '/application', opts).then(res => {
-      console.log('sync application complete')
+      console.log('Sync application complete')
       authorsdb.sync(remotedb + '/authors', opts).then(res => {
-        console.log('sync authors complete')
+        console.log('Sync authors complete')
         postsdb.sync(remotedb + '/posts', opts).then(res => {
-          console.log('sync posts complete')
+          console.log('Sync posts complete')
           viewsdb.sync(remotedb + '/views', opts).then(res => {
-            console.log('sync views complete')
+            console.log('Sync views complete')
             cb()
           }).catch(err => {
             errcb(err)

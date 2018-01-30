@@ -10,8 +10,8 @@
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
-      <button class="button" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;Publish</button>&nbsp;
-      <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
+      <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>&nbsp;
+      <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>&nbsp;
       <button class="button" v-on:click="close">Cancel</button>&nbsp;
     </div>
   </div>
@@ -78,32 +78,26 @@
         <h5>{{ post.title | shorten(45) }}</h5>
         <div class="row padding-top">
           <label for="uri"><i class="icon-link"></i>&nbsp;Post path</label>
-          <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" style="width:25rem;" v-model="post._id" />
-        </div>
-        <div class="row">
-          <label>Set Featured</label>
-          <div class="row">
-            <div class="two columns">
-              <input type="radio" id="feat1" name="featradiogroup" value="false" v-model="post.featured" />
-              <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;No</label>
-            </div>
-            <div class="one column">
-              <input type="radio" id="feat2" name="featradiogroup" value="true" v-model="post.featured" />
-              <label class="text-normal" for="feat2"><i class="icon-star-full"></i>&nbsp;Yes</label>
-            </div>
-          </div>
+          <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" disabled style="width:25rem;" v-model="post._id" />
         </div>
         <div class="row padding-top">
-          <p class="padding-bottom-large left">
+
+          <div class="two columns">
+            <input type="checkbox" id="feat1" value="true" v-model="post.featured" />
+            <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;Featured</label>
+          </div>
+
+        </div>
+        <div class="row padding-top">
+          <p class="six columns">
             <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
-            <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
             <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
             <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
           </p>
-          <p class="padding-bottom-large right">
-            <i class="icon-clock"></i>&nbsp;Created: {{ post.createDate }}<br/>
-            <i class="icon-clock"></i>&nbsp;Modified: {{ post.modifyDate }}<br/>
-            <i class="icon-clock2"></i>&nbsp;Published: {{ post.publishDate }}<br/>
+          <p class="six columns">
+            <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
+            <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
+            <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
           </p>
         </div>
       </div>
@@ -118,7 +112,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
+import moment from 'moment'
 export default {
   name: 'post-edit',
   data () {
@@ -157,41 +151,49 @@ export default {
       this.$router.push('/post/' + this.post._id)
     },
     publish () {
-      this.status = 'Published'
-      console.log('published post')
+      if (this.post.published) {
+        this.post.published = false
+        this.status = 'Unpublished'
+      } else {
+        this.post.published = true
+        this.status = 'Published'
+      }
     },
     save () {
-      const data = {
-        '_id': this.post._id,
-        '_rev': this.post._rev,
-        'title': this.post.title,
-        'authorId': this.post.authorId,
-        'category': this.post.category,
-        'tags': this.post.tags,
-        'featured': this.post.featured,
-        'published': this.post.published,
-        'createDate': this.post.createDate,
-        'modifiyDate': new Date().toJSON(),
-        'publishDate': this.post.publishDate,
-        'thumbnail': this.post.thumbnail,
-        'banner': this.post.banner,
-        'bannerCaption': this.post.bannerCaption,
-        'description': this.post.description,
-        'content': this.post.content
-      }
-      this.$store.dispatch('updatePost', data).then(() => {
-        // todo
+      // get time ISO-8601
+      this.post.modifyDate = new Date().toJSON()
+
+      this.$store.dispatch('updatePost', this.post).then(() => {
         console.log('saved post')
-        this.status = 'Saved'
+        this.status = 'Saved (' + moment(this.syncTime).fromNow() + ')'
       }).catch((err) => {
         console.log(err)
-        this.status = err
+        this.status = err.message
       })
     },
-    remove () {
+    trash () {
+      if (this.post.deleted) {
+        this.post.deleted = false
+        this.status = 'Recovered from Trash'
+      } else {
+        this.post.published = false
+        this.post.deleted = true
+        this.status = 'Moved to Trash'
+      }
+    },
+    delete () {
       if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
-        console.log('deleted post')
-        this.status = 'Deleted'
+        this.$store.dispatch('deletePost', this.currentPost).then(() => {
+          this.post = null
+          console.log('deleted post')
+          this.status = 'Deleted'
+          setTimeout(() => {
+            this.$router.push('/post')
+          }, 3000)
+        }).catch((err) => {
+          console.log(err)
+          this.status = err
+        })
       }
     }
   }

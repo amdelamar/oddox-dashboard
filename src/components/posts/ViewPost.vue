@@ -16,21 +16,24 @@
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null">
-      <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
+      <img v-if="post.banner !== null && post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
 
-      <h1>{{ post.title }}</h1>
-      <div v-html="post.content"></div>
+      <h1 v-if="post.title !== null && post.title.length > 0">{{ post.title }}</h1>
+      <div v-if="post.content !== null && post.content.length > 0" v-html="post.content"></div>
       <hr/>
-      <p class="padding-bottom-large left">
-        <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId }}</code><br/>
-        <i class="icon-folder-open"></i>&nbsp;Category: <code>{{ post.category }}</code><br/>
-        <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag }}</code>
-      </p>
-      <p class="padding-bottom-large right">
-        Created: {{ post.createDate }}<br/>
-        Modified: {{ post.modifyDate }}<br/>
-        Published: {{ post.publishDate }}<br/>
-      </p>
+      <div class="row padding-top">
+        <p class="six columns">
+          <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
+          <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
+          <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
+          <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
+        </p>
+        <p class="six columns">
+          <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
+          <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
+          <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
+        </p>
+      </div>
     </div>
 
   </div>
