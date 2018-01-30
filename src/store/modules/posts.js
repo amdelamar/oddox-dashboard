@@ -63,21 +63,9 @@ const actions = {
     })
   },
 
-  createPost ({ commit }, data) {
-    return new Promise((resolve, reject) => {
-      database.createPost(data, post => {
-        commit(types.SET_POST, post)
-        resolve()
-      }, err => {
-        reject(err)
-      })
-    })
-  },
-
   updatePost ({ commit }, data) {
     return new Promise((resolve, reject) => {
       database.updatePost(data, post => {
-        commit(types.SET_POST, post)
         resolve()
       }, err => {
         reject(err)

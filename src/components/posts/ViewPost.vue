@@ -60,8 +60,6 @@ export default {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentPost', this.$route.params.id)
         // document.getElementById('post-view').scrollTop = 0
-      } else {
-        // this.$store.dispatch('setCurrentPost', null)
       }
     },
     close () {

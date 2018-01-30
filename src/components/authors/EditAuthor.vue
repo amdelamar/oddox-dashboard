@@ -31,14 +31,14 @@
         <!-- Profile -->
         <div class="row">
           <label for="name">Display Name</label>
-          <input type="text" id="name" class="full-width" v-model="author.name" placeholder="My Name" />
+          <input type="text" id="name" style="width:50%;min-width:25rem;" v-model="author.name" placeholder="My Name" />
         </div>
-        <div class="row">
-          <label for="desc">Short Bio</label>
+        <div class="row padding-top">
+          <label for="desc">Short Description</label>
           <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
         </div>
         <div class="row padding-top">
-          <label for="cont">Full Page Bio</label>
+          <label for="cont">About Me / Long Description</label>
           <textarea id="cont" class="full-width" style="height:30rem;" v-model="author.content" placeholder="<p>\nA few paragraphs about me...\n</p>"></textarea>
         </div>
       </div>
@@ -51,17 +51,11 @@
           <input type="text" id="thumbnail" style="width:25rem;" v-if="author.thumbnail !== null" v-model="author.thumbnail" />
         </div>
         <div class="row padding-top">
-          <label for="email"><i class="icon-envelop"></i>&nbsp;Email Address</label>
-          <input type="text" id="email" class="full-width" v-model="author.email" />
-        </div>
-        <div class="row padding-top">
           <div class="six columns">
             <label for="username"><i class="icon-user"></i>&nbsp;Username</label>
             <input type="text" id="username" class="" v-model="author._id" />
             <br/>
             <span class="text-darkgrey">https://{{ 'mydomain.com/author/' }}{{ author._id || ''}}</span>
-            <br/><br/>
-            <button class="button">Change Password</button>
           </div>
           <div class="six columns">
             <label for="role"><i class="icon-clipboard"></i>&nbsp;Role</label>
@@ -72,6 +66,18 @@
               <option value="editor">Editor</option>
             </select>
           </div>
+        </div>
+        <div class="row padding-top">
+          <label for="email"><i class="icon-envelop"></i>&nbsp;Email Address</label>
+          <input type="text" id="email" style="width:50%;min-width:25rem;" v-model="author.email" />
+        </div>
+        <hr/>
+        <div class="row padding-top padding-bottom">
+          <h3>Security</h3>
+          <button class="button">Change Password</button>
+          <button class="button">Reset Password</button>
+
+          <br/><br/>
         </div>
 
       </div>

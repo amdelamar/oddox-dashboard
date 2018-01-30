@@ -63,21 +63,9 @@ const actions = {
     })
   },
 
-  createAuthor ({ commit }, data) {
-    return new Promise((resolve, reject) => {
-      database.createAuthor(data, author => {
-        commit(types.SET_AUTHOR, author)
-        resolve()
-      }, err => {
-        reject(err)
-      })
-    })
-  },
-
   updateAuthor ({ commit }, data) {
     return new Promise((resolve, reject) => {
       database.updateAuthor(data, author => {
-        commit(types.SET_AUTHOR, author)
         resolve()
       }, err => {
         reject(err)

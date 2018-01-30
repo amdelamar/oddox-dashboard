@@ -57,8 +57,6 @@ export default {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         this.$store.dispatch('setCurrentAuthor', this.$route.params.id)
         // document.getElementById('author-view').scrollTop = 0
-      } else {
-        // this.$store.dispatch('setCurrentAuthor', null)
       }
     },
     close () {
