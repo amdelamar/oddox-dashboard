@@ -181,7 +181,7 @@ export default {
         this.status = 'Moved to Trash'
       }
     },
-    delete () {
+    destroy () {
       if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('deletePost', this.currentPost).then(() => {
           this.post = null
@@ -192,7 +192,7 @@ export default {
           }, 3000)
         }).catch((err) => {
           console.log(err)
-          this.status = err
+          this.status = err.message
         })
       }
     }

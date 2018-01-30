@@ -10,7 +10,6 @@
     <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
-      <button class="button button-red button-red-outline" v-on:click="remove"><i class="icon-cross"></i>&nbsp;Delete</button>&nbsp;
       <button class="button" v-on:click="close">Cancel</button>&nbsp;
     </div>
   </div>
@@ -88,11 +87,7 @@
         <div class="row padding-top padding-bottom">
           <h3>Danger Zone</h3>
           <p>Careful! These actions may permanently destroy data.</p>
-          <div class="button button-red dropdown"><i class="icon-cross"></i>&nbsp;Delete Account
-            <div class="dropdown-body padding-none">
-              <button class="button button-red" v-on:click="remove">Are you sure?</button>
-            </div>
-          </div>
+          <button class="button button-red" v-on:click="destroy"><i class="icon-cross"></i>&nbsp;Delete</button>
         </div>
       </div>
     </div>
@@ -105,7 +100,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
+import moment from 'moment'
 export default {
   name: 'author-edit',
   data () {
@@ -145,31 +140,30 @@ export default {
       this.$router.push('/author/' + this.author._id)
     },
     save () {
-      const data = {
-        '_id': this.author._id,
-        '_rev': this.author._rev,
-        'name': this.author.name,
-        'email': this.author.email,
-        'roleId': this.author.roleId,
-        'createDate': this.author.createDate,
-        'modifiyDate': new Date().toJSON(),
-        'thumbnail': this.author.thumbnail,
-        'description': this.author.description,
-        'content': this.author.content
-      }
-      this.$store.dispatch('updateAuthor', data).then(() => {
-        // todo
+      // get time ISO-8601
+      this.author.modifyDate = new Date().toJSON()
+
+      this.$store.dispatch('updateAuthor', this.author).then(() => {
         console.log('saved author')
-        this.status = 'Saved'
+        this.status = 'Saved (' + moment(this.syncTime).fromNow() + ')'
       }).catch((err) => {
         console.log(err)
-        this.status = err
+        this.status = err.message
       })
     },
-    remove () {
+    destroy () {
       if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
-        console.log('deleted author')
-        this.status = 'Deleted'
+        this.$store.dispatch('deleteAuthor', this.currentAuthor).then(() => {
+          this.author = null
+          console.log('deleted author')
+          this.status = 'Deleted'
+          setTimeout(() => {
+            this.$router.push('/author')
+          }, 3000)
+        }).catch((err) => {
+          console.log(err)
+          this.status = err.message
+        })
       }
     }
   }
