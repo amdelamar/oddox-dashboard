@@ -9,10 +9,10 @@
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
-      <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>&nbsp;
-      <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>&nbsp;
-      <button class="button" v-on:click="close">Cancel</button>&nbsp;
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
+      <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>
+      <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-if="!newFlag" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>
+      <button class="button" v-on:click="close">Cancel</button>
     </div>
   </div>
 
@@ -24,21 +24,21 @@
     </p>
     <p class="super-center text-center animated fadeIn" v-if="post === null && status.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
-      <em class="text-red text-bold">Oops! Nothing to show.</em>
+      <em class="text-red text-bold">{{ status }}</em>
     </p>
 
-    <div class="full-height padding-large animated fadeIn" v-if="post !== null">
+    <div class="full-height padding-large animated fadeIn" v-if="post !== null && !loading">
 
       <div v-if="tab == 0">
         <!-- Content -->
         <div class="row">
           <label for="title">Title</label>
-          <input type="text" id="title" class="full-width" v-model="post.title" />
+          <input type="text" id="title" class="full-width" v-model="post.title" v-on:keyup="createUri()" placeholder="New Post Title" />
         </div>
 
         <div class="row padding-top">
           <label for="cont">Content</label>
-          <textarea id="cont" class="full-width" style="height:30rem;" v-model="post.content"></textarea>
+          <textarea id="cont" class="full-width" style="height:30rem;" v-model="post.content" placeholder="<p>\nBegin writing your post here...\n</p>"></textarea>
         </div>
       </div>
       <div v-if="tab == 1">
@@ -49,8 +49,8 @@
           <input type="text" id="cat" class="" v-model="post.category" />
         </div>
         <div class="row padding-top">
-          <label for="tags"><i class="icon-price-tag"></i>&nbsp;Tags</label><span class="text-darkgrey">Comma separated list of keywords.</span>
-          <input type="text" id="tags" class="full-width" v-model="post.tags" />
+          <label for="tags"><i class="icon-price-tag"></i>&nbsp;Tags</label><span class="text-darkgrey">Comma separated list of keywords.</span><br/>
+          <input type="text" id="tags" style="width:50%;min-width:25rem;" v-model="post.tags" />
         </div>
         <div class="row padding-top">
           <label for="desc">Description</label><span class="text-darkgrey">A short one or two sentences to describe your post.</span>
@@ -76,17 +76,16 @@
       <div v-if="tab == 2">
         <!-- Advanced -->
         <h5>{{ post.title | shorten(45) }}</h5>
-        <div class="row padding-top">
-          <label for="uri"><i class="icon-link"></i>&nbsp;Post path</label>
-          <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" disabled style="width:25rem;" v-model="post._id" />
+        <div class="row">
+          <input type="checkbox" id="feat1" value="true" v-model="post.featured" />
+          <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;Featured</label>
+          <span class="text-darkgrey">Highlight this post amongst the rest. You can change this anytime.</span>
+          <br/><br/>
         </div>
         <div class="row padding-top">
-
-          <div class="two columns">
-            <input type="checkbox" id="feat1" value="true" v-model="post.featured" />
-            <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;Featured</label>
-          </div>
-
+          <label for="uri"><i class="icon-link"></i>&nbsp;Post path</label>
+          <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" :disabled="!newFlag" style="width:25rem;" v-model="post._id" />
+          <br/><span class="text-darkgrey">Post path must be unique. Use lowercase letters, no spaces, no symbols, and try to keep it short.<br/>Once saved, the path cannot be changed later.</span>
         </div>
         <div class="row padding-top">
           <p class="six columns">
@@ -99,6 +98,11 @@
             <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
             <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
           </p>
+        </div>
+        <div class="row padding-top padding-bottom">
+          <h3>Danger Zone</h3>
+          <p>Careful! These actions may permanently destroy data.</p>
+          <button class="button button-red" v-on:click="destroy"><i class="icon-cross"></i>&nbsp;Delete</button>
         </div>
       </div>
 
@@ -117,13 +121,15 @@ export default {
   name: 'post-edit',
   data () {
     return {
-      post: null,
+      post: {},
+      newFlag: false,
       tab: 0,
       loading: true,
       status: ''
     }
   },
   computed: mapGetters({
+    authToken: 'getAuthToken',
     currentPost: 'getCurrentPost'
   }),
   created () {
@@ -135,6 +141,7 @@ export default {
   methods: {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
+        // edit post
         this.$store.dispatch('setCurrentPost', this.$route.params.id).then(() => {
           this.loading = false
           this.post = JSON.parse(JSON.stringify(this.currentPost))
@@ -142,13 +149,51 @@ export default {
           this.loading = false
           this.status = err
         })
+      } else {
+        // new post
+        this.$store.dispatch('setCurrentPost', null).then(() => {
+          this.loading = false
+          this.newFlag = true
+          this.post = {
+            _id: '',
+            title: '',
+            authorId: this.authToken.username,
+            category: '',
+            tags: [],
+            featured: false,
+            published: false,
+            deleted: false,
+            createDate: new Date().toJSON(),
+            modifyDate: '',
+            publishDate: '',
+            thumbnail: '',
+            banner: '',
+            bannerCaption: '',
+            description: '',
+            content: ''
+          }
+        }).catch((err) => {
+          this.loading = false
+          this.status = err
+        })
       }
+    },
+    createUri () {
+      let temp = this.post.title.toLowerCase()
+      while (temp.indexOf(' ') >= 0) {
+        temp = temp.replace(' ', '-')
+      }
+      this.post._id = temp
     },
     setTab (tabIndex) {
       this.tab = tabIndex
     },
     close () {
-      this.$router.push('/post/' + this.post._id)
+      if (this.newFlag) {
+        this.$router.push('/post')
+      } else {
+        this.$router.push('/post/' + this.post._id)
+      }
     },
     publish () {
       if (this.post.published) {
@@ -160,6 +205,12 @@ export default {
       }
     },
     save () {
+      if (this.post._id.length < 1 || this.post.title.length < 1) {
+        // can't save new post
+        this.status = 'Enter Title before Saving'
+        return
+      }
+
       // get time ISO-8601
       this.post.modifyDate = new Date().toJSON()
 
@@ -182,14 +233,19 @@ export default {
       }
     },
     destroy () {
+      if (this.newFlag) {
+        // can't delete new post
+        return
+      }
+
       if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('deletePost', this.currentPost).then(() => {
           this.post = null
           console.log('deleted post')
-          this.status = 'Deleted'
+          this.status = 'Post was deleted'
           setTimeout(() => {
             this.$router.push('/post')
-          }, 3000)
+          }, 2500)
         }).catch((err) => {
           console.log(err)
           this.status = err.message

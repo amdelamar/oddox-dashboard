@@ -3,8 +3,8 @@
 
     <div class="contextbar border-bottom background-solid-lightgrey">
       <div class="row padding">
-        <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />&nbsp;
-        <button class="button button-small border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+        <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />
+        <button class="button button-small margin-left border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
         <button class="button button-blue button-blue-outline right" v-on:click="newAuthor"><i class="icon-plus"></i>&nbsp;New</button>
       </div>
     </div>

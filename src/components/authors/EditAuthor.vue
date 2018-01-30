@@ -9,8 +9,8 @@
     </div>
     <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>&nbsp;
-      <button class="button" v-on:click="close">Cancel</button>&nbsp;
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
+      <button class="button" v-on:click="close">Cancel</button>
     </div>
   </div>
 
@@ -22,16 +22,16 @@
     </p>
     <p class="super-center text-center animated fadeIn" v-if="author === null && status.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
-      <em class="text-red text-bold">Oops! Nothing to show.</em>
+      <em class="text-red text-bold">{{ status }}</em>
     </p>
 
-    <div class="full-height padding-large animated fadeIn" v-if="author !== null">
+    <div class="full-height padding-large animated fadeIn" v-if="author !== null && !loading">
 
       <div v-if="tab == 0">
         <!-- Profile -->
         <div class="row">
           <label for="name">Display Name</label>
-          <input type="text" id="name" class="full-width" v-model="author.name" />
+          <input type="text" id="name" class="full-width" v-model="author.name" placeholder="My Name" />
         </div>
         <div class="row">
           <label for="desc">Short Bio</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="row padding-top">
           <label for="cont">Full Page Bio</label>
-          <textarea id="cont" class="full-width" style="height:30rem;" v-model="author.content"></textarea>
+          <textarea id="cont" class="full-width" style="height:30rem;" v-model="author.content" placeholder="<p>\nA few paragraphs about me...\n</p>"></textarea>
         </div>
       </div>
       <div v-if="tab == 1">
@@ -48,7 +48,7 @@
         <div class="row">
           <img v-if="author.thumbnail.length > 0" class="round border margin-right left" height="65" width="65" alt="" :src="author.thumbnail" />
           <label for="thumbnail"><i class="icon-image"></i>&nbsp;Profile Picture</label>
-          <input type="text" id="thumbnail" style="width:25rem;" v-model="author.thumbnail" />
+          <input type="text" id="thumbnail" style="width:25rem;" v-if="author.thumbnail !== null" v-model="author.thumbnail" />
         </div>
         <div class="row padding-top">
           <label for="email"><i class="icon-envelop"></i>&nbsp;Email Address</label>
@@ -80,8 +80,8 @@
         <h4>{{ author.name }}</h4>
         <div class="row">
           <p>
-            <i class="icon-clock"></i>&nbsp;Created: {{ author.createDate }}<br/>
-            <i class="icon-clock"></i>&nbsp;Modified: {{ author.modifyDate }}<br/>
+            <i class="icon-clock"></i>&nbsp;Created: <code>{{ author.createDate || 'null' }}</code><br/>
+            <i class="icon-clock"></i>&nbsp;Modified: <code>{{ author.modifyDate || 'null' }}</code><br/>
           </p>
         </div>
         <div class="row padding-top padding-bottom">
@@ -105,7 +105,8 @@ export default {
   name: 'author-edit',
   data () {
     return {
-      author: null,
+      author: {},
+      newFlag: false,
       tab: 0,
       status: '',
       loading: true,
@@ -124,9 +125,30 @@ export default {
   methods: {
     read () {
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
+        // edit author
         this.$store.dispatch('setCurrentAuthor', this.$route.params.id).then(() => {
           this.loading = false
           this.author = JSON.parse(JSON.stringify(this.currentAuthor))
+        }).catch((err) => {
+          this.loading = false
+          this.status = err
+        })
+      } else {
+        // new author
+        this.$store.dispatch('setCurrentAuthor', null).then(() => {
+          this.loading = false
+          this.newFlag = true
+          this.author = {
+            _id: '',
+            name: '',
+            email: '',
+            roleId: '',
+            createDate: new Date().toJSON(),
+            modifyDate: '',
+            thumbnail: '',
+            description: '',
+            content: ''
+          }
         }).catch((err) => {
           this.loading = false
           this.status = err
@@ -137,9 +159,19 @@ export default {
       this.tab = tabIndex
     },
     close () {
-      this.$router.push('/author/' + this.author._id)
+      if (this.newFlag) {
+        this.$router.push('/author')
+      } else {
+        this.$router.push('/author/' + this.author._id)
+      }
     },
     save () {
+      if (this.author._id.length < 1 || this.author.name.length < 1) {
+        // can't save new author
+        this.status = 'Enter Username before Saving'
+        return
+      }
+
       // get time ISO-8601
       this.author.modifyDate = new Date().toJSON()
 
@@ -152,14 +184,19 @@ export default {
       })
     },
     destroy () {
+      if (this.newFlag) {
+        // can't delete new author
+        return
+      }
+
       if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('deleteAuthor', this.currentAuthor).then(() => {
           this.author = null
           console.log('deleted author')
-          this.status = 'Deleted'
+          this.status = 'Author was deleted'
           setTimeout(() => {
             this.$router.push('/author')
-          }, 3000)
+          }, 2500)
         }).catch((err) => {
           console.log(err)
           this.status = err.message

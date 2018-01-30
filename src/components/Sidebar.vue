@@ -17,7 +17,6 @@
         <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;<span>All Posts</span></router-link>
           <span class="nav-item"><hr class="margin-none"/></span>
         <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;<span>All Authors</span></router-link>
-        <router-link class="nav-item" to="/my-profile"><i class="icon-profile"></i>&nbsp;&nbsp;<span>My Profile</span></router-link>
         <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;<span>Settings</span></router-link>
 
       </nav>
