@@ -79,13 +79,12 @@ export default {
         this.message = 'Synced ' + moment(this.syncTime).fromNow()
         this.syncButton = 'Synced'
         this.iconSpin = false
+        this.$store.dispatch('loadAppConfig')
+        this.$store.dispatch('allPosts')
+        this.$store.dispatch('allAuthors')
         // delay for a second
         setTimeout(() => {
           this.disableFlag = false
-          this.$store.dispatch('allPosts')
-          this.$store.dispatch('allAuthors')
-          this.$store.dispatch('loadAppConfig')
-          this.$store.dispatch('loadAppFirewall')
           this.syncButton = 'Sync Now'
         }, 5000)
       }).catch(err => {

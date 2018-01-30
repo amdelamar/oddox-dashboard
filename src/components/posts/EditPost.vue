@@ -99,6 +99,7 @@
             <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
           </p>
         </div>
+        <hr/>
         <div class="row padding-top padding-bottom">
           <h3>Danger Zone</h3>
           <p>Careful! These actions may permanently destroy data.</p>

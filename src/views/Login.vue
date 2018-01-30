@@ -127,13 +127,11 @@ export default {
           // or forget me
           localStorage.removeItem('remember-me')
         }
-
         this.$store.dispatch('login', this.authToken).then(result => {
           // successful login
           console.log(result)
           this.message = result
           this.disableLogin = false
-          this.$store.dispatch('synchronize')
           this.$router.push('/post')
         }).catch(err => {
           // failed login
