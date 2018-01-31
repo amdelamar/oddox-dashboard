@@ -32,13 +32,11 @@
       <div v-if="tab == 0">
         <!-- Content -->
         <div class="row">
-          <label for="title">Title</label>
-          <input type="text" id="title" class="full-width" v-model="post.title" v-on:keyup="createUri()" placeholder="New Post Title" />
+          <input type="text" class="full-width text-medium" v-model="post.title" v-on:keyup="createUri()" placeholder="New Post Title" />
         </div>
 
-        <div class="row padding-top">
-          <label for="cont">Content</label>
-          <textarea id="cont" class="full-width" style="height:30rem;" v-model="post.content" placeholder="<p>\nBegin writing your post here...\n</p>"></textarea>
+        <div class="row">
+          <editor class="full-width" style="height:30rem;" v-bind:text="post.content"></editor>
         </div>
       </div>
       <div v-if="tab == 1">
@@ -117,9 +115,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Editor from '@/components/Editor'
 import moment from 'moment'
 export default {
   name: 'post-edit',
+  components: {
+    'editor': Editor
+  },
   data () {
     return {
       post: {},
