@@ -15,7 +15,7 @@ import NotFound from '@/views/error/404'
 
 Vue.use(Router)
 
-// Route logic to check for authentication.
+// Redirect for authentication.
 const mustBeAuthenticated = (to, from, next) => {
   if (store.getters.isAuthenticated) {
     next()
@@ -61,6 +61,19 @@ export default new Router({
           path: ':id',
           name: 'edit-post',
           component: EditPost
+        }
+      ]
+    },
+    {
+      path: '/draft',
+      name: 'drafts',
+      component: Posts,
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: ':id',
+          name: 'view-draft',
+          component: Posts
         }
       ]
     },

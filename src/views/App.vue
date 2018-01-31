@@ -68,6 +68,12 @@ html, body {
 .text-red {
   color: var(--red);
 }
+.text-green {
+  color: var(--green);
+}
+.text-white {
+  color: var(--white);
+}
 .text-theme {
   color: #67d9b8;
 }
@@ -100,6 +106,19 @@ input:hover, input:active, input:focus {
   line-height: initial;
   letter-spacing: initial;
   text-transform: initial;
+}
+.dialog {
+  /* display: none; */
+  z-index: 1;
+  position: fixed;
+  width: 400px;
+  height: 250px;
+  top: 50%;
+  left: 50%;
+  margin: -125px 0 0 -200px;
+}
+.background-solid-theme, hover-background-solid-theme:hover {
+  background-color: #67d9b8;
 }
 .background-transparent { background: transparent; }
 .text-capitalize { text-transform: capitalize; }

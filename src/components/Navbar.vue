@@ -1,5 +1,6 @@
 <template>
   <nav id="app-navbar" class="navbar background-solid-lightgrey">
+
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">

@@ -28,14 +28,14 @@ const actions = {
     })
   },
 
-  searchPosts ({ commit }, text) {
+  searchAllPosts ({ commit }, text) {
     return new Promise((resolve, reject) => {
       if (text === null || text.length < 1) {
         // if empty search, return all
         resolve()
       } else {
         // otherwise do normal search
-        database.searchPosts(text, posts => {
+        database.searchAllPosts(text, posts => {
           commit(types.SET_POSTS, posts)
           resolve()
         }, err => {

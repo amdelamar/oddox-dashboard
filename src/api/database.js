@@ -31,26 +31,6 @@ export default {
     })
   },
 
-  destroy (cb, errcb) {
-    applicationdb.destroy().then(res => {
-      authorsdb.destroy().then(res => {
-        postsdb.destroy().then(res => {
-          viewsdb.destroy().then(res => {
-            cb()
-          }).catch(err => {
-            errcb(err)
-          })
-        }).catch(err => {
-          errcb(err)
-        })
-      }).catch(err => {
-        errcb(err)
-      })
-    }).catch(err => {
-      errcb(err)
-    })
-  },
-
   synchronize (authToken, cb, errcb) {
     if (authToken === null || authToken.fullUrl === undefined) {
       errcb('Not logged in.')
@@ -112,14 +92,6 @@ export default {
     })
   },
 
-  createAuthor (author, cb, errcb) {
-    authorsdb.put(author).then(result => {
-      cb(result)
-    }).catch(err => {
-      errcb(err)
-    })
-  },
-
   readAuthor (id, cb, errcb) {
     authorsdb.get(id).then(result => {
       cb(result)
@@ -158,7 +130,7 @@ export default {
     })
   },
 
-  searchPosts (text, cb, errcb) {
+  searchAllPosts (text, cb, errcb) {
     postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
@@ -169,14 +141,6 @@ export default {
         }
       }
       cb(temp)
-    }).catch(err => {
-      errcb(err)
-    })
-  },
-
-  createPost (post, cb, errcb) {
-    postsdb.put(post).then(result => {
-      cb(result)
     }).catch(err => {
       errcb(err)
     })
@@ -217,6 +181,26 @@ export default {
   updateAppDoc (doc, cb, errcb) {
     applicationdb.put(doc).then(result => {
       cb(result)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  destroy (cb, errcb) {
+    applicationdb.destroy().then(res => {
+      authorsdb.destroy().then(res => {
+        postsdb.destroy().then(res => {
+          viewsdb.destroy().then(res => {
+            cb()
+          }).catch(err => {
+            errcb(err)
+          })
+        }).catch(err => {
+          errcb(err)
+        })
+      }).catch(err => {
+        errcb(err)
+      })
     }).catch(err => {
       errcb(err)
     })

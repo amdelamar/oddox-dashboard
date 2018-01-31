@@ -56,7 +56,7 @@ export default {
         this.clearSearch()
       }
 
-      this.$store.dispatch('searchPosts', this.text).then(result => {
+      this.$store.dispatch('searchAllPosts', this.text).then(result => {
         // successful search
       }).catch(err => {
         // failed search

@@ -9,7 +9,7 @@
       <nav class="nav-list padding">
         <router-link class="nav-item" to="/post"><i class="icon-stack"></i>&nbsp;&nbsp;<span>Posts</span></router-link>
         <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;<span>Drafts</span></router-link>
-        <router-link class="nav-item" to="/featured"><i class="icon-star-empty"></i>&nbsp;&nbsp;<span>Featured</span></router-link>
+        <router-link class="nav-item" to="/featured"><i class="icon-star-full"></i>&nbsp;&nbsp;<span>Featured</span></router-link>
         <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;<span>Categories</span></router-link>
         <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;&nbsp;<span>Tags</span></router-link>
         <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;<span>Years</span></router-link>
@@ -23,10 +23,10 @@
     </div>
 
     <footer class="full-width text-darkgrey text-center">
-      <p class="text-nowrap" title="Total disk size of your database">
+      <p class="text-small text-nowrap" title="Total disk size of your database">
         <span>Storage:</span> <code>{{ dbsize }}</code>
         <br/>
-        <em class="text-small"><a class="text-darkgrey" :href="link">{{ name }} {{ version }}</a></em>
+        <em><a class="text-grey" :href="link">{{ name }} {{ version }}</a></em>
       </p>
     </footer>
   </nav>
