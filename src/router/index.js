@@ -117,6 +117,21 @@ export default new Router({
       ]
     },
     {
+      path: '/category',
+      name: 'category',
+      component: NotFound
+    },
+    {
+      path: '/tag',
+      name: 'tags',
+      component: NotFound
+    },
+    {
+      path: '/year',
+      name: 'years',
+      component: NotFound
+    },
+    {
       path: '/author',
       name: 'authors',
       component: Authors,
@@ -124,6 +139,7 @@ export default new Router({
       children: [
         {
           path: ':id',
+          name: 'view-author',
           component: Authors,
           beforeEnter: mustBeAuthenticated
         }

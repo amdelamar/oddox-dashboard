@@ -21,12 +21,14 @@
         <em class="text-red text-bold">{{ message }}</em>
       </p>
 
-      <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">
-        <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
-          <p class="margin-none text-nowrap">{{ author.name | shorten(45) }}</p>
-          <span class="text-small text-nowrap">{{ author.description | shorten(60) }}</span>
-        </div>
-      </a>
+      <div v-for="author in authors" class="author-item" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
+        <router-link :to="{ name:'view-author', params:{ id:author._id }}">
+          <div class="row padding border-bottom margin-none">
+            <p class="margin-none text-nowrap">{{ author.name | shorten(45) }}</p>
+            <span class="text-small text-nowrap">{{ author.description | shorten(60) }}</span>
+          </div>
+        </router-link>
+      </div>
     </div>
 
   </div>
@@ -81,14 +83,20 @@ export default {
 #author-list {
   height: calc(100% - 6.5rem);
 }
-#author-list .item {
+#author-list .author-item {
   transition: all 0.3s ease;
+  overflow: hidden;
 }
-#author-list .item.active {
-  color: #FFFFFF;
+#author-list .author-item.active {
   background: var(--blue);
 }
-#author-list .item.active:hover {
+#author-list .author-item.active, #author-list .author-item.active a {
+  color: #FFFFFF;
+}
+#author-list .author-item:hover {
+  background: var(--light-grey);
+}
+#author-list .author-item.active:hover {
   background: var(--light-blue);
 }
 </style>

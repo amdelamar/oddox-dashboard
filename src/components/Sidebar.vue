@@ -7,17 +7,17 @@
       </div>
 
       <nav class="nav-list padding">
-        <router-link class="nav-item" to="/post"><i class="icon-stack"></i>&nbsp;&nbsp;<span>Posts</span></router-link>
-        <router-link class="nav-item" to="/draft"><i class="icon-file-text2"></i>&nbsp;&nbsp;<span>Drafts</span></router-link>
-        <router-link class="nav-item" to="/featured"><i class="icon-star-full"></i>&nbsp;&nbsp;<span>Featured</span></router-link>
-        <router-link class="nav-item" to="/category"><i class="icon-folder"></i>&nbsp;&nbsp;<span>Categories</span></router-link>
-        <router-link class="nav-item" to="/tags"><i class="icon-price-tag"></i>&nbsp;&nbsp;<span>Tags</span></router-link>
-        <router-link class="nav-item" to="/years"><i class="icon-calendar"></i>&nbsp;&nbsp;<span>Years</span></router-link>
-        <router-link class="nav-item" to="/trash"><i class="icon-bin"></i>&nbsp;&nbsp;<span>Trash</span></router-link>
-        <router-link class="nav-item" to="/all"><i class="icon-book"></i>&nbsp;&nbsp;<span>All Posts</span></router-link>
+        <router-link class="nav-item" :to="{name:'posts'}"><i class="icon-stack"></i>&nbsp;&nbsp;<span>Posts</span></router-link>
+        <router-link class="nav-item" :to="{name:'drafts'}"><i class="icon-file-text2"></i>&nbsp;&nbsp;<span>Drafts</span></router-link>
+        <router-link class="nav-item" :to="{name:'featured'}"><i class="icon-star-full"></i>&nbsp;&nbsp;<span>Featured</span></router-link>
+        <router-link class="nav-item" :to="{name:'category'}"><i class="icon-folder"></i>&nbsp;&nbsp;<span>Categories</span></router-link>
+        <router-link class="nav-item" :to="{name:'tags'}"><i class="icon-price-tag"></i>&nbsp;&nbsp;<span>Tags</span></router-link>
+        <router-link class="nav-item" :to="{name:'years'}"><i class="icon-calendar"></i>&nbsp;&nbsp;<span>Years</span></router-link>
+        <router-link class="nav-item" :to="{name:'trash'}"><i class="icon-bin"></i>&nbsp;&nbsp;<span>Trash</span></router-link>
+        <router-link class="nav-item" :to="{name:'all-posts'}"><i class="icon-book"></i>&nbsp;&nbsp;<span>All Posts</span></router-link>
           <span class="nav-item"><hr class="margin-none"/></span>
-        <router-link class="nav-item" to="/author"><i class="icon-users"></i>&nbsp;&nbsp;<span>All Authors</span></router-link>
-        <router-link class="nav-item" to="/settings"><i class="icon-cog"></i>&nbsp;&nbsp;<span>Settings</span></router-link>
+        <router-link class="nav-item" :to="{name:'authors'}"><i class="icon-users"></i>&nbsp;&nbsp;<span>All Authors</span></router-link>
+        <router-link class="nav-item" :to="{name:'settings'}"><i class="icon-cog"></i>&nbsp;&nbsp;<span>Settings</span></router-link>
 
       </nav>
     </div>

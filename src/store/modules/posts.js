@@ -16,6 +16,18 @@ const getters = {
 // actions
 const actions = {
 
+  searchPosts ({ commit }, text) {
+    return new Promise((resolve, reject) => {
+      database.searchPosts(text, posts => {
+        commit(types.SET_POSTS, posts)
+        resolve()
+      }, err => {
+        commit(types.SET_POSTS, null)
+        reject(err)
+      })
+    })
+  },
+
   searchAllPosts ({ commit }, text) {
     return new Promise((resolve, reject) => {
       database.searchAllPosts(text, posts => {
@@ -28,9 +40,33 @@ const actions = {
     })
   },
 
-  searchAllDrafts ({ commit }, text) {
+  searchDrafts ({ commit }, text) {
     return new Promise((resolve, reject) => {
-      database.searchAllDrafts(text, posts => {
+      database.searchDrafts(text, posts => {
+        commit(types.SET_POSTS, posts)
+        resolve()
+      }, err => {
+        commit(types.SET_POSTS, null)
+        reject(err)
+      })
+    })
+  },
+
+  searchFeatured ({ commit }, text) {
+    return new Promise((resolve, reject) => {
+      database.searchFeatured(text, posts => {
+        commit(types.SET_POSTS, posts)
+        resolve()
+      }, err => {
+        commit(types.SET_POSTS, null)
+        reject(err)
+      })
+    })
+  },
+
+  searchTrash ({ commit }, text) {
+    return new Promise((resolve, reject) => {
+      database.searchTrash(text, posts => {
         commit(types.SET_POSTS, posts)
         resolve()
       }, err => {

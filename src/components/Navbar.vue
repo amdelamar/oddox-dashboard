@@ -27,8 +27,8 @@
                 Welcome <span class="text-bold">{{ authToken.username }}</span>
               </div>
 
-              <router-link to="/my-profile" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
-              <router-link to="/settings" class="nav-item"><i class="icon-cog"></i>&nbsp;Settings</router-link>
+              <router-link :to="{name:'my-profile'}" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
+              <router-link :to="{name:'settings'}" class="nav-item"><i class="icon-cog"></i>&nbsp;Settings</router-link>
               <hr class="margin"/>
               <button class="nav-item button button-red full-width" v-on:click="logout">Logout</button>
             </div>

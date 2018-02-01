@@ -121,6 +121,28 @@ export default {
     })
   },
 
+  searchPosts (text, cb, errcb) {
+    db.postsdb.allDocs({include_docs: true}).then(results => {
+      let temp = []
+      for (let i = 0; i < results.total_rows; i++) {
+        if (results.rows[i].doc.title !== undefined && results.rows[i].doc.published && !results.rows[i].doc.deleted) {
+          if (text === null || text.length < 1) {
+            // empty search, return all
+            temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
+          }
+        }
+      }
+      cb(temp)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
   searchAllPosts (text, cb, errcb) {
     db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
@@ -143,11 +165,55 @@ export default {
     })
   },
 
-  searchAllDrafts (text, cb, errcb) {
+  searchDrafts (text, cb, errcb) {
     db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
-        if (results.rows[i].doc.title !== undefined && !results.rows[i].doc.published) {
+        if (results.rows[i].doc.title !== undefined && !results.rows[i].doc.published && !results.rows[i].doc.deleted) {
+          if (text === null || text.length < 1) {
+            // empty search, return all
+            temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
+          }
+        }
+      }
+      cb(temp)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  searchFeatured (text, cb, errcb) {
+    db.postsdb.allDocs({include_docs: true}).then(results => {
+      let temp = []
+      for (let i = 0; i < results.total_rows; i++) {
+        if (results.rows[i].doc.title !== undefined && results.rows[i].doc.featured && !results.rows[i].doc.deleted) {
+          if (text === null || text.length < 1) {
+            // empty search, return all
+            temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
+          }
+        }
+      }
+      cb(temp)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  searchTrash (text, cb, errcb) {
+    db.postsdb.allDocs({include_docs: true}).then(results => {
+      let temp = []
+      for (let i = 0; i < results.total_rows; i++) {
+        if (results.rows[i].doc.title !== undefined && results.rows[i].doc.deleted) {
           if (text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)

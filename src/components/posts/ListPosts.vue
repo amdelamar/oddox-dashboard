@@ -71,8 +71,16 @@ export default {
           console.log(err)
           this.message = err.message
         })
+      } else if (this.$route.name.indexOf('featured') !== -1) {
+        this.$store.dispatch('searchFeatured', this.text).then(result => {
+          // successful search
+        }).catch(err => {
+          // failed search
+          console.log(err)
+          this.message = err.message
+        })
       } else if (this.$route.name.indexOf('drafts') !== -1) {
-        this.$store.dispatch('searchAllDrafts', this.text).then(result => {
+        this.$store.dispatch('searchDrafts', this.text).then(result => {
           // successful search
         }).catch(err => {
           // failed search
@@ -80,7 +88,7 @@ export default {
           this.message = err.message
         })
       } else if (this.$route.name.indexOf('trash') !== -1) {
-        this.$store.dispatch('searchAllDrafts', this.text).then(result => {
+        this.$store.dispatch('searchTrash', this.text).then(result => {
           // successful search
         }).catch(err => {
           // failed search
@@ -88,7 +96,7 @@ export default {
           this.message = err.message
         })
       } else if (this.$route.name.indexOf('posts') !== -1) {
-        this.$store.dispatch('searchAllPosts', this.text).then(result => {
+        this.$store.dispatch('searchPosts', this.text).then(result => {
           // successful search
         }).catch(err => {
           // failed search
