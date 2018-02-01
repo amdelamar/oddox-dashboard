@@ -95,7 +95,7 @@ export default {
           console.log(err)
           this.message = err.message
         })
-      } else if (this.$route.name.indexOf('posts') !== -1) {
+      } else {
         this.$store.dispatch('searchPosts', this.text).then(result => {
           // successful search
         }).catch(err => {
