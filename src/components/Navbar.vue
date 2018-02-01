@@ -54,12 +54,16 @@ export default {
     }
   },
   computed: mapGetters({
+    isInitialized: 'isInitialized',
     appConfig: 'getAppConfig',
     authToken: 'getAuthToken',
     status: 'getSyncError',
     syncTime: 'getSyncTime'
   }),
   created () {
+    if (!this.isInitialized) {
+      this.$store.dispatch('initialize')
+    }
     if (this.syncTime !== null) {
       this.message = 'Synced ' + moment(this.syncTime).fromNow()
     }

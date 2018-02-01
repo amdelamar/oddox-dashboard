@@ -1,10 +1,21 @@
 import database from '../../api/database'
+import base64 from '../../api/base64'
 import * as types from '../mutation-types'
 import moment from 'moment'
 
+const loadAuthToken = () => {
+  // get token from LocalStorage
+  if (localStorage.getItem('auth-token')) {
+    return JSON.parse(base64.decode(JSON.parse(localStorage.getItem('auth-token'))))
+  }
+  // otherwise return empty
+  return ''
+}
+
 // initial state
 const state = {
-  authToken: JSON.parse(localStorage.getItem('auth-token')) || '',
+  initialized: false,
+  authToken: loadAuthToken(),
   authTime: null,
   synced: false,
   syncError: '',
@@ -13,6 +24,7 @@ const state = {
 
 // getters
 const getters = {
+  isInitialized: state => state.initialized,
   getAuthToken: state => state.authToken,
   isAuthenticated: state => !!state.authToken,
   getAuthTime: state => state.authTime,
@@ -23,6 +35,19 @@ const getters = {
 
 // actions
 const actions = {
+  initialize ({ commit }) {
+    return new Promise((resolve, reject) => {
+      // create unique identifier
+      let uid = base64.encode(state.authToken.url)
+      // create local databases
+      database.init(uid, result => {
+        resolve('Local databases initialized: ' + uid)
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+
   synchronize ({ commit }) {
     return new Promise((resolve, reject) => {
       database.synchronize(state.authToken, result => {
@@ -42,8 +67,9 @@ const actions = {
   login ({ commit }, token) {
     return new Promise((resolve, reject) => {
       database.login(token, result => {
-        localStorage.setItem('auth-token', JSON.stringify(result))
+        // base and save to storage
         commit(types.SET_AUTH_TOKEN, result)
+        localStorage.setItem('auth-token', JSON.stringify(base64.encode(JSON.stringify(result))))
         commit(types.SET_AUTH_TIME, moment.now())
         resolve('Login Success.')
       }, err => {
@@ -90,6 +116,9 @@ const actions = {
 
 // mutations
 const mutations = {
+  [types.SET_IS_INIT] (state, initialized) {
+    state.initialized = initialized
+  },
   [types.SET_AUTH_TOKEN] (state, authToken) {
     state.authToken = authToken
   },

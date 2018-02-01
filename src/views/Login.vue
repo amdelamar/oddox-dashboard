@@ -129,10 +129,25 @@ export default {
         }
         this.$store.dispatch('login', this.authToken).then(result => {
           // successful login
-          console.log(result)
-          this.message = result
-          this.disableLogin = false
-          this.$router.push('/post')
+          this.$store.dispatch('initialize').then(result2 => {
+            // successful initialize
+            console.log(result2)
+            console.log(result)
+            this.message = result
+            this.disableLogin = false
+            this.$router.push('/post')
+          }).catch(err2 => {
+            // failed initialize
+            console.log(err2)
+            this.message = err2
+            this.authToken.password = ''
+            this.disableLogin = false
+
+            // disappear after 5 seconds
+            setTimeout(() => {
+              this.message = ''
+            }, 5000)
+          })
         }).catch(err => {
           // failed login
           console.log(err)

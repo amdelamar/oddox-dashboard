@@ -1,3 +1,4 @@
+export const SET_IS_INIT = 'SET_IS_INIT'
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN'
 export const SET_AUTH_TIME = 'SET_AUTH_TIME'
 export const SET_IS_SYNCED = 'SET_IS_SYNCED'

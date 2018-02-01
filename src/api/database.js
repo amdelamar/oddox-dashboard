@@ -1,13 +1,26 @@
 import PouchDB from 'pouchdb-browser'
-
-const applicationdb = new PouchDB('application')
-const authorsdb = new PouchDB('authors')
-const postsdb = new PouchDB('posts')
-const viewsdb = new PouchDB('views')
-
 PouchDB.debug.disable()
 
+const db = {
+  applicationdb: null,
+  authorsdb: null,
+  postsdb: null,
+  viewsdb: null
+}
+
 export default {
+
+  db,
+
+  init (uniqueIdentifer, cb, errcb) {
+    // create local databases
+    // use a unique prefix to separate multi-blogs from overriting each other
+    db.applicationdb = new PouchDB(uniqueIdentifer + '-application')
+    db.authorsdb = new PouchDB(uniqueIdentifer + '-authors')
+    db.postsdb = new PouchDB(uniqueIdentifer + '-posts')
+    db.viewsdb = new PouchDB(uniqueIdentifer + '-views')
+    cb()
+  },
 
   login (authToken, cb, errcb) {
     // Create full url: 'https://admin:admin@localhost:6984'
@@ -39,13 +52,13 @@ export default {
     let remotedb = authToken.fullUrl
     let opts = { live: false, retry: true }
 
-    applicationdb.sync(remotedb + '/application', opts).then(res => {
+    db.applicationdb.sync(remotedb + '/application', opts).then(res => {
       console.log('Sync application complete')
-      authorsdb.sync(remotedb + '/authors', opts).then(res => {
+      db.authorsdb.sync(remotedb + '/authors', opts).then(res => {
         console.log('Sync authors complete')
-        postsdb.sync(remotedb + '/posts', opts).then(res => {
+        db.postsdb.sync(remotedb + '/posts', opts).then(res => {
           console.log('Sync posts complete')
-          viewsdb.sync(remotedb + '/views', opts).then(res => {
+          db.viewsdb.sync(remotedb + '/views', opts).then(res => {
             console.log('Sync views complete')
             cb()
           }).catch(err => {
@@ -63,7 +76,7 @@ export default {
   },
 
   allAuthors (cb, errcb) {
-    authorsdb.allDocs({include_docs: true}).then(results => {
+    db.authorsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.name !== undefined) {
@@ -77,7 +90,7 @@ export default {
   },
 
   searchAuthors (text, cb, errcb) {
-    authorsdb.allDocs({include_docs: true}).then(results => {
+    db.authorsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.name !== undefined) {
@@ -93,7 +106,7 @@ export default {
   },
 
   readAuthor (id, cb, errcb) {
-    authorsdb.get(id).then(result => {
+    db.authorsdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -101,7 +114,7 @@ export default {
   },
 
   updateAuthor (author, cb, errcb) {
-    authorsdb.put(author).then(result => {
+    db.authorsdb.put(author).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -109,7 +122,7 @@ export default {
   },
 
   deleteAuthor (author, cb, errcb) {
-    authorsdb.remove(author).then(result => {
+    db.authorsdb.remove(author).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -117,7 +130,7 @@ export default {
   },
 
   allPosts (cb, errcb) {
-    postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined) {
@@ -131,7 +144,7 @@ export default {
   },
 
   searchAllPosts (text, cb, errcb) {
-    postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined) {
@@ -147,7 +160,7 @@ export default {
   },
 
   readPost (id, cb, errcb) {
-    postsdb.get(id).then(result => {
+    db.postsdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -155,7 +168,7 @@ export default {
   },
 
   updatePost (post, cb, errcb) {
-    postsdb.put(post).then(result => {
+    db.postsdb.put(post).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -163,7 +176,7 @@ export default {
   },
 
   deletePost (post, cb, errcb) {
-    postsdb.remove(post).then(result => {
+    db.postsdb.remove(post).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -171,7 +184,7 @@ export default {
   },
 
   readAppDoc (id, cb, errcb) {
-    applicationdb.get(id).then(result => {
+    db.applicationdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -179,7 +192,7 @@ export default {
   },
 
   updateAppDoc (doc, cb, errcb) {
-    applicationdb.put(doc).then(result => {
+    db.applicationdb.put(doc).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)
@@ -187,10 +200,10 @@ export default {
   },
 
   destroy (cb, errcb) {
-    applicationdb.destroy().then(res => {
-      authorsdb.destroy().then(res => {
-        postsdb.destroy().then(res => {
-          viewsdb.destroy().then(res => {
+    db.applicationdb.destroy().then(res => {
+      db.authorsdb.destroy().then(res => {
+        db.postsdb.destroy().then(res => {
+          db.viewsdb.destroy().then(res => {
             cb()
           }).catch(err => {
             errcb(err)
