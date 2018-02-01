@@ -41,6 +41,7 @@ const actions = {
       let uid = base64.encode(state.authToken.url)
       // create local databases
       database.init(uid, result => {
+        commit(types.SET_IS_INIT, true)
         resolve('Local databases initialized: ' + uid)
       }, err => {
         reject(err)

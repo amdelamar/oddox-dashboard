@@ -11,20 +11,6 @@ export default {
 </script>
 
 <style>
-.scrollable {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.scollable-none {
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-.overflow-none {
-  overflow: none;
-}
-.full-height {
-  height: 100%;
-}
 #app {
   height: 100%;
   width: 100%;
@@ -93,6 +79,20 @@ html, body {
   top: 50%;
   left: 50%;
   margin: -25px 0 0 -100px;
+}
+.scrollable {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.scollable-none {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.overflow-none {
+  overflow: none;
+}
+.full-height {
+  height: 100%;
 }
 input:hover, input:active, input:focus {
   background-color: var(--white);

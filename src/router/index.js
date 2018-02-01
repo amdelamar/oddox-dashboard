@@ -78,6 +78,45 @@ export default new Router({
       ]
     },
     {
+      path: '/featured',
+      name: 'featured',
+      component: Posts,
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: ':id',
+          name: 'view-featured',
+          component: Posts
+        }
+      ]
+    },
+    {
+      path: '/trash',
+      name: 'trash',
+      component: Posts,
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: ':id',
+          name: 'view-trash',
+          component: Posts
+        }
+      ]
+    },
+    {
+      path: '/all',
+      name: 'all-posts',
+      component: Posts,
+      beforeEnter: mustBeAuthenticated,
+      children: [
+        {
+          path: ':id',
+          name: 'view-all-posts',
+          component: Posts
+        }
+      ]
+    },
+    {
       path: '/author',
       name: 'authors',
       component: Authors,

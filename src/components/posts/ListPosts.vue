@@ -15,13 +15,20 @@
         <em class="text-darkgrey" v-if="text === null">No posts found.</em>
         <em class="text-darkgrey" v-if="text !== null">No results found for '{{ text }}'.</em>
       </p>
+      <p class="super-center text-center animated fadeIn" v-if="message.length > 0">
+        <i class="icon-notification text-red text-largest"></i><br/>
+        <em class="text-red text-bold">{{ message }}</em>
+      </p>
 
-      <a class="overflow-none" :href="'/#/post/' + post._id" v-for="post in posts">
-        <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
-          <p class="margin-none text-nowrap">{{ post.title | shorten(45) }}</p>
-          <span class="text-small text-nowrap">{{ post.description | shorten(60) }}</span>
-        </div>
-      </a>
+      <div v-for="post in posts" class="post-item" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
+        <router-link :to="{ name:'view-post', params:{ id:post._id }}">
+          <div class="row padding border-bottom margin-none">
+            <p class="margin-none text-nowrap">{{ post.title | shorten(45) }}</p>
+            <span class="text-small text-nowrap">{{ post.description | shorten(60) }}</span>
+          </div>
+        </router-link>
+      </div>
+
     </div>
 
   </div>
@@ -33,7 +40,8 @@ export default {
   name: 'post-list',
   data () {
     return {
-      text: ''
+      text: '',
+      message: ''
     }
   },
   computed: mapGetters({
@@ -43,25 +51,51 @@ export default {
   created () {
     this.clearSearch()
   },
+  watch: {
+    '$route': 'search'
+  },
   methods: {
     clearSearch () {
-      this.$store.dispatch('allPosts')
       this.text = ''
+      this.message = ''
+      this.search()
     },
     search () {
       this.text = this.text.toLowerCase()
 
-      if (this.text.length < 1) {
-        // clear search if they delete
-        this.clearSearch()
+      if (this.$route.name.indexOf('all-posts') !== -1) {
+        this.$store.dispatch('searchAllPosts', this.text).then(result => {
+          // successful search
+        }).catch(err => {
+          // failed search
+          console.log(err)
+          this.message = err.message
+        })
+      } else if (this.$route.name.indexOf('drafts') !== -1) {
+        this.$store.dispatch('searchAllDrafts', this.text).then(result => {
+          // successful search
+        }).catch(err => {
+          // failed search
+          console.log(err)
+          this.message = err.message
+        })
+      } else if (this.$route.name.indexOf('trash') !== -1) {
+        this.$store.dispatch('searchAllDrafts', this.text).then(result => {
+          // successful search
+        }).catch(err => {
+          // failed search
+          console.log(err)
+          this.message = err.message
+        })
+      } else if (this.$route.name.indexOf('posts') !== -1) {
+        this.$store.dispatch('searchAllPosts', this.text).then(result => {
+          // successful search
+        }).catch(err => {
+          // failed search
+          console.log(err)
+          this.message = err.message
+        })
       }
-
-      this.$store.dispatch('searchAllPosts', this.text).then(result => {
-        // successful search
-      }).catch(err => {
-        // failed search
-        console.log(err)
-      })
     }
   }
 }
@@ -74,14 +108,20 @@ export default {
 #post-list {
   height: calc(100% - 6.5rem);
 }
-#post-list .item {
+#post-list .post-item {
   transition: all 0.3s ease;
+  overflow: hidden;
 }
-#post-list .item.active {
-  color: #FFFFFF;
+#post-list .post-item.active {
   background: var(--blue);
 }
-#post-list .item.active:hover {
+#post-list .post-item.active, #post-list .post-item.active a {
+  color: #FFFFFF;
+}
+#post-list .post-item:hover {
+  background: var(--light-grey);
+}
+#post-list .post-item.active:hover {
   background: var(--light-blue);
 }
 </style>

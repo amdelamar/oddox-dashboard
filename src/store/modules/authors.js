@@ -16,33 +16,15 @@ const getters = {
 // actions
 const actions = {
 
-  allAuthors ({ commit }) {
+  searchAllAuthors ({ commit }, text) {
     return new Promise((resolve, reject) => {
-      database.allAuthors(authors => {
+      database.searchAllAuthors(text, authors => {
         commit(types.SET_AUTHORS, authors)
         resolve()
       }, err => {
         commit(types.SET_AUTHORS, null)
         reject(err)
       })
-    })
-  },
-
-  searchAuthors ({ commit }, text) {
-    return new Promise((resolve, reject) => {
-      if (text === null || text.length < 1) {
-        // if empty search, return all
-        resolve()
-      } else {
-        // otherwise do normal search
-        database.searchAuthors(text, authors => {
-          commit(types.SET_AUTHORS, authors)
-          resolve()
-        }, err => {
-          commit(types.SET_AUTHORS, null)
-          reject(err)
-        })
-      }
     })
   },
 

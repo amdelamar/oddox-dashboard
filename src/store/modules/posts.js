@@ -16,9 +16,9 @@ const getters = {
 // actions
 const actions = {
 
-  allPosts ({ commit }) {
+  searchAllPosts ({ commit }, text) {
     return new Promise((resolve, reject) => {
-      database.allPosts(posts => {
+      database.searchAllPosts(text, posts => {
         commit(types.SET_POSTS, posts)
         resolve()
       }, err => {
@@ -28,21 +28,15 @@ const actions = {
     })
   },
 
-  searchAllPosts ({ commit }, text) {
+  searchAllDrafts ({ commit }, text) {
     return new Promise((resolve, reject) => {
-      if (text === null || text.length < 1) {
-        // if empty search, return all
+      database.searchAllDrafts(text, posts => {
+        commit(types.SET_POSTS, posts)
         resolve()
-      } else {
-        // otherwise do normal search
-        database.searchAllPosts(text, posts => {
-          commit(types.SET_POSTS, posts)
-          resolve()
-        }, err => {
-          commit(types.SET_POSTS, null)
-          reject(err)
-        })
-      }
+      }, err => {
+        commit(types.SET_POSTS, null)
+        reject(err)
+      })
     })
   },
 

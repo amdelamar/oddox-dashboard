@@ -16,6 +16,10 @@
         <em class="text-darkgrey" v-if="text === null">No authors found.</em>
         <em class="text-darkgrey" v-if="text !== null">No results found for '{{ text }}'.</em>
       </p>
+      <p class="super-center text-center animated fadeIn" v-if="message.length > 0">
+        <i class="icon-notification text-red text-largest"></i><br/>
+        <em class="text-red text-bold">{{ message }}</em>
+      </p>
 
       <a class="overflow-none" :href="'/#/author/' + author._id" v-for="author in authors">
         <div class="row item padding border-bottom margin-none hover-background-solid-lightgrey" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
@@ -34,7 +38,8 @@ export default {
   name: 'author-list',
   data () {
     return {
-      text: ''
+      text: '',
+      message: ''
     }
   },
   computed: mapGetters({
@@ -46,8 +51,9 @@ export default {
   },
   methods: {
     clearSearch () {
-      this.$store.dispatch('allAuthors')
       this.text = ''
+      this.message = ''
+      this.search()
     },
     newAuthor () {
       this.$store.dispatch('setCurrentAuthor', null)
@@ -56,16 +62,12 @@ export default {
     search () {
       this.text = this.text.toLowerCase()
 
-      if (this.text.length < 1) {
-        // clear search if they delete
-        this.clearSearch()
-      }
-
-      this.$store.dispatch('searchAuthors', this.text).then(result => {
+      this.$store.dispatch('searchAllAuthors', this.text).then(result => {
         // successful search
       }).catch(err => {
         // failed search
         console.log(err)
+        this.message = err.message
       })
     }
   }

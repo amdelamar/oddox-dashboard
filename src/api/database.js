@@ -75,27 +75,19 @@ export default {
     })
   },
 
-  allAuthors (cb, errcb) {
+  searchAllAuthors (text, cb, errcb) {
     db.authorsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.name !== undefined) {
-          temp.push(results.rows[i].doc)
-        }
-      }
-      cb(temp)
-    }).catch(err => {
-      errcb(err)
-    })
-  },
-
-  searchAuthors (text, cb, errcb) {
-    db.authorsdb.allDocs({include_docs: true}).then(results => {
-      let temp = []
-      for (let i = 0; i < results.total_rows; i++) {
-        if (results.rows[i].doc.name !== undefined) {
-          if (results.rows[i].doc.name.toLowerCase().indexOf(text) !== -1) {
+          if (text === null || text.length < 1) {
+            // empty search, return all
             temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.name.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
           }
         }
       }
@@ -129,12 +121,20 @@ export default {
     })
   },
 
-  allPosts (cb, errcb) {
+  searchAllPosts (text, cb, errcb) {
     db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined) {
-          temp.push(results.rows[i].doc)
+          if (text === null || text.length < 1) {
+            // empty search, return all
+            temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
+          }
         }
       }
       cb(temp)
@@ -143,13 +143,19 @@ export default {
     })
   },
 
-  searchAllPosts (text, cb, errcb) {
+  searchAllDrafts (text, cb, errcb) {
     db.postsdb.allDocs({include_docs: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
-        if (results.rows[i].doc.title !== undefined) {
-          if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+        if (results.rows[i].doc.title !== undefined && !results.rows[i].doc.published) {
+          if (text === null || text.length < 1) {
+            // empty search, return all
             temp.push(results.rows[i].doc)
+          } else {
+            // search by text
+            if (results.rows[i].doc.title.toLowerCase().indexOf(text) !== -1) {
+              temp.push(results.rows[i].doc)
+            }
           }
         }
       }
