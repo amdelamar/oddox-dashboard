@@ -4,8 +4,9 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Profile</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Account</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Advanced</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Preview</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Account</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cog"></i></button>
     </div>
     <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
@@ -27,11 +28,11 @@
 
     <div class="full-height padding-large animated fadeIn" v-if="author !== null && !loading">
 
-      <div v-if="tab == 0">
+      <div class="row full-height" v-if="tab == 0">
         <!-- Profile -->
         <div class="row">
           <label for="name">Display Name</label>
-          <input type="text" id="name" style="width:50%;min-width:25rem;" v-model="author.name" placeholder="My Name" />
+          <input type="text" id="name" class="text-medium" style="width:30%;min-width:25rem;" v-model="author.name" placeholder="My Name" />
         </div>
         <div class="row padding-top">
           <label for="desc">Short Description</label>
@@ -39,10 +40,65 @@
         </div>
         <div class="row padding-top">
           <label for="cont">About Me / Long Description</label>
-          <textarea id="cont" class="full-width" style="height:30rem;" v-model="author.content" placeholder="<p>\nA few paragraphs about me...\n</p>"></textarea>
+          <div class="editor full-width">
+            <div class="editor-toolbar full-width">
+                <select id="fontFamily">
+                  <option value="Arial">Arial</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Consolas">Consolas</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Roboto">Roboto</option>
+                </select>
+                <select id="fontSize">
+                  <option value="8pt">8pt</option>
+                  <option value="10pt">10pt</option>
+                  <option value="12pt">12pt</option>
+                  <option value="14pt">14pt</option>
+                  <option value="16pt">16pt</option>
+                  <option value="18pt">18pt</option>
+                  <option value="24pt">24pt</option>
+                  <option value="36pt">36pt</option>
+                  <option value="48pt">48pt</option>
+                  <option value="64pt">64pt</option>
+                  <option value="72pt">72pt</option>
+                </select>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button" :class="{'active':bold}" v-on:click="bold = !bold"><i class="icon-bold"></i></button>
+                <button class="button"><i class="icon-italic"></i></button>
+                <button class="button"><i class="icon-underline"></i></button>
+                <button class="button"><i class="icon-strikethrough"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-paragraph-left"></i></button>
+                <button class="button"><i class="icon-paragraph-center"></i></button>
+                <button class="button"><i class="icon-paragraph-right"></i></button>
+                <button class="button"><i class="icon-indent-increase"></i></button>
+                <button class="button"><i class="icon-indent-decrease"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-list-numbered"></i></button>
+                <button class="button"><i class="icon-list"></i></button>
+                <button class="button"><i class="icon-table"></i></button>
+                <button class="button"><i class="icon-image"></i></button>
+                <button class="button"><i class="icon-link"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-superscript"></i></button>
+                <button class="button"><i class="icon-subscript"></i></button>
+            </div>
+            <textarea id="content" class="editor-textbox full-width" style="height:30rem;" v-model="author.content" placeholder="<p>\nA few paragraphs about me...\n</p>"></textarea>
+          </div>
         </div>
       </div>
-      <div v-if="tab == 1">
+      <div class="row full-height" v-if="tab == 1">
+        <!-- Preview -->
+        <img v-if="author.thumbnail.length > 0" class="margin-bottom-large shadow round left margin-right-large" height="150" width="150" alt="Profile Picture" :src="author.thumbnail" />
+        <h1 v-if="author.name.length > 0">{{ author.name }}</h1>
+        <div v-if="author.content.length > 0" v-html="author.content"></div>
+        <p v-if="author.content.length < 1" class="super-center text-center">
+          <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
+          <em class="text-grey">Nothing to show yet!</em>
+        </p>
+      </div>
+      <div class="row full-height" v-if="tab == 2">
         <!-- Account -->
         <h4>{{ author.name }}</h4>
         <div class="row">
@@ -81,7 +137,7 @@
         </div>
 
       </div>
-      <div v-if="tab == 2">
+      <div class="row full-height" v-if="tab == 3">
         <!-- Advanced -->
         <h4>{{ author.name }}</h4>
         <div class="row">
@@ -117,7 +173,8 @@ export default {
       tab: 0,
       status: '',
       loading: true,
-      preview: false
+      preview: false,
+      bold: false
     }
   },
   computed: mapGetters({

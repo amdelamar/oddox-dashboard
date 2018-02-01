@@ -22,13 +22,17 @@
       <div v-if="post.content !== null && post.content.length > 0" v-html="post.content"></div>
       <hr/>
       <div class="row padding-top">
-        <p class="six columns">
+        <p class="four columns">
           <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
           <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
           <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
           <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
         </p>
-        <p class="six columns">
+        <p class="four columns">
+          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || 'none' }}</code><br/>
+          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag || 'none' }}</code><br/>
+        </p>
+        <p class="four columns">
           <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
           <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
           <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>

@@ -5,7 +5,8 @@
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Content</button>
       <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Details</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Advanced</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Preview</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cog"></i></button>
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="status.length > 0">{{ status }}</code>&nbsp;
@@ -29,19 +30,66 @@
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null && !loading">
 
-      <div v-if="tab == 0">
+      <div class="row full-height" v-if="tab == 0">
         <!-- Content -->
         <div class="row">
-          <input type="text" class="full-width text-medium" v-model="post.title" v-on:keyup="createUri()" placeholder="New Post Title" />
+          <label for="title">Title</label>
+          <input type="text" id="title" class="full-width text-medium" v-model="post.title" v-on:keyup="createUri()" />
         </div>
 
         <div class="row">
-          <editor class="full-width" style="height:30rem;" v-bind:text="post.content"></editor>
+          <label for="content">Content</label>
+          <div class="editor full-width">
+            <div class="editor-toolbar full-width">
+                <select id="fontFamily">
+                  <option value="Arial">Arial</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Consolas">Consolas</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Roboto">Roboto</option>
+                </select>
+                <select id="fontSize">
+                  <option value="8pt">8pt</option>
+                  <option value="10pt">10pt</option>
+                  <option value="12pt">12pt</option>
+                  <option value="14pt">14pt</option>
+                  <option value="16pt">16pt</option>
+                  <option value="18pt">18pt</option>
+                  <option value="24pt">24pt</option>
+                  <option value="36pt">36pt</option>
+                  <option value="48pt">48pt</option>
+                  <option value="64pt">64pt</option>
+                  <option value="72pt">72pt</option>
+                </select>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button" :class="{'active':bold}" v-on:click="bold = !bold"><i class="icon-bold"></i></button>
+                <button class="button"><i class="icon-italic"></i></button>
+                <button class="button"><i class="icon-underline"></i></button>
+                <button class="button"><i class="icon-strikethrough"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-paragraph-left"></i></button>
+                <button class="button"><i class="icon-paragraph-center"></i></button>
+                <button class="button"><i class="icon-paragraph-right"></i></button>
+                <button class="button"><i class="icon-indent-increase"></i></button>
+                <button class="button"><i class="icon-indent-decrease"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-list-numbered"></i></button>
+                <button class="button"><i class="icon-list"></i></button>
+                <button class="button"><i class="icon-table"></i></button>
+                <button class="button"><i class="icon-image"></i></button>
+                <button class="button"><i class="icon-link"></i></button>
+                <span class="border-left margin-left margin-right"></span>
+                <button class="button"><i class="icon-superscript"></i></button>
+                <button class="button"><i class="icon-subscript"></i></button>
+            </div>
+            <textarea id="content" class="editor-textbox full-width" style="height:30rem;" v-model="post.content" placeholder="<p>Begin writing here...</p>"></textarea>
+          </div>
         </div>
       </div>
-      <div v-if="tab == 1">
+      <div class="row full-height" v-if="tab == 1">
         <!-- Details -->
-        <h5>{{ post.title | shorten(45) }}</h5>
+        <h2>{{ post.title | shorten(45) }}</h2>
         <div class="row">
           <label for="cat"><i class="icon-folder-open"></i>&nbsp;Category</label><span class="text-darkgrey">Single keyword to group similar posts together.</span><br/>
           <input type="text" id="cat" class="" v-model="post.category" />
@@ -71,9 +119,19 @@
           <input type="text" id="bannerCaption" class="full-width" v-model="post.bannerCaption" />
         </div>
       </div>
-      <div v-if="tab == 2">
+      <div class="row full-height" v-if="tab == 2">
+        <!-- Preview -->
+        <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
+        <h1 v-if="post.title.length > 0">{{ post.title}}</h1>
+        <div v-if="post.content.length > 0" v-html="post.content"></div>
+        <p v-if="post.content.length < 1" class="super-center text-center">
+          <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
+          <em class="text-grey">Nothing to show yet!</em>
+        </p>
+      </div>
+      <div class="row full-height" v-if="tab == 3">
         <!-- Advanced -->
-        <h5>{{ post.title | shorten(45) }}</h5>
+        <h2>{{ post.title | shorten(45) }}</h2>
         <div class="row">
           <input type="checkbox" id="feat1" value="true" v-model="post.featured" />
           <label class="text-normal" for="feat1"><i class="icon-star-empty"></i>&nbsp;Featured</label>
@@ -103,7 +161,7 @@
           <p>Careful! These actions may permanently destroy data.</p>
           <button class="button button-red" v-on:click="destroy"><i class="icon-cross"></i>&nbsp;Delete</button>
         </div>
-      </div>
+      </div> <!-- end of tabs -->
 
     </div>
 
@@ -115,20 +173,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Editor from '@/components/Editor'
 import moment from 'moment'
 export default {
   name: 'post-edit',
-  components: {
-    'editor': Editor
-  },
   data () {
     return {
       post: {},
       newFlag: false,
       tab: 0,
       loading: true,
-      status: ''
+      status: '',
+      bold: false
     }
   },
   computed: mapGetters({
@@ -201,10 +256,12 @@ export default {
     publish () {
       if (this.post.published) {
         this.post.published = false
-        this.status = 'Unpublished'
       } else {
         this.post.published = true
-        this.status = 'Published'
+        this.post.deleted = false
+
+        // get time ISO-8601
+        this.post.publishDate = new Date().toJSON()
       }
     },
     save () {
@@ -218,7 +275,7 @@ export default {
       this.post.modifyDate = new Date().toJSON()
 
       this.$store.dispatch('updatePost', this.post).then(() => {
-        console.log('saved post')
+        console.log('Saved post')
         this.status = 'Saved (' + moment(this.syncTime).fromNow() + ')'
       }).catch((err) => {
         console.log(err)
@@ -228,11 +285,9 @@ export default {
     trash () {
       if (this.post.deleted) {
         this.post.deleted = false
-        this.status = 'Recovered from Trash'
       } else {
         this.post.published = false
         this.post.deleted = true
-        this.status = 'Moved to Trash'
       }
     },
     destroy () {

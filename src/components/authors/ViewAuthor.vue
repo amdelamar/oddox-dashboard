@@ -27,8 +27,8 @@
         <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.roleId }}</code>
       </p>
       <p class="padding-bottom-large right">
-        Created: {{ author.createDate }}<br/>
-        Modified: {{ author.modifyDate }}<br/>
+        <i class="icon-clock"></i>&nbsp;Created: <code>{{ author.createDate || 'null' }}</code><br/>
+        <i class="icon-clock"></i>&nbsp;Modified: <code>{{ author.modifyDate || 'null' }}</code><br/>
       </p>
     </div>
 
