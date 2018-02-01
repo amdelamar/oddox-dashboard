@@ -1,5 +1,7 @@
 # <img src="https://oddox.org/assets/logo-dark.png" width="150px" alt="Oddox" /> DASHBOARD
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/oddoxorg/dashboard.svg)](https://greenkeeper.io/)
+
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/oddoxorg/dashboard.svg)](https://codecov.io/gh/oddoxorg/dashboard)
