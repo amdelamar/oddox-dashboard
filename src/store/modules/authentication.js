@@ -19,7 +19,7 @@ const state = {
   authTime: null,
   synced: false,
   syncError: '',
-  syncTime: null
+  syncTime: ''
 }
 
 // getters
@@ -37,13 +37,12 @@ const getters = {
 const actions = {
   initialize ({ commit }) {
     return new Promise((resolve, reject) => {
-      // create unique identifier
-      let uid = base64.encode(state.authToken.url)
-      // create local databases
-      database.init(uid, result => {
+      // Create local databases.
+      database.init(state.authToken, result => {
         commit(types.SET_IS_INIT, true)
-        resolve('Local databases initialized: ' + uid)
+        resolve('Local databases initialized: ' + state.authToken.uid)
       }, err => {
+        commit(types.SET_IS_INIT, false)
         reject(err)
       })
     })
@@ -51,6 +50,7 @@ const actions = {
 
   synchronize ({ commit }) {
     return new Promise((resolve, reject) => {
+      // Sync local with remote databases
       database.synchronize(state.authToken, result => {
         commit(types.SET_IS_SYNCED, true)
         commit(types.SET_SYNC_ERROR, '')
@@ -59,7 +59,7 @@ const actions = {
       }, err => {
         commit(types.SET_IS_SYNCED, false)
         commit(types.SET_SYNC_ERROR, err)
-        commit(types.SET_SYNC_TIME, null)
+        commit(types.SET_SYNC_TIME, '')
         reject(err)
       })
     })
@@ -67,8 +67,9 @@ const actions = {
 
   login ({ commit }, token) {
     return new Promise((resolve, reject) => {
+      // Try to login to remote database
       database.login(token, result => {
-        // base and save to storage
+        // base64 and save to storage
         commit(types.SET_AUTH_TOKEN, result)
         localStorage.setItem('auth-token', JSON.stringify(base64.encode(JSON.stringify(result))))
         commit(types.SET_AUTH_TIME, moment.now())
@@ -80,16 +81,18 @@ const actions = {
   },
 
   logout ({ commit }) {
+    // Only remove token. Don't destroy databases.
     localStorage.removeItem('auth-token')
     commit(types.SET_AUTH_TOKEN, '')
   },
 
   destroyDatabases ({ commit }) {
     return new Promise((resolve, reject) => {
+      // Permanently destroy local databases
       database.destroy(result => {
         commit(types.SET_POST, null)
         commit(types.SET_POSTS, null)
-        resolve('Destroy Databases Success.')
+        resolve('Destroyed all local databases.')
       }, err => {
         reject(err)
       })
@@ -98,12 +101,13 @@ const actions = {
 
   destroyEverything ({ commit }) {
     return new Promise((resolve, reject) => {
+      // Destroy storage and state values
       database.destroy(result => {
         commit(types.SET_POST, null)
         commit(types.SET_POSTS, null)
         commit(types.SET_AUTH_TOKEN, '')
         window.localStorage.clear()
-        resolve('Clear LocalStorage Success.')
+        resolve('LocalStorage destroyed.')
       }, err => {
         reject(err)
       })

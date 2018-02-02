@@ -14,9 +14,9 @@
           <i class="icon-spinner9 animated spin"></i><br/>
           <em>Loading...</em>
         </p>
-        <p class="super-center text-center animated fadeIn" v-if="appConfig === null && status.length > 0">
+        <p class="super-center text-center animated fadeIn" v-if="appConfig === null && message.length > 0">
           <i class="icon-notification text-red text-largest"></i><br/>
-          <em class="text-red text-bold">{{ status }}</em>
+          <em class="text-red text-bold">{{ message }}</em>
         </p>
 
         <div class="full-height padding-large" v-if="appConfig !== null && appFirewall !== null">
@@ -246,7 +246,7 @@ export default {
       appConfig: null,
       appFirewall: null,
       loading: true,
-      status: '',
+      message: '',
       postName: '',
       contextOther: '',
       featuredName: '',
@@ -274,11 +274,11 @@ export default {
           this.appFirewall = JSON.parse(JSON.stringify(this.currentAppFirewall))
         }).catch((err) => {
           this.loading = false
-          this.status = err.message
+          this.message = err.message
         })
       }).catch((err) => {
         this.loading = false
-        this.status = err.message
+        this.message = err.message
       })
     },
     close () {
@@ -288,7 +288,7 @@ export default {
       console.log('Saved Changes.')
     },
     destroyDatabases () {
-      this.status = ''
+      this.message = ''
       if (confirm('Are you sure you want to delete all local databases?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('destroyDatabases').then(() => {
           console.log('Deleted all databases.')
@@ -297,7 +297,7 @@ export default {
       }
     },
     destroyEverything () {
-      this.status = ''
+      this.message = ''
       if (confirm('Are you sure you want to delete everything?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('destroyEverything').then(() => {
           console.log('Deleted everything.')

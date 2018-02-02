@@ -9,7 +9,7 @@
       <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cog"></i></button>
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
-      <code v-if="status.length > 0">{{ status }}</code>&nbsp;
+      <code v-if="message.length > 0">{{ message }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
       <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>
       <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-if="!newFlag" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>
@@ -23,9 +23,9 @@
       <i class="icon-spinner9 animated spin"></i><br/>
       <em>Loading...</em>
     </p>
-    <p class="super-center text-center animated fadeIn" v-if="post === null && status.length > 0">
+    <p class="super-center text-center animated fadeIn" v-if="post === null && message.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
-      <em class="text-red text-bold">{{ status }}</em>
+      <em class="text-red text-bold">{{ message }}</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null && !loading">
@@ -182,7 +182,7 @@ export default {
       newFlag: false,
       tab: 0,
       loading: true,
-      status: '',
+      message: '',
       bold: false
     }
   },
@@ -205,7 +205,7 @@ export default {
           this.post = JSON.parse(JSON.stringify(this.currentPost))
         }).catch((err) => {
           this.loading = false
-          this.status = err
+          this.message = err.message
         })
       } else {
         // new post
@@ -232,7 +232,7 @@ export default {
           }
         }).catch((err) => {
           this.loading = false
-          this.status = err
+          this.message = err.message
         })
       }
     },
@@ -267,7 +267,7 @@ export default {
     save () {
       if (this.post._id.length < 1 || this.post.title.length < 1) {
         // can't save new post
-        this.status = 'Enter Title before Saving'
+        this.message = 'Enter Title before Saving'
         return
       }
 
@@ -276,10 +276,10 @@ export default {
 
       this.$store.dispatch('updatePost', this.post).then(() => {
         console.log('Saved post')
-        this.status = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
       }).catch((err) => {
         console.log(err)
-        this.status = err.message
+        this.message = err.message
       })
     },
     trash () {
@@ -300,13 +300,13 @@ export default {
         this.$store.dispatch('deletePost', this.currentPost).then(() => {
           this.post = null
           console.log('deleted post')
-          this.status = 'Post was deleted'
+          this.message = 'Post was deleted'
           setTimeout(() => {
             this.$router.push('/post')
           }, 2500)
         }).catch((err) => {
           console.log(err)
-          this.status = err.message
+          this.message = err.message
         })
       }
     }

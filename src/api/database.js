@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb-browser'
 PouchDB.debug.disable()
 
 const db = {
+  _usersdb: null,
   applicationdb: null,
   authorsdb: null,
   postsdb: null,
@@ -12,14 +13,45 @@ export default {
 
   db,
 
-  init (uniqueIdentifer, cb, errcb) {
+  init (authToken, cb, errcb) {
     // create local databases
     // use a unique prefix to separate multi-blogs from overriting each other
+    let uniqueIdentifer = authToken.uid
+
+    // if server admin user, then create _users db as well
+    if (authToken.serverAdmin) {
+      db._usersdb = new PouchDB(uniqueIdentifer + '-_users')
+      if (db._usersdb !== null) {
+        errcb('Failed to create local _users database. [ERRDBU]')
+      }
+    }
+    // otherwise don't create it at all.
+    // This is because a regular user can't access the _users db,
+    // This prevents them from changing other users' access or pwds.
+    // Only server admin has that power.
+
+    // create necessary local databases
     db.applicationdb = new PouchDB(uniqueIdentifer + '-application')
-    db.authorsdb = new PouchDB(uniqueIdentifer + '-authors')
-    db.postsdb = new PouchDB(uniqueIdentifer + '-posts')
-    db.viewsdb = new PouchDB(uniqueIdentifer + '-views')
-    cb()
+    if (db.applicationdb !== null) {
+      db.authorsdb = new PouchDB(uniqueIdentifer + '-authors')
+      if (db.authorsdb !== null) {
+        db.postsdb = new PouchDB(uniqueIdentifer + '-posts')
+        if (db.postsdb !== null) {
+          db.viewsdb = new PouchDB(uniqueIdentifer + '-views')
+          if (db.viewsdb !== null) {
+            cb()
+          } else {
+            errcb('Failed to create local application database.')
+          }
+        } else {
+          errcb('Failed to create local authors database.')
+        }
+      } else {
+        errcb('Failed to create local posts database.')
+      }
+    } else {
+      errcb('Failed to create local views database.')
+    }
   },
 
   login (authToken, cb, errcb) {
@@ -34,12 +66,42 @@ export default {
     }
     let remoteUrl = http + authToken.username + ':' + authToken.password + '@' + host
 
-    // test connection
-    let remotedb = new PouchDB(remoteUrl + '/posts')
-    remotedb.allDocs().then(res => {
+    // Create unique identifier. UID
+    // Based off "domain:port" and do not include http(s) or slashes.
+    let uid = ''
+    if (authToken.url.startsWith('https')) {
+      uid = authToken.url.substr(8)
+    } else if (authToken.url.startsWith('http')) {
+      uid = authToken.url.substr(7)
+    }
+    if (uid.endsWith('/')) {
+      uid = uid.substr(0, uid.length - 1)
+    }
+    authToken.uid = uid
+
+    // Test connection and login
+    let remotePosts = new PouchDB(remoteUrl + '/posts')
+    remotePosts.allDocs().then(res => {
+      // connection good
       authToken.fullUrl = remoteUrl
-      cb(authToken)
+      authToken.serverAdmin = false
+
+      // check if server admin
+      let remoteUsers = new PouchDB(remoteUrl + '/_users')
+      remoteUsers.allDocs().then(res => {
+        // user is a server admin
+        authToken.serverAdmin = true
+        cb(authToken)
+      }).catch(err => {
+        // 401 Unauthorized
+        // Means we are not a server admin
+        // so just return what we got and ignore the error
+        authToken.serverAdmin = false
+        console.log(err.message)
+        cb(authToken)
+      })
     }).catch(err => {
+      // bad connection or login
       errcb(err.message)
     })
   },
@@ -52,6 +114,16 @@ export default {
     let remotedb = authToken.fullUrl
     let opts = { live: false, retry: true }
 
+    // if server admin user, then sync _users db as well
+    if (authToken.serverAdmin) {
+      db._usersdb.sync(remotedb + '/_users', opts).then(res => {
+        console.log('Sync _users complete')
+      }).catch(err => {
+        errcb(err)
+      })
+    }
+
+    // sync necessary local dbs with remote dbs
     db.applicationdb.sync(remotedb + '/application', opts).then(res => {
       console.log('Sync application complete')
       db.authorsdb.sync(remotedb + '/authors', opts).then(res => {
@@ -80,7 +152,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.name !== undefined) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -126,7 +198,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.published && !results.rows[i].doc.deleted) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -148,7 +220,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -170,7 +242,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && !results.rows[i].doc.published && !results.rows[i].doc.deleted) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -192,7 +264,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.featured && !results.rows[i].doc.deleted) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -214,7 +286,7 @@ export default {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.deleted) {
-          if (text === null || text.length < 1) {
+          if (text === undefined || text === null || text.length < 1) {
             // empty search, return all
             temp.push(results.rows[i].doc)
           } else {
@@ -272,11 +344,15 @@ export default {
   },
 
   destroy (cb, errcb) {
-    db.applicationdb.destroy().then(res => {
-      db.authorsdb.destroy().then(res => {
-        db.postsdb.destroy().then(res => {
-          db.viewsdb.destroy().then(res => {
-            cb()
+    db._usersdb.destroy().then(res => {
+      db.applicationdb.destroy().then(res => {
+        db.authorsdb.destroy().then(res => {
+          db.postsdb.destroy().then(res => {
+            db.viewsdb.destroy().then(res => {
+              cb()
+            }).catch(err => {
+              errcb(err)
+            })
           }).catch(err => {
             errcb(err)
           })

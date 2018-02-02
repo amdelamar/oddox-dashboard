@@ -14,9 +14,9 @@
           <i class="icon-spinner9 animated spin"></i><br/>
           <em>Loading...</em>
         </p>
-        <p class="super-center text-center animated fadeIn" v-if="status.length > 0">
+        <p class="super-center text-center animated fadeIn" v-if="message.length > 0">
           <i class="icon-notification text-red text-largest"></i><br/>
-          <em class="text-red text-bold">{{ status }}</em>
+          <em class="text-red text-bold">{{ message }}</em>
         </p>
 
       </div>
@@ -30,13 +30,12 @@
 import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-
 export default {
   name: 'my-profile',
   data () {
     return {
       loading: true,
-      status: ''
+      message: ''
     }
   },
   components: {
@@ -44,8 +43,7 @@ export default {
     'app-sidebar': Sidebar
   },
   computed: mapGetters({
-    authToken: 'getAuthToken',
-    author: 'getCurrentAuthor'
+    authToken: 'getAuthToken'
   }),
   created () {
     this.getProfile()
@@ -58,7 +56,7 @@ export default {
       }).catch(err => {
         // failed logout
         console.log(err)
-        this.status = err.message
+        this.message = err.message
       })
     }
   }

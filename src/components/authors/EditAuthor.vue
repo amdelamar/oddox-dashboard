@@ -9,7 +9,7 @@
       <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cog"></i></button>
     </div>
     <div class="eight columns padding text-right" v-if="author !== null">
-      <code v-if="status.length > 0">{{ status }}</code>&nbsp;
+      <code v-if="message.length > 0">{{ message }}</code>&nbsp;
       <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
       <button class="button" v-on:click="close">Cancel</button>
     </div>
@@ -21,9 +21,9 @@
       <i class="icon-spinner9 animated spin"></i><br/>
       <em>Loading...</em>
     </p>
-    <p class="super-center text-center animated fadeIn" v-if="author === null && status.length > 0">
+    <p class="super-center text-center animated fadeIn" v-if="author === null && message.length > 0">
       <i class="icon-notification text-red text-largest"></i><br/>
-      <em class="text-red text-bold">{{ status }}</em>
+      <em class="text-red text-bold">{{ message }}</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="author !== null && !loading">
@@ -171,7 +171,7 @@ export default {
       author: {},
       newFlag: false,
       tab: 0,
-      status: '',
+      message: '',
       loading: true,
       preview: false,
       bold: false
@@ -195,7 +195,7 @@ export default {
           this.author = JSON.parse(JSON.stringify(this.currentAuthor))
         }).catch((err) => {
           this.loading = false
-          this.status = err
+          this.message = err.message
         })
       } else {
         // new author
@@ -215,7 +215,7 @@ export default {
           }
         }).catch((err) => {
           this.loading = false
-          this.status = err
+          this.message = err.message
         })
       }
     },
@@ -232,7 +232,7 @@ export default {
     save () {
       if (this.author._id.length < 1 || this.author.name.length < 1) {
         // can't save new author
-        this.status = 'Enter Username before Saving'
+        this.message = 'Enter Username before Saving'
         return
       }
 
@@ -241,10 +241,10 @@ export default {
 
       this.$store.dispatch('updateAuthor', this.author).then(() => {
         console.log('saved author')
-        this.status = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
       }).catch((err) => {
         console.log(err)
-        this.status = err.message
+        this.message = err.message
       })
     },
     destroy () {
@@ -257,13 +257,13 @@ export default {
         this.$store.dispatch('deleteAuthor', this.currentAuthor).then(() => {
           this.author = null
           console.log('deleted author')
-          this.status = 'Author was deleted'
+          this.message = 'Author was deleted'
           setTimeout(() => {
             this.$router.push('/author')
           }, 2500)
         }).catch((err) => {
           console.log(err)
-          this.status = err.message
+          this.message = err.message
         })
       }
     }

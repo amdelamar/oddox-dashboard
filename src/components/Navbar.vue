@@ -17,7 +17,10 @@
         </div>
 
         <div class="nav-group nav-large-menu">
-          <span class="nav-item text-capitalize" v-if="status.length > 0 || message.length > 0"><code>{{ message }}{{ status }}</code></span>
+          <span class="nav-item text-capitalize"
+            v-if="(syncError !== null && syncError.message !== undefined && syncError.message.length > 0) || syncTime.length > 0">
+            <code>{{ moment(this.syncTime).format() }}{{ syncError.message }}</code>
+          </span>
 
           <button class="button hover-shadow" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
 
@@ -47,7 +50,6 @@ export default {
   data () {
     return {
       title: 'Dashboard',
-      message: '',
       syncButton: 'Sync Now',
       iconSpin: false,
       disableFlag: false
@@ -57,36 +59,34 @@ export default {
     isInitialized: 'isInitialized',
     appConfig: 'getAppConfig',
     authToken: 'getAuthToken',
-    status: 'getSyncError',
+    syncError: 'getSyncError',
     syncTime: 'getSyncTime'
   }),
   created () {
     if (!this.isInitialized) {
+      // just a double check
       this.$store.dispatch('initialize')
     }
-    if (this.syncTime !== null) {
-      this.message = 'Synced ' + moment(this.syncTime).fromNow()
-    }
     if (this.appConfig !== null && this.appConfig.settings.name !== null) {
+      // replace 'Dashboard' with blog name
       this.title = this.appConfig.settings.name
     }
   },
   methods: {
     sync () {
       console.log('Syncing...')
-      this.message = ''
       this.syncButton = 'Syncing...'
       this.disableFlag = true
       this.iconSpin = true
       this.$store.dispatch('synchronize').then(result => {
         // on successful sync
-        console.log('Syncrhonized at ' + moment(this.syncTime).format())
-        this.message = 'Synced ' + moment(this.syncTime).fromNow()
+        console.log('Synchronized at ' + moment(this.syncTime).format())
         this.syncButton = 'Synced'
         this.iconSpin = false
         this.$store.dispatch('loadAppConfig')
-        this.$store.dispatch('allPosts')
-        this.$store.dispatch('allAuthors')
+        this.$store.dispatch('searchPosts')
+        this.$store.dispatch('searchAllAuthors')
+
         // delay for a second
         setTimeout(() => {
           this.disableFlag = false
@@ -94,7 +94,7 @@ export default {
         }, 5000)
       }).catch(err => {
         // failed login
-        console.log(err)
+        console.log('Sync Failed: ' + err.message)
         this.disableFlag = false
         this.iconSpin = false
         this.syncButton = 'Sync Now'

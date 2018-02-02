@@ -5,7 +5,7 @@
 
   <div class="row section padding-top-large">
     <div id="login-dialog" class="padding-large shadow border round background-solid-white animated fadeIn">
-      <h3 class="text-center">{{ title }}</h3>
+      <h3 class="text-center">Login</h3>
 
       <form v-on:submit="login">
       <div class="row">
@@ -67,9 +67,8 @@ export default {
   },
   data () {
     return {
-      title: 'Login',
       authToken: {
-        url: 'https://localhost:6984/',
+        url: 'https://127.0.0.1:6984/',
         username: '',
         password: ''
       },
@@ -129,17 +128,18 @@ export default {
         }
         this.$store.dispatch('login', this.authToken).then(result => {
           // successful login
+          console.log(result)
+          console.log('Initializing databases...')
           this.$store.dispatch('initialize').then(result2 => {
             // successful initialize
             console.log(result2)
-            console.log(result)
-            this.message = result
             this.disableLogin = false
+            this.message = result
             this.$router.push('/post')
           }).catch(err2 => {
             // failed initialize
             console.log(err2)
-            this.message = err2
+            this.message = err2.message
             this.authToken.password = ''
             this.disableLogin = false
 
@@ -151,7 +151,7 @@ export default {
         }).catch(err => {
           // failed login
           console.log(err)
-          this.message = err
+          this.message = err.message
           this.authToken.password = ''
           this.disableLogin = false
 
