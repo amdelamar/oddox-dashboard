@@ -31,11 +31,11 @@ const mustBeServerAdmin = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
     console.log('User is not logged in. Redirecting to login page.')
     next('/login')
-  } else if (!store.getters.getAuthToken.serverAdmin) {
+  } else if (store.getters.getAuthToken.serverAdmin) {
+    next()
+  } else {
     console.log('Unauthorized. You are not a server administrator.')
     next('/unauthorized')
-  } else {
-    next()
   }
 }
 

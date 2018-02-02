@@ -10,7 +10,7 @@
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="message.length > 0">{{ message }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;{{ newFlag ? 'Create' : 'Save' }}</button>
       <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>
       <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-if="!newFlag" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>
       <button class="button" v-on:click="close">Cancel</button>
@@ -275,8 +275,15 @@ export default {
       this.post.modifyDate = new Date().toJSON()
 
       this.$store.dispatch('updatePost', this.post).then(() => {
-        console.log('Saved post')
-        this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        // check if creating new post
+        if (this.newFlag) {
+          console.log('Created post: ' + this.post._id)
+          this.message = 'Created (' + moment(this.syncTime).fromNow() + ')'
+          this.newFlag = false
+        } else {
+          console.log('Saved post: ' + this.post._id)
+          this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        }
       }).catch((err) => {
         console.log(err)
         this.message = err.message
@@ -298,8 +305,8 @@ export default {
 
       if (confirm('Are you sure you want to delete this post?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('deletePost', this.currentPost).then(() => {
+          console.log('Deleted post: ' + this.post._id)
           this.post = null
-          console.log('deleted post')
           this.message = 'Post was deleted'
           setTimeout(() => {
             this.$router.push('/post')

@@ -10,7 +10,7 @@
     </div>
     <div class="eight columns padding text-right" v-if="author !== null">
       <code v-if="message.length > 0">{{ message }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;Save</button>
+      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;{{ newFlag ? 'Create' : 'Save' }}</button>
       <button class="button" v-on:click="close">Cancel</button>
     </div>
   </div>
@@ -202,10 +202,12 @@ export default {
           // console.log('Authorized: Server admin can edit other users.')
           return true
         }
-      } else if (!this.authToken.serverAdmin) {
+      } else if (this.authToken.serverAdmin) {
         // only server admins can create new authors
-        return false
+        return true
       }
+      console.log('Unauthorized. You are not a server administrator.')
+      return false
     },
     read () {
       // quick access check
@@ -256,18 +258,44 @@ export default {
       }
     },
     save () {
-      if (this.author._id.length < 1 || this.author.name.length < 1) {
+      if (this.author._id.length < 1) {
         // can't save new author
         this.message = 'Enter Username before Saving'
+        this.setTab(2)
         return
+      }
+      if (this.author.name.length < 1) {
+        this.author.name = 'Anonymous'
       }
 
       // get time ISO-8601
       this.author.modifyDate = new Date().toJSON()
 
       this.$store.dispatch('updateAuthor', this.author).then(() => {
-        console.log('saved author')
-        this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        // check if creating new author
+        if (this.newFlag) {
+          // create new user also
+          let newUser = {
+            _id: 'org.couchdb.user:' + this.author._id,
+            name: this.author._id,
+            roles: [
+              'author'
+            ],
+            type: 'user',
+            password: 'oddox' /* default password */
+          }
+          this.$store.dispatch('updateUser', newUser).then(() => {
+            console.log('Created author & user: ' + this.author._id)
+            this.message = 'Created (' + moment(this.syncTime).fromNow() + ')'
+            this.newFlag = false
+          }).catch((err) => {
+            console.log(err)
+            this.message = err.message
+          })
+        } else {
+          console.log('Saved author: ' + this.author._id)
+          this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        }
       }).catch((err) => {
         console.log(err)
         this.message = err.message
@@ -281,8 +309,8 @@ export default {
 
       if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
         this.$store.dispatch('deleteAuthor', this.currentAuthor).then(() => {
+          console.log('Deleted author: ' + this.author._id)
           this.author = null
-          console.log('deleted author')
           this.message = 'Author was deleted'
           setTimeout(() => {
             this.$router.push('/author')

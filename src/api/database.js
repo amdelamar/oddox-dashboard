@@ -21,7 +21,7 @@ export default {
     // if server admin user, then create _users db as well
     if (authToken.serverAdmin) {
       db._usersdb = new PouchDB(uniqueIdentifer + '-_users')
-      if (db._usersdb !== null) {
+      if (db._usersdb == null) {
         errcb('Failed to create local _users database. [ERRDBU]')
       }
     }
@@ -185,8 +185,24 @@ export default {
     })
   },
 
+  updateUser (user, cb, errcb) {
+    db._usersdb.put(user).then(result => {
+      cb(result)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
   deleteAuthor (author, cb, errcb) {
     db.authorsdb.remove(author).then(result => {
+      cb(result)
+    }).catch(err => {
+      errcb(err)
+    })
+  },
+
+  deleteUser (user, cb, errcb) {
+    db._usersdb.remove(user).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err)

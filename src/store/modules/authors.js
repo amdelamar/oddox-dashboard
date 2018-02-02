@@ -55,10 +55,30 @@ const actions = {
     })
   },
 
+  updateUser ({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      database.updateUser(data, user => {
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+
   deleteAuthor ({ commit }, data) {
     return new Promise((resolve, reject) => {
       database.deleteAuthor(data, author => {
         commit(types.SET_AUTHOR, null)
+        resolve()
+      }, err => {
+        reject(err)
+      })
+    })
+  },
+
+  deleteUser ({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      database.deleteUser(data, user => {
         resolve()
       }, err => {
         reject(err)

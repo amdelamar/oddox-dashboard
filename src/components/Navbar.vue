@@ -27,7 +27,10 @@
           <a href="javascript: void(0)" class="button dropdown hover-shadow margin-left"><i class="icon-user"></i>&nbsp;&#9662;
             <div class="dropdown-body round border nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
-                Welcome <span class="text-bold">{{ authToken.username }}</span>
+                Welcome <span class="text-bold" title="This is your username">{{ authToken.username }}</span><br/>
+                <small title="This is your role">
+                  <code>{{ authToken.serverAdmin ? 'Admin' : 'Author' }}</code><i class="icon-question"></i>
+                </small>
               </div>
 
               <router-link :to="{name:'my-profile'}" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
