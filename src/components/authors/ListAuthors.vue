@@ -5,6 +5,27 @@
       <div class="row padding">
         <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />
         <button class="button button-small margin-left border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+
+        <div class="right margin-left">
+        <span class="button button-small dropdown border-none background-solid-grey hover-shadow">&#9662;
+          <div class="dropdown-body padding border round text-left background-solid-white">
+            <span class="text-darkgrey">View Options</span>
+            <hr class="margin"/>
+
+            <input type="radio" group="size" id="comfort" v-model="option.mode" value="0" />
+            <label for="comfort"><span class="text-small">Comfortable Size</span></label>
+            <input type="radio" group="size" id="compact" v-model="option.mode" value="1" />
+            <label for="compact"><span class="text-small">Compact Size</span></label>
+            <hr class="margin"/>
+
+            <input type="checkbox" id="showDesc" v-model="option.showDesc" />
+            <label for="showDesc"><span class="text-small"><i class="icon-eye"></i>&nbsp;Show Descriptions</span></label>
+            <input type="checkbox" id="showUser" v-model="option.showUser" />
+            <label for="showUser"><span class="text-small"><i class="icon-star-full"></i>&nbsp;Show Username</span></label>
+
+          </div>
+        </span>
+        </div>
         <button class="button button-blue button-blue-outline right" v-on:click="newAuthor"><i class="icon-plus"></i>&nbsp;New</button>
       </div>
     </div>
@@ -23,9 +44,14 @@
 
       <div v-for="author in authors" class="author-item" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
         <router-link :to="{ name:'view-author', params:{ id:author._id }}">
-          <div class="row padding border-bottom margin-none">
-            <p class="margin-none text-nowrap">{{ author.name | shorten(45) }}</p>
-            <span class="text-small text-nowrap">{{ author.description | shorten(60) }}</span>
+          <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
+            <p class="margin-none text-nowrap">
+              {{ author.name | shorten(45) }}<br/>
+              <span v-if="option.showDesc" class="text-small text-nowrap">{{ author.description | shorten(60) }}<br/></span>
+              <span v-if="option.showUser" class="text-small text-nowrap" title="username">
+                <code>{{ author._id || '?' }}</code>
+              </span>
+            </p>
           </div>
         </router-link>
       </div>
@@ -41,6 +67,10 @@ export default {
   data () {
     return {
       text: '',
+      option: {
+        mode: 0,
+        showDesc: true
+      },
       message: ''
     }
   },
@@ -90,8 +120,11 @@ export default {
 #author-list .author-item.active {
   background: var(--blue);
 }
+#author-list .author-item.active code {
+  background: transparent;
+}
 #author-list .author-item.active, #author-list .author-item.active a {
-  color: #FFFFFF;
+  color: var(--white);
 }
 #author-list .author-item:hover {
   background: var(--light-grey);

@@ -29,8 +29,8 @@
           <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
         </p>
         <p class="four columns">
-          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || 'none' }}</code><br/>
-          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag || 'none' }}</code><br/>
+          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || ' ' }}</code><br/>
+          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag || ' ' }}</code><br/>
         </p>
         <p class="four columns">
           <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
