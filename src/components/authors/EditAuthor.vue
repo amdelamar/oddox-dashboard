@@ -178,6 +178,7 @@ export default {
     }
   },
   computed: mapGetters({
+    authToken: 'getAuthToken',
     currentAuthor: 'getCurrentAuthor'
   }),
   created () {
@@ -187,7 +188,32 @@ export default {
     '$route': 'read'
   },
   methods: {
+    accessCheck () {
+      if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
+        // is user trying to edit themselves?
+        if (this.$route.params.id === this.authToken.username) {
+          // console.log('Authorized: User can edit themselves.')
+          return true
+        } else if (!this.authToken.serverAdmin) {
+          // only server admins can edit other authors
+          console.log('Unauthorized. User cannot edit other users.')
+          return false
+        } else if (this.authToken.serverAdmin) {
+          // console.log('Authorized: Server admin can edit other users.')
+          return true
+        }
+      } else if (!this.authToken.serverAdmin) {
+        // only server admins can create new authors
+        return false
+      }
+    },
     read () {
+      // quick access check
+      if (!this.accessCheck()) {
+        this.$router.push('/unauthorized')
+        return
+      }
+      // load author if possible
       if (this.$route.params.id !== null && this.$route.params.id !== undefined) {
         // edit author
         this.$store.dispatch('setCurrentAuthor', this.$route.params.id).then(() => {
