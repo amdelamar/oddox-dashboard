@@ -12,6 +12,7 @@ import Settings from '@/views/Settings'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/error/404'
+import Unauthorized from '@/views/error/401'
 
 Vue.use(Router)
 
@@ -23,6 +24,19 @@ const mustBeAuthenticated = (to, from, next) => {
   }
   console.log('User is not logged in. Redirecting to login page.')
   next('/login')
+}
+
+// Error for users trying to access a server admin feature.
+const mustBeServerAdmin = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    console.log('User is not logged in. Redirecting to login page.')
+    next('/login')
+  } else if (!store.getters.getAuthToken.serverAdmin) {
+    console.log('Unauthorized. You are not a server administrator.')
+    next('/unauthorized')
+  } else {
+    next()
+  }
 }
 
 export default new Router({
@@ -149,7 +163,7 @@ export default new Router({
       path: '/new-author',
       name: 'new-author',
       component: EditAuthor,
-      beforeEnter: mustBeAuthenticated
+      beforeEnter: mustBeServerAdmin
     },
     {
       path: '/edit-author',
@@ -186,8 +200,13 @@ export default new Router({
       component: Logout
     },
     {
+      path: '/unauthorized',
+      name: '401',
+      component: Unauthorized
+    },
+    {
       path: '*',
-      name: 'error',
+      name: '404',
       component: NotFound
     }
   ]
