@@ -271,7 +271,7 @@ export default {
       // get time ISO-8601
       this.author.modifyDate = new Date().toJSON()
 
-      this.$store.dispatch('updateAuthor', this.author).then(() => {
+      this.$store.dispatch('updateAuthor', this.author).then((result) => {
         // check if creating new author
         if (this.newFlag) {
           // create new user also
@@ -287,6 +287,9 @@ export default {
           this.$store.dispatch('updateUser', newUser).then(() => {
             console.log('Created author & user: ' + this.author._id)
             this.message = 'Created (' + moment(this.syncTime).fromNow() + ')'
+            // retrieve new _id and _rev
+            this.author._id = result.id
+            this.author._rev = result.rev
             this.newFlag = false
           }).catch((err) => {
             console.log(err)
@@ -295,6 +298,9 @@ export default {
         } else {
           console.log('Saved author: ' + this.author._id)
           this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+          // retrieve new _id and _rev
+          this.author._id = result.id
+          this.author._rev = result.rev
         }
       }).catch((err) => {
         console.log(err)
@@ -306,15 +312,46 @@ export default {
         // can't delete new author
         return
       }
+      let warnDelete = 'Are you sure you want to delete this author?\nIt cannot be undone if you do.'
+      if (this.author._id === this.authToken.username) {
+        warnDelete = 'Are you sure you want to delete your account?\nIt cannot be undone and you will be immediately logged out.'
+      }
 
-      if (confirm('Are you sure you want to delete this author?\nIt cannot be undone if you do.')) {
+      if (confirm(warnDelete)) {
         this.$store.dispatch('deleteAuthor', this.currentAuthor).then(() => {
-          console.log('Deleted author: ' + this.author._id)
-          this.author = null
-          this.message = 'Author was deleted'
-          setTimeout(() => {
-            this.$router.push('/author')
-          }, 2500)
+          // remove by id
+          let userid = 'org.couchdb.user:' + this.author._id
+          // this is a special remove.
+          // It removes a doc with just the _id and not _rev.
+          // Reason for this is, we don't want to bother opening and reading
+          // each user doc everytime we make simple edits to authors profile.
+          this.$store.dispatch('deleteUser', userid).then(() => {
+            console.log('Deleted author: ' + this.author._id)
+            if (this.author._id === this.authToken.username) {
+              // Logout
+              // user deleted themselves
+              console.log('Logging out...')
+              this.$store.dispatch('logout').then(result => {
+                // on successful logout
+                console.log('Logged out.')
+                this.$router.push('/logout')
+              }).catch(err => {
+                // failed logout
+                console.log(err)
+              })
+            } else {
+              // else
+              // server admin deleted user
+              this.author = null
+              this.message = 'Author was deleted'
+              setTimeout(() => {
+                this.$router.push('/author')
+              }, 2500)
+            }
+          }).catch((err) => {
+            console.log(err)
+            this.message = err.message
+          })
         }).catch((err) => {
           console.log(err)
           this.message = err.message

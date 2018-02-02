@@ -274,7 +274,7 @@ export default {
       // get time ISO-8601
       this.post.modifyDate = new Date().toJSON()
 
-      this.$store.dispatch('updatePost', this.post).then(() => {
+      this.$store.dispatch('updatePost', this.post).then((result) => {
         // check if creating new post
         if (this.newFlag) {
           console.log('Created post: ' + this.post._id)
@@ -284,6 +284,9 @@ export default {
           console.log('Saved post: ' + this.post._id)
           this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
         }
+        // retrieve new _id and _rev
+        this.post._id = result.id
+        this.post._rev = result.rev
       }).catch((err) => {
         console.log(err)
         this.message = err.message

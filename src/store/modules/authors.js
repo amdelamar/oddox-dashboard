@@ -48,7 +48,7 @@ const actions = {
   updateAuthor ({ commit }, data) {
     return new Promise((resolve, reject) => {
       database.updateAuthor(data, author => {
-        resolve()
+        resolve(author)
       }, err => {
         reject(err)
       })

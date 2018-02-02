@@ -201,9 +201,13 @@ export default {
     })
   },
 
-  deleteUser (user, cb, errcb) {
-    db._usersdb.remove(user).then(result => {
-      cb(result)
+  deleteUser (userid, cb, errcb) {
+    db._usersdb.get(userid).then(result1 => {
+      db._usersdb.remove(result1).then(result2 => {
+        cb(result2)
+      }).catch(err => {
+        errcb(err)
+      })
     }).catch(err => {
       errcb(err)
     })

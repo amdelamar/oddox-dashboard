@@ -96,7 +96,7 @@ const actions = {
   updatePost ({ commit }, data) {
     return new Promise((resolve, reject) => {
       database.updatePost(data, post => {
-        resolve()
+        resolve(post)
       }, err => {
         reject(err)
       })
