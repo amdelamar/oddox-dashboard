@@ -22,7 +22,8 @@
             <label for="showDesc"><span class="text-small"><i class="icon-eye"></i>&nbsp;Show Descriptions</span></label>
             <input type="checkbox" id="showUser" v-model="option.showUser" />
             <label for="showUser"><span class="text-small"><i class="icon-star-full"></i>&nbsp;Show Username</span></label>
-
+            <input type="checkbox" id="showRole" v-model="option.showRole" />
+            <label for="showRole"><span class="text-small"><i class="icon-star-full"></i>&nbsp;Show Role</span></label>
           </div>
         </span>
         </div>
@@ -51,6 +52,10 @@
               <span v-if="option.showUser" class="text-small text-nowrap" title="username">
                 <code>{{ author._id || '?' }}</code>
               </span>
+              <span v-if="option.showUser && option.showRole" class="text-grey">&nbsp;|&nbsp;</span>
+              <span v-if="option.showRole" class="text-small text-nowrap" title="role">
+                <code>{{ author.role || '?' }}</code>
+              </span>
             </p>
           </div>
         </router-link>
@@ -69,7 +74,9 @@ export default {
       text: '',
       option: {
         mode: 0,
-        showDesc: true
+        showDesc: true,
+        showUser: false,
+        showRole: false
       },
       message: ''
     }

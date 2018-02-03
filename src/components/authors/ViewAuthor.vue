@@ -24,7 +24,7 @@
       <p class="padding-bottom-large left">
         <i class="icon-user"></i>&nbsp;Username: <code>{{ author._id }}</code><br/>
         <i class="icon-envelop"></i>&nbsp;Email: <code>{{ author.email }}</code><br/>
-        <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.roleId }}</code>
+        <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.role }}</code>
       </p>
       <p class="padding-bottom-large right">
         <i class="icon-clock"></i>&nbsp;Created: <code>{{ author.createDate || 'null' }}</code><br/>

@@ -115,11 +115,9 @@
           </div>
           <div class="six columns">
             <label for="role"><i class="icon-clipboard"></i>&nbsp;Role</label>
-            <select id="role" class="" v-model="author.roleId">
-              <option value="owner">Owner</option>
+            <select id="role" class="" v-model="author.role" :disabled="!authToken.serverAdmin">
               <option value="admin">Admin</option>
               <option value="author">Author</option>
-              <option value="editor">Editor</option>
             </select>
           </div>
         </div>
@@ -234,7 +232,7 @@ export default {
             _id: '',
             name: '',
             email: '',
-            roleId: '',
+            role: 'author',
             createDate: new Date().toJSON(),
             modifyDate: '',
             thumbnail: '',
@@ -278,14 +276,16 @@ export default {
           let newUser = {
             _id: 'org.couchdb.user:' + this.author._id,
             name: this.author._id,
-            roles: [
-              'author'
-            ],
+            roles: [ this.author.role ],
             type: 'user',
             password: 'oddox' /* default password */
           }
           this.$store.dispatch('updateUser', newUser).then(() => {
-            console.log('Created author & user: ' + this.author._id)
+            if (this.author.role === 'admin') {
+              console.log('Created admin: ' + this.author._id)
+            } else {
+              console.log('Created author: ' + this.author._id)
+            }
             this.message = 'Created (' + moment(this.syncTime).fromNow() + ')'
             // retrieve new _id and _rev
             this.author._id = result.id
