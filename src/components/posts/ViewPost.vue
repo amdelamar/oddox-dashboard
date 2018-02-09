@@ -24,13 +24,16 @@
       <div class="row padding-top">
         <p class="four columns">
           <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
+          <i class="icon-users"></i>&nbsp;Co-Authors: <code v-for="coa in post.coauthorIds">{{ coa }}</code><br/>
+          <i class="icon-users"></i>&nbsp;Editors: <code v-for="edt in post.editorIds">{{ edt }}</code><br/>
+          <br/>
           <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
           <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
           <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
         </p>
         <p class="four columns">
-          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || ' ' }}</code><br/>
-          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag || ' ' }}</code><br/>
+          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || 'null' }}</code><br/>
+          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag }}</code><br/>
         </p>
         <p class="four columns">
           <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>

@@ -18,6 +18,8 @@
             <label for="compact"><span class="text-small">Compact Size</span></label>
             <hr class="margin"/>
 
+            <input type="checkbox" id="showThumb" v-model="option.showThumb" />
+            <label for="showThumb"><span class="text-small"><i class="icon-image"></i>&nbsp;Show Profile Picture</span></label>
             <input type="checkbox" id="showDesc" v-model="option.showDesc" />
             <label for="showDesc"><span class="text-small"><i class="icon-eye"></i>&nbsp;Show Descriptions</span></label>
             <input type="checkbox" id="showUser" v-model="option.showUser" />
@@ -47,6 +49,10 @@
         <router-link :to="{ name:'view-author', params:{ id:author._id }}">
           <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
+              <span v-if="option.showThumb" class="text-small text-nowrap" title="profile picture">
+                <img v-if="author.thumbnail.length > 0" class="left margin-right background-solid-white circle border" height="25" width="25" alt="" :src="author.thumbnail" />
+                <div v-if="author.thumbnail.length == 0" class="left margin-right background-solid-white circle border" style="height:25px;width:25px"></div>
+              </span>
               {{ author.name | shorten(45) }}<br/>
               <span v-if="option.showDesc" class="text-small text-nowrap">{{ author.description | shorten(60) }}<br/></span>
               <span v-if="option.showUser" class="text-small text-nowrap" title="username">
@@ -75,6 +81,7 @@ export default {
       option: {
         mode: 0,
         showDesc: true,
+        showThumb: true,
         showUser: false,
         showRole: false
       },

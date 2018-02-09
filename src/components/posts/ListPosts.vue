@@ -49,7 +49,7 @@
         <router-link :to="{ name:'view-post', params:{ id:post._id }}">
           <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
-              <span v-if="option.showStar && post.featured" class="icon-star-full right"></span>
+              <span v-if="option.showStar && post.featured" class="icon-star-full right margin-right"></span>
               {{ post.title | shorten(45) }}<br/>
               <span v-if="option.showDesc" class="text-small text-nowrap">{{ post.description | shorten(60) }}<br/></span>
               <span v-if="option.showCat" class="text-small text-nowrap" title="category">
@@ -79,7 +79,7 @@ export default {
       option: {
         mode: 0,
         showDesc: true,
-        showStar: false,
+        showStar: true,
         showCat: false,
         showTags: false
       },

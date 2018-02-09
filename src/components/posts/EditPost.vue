@@ -146,6 +146,10 @@
         <div class="row padding-top">
           <p class="six columns">
             <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
+            <i class="icon-users"></i>&nbsp;Co-Authors: <code v-for="coa in post.coauthorIds">{{ coa }}</code><br/>
+            <i class="icon-users"></i>&nbsp;Editors: <code v-for="edt in post.editorIds">{{ edt }}</code><br/>
+            <br/>
+            <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
             <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
             <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
           </p>
@@ -216,6 +220,8 @@ export default {
             _id: '',
             title: '',
             authorId: this.authToken.username,
+            coauthorIds: [],
+            editorIds: [],
             category: '',
             tags: [],
             featured: false,

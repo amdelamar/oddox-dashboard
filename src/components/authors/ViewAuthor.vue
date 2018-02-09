@@ -22,9 +22,9 @@
       <div v-html="author.content"></div>
       <hr/>
       <p class="padding-bottom-large left">
-        <i class="icon-user"></i>&nbsp;Username: <code>{{ author._id }}</code><br/>
-        <i class="icon-envelop"></i>&nbsp;Email: <code>{{ author.email }}</code><br/>
-        <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.role }}</code>
+        <i class="icon-user"></i>&nbsp;Username: <code>{{ author._id || 'null' }}</code><br/>
+        <i class="icon-envelop"></i>&nbsp;Email: <code>{{ author.email || 'null' }}</code><br/>
+        <i class="icon-price-tag"></i>&nbsp;Role: <code>{{ author.role || 'author' }}</code>
       </p>
       <p class="padding-bottom-large right">
         <i class="icon-clock"></i>&nbsp;Created: <code>{{ author.createDate || 'null' }}</code><br/>
