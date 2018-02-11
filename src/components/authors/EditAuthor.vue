@@ -39,53 +39,8 @@
           <textarea id="desc" class="full-width" placeholder="A short description about me..." v-model="author.description"></textarea>
         </div>
         <div class="row padding-top">
-          <label for="cont">About Me / Long Description</label>
-          <div class="editor full-width">
-            <div class="editor-toolbar full-width">
-                <select id="fontFamily">
-                  <option value="Arial">Arial</option>
-                  <option value="Helvetica">Helvetica</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Consolas">Consolas</option>
-                  <option value="Courier New">Courier New</option>
-                  <option value="Roboto">Roboto</option>
-                </select>
-                <select id="fontSize">
-                  <option value="8pt">8pt</option>
-                  <option value="10pt">10pt</option>
-                  <option value="12pt">12pt</option>
-                  <option value="14pt">14pt</option>
-                  <option value="16pt">16pt</option>
-                  <option value="18pt">18pt</option>
-                  <option value="24pt">24pt</option>
-                  <option value="36pt">36pt</option>
-                  <option value="48pt">48pt</option>
-                  <option value="64pt">64pt</option>
-                  <option value="72pt">72pt</option>
-                </select>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button" :class="{'active':bold}" v-on:click="bold = !bold"><i class="icon-bold"></i></button>
-                <button class="button"><i class="icon-italic"></i></button>
-                <button class="button"><i class="icon-underline"></i></button>
-                <button class="button"><i class="icon-strikethrough"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-paragraph-left"></i></button>
-                <button class="button"><i class="icon-paragraph-center"></i></button>
-                <button class="button"><i class="icon-paragraph-right"></i></button>
-                <button class="button"><i class="icon-indent-increase"></i></button>
-                <button class="button"><i class="icon-indent-decrease"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-list-numbered"></i></button>
-                <button class="button"><i class="icon-list"></i></button>
-                <button class="button"><i class="icon-table"></i></button>
-                <button class="button"><i class="icon-image"></i></button>
-                <button class="button"><i class="icon-link"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-superscript"></i></button>
-                <button class="button"><i class="icon-subscript"></i></button>
-            </div>
-            <textarea id="content" class="editor-textbox full-width" style="height:30rem;" v-model="author.content" placeholder="<p>\nA few paragraphs about me...\n</p>"></textarea>
-          </div>
+          <label>About Me / Long Description</label>
+          <ckeditor v-model="author.content"></ckeditor>
         </div>
       </div>
       <div class="row full-height" v-if="tab == 1">
@@ -160,10 +115,14 @@
 </template>
 
 <script>
+import CKEditor from '@/components/CKEditor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
   name: 'author-edit',
+  components: {
+    'ckeditor': CKEditor
+  },
   data () {
     return {
       author: {},
@@ -171,8 +130,7 @@ export default {
       tab: 0,
       message: '',
       loading: true,
-      preview: false,
-      bold: false
+      preview: false
     }
   },
   computed: mapGetters({

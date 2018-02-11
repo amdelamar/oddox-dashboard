@@ -36,55 +36,9 @@
           <label for="title">Title</label>
           <input type="text" id="title" class="full-width text-medium" v-model="post.title" v-on:keyup="createUri()" />
         </div>
-
         <div class="row">
-          <label for="content">Content</label>
-          <div class="editor full-width">
-            <div class="editor-toolbar full-width">
-                <select id="fontFamily">
-                  <option value="Arial">Arial</option>
-                  <option value="Helvetica">Helvetica</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Consolas">Consolas</option>
-                  <option value="Courier New">Courier New</option>
-                  <option value="Roboto">Roboto</option>
-                </select>
-                <select id="fontSize">
-                  <option value="8pt">8pt</option>
-                  <option value="10pt">10pt</option>
-                  <option value="12pt">12pt</option>
-                  <option value="14pt">14pt</option>
-                  <option value="16pt">16pt</option>
-                  <option value="18pt">18pt</option>
-                  <option value="24pt">24pt</option>
-                  <option value="36pt">36pt</option>
-                  <option value="48pt">48pt</option>
-                  <option value="64pt">64pt</option>
-                  <option value="72pt">72pt</option>
-                </select>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button" :class="{'active':bold}" v-on:click="bold = !bold"><i class="icon-bold"></i></button>
-                <button class="button"><i class="icon-italic"></i></button>
-                <button class="button"><i class="icon-underline"></i></button>
-                <button class="button"><i class="icon-strikethrough"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-paragraph-left"></i></button>
-                <button class="button"><i class="icon-paragraph-center"></i></button>
-                <button class="button"><i class="icon-paragraph-right"></i></button>
-                <button class="button"><i class="icon-indent-increase"></i></button>
-                <button class="button"><i class="icon-indent-decrease"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-list-numbered"></i></button>
-                <button class="button"><i class="icon-list"></i></button>
-                <button class="button"><i class="icon-table"></i></button>
-                <button class="button"><i class="icon-image"></i></button>
-                <button class="button"><i class="icon-link"></i></button>
-                <span class="border-left margin-left margin-right"></span>
-                <button class="button"><i class="icon-superscript"></i></button>
-                <button class="button"><i class="icon-subscript"></i></button>
-            </div>
-            <textarea id="content" class="editor-textbox full-width" style="height:30rem;" v-model="post.content" placeholder="<p>Begin writing here...</p>"></textarea>
-          </div>
+          <label>Content</label>
+          <ckeditor v-model="post.content"></ckeditor>
         </div>
       </div>
       <div class="row full-height" v-if="tab == 1">
@@ -176,10 +130,14 @@
 </template>
 
 <script>
+import CKEditor from '@/components/CKEditor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
   name: 'post-edit',
+  components: {
+    'ckeditor': CKEditor
+  },
   data () {
     return {
       post: {},
@@ -187,8 +145,7 @@ export default {
       newFlag: false,
       tab: 0,
       loading: true,
-      message: '',
-      bold: false
+      message: ''
     }
   },
   computed: mapGetters({
