@@ -96,7 +96,7 @@
         </div>
         <div class="row padding-top">
           <label for="tags"><i class="icon-price-tag"></i>&nbsp;Tags</label><span class="text-darkgrey">Comma separated list of keywords.</span><br/>
-          <input type="text" id="tags" style="width:50%;min-width:25rem;" v-model="post.tags" />
+          <input type="text" id="tags" style="width:50%;min-width:25rem;" v-model="tags" v-on:keyup="createTags()" />
         </div>
         <div class="row padding-top">
           <label for="desc">Description</label><span class="text-darkgrey">A short one or two sentences to describe your post.</span>
@@ -183,6 +183,7 @@ export default {
   data () {
     return {
       post: {},
+      tags: '',
       newFlag: false,
       tab: 0,
       loading: true,
@@ -207,6 +208,7 @@ export default {
         this.$store.dispatch('setCurrentPost', this.$route.params.id).then(() => {
           this.loading = false
           this.post = JSON.parse(JSON.stringify(this.currentPost))
+          this.tags = this.post.tags.toString()
         }).catch((err) => {
           this.loading = false
           this.message = err.message
@@ -236,6 +238,7 @@ export default {
             description: '',
             content: ''
           }
+          this.tags = ''
         }).catch((err) => {
           this.loading = false
           this.message = err.message
@@ -243,11 +246,27 @@ export default {
       }
     },
     createUri () {
+      // cleanup title to create uri
       let temp = this.post.title.toLowerCase()
       while (temp.indexOf(' ') >= 0) {
         temp = temp.replace(' ', '-')
       }
       this.post._id = temp
+    },
+    createTags () {
+      // cleanup tag input
+      // comma separated, no spaces
+      let temp = this.tags
+      while (temp.indexOf(', ') >= 0) {
+        temp = temp.replace(', ', '-')
+      }
+      while (temp.indexOf(' ') >= 0) {
+        temp = temp.replace(' ', '-')
+      }
+      while (temp.indexOf(',,') >= 0) {
+        temp = temp.replace(',,', ',')
+      }
+      this.tags = temp
     },
     setTab (tabIndex) {
       this.tab = tabIndex
@@ -276,6 +295,9 @@ export default {
         this.message = 'Enter Title before Saving'
         return
       }
+
+      // split tags into array
+      this.post.tags = this.tags.split(',')
 
       // get time ISO-8601
       this.post.modifyDate = new Date().toJSON()
