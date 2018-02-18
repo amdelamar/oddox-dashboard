@@ -49,6 +49,7 @@
             <br/><span class="text-darkgrey">Enter Keywords as a comma-separated list. This is used by search engines to scan your pages.</span><br/><br/>
           </div>
           <div class="row padding-top">
+            <!--
             <div class="four columns">
               <label>Features</label>
               <input type="checkbox" id="c02" value="2" checked="checked" />
@@ -76,19 +77,22 @@
                 <option value="30">30</option>
               </select>
             </div>
+            -->
             <div class="four columns">
               <label for="lastUpdated">Last Updated</label>
-              <input type="date" id="lastUpdated" v-model="appConfig.settings.lastUpdated" />
+              <input type="text" id="lastUpdated" style="width:50%;min-width:20rem;" maxlength="50" placeholder="DD/MM/YYYY" v-model="appConfig.settings.lastUpdated" />
             </div>
           </div>
 
-            <div class="row padding-top padding-bottom text-right">
+            <div class="row padding-top-large padding-bottom-large">
               <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+              &nbsp;<code v-if="message.length > 0">{{ message }}</code>
             </div>
           </div>
 
           <hr class="margin"/>
 
+          <!--
           <div class="row padding-top padding-bottom">
           <h3>Networking</h3>
           <p>Reroute paths to posts/tags/etc, and enable decoupling for deploying you blog alongside existing websites.</p>
@@ -203,7 +207,7 @@
           </div>
 
           <hr class="margin"/>
-
+          -->
           <div class="row padding-top padding-bottom">
           <h3>Danger Zone</h3>
             <p>Careful! These actions may permanently destroy data.</p>
@@ -234,7 +238,7 @@
 import { mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
-
+import moment from 'moment'
 export default {
   name: 'settings',
   components: {
@@ -285,7 +289,21 @@ export default {
       this.$router.push('/post')
     },
     saveChanges () {
-      console.log('Saved Changes.')
+      // get time ISO-8601
+      this.appConfig.settings.modifyDate = new Date().toJSON()
+
+      console.log(this.appConfig)
+
+      this.$store.dispatch('updateAppConfig', this.appConfig).then((result) => {
+        console.log('Saved settings.')
+        this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
+        // retrieve new _id and _rev
+        this.appConfig._id = result.id
+        this.appConfig._rev = result.rev
+      }).catch((err) => {
+        console.log(err)
+        this.message = err.message
+      })
     },
     destroyDatabases () {
       this.message = ''

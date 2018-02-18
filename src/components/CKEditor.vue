@@ -1,5 +1,5 @@
 <template>
-  <textarea name="content" class="ckeditor" :id="id" :value="value" v-on:input="updateValue($event.target.value)"></textarea>
+  <textarea name="content" class="ckeditor" :id="id" :value="value" v-on:change="updateValue($event.target.value)"></textarea>
 </template>
 
 <script>

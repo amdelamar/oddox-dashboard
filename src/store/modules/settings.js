@@ -47,7 +47,7 @@ const actions = {
       } else {
         database.updateAppDoc('APPCONFIG', result => {
           commit(types.SET_APPCONFIG, result)
-          resolve()
+          resolve(result)
         }, err => {
           commit(types.SET_APPCONFIG, null)
           reject(err)
@@ -63,7 +63,7 @@ const actions = {
       } else {
         database.updateAppDoc('APPFIREWALL', result => {
           commit(types.SET_APPFIREWALL, result)
-          resolve()
+          resolve(result)
         }, err => {
           commit(types.SET_APPFIREWALL, null)
           reject(err)
