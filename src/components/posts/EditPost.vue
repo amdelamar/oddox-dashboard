@@ -92,22 +92,31 @@
           <span class="text-darkgrey">Highlight this post amongst the rest. You can change this anytime.</span>
           <br/><br/>
         </div>
+        <div class="row">
+          <label><i class="icon-user"></i>&nbsp;Author&nbsp;<code>{{ post.authorId || '(you)' }}</code></label>
+        </div>
+        <div class="row padding-top">
+          <label for="coauthors"><i class="icon-users"></i>&nbsp;Co-Authors</label><span class="text-darkgrey">Comma separated list of Co-Authors. Leave empty for none.</span><br/>
+          <input type="text" id="coauthors" style="width:50%;min-width:25rem;" v-model="this.coauthors" v-on:keyup="createCoAuthors()" />
+          <br/><span>Co-Authors can edit and make changes to this post, and usually are public and appear next to the Author's name for credit.</span><br/><br/>
+        </div>
+        <div class="row padding-top">
+          <label for="editors"><i class="icon-users"></i>&nbsp;Editors</label><span class="text-darkgrey">Comma separated list of Editors. Leave empty for none.</span><br/>
+          <input type="text" id="editors" style="width:50%;min-width:25rem;" v-model="this.editors" v-on:keyup="createEditors()" />
+          <br/><span>Editors can edit and make changes to this post, but are usually not public.</span><br/><br/>
+        </div>
         <div class="row padding-top">
           <label for="uri"><i class="icon-link"></i>&nbsp;Post path</label>
           <span class="text-darkgrey">https://{{ 'mydomain.com' }}/blog/</span><input type="text" id="uri" :disabled="!newFlag" style="width:25rem;" v-model="post._id" />
-          <br/><span class="text-darkgrey">Post path must be unique. Use lowercase letters, no spaces, no symbols, and try to keep it short.<br/>Once saved, the path cannot be changed later.</span>
+          <br/><span>Post path must be unique. Use lowercase letters, no spaces, no symbols, and try to keep it short.<br/>Once saved, the path cannot be changed later.</span><br/><br/>
         </div>
         <div class="row padding-top">
-          <p class="six columns">
-            <i class="icon-user"></i>&nbsp;Author: <code>{{ post.authorId || '(you)' }}</code><br/>
-            <i class="icon-users"></i>&nbsp;Co-Authors: <code v-for="coa in post.coauthorIds">{{ coa }}</code><br/>
-            <i class="icon-users"></i>&nbsp;Editors: <code v-for="edt in post.editorIds">{{ edt }}</code><br/>
-            <br/>
+          <p class="five columns">
             <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
             <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
             <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
           </p>
-          <p class="six columns">
+          <p class="five columns">
             <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
             <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
             <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
@@ -141,6 +150,8 @@ export default {
   data () {
     return {
       post: {},
+      coauthors: '',
+      editors: '',
       tags: '',
       newFlag: false,
       tab: 0,
@@ -166,6 +177,8 @@ export default {
           this.loading = false
           this.post = JSON.parse(JSON.stringify(this.currentPost))
           this.tags = this.post.tags.toString()
+          this.coauthors = this.post.coauthorIds.toString()
+          this.editors = this.post.editorIds.toString()
         }).catch((err) => {
           this.loading = false
           this.message = err.message
@@ -196,6 +209,8 @@ export default {
             content: ''
           }
           this.tags = ''
+          this.coauthors = ''
+          this.editors = ''
         }).catch((err) => {
           this.loading = false
           this.message = err.message
@@ -209,6 +224,36 @@ export default {
         temp = temp.replace(' ', '-')
       }
       this.post._id = temp
+    },
+    createEditors () {
+      // cleanup editor input
+      // comma separated, no spaces
+      let temp = this.editors
+      while (temp.indexOf(', ') >= 0) {
+        temp = temp.replace(', ', '-')
+      }
+      while (temp.indexOf(' ') >= 0) {
+        temp = temp.replace(' ', '-')
+      }
+      while (temp.indexOf(',,') >= 0) {
+        temp = temp.replace(',,', ',')
+      }
+      this.editors = temp
+    },
+    createCoAuthors () {
+      // cleanup coauthor input
+      // comma separated, no spaces
+      let temp = this.coauthors
+      while (temp.indexOf(', ') >= 0) {
+        temp = temp.replace(', ', '-')
+      }
+      while (temp.indexOf(' ') >= 0) {
+        temp = temp.replace(' ', '-')
+      }
+      while (temp.indexOf(',,') >= 0) {
+        temp = temp.replace(',,', ',')
+      }
+      this.coauthors = temp
     },
     createTags () {
       // cleanup tag input
@@ -255,6 +300,9 @@ export default {
 
       // split tags into array
       this.post.tags = this.tags.split(',')
+      this.post.coauthorIds = this.coauthors.split(',')
+      this.post.editorIds = this.editors.split(',')
+      console.log('Co-Authors: ' + this.post.coauthorIds)
 
       // get time ISO-8601
       this.post.modifyDate = new Date().toJSON()
