@@ -12,17 +12,28 @@ Offline-first dashboard for authors to manage their Oddox blog
 
 ## Usage
 
-Dashboard is a GUI for authors with an [Oddox](https://github.com/oddoxorg/oddox) blog to write, sync, and manage their content.
+Dashboard is a SPA (single page app) for authors with an [Oddox](https://github.com/oddoxorg/oddox) blog to write, sync, and manage their content.
 
-This project is still in development. It is not easily modifiable for "new" blogs, but stay tuned. A self-installing version will be made available once the main features are complete.
+This project is still in development but stay tuned. The first version will be made available once the main features are complete.
 
-Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
+Oddox Dashboard should be included with your deployment of the [server](https://github.com/oddoxorg/oddox). Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
-### Prerequisites
+## Features
 
- * [Node.js 8+](https://nodejs.org/) with [npm](https://www.npmjs.com/get-npm) (Which is included by default).
+ * Offline-first, write post and sync later
+ * Multi-Author blog system with roles. Author, Admin, Co-Authors, and Editors
+ * Organize blog posts by Tags, Categories, Featured, Authors, and Dates
+ * Trash can to recover deleted posts 
 
-### Getting Started
+## Planned Features
+
+ * Mobile app, with Ionic or Cordova?
+ * Desktop app with Electron or Chromium?
+ * Themes (Light / Dark)
+
+## Deployment
+
+For developers, run the commands below to get started.
 
 ``` bash
 # install dependencies
