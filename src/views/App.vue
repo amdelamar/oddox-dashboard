@@ -40,16 +40,16 @@ html, body {
   width: 100%;
 }
 .side-content {
-  width: 26%;
-  margin: 0;
+  width: 26% !important;
+  margin: 0 !important;
 }
 .main-content {
-  width: 60.6666666667%;
-  margin: 0;
+  width: 60.6666666667% !important;
+  margin: 0 !important;
 }
 .full-main-content {
-  width: 86.6666666667%;
-  margin: 0;
+  width: 86.6666666667% !important;
+  margin: 0 !important;
 }
 .text-red {
   color: var(--red);
@@ -118,34 +118,42 @@ input:hover, input:active, input:focus {
   margin: -125px 0 0 -200px;
 }
 .background-solid-theme, hover-background-solid-theme:hover {
-  background-color: #67d9b8;
+  background-color: #67d9b8 !important;
 }
-.background-transparent { background: transparent; }
+.background-transparent { background: transparent !important; }
 .text-capitalize { text-transform: capitalize; }
 .text-lightgrey { color: #fafafa; }
 .text-grey { color: #d3d3d3; }
 .text-darkgrey { color: #8c8c8c; }
 
 .background-solid-white, .hover-background-solid-white:hover {
-  background-color: var(--white);
+  background-color: var(--white) !important;
 }
 .background-solid-lightgrey, .hover-background-solid-lightgrey:hover {
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 .background-solid-grey, .hover-background-solid-grey:hover {
-  background-color: #d3d3d3;
+  background-color: #d3d3d3 !important;
 }
 .background-solid-darkgrey, .hover-background-solid-darkgrey:hover {
-  background-color: #8c8c8c;
+  background-color: #8c8c8c !important;
 }
 .background-gradient-grey, .hover-background-gradient-grey:hover {
-  background-color: unset;
-  background-image: linear-gradient(180deg, var(--white) 50%, #fafafa 100%);
+  background-color: unset !important;
+  background-image: linear-gradient(180deg, var(--white) 50%, #fafafa 100%) !important;
 }
-
-.button-blue-outline { background: transparent; color: var(--blue); }
-.button-red-outline { background: transparent; color: var(--red); }
-.button-green-outline { background: transparent; color: var(--green); }
+.button-blue-outline {
+  background: transparent !important;
+  color: var(--blue) !important;
+}
+.button-red-outline {
+  background: transparent !important;
+  color: var(--red) !important;
+}
+.button-green-outline {
+  background: transparent !important;
+  color: var(--green) !important;
+}
 
 .animated.spin {
   animation-name: spin;

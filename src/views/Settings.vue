@@ -278,11 +278,11 @@ export default {
           this.appFirewall = JSON.parse(JSON.stringify(this.currentAppFirewall))
         }).catch((err) => {
           this.loading = false
-          this.message = err.message
+          this.message = err
         })
       }).catch((err) => {
         this.loading = false
-        this.message = err.message
+        this.message = err
       })
     },
     close () {
@@ -302,7 +302,7 @@ export default {
         this.appConfig._rev = result.rev
       }).catch((err) => {
         console.log(err)
-        this.message = err.message
+        this.message = err
       })
     },
     destroyDatabases () {
