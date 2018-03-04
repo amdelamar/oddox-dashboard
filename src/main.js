@@ -5,12 +5,19 @@ import App from './views/App'
 import Router from './router'
 import store from './store'
 import { shorten } from './filters/shorten'
+
+// Require css framework files
 import './assets/vendor/osseous/1.2.0/osseous.min.css'
 // import './assets/vendor/osseous/1.2.0/osseous.min.js'
 import './assets/vendor/animate/3.5.2/animate.min.css'
 // import './assets/vendor/highlight/9.12.0/highlight.pack.js'
 import './assets/vendor/highlight/9.12.0/styles/default.min.css'
 import './assets/vendor/icomoon/icomoon.min.css'
+
+// Require vue-wysiwyg
+import 'vue-wysiwyg/dist/vueWysiwyg.css'
+import wysiwyg from 'vue-wysiwyg'
+Vue.use(wysiwyg, {})
 
 Vue.config.productionTip = false
 Vue.filter('shorten', shorten)

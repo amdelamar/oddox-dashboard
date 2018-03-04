@@ -38,7 +38,7 @@
         </div>
         <div class="row">
           <label>Content</label>
-          <ckeditor v-model="post.content"></ckeditor>
+          <wysiwyg v-model="post.content" />
         </div>
       </div>
       <div class="row full-height" v-if="tab == 1">
@@ -139,14 +139,10 @@
 </template>
 
 <script>
-import CKEditor from '@/components/CKEditor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
   name: 'post-edit',
-  components: {
-    'ckeditor': CKEditor
-  },
   data () {
     return {
       post: {},

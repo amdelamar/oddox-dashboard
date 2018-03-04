@@ -40,7 +40,7 @@
         </div>
         <div class="row padding-top">
           <label>About Me / Long Description</label>
-          <ckeditor v-model="author.content"></ckeditor>
+          <wysiwyg v-model="author.content" />
         </div>
       </div>
       <div class="row full-height" v-if="tab == 1">
@@ -115,14 +115,10 @@
 </template>
 
 <script>
-import CKEditor from '@/components/CKEditor'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
   name: 'author-edit',
-  components: {
-    'ckeditor': CKEditor
-  },
   data () {
     return {
       author: {},
