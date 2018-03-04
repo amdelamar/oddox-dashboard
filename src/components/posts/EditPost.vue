@@ -97,12 +97,12 @@
         </div>
         <div class="row padding-top">
           <label for="coauthors"><i class="icon-users"></i>&nbsp;Co-Authors</label><span class="text-darkgrey">Comma separated list of Co-Authors. Leave empty for none.</span><br/>
-          <input type="text" id="coauthors" style="width:50%;min-width:25rem;" v-model="this.coauthors" v-on:keyup="createCoAuthors()" />
+          <input type="text" id="coauthors" style="width:50%;min-width:25rem;" v-model="coauthors" v-on:keyup="createCoAuthors()" />
           <br/><span>Co-Authors can edit and make changes to this post, and usually are public and appear next to the Author's name for credit.</span><br/><br/>
         </div>
         <div class="row padding-top">
           <label for="editors"><i class="icon-users"></i>&nbsp;Editors</label><span class="text-darkgrey">Comma separated list of Editors. Leave empty for none.</span><br/>
-          <input type="text" id="editors" style="width:50%;min-width:25rem;" v-model="this.editors" v-on:keyup="createEditors()" />
+          <input type="text" id="editors" style="width:50%;min-width:25rem;" v-model="editors" v-on:keyup="createEditors()" />
           <br/><span>Editors can edit and make changes to this post, but are usually not public.</span><br/><br/>
         </div>
         <div class="row padding-top">
@@ -294,11 +294,10 @@ export default {
         return
       }
 
-      // split tags into array
-      this.post.tags = this.tags.split(',')
-      this.post.coauthorIds = this.coauthors.split(',')
-      this.post.editorIds = this.editors.split(',')
-      console.log('Co-Authors: ' + this.post.coauthorIds)
+      // split strings into arrays
+      this.post.tags = this.tags.length > 1 ? this.tags.split(',') : []
+      this.post.coauthorIds = this.coauthors.length > 1 ? this.coauthors.split(',') : []
+      this.post.editorIds = this.editors.length > 1 ? this.editors.split(',') : []
 
       // get time ISO-8601
       this.post.modifyDate = new Date().toJSON()
