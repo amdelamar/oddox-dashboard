@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="row text-center" v-if="message.length > 1">
-        <span class="text-red text-bold" v-bind:class="{ 'animated fadeIn': message.length > 1 }"><span class="icon-blocked"></span>&nbsp;{{message}}</span>
+        <span class="text-red text-bold animated fadeIn"><span class="icon-blocked"></span>&nbsp;{{message}}</span>
       </div>
 
       <div class="row">
@@ -138,8 +138,8 @@ export default {
             this.$router.push('/post')
           }).catch(err2 => {
             // failed initialize
-            console.log(err2)
-            this.message = err2.message
+            console.log('Init Error: ' + err2)
+            this.message = err2
             this.authToken.password = ''
             this.disableLogin = false
 
@@ -150,8 +150,8 @@ export default {
           })
         }).catch(err => {
           // failed login
-          console.log(err)
-          this.message = err.message
+          console.log('Login Error: ' + err)
+          this.message = err
           this.authToken.password = ''
           this.disableLogin = false
 

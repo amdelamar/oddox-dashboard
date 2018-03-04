@@ -113,7 +113,7 @@ export default {
       }).catch(err => {
         // failed search
         console.log(err)
-        this.message = err.message
+        this.message = err
       })
     }
   }

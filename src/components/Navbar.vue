@@ -97,7 +97,7 @@ export default {
         }, 5000)
       }).catch(err => {
         // failed login
-        console.log('Sync Failed: ' + err.message)
+        console.log('Sync Failed: ' + err)
         this.disableFlag = false
         this.iconSpin = false
         this.syncButton = 'Sync Now'

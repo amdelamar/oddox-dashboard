@@ -119,7 +119,7 @@ export default {
       db._usersdb.sync(remotedb + '/_users', opts).then(res => {
         console.log('Sync _users complete')
       }).catch(err => {
-        errcb(err)
+        errcb(err.message)
       })
     }
 
@@ -134,16 +134,16 @@ export default {
             console.log('Sync views complete')
             cb()
           }).catch(err => {
-            errcb(err)
+            errcb(err.message)
           })
         }).catch(err => {
-          errcb(err)
+          errcb(err.message)
         })
       }).catch(err => {
-        errcb(err)
+        errcb(err.message)
       })
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -165,7 +165,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -173,7 +173,7 @@ export default {
     db.authorsdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -181,7 +181,7 @@ export default {
     db.authorsdb.put(author).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -189,7 +189,7 @@ export default {
     db._usersdb.put(user).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -197,7 +197,7 @@ export default {
     db.authorsdb.remove(author).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -206,10 +206,10 @@ export default {
       db._usersdb.remove(result1).then(result2 => {
         cb(result2)
       }).catch(err => {
-        errcb(err)
+        errcb(err.message)
       })
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -231,7 +231,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -253,7 +253,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -275,7 +275,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -297,7 +297,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -319,7 +319,7 @@ export default {
       }
       cb(temp)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -327,7 +327,7 @@ export default {
     db.postsdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -335,7 +335,7 @@ export default {
     db.postsdb.put(post).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -343,7 +343,7 @@ export default {
     db.postsdb.remove(post).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -351,7 +351,7 @@ export default {
     db.applicationdb.get(id).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -359,7 +359,7 @@ export default {
     db.applicationdb.put(doc).then(result => {
       cb(result)
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   },
 
@@ -371,19 +371,19 @@ export default {
             db.viewsdb.destroy().then(res => {
               cb()
             }).catch(err => {
-              errcb(err)
+              errcb(err.message)
             })
           }).catch(err => {
-            errcb(err)
+            errcb(err.message)
           })
         }).catch(err => {
-          errcb(err)
+          errcb(err.message)
         })
       }).catch(err => {
-        errcb(err)
+        errcb(err.message)
       })
     }).catch(err => {
-      errcb(err)
+      errcb(err.message)
     })
   }
 

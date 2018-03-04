@@ -177,7 +177,7 @@ export default {
           this.editors = this.post.editorIds.toString()
         }).catch((err) => {
           this.loading = false
-          this.message = err.message
+          this.message = err
         })
       } else {
         // new post
@@ -209,7 +209,7 @@ export default {
           this.editors = ''
         }).catch((err) => {
           this.loading = false
-          this.message = err.message
+          this.message = err
         })
       }
     },
@@ -317,7 +317,7 @@ export default {
         this.post._rev = result.rev
       }).catch((err) => {
         console.log(err)
-        this.message = err.message
+        this.message = err
       })
     },
     trash () {
@@ -344,7 +344,7 @@ export default {
           }, 2500)
         }).catch((err) => {
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       }
     }

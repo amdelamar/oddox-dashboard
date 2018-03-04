@@ -111,7 +111,7 @@ export default {
         }).catch(err => {
           // failed search
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       } else if (this.$route.name.indexOf('featured') !== -1) {
         this.$store.dispatch('searchFeatured', this.text).then(result => {
@@ -119,7 +119,7 @@ export default {
         }).catch(err => {
           // failed search
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       } else if (this.$route.name.indexOf('drafts') !== -1) {
         this.$store.dispatch('searchDrafts', this.text).then(result => {
@@ -127,7 +127,7 @@ export default {
         }).catch(err => {
           // failed search
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       } else if (this.$route.name.indexOf('trash') !== -1) {
         this.$store.dispatch('searchTrash', this.text).then(result => {
@@ -135,7 +135,7 @@ export default {
         }).catch(err => {
           // failed search
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       } else {
         this.$store.dispatch('searchPosts', this.text).then(result => {
@@ -143,7 +143,7 @@ export default {
         }).catch(err => {
           // failed search
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       }
     }

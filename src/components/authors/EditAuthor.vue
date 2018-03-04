@@ -175,7 +175,7 @@ export default {
           this.author = JSON.parse(JSON.stringify(this.currentAuthor))
         }).catch((err) => {
           this.loading = false
-          this.message = err.message
+          this.message = err
         })
       } else {
         // new author
@@ -195,7 +195,7 @@ export default {
           }
         }).catch((err) => {
           this.loading = false
-          this.message = err.message
+          this.message = err
         })
       }
     },
@@ -247,7 +247,7 @@ export default {
             this.newFlag = false
           }).catch((err) => {
             console.log(err)
-            this.message = err.message
+            this.message = err
           })
         } else {
           console.log('Saved author: ' + this.author._id)
@@ -258,7 +258,7 @@ export default {
         }
       }).catch((err) => {
         console.log(err)
-        this.message = err.message
+        this.message = err
       })
     },
     destroy () {
@@ -304,11 +304,11 @@ export default {
             }
           }).catch((err) => {
             console.log(err)
-            this.message = err.message
+            this.message = err
           })
         }).catch((err) => {
           console.log(err)
-          this.message = err.message
+          this.message = err
         })
       }
     }
