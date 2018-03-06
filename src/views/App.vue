@@ -143,16 +143,16 @@ input:hover, input:active, input:focus {
   background-image: linear-gradient(180deg, var(--white) 50%, #fafafa 100%) !important;
 }
 .button-blue-outline {
-  background: transparent !important;
-  color: var(--blue) !important;
+  background: transparent;
+  color: var(--blue);
 }
 .button-red-outline {
-  background: transparent !important;
-  color: var(--red) !important;
+  background: transparent;
+  color: var(--red);
 }
 .button-green-outline {
-  background: transparent !important;
-  color: var(--green) !important;
+  background: transparent;
+  color: var(--green);
 }
 
 .animated.spin {

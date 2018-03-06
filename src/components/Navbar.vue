@@ -5,7 +5,7 @@
 
         <div class="nav-item-logo">
             <a v-on:click="sync" :disabled="disableFlag">
-              <img v-if="!iconSpin" class="margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
+              <img v-if="!iconSpin" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
               <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title | shorten(15) }}</span>
             </a>
@@ -22,9 +22,9 @@
             <code>{{ moment(this.syncTime).format() }}{{ syncError.message }}</code>
           </span>
 
-          <button class="button hover-shadow" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button border-none hover-shadow" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
 
-          <a href="javascript: void(0)" class="button dropdown hover-shadow margin-left"><i class="icon-user"></i>&nbsp;&#9662;
+          <a href="javascript: void(0)" class="button border-none dropdown hover-shadow margin-left"><i class="icon-user"></i>&nbsp;&#9662;
             <div class="dropdown-body round border nav-list">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold" title="This is your username">{{ authToken.username }}</span><br/>

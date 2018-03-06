@@ -4,9 +4,9 @@
   <div class="contextbar border-bottom background-solid-lightgrey">
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Content</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Details</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Preview</button>
-      <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cog"></i></button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Preview</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 2 }" v-on:click="setTab(2)">Details</button>
+      <button class="tab button" v-bind:class="{ 'active': tab == 3 }" v-on:click="setTab(3)"><i class="icon-cogs"></i></button>
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="message.length > 0">{{ message }}</code>&nbsp;
@@ -42,6 +42,16 @@
         </div>
       </div>
       <div class="row full-height" v-if="tab == 1">
+        <!-- Preview -->
+        <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
+        <h1 v-if="post.title.length > 0">{{ post.title}}</h1>
+        <div v-if="post.content.length > 0" v-html="post.content"></div>
+        <p v-if="post.content.length < 1" class="super-center text-center">
+          <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
+          <em class="text-grey">Nothing to show yet!</em>
+        </p>
+      </div>
+      <div class="row full-height" v-if="tab == 2">
         <!-- Details -->
         <h2>{{ post.title | shorten(45) }}</h2>
         <div class="row">
@@ -72,16 +82,6 @@
           <label for="bannerCaption">Banner Caption</label><span class="text-darkgrey">Captioning or alternative text for your banner image.</span>
           <input type="text" id="bannerCaption" class="full-width" v-model="post.bannerCaption" />
         </div>
-      </div>
-      <div class="row full-height" v-if="tab == 2">
-        <!-- Preview -->
-        <img v-if="post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
-        <h1 v-if="post.title.length > 0">{{ post.title}}</h1>
-        <div v-if="post.content.length > 0" v-html="post.content"></div>
-        <p v-if="post.content.length < 1" class="super-center text-center">
-          <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
-          <em class="text-grey">Nothing to show yet!</em>
-        </p>
       </div>
       <div class="row full-height" v-if="tab == 3">
         <!-- Advanced -->

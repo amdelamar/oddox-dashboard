@@ -8,7 +8,7 @@
 
 Offline-first dashboard for authors to manage their Oddox blog
 
-> Live Example: coming soon...
+> https://dashboard.oddox.org/
 
 ## Usage
 
@@ -20,10 +20,10 @@ Oddox Dashboard should be included with your deployment of the [server](https://
 
 ## Features
 
- * Offline-first, write post and sync later
+ * Offline-first, write a post and sync later
  * Multi-Author blog system with roles. Author, Admin, Co-Authors, and Editors
  * Organize blog posts by Tags, Categories, Featured, Authors, and Dates
- * Trash can to recover deleted posts 
+ * Trash can to recover deleted posts
 
 ## Planned Features
 
