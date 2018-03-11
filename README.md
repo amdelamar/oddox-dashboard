@@ -18,20 +18,7 @@ This project is still in development but stay tuned. The first version will be m
 
 Oddox Dashboard should be included with your deployment of the [server](https://github.com/oddoxorg/oddox). Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
-## Features
-
- * Offline-first, write a post and sync later
- * Multi-Author blog system with roles. Author, Admin, Co-Authors, and Editors
- * Organize blog posts by Tags, Categories, Featured, Authors, and Dates
- * Trash can to recover deleted posts
-
-## Planned Features
-
- * Mobile app, with Ionic or Cordova?
- * Desktop app with Electron or Chromium?
- * Themes (Light / Dark)
-
-## Deployment
+## Build and Deploy
 
 For developers, run the commands below to get started.
 
@@ -60,7 +47,7 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## Technologies Used
+## Tech Stack
 
  * [Vuejs 2](https://vuejs.org/) JavaScript Framework
  * [PouchDB 6](https://pouchdb.com/) NoSQL Database
