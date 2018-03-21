@@ -68,7 +68,7 @@ export default {
   data () {
     return {
       authToken: {
-        url: 'https://127.0.0.1:6984/',
+        url: 'https://localhost:6984/',
         username: '',
         password: ''
       },
