@@ -1,7 +1,7 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar border-bottom background-lightgrey">
+  <div class="contextbar border-bottom border-tertiary background-lightgrey">
     <div class="padding text-right" v-if="post !== null">
       <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>
       <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>

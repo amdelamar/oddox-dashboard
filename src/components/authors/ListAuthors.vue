@@ -1,14 +1,14 @@
 <template>
   <div class="full-height">
 
-    <div class="contextbar border-bottom background-lightgrey">
+    <div class="contextbar border-bottom border-tertiary background-lightgrey">
       <div class="row padding">
         <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />
-        <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+        <button class="button button-small margin-left border-none background-grey hover-shadow-outline" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
 
         <div class="right margin-left">
-        <span class="button button-small dropdown border-none background-grey hover-shadow">&#9662;
-          <div class="dropdown-body padding border round text-left background-white">
+        <span class="button button-small dropdown border-none background-grey hover-shadow-outline">&#9662;
+          <div class="dropdown-body padding border round text-left shadow background-white">
             <span class="text-darkgrey">View Options</span>
             <hr class="margin"/>
 
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div id="author-list" class="background-white border-left border-right full-height scrollable text-left">
+    <div id="author-list" class="background-white border-left border-right border-tertiary full-height scrollable text-left">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
         <span v-if="text === null || text.length == 0">

@@ -1,9 +1,9 @@
 <template>
-  <nav id="app-sidebar" class="background-solid-lightgrey">
+  <nav id="app-sidebar" class="background-lightgrey">
 
     <div class="full-width">
       <div class="contextbar padding">
-        <button class="full-width button button-primary" v-on:click="newPost">New Post</button>
+        <button class="button button-primary full-width" v-on:click="newPost">New Post</button>
       </div>
 
       <nav class="nav-list padding">
@@ -18,7 +18,6 @@
           <span class="nav-item"><hr class="margin-none"/></span>
         <router-link class="nav-item" :to="{name:'authors'}"><i class="icon-users"></i>&nbsp;&nbsp;<span>All Authors</span></router-link>
         <router-link class="nav-item" :to="{name:'settings'}"><i class="icon-cog"></i>&nbsp;&nbsp;<span>Settings</span></router-link>
-
       </nav>
     </div>
 

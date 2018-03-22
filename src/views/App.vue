@@ -57,6 +57,10 @@ html, body {
 .button {
   transition: all 0.1s ease;
 }
+.button:hover {
+  opacity: 1 !important;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
 .super-center {
   position: relative;
   width: 200px;
@@ -83,7 +87,10 @@ input:hover, input:active, input:focus {
   background-color: var(--white);
 }
 .shadow, .hover-shadow:hover {
-  box-shadow: 0 0 8px 5px #efefef;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.15);
+}
+.shadow-outline, .hover-shadow-outline:hover {
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.15);
 }
 .dialog {
   /* display: none; */

@@ -22,10 +22,10 @@
             <code>{{ moment(this.syncTime).format() }}{{ syncError.message }}</code>
           </span>
 
-          <button class="button border-none hover-shadow" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
+          <button class="button border-none hover-shadow-outline" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
 
-          <a href="javascript: void(0)" class="button border-none dropdown hover-shadow margin-left"><i class="icon-user"></i>&nbsp;&#9662;
-            <div class="dropdown-body round border nav-list">
+          <a href="javascript: void(0)" class="button border-none dropdown hover-shadow-outline margin-left"><i class="icon-user"></i>&nbsp;&#9662;
+            <div class="dropdown-body round border nav-list shadow">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold" title="This is your username">{{ authToken.username }}</span><br/>
                 <small title="This is your role">

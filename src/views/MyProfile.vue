@@ -4,10 +4,10 @@
   <app-navbar></app-navbar>
 
   <main id="main" role="main">
-    <section class="two columns full-height border-right">
+    <section class="two columns full-height border-right border-tertiary">
       <app-sidebar></app-sidebar>
     </section>
-    <section class="full-main-content columns border-top full-height">
+    <section class="full-main-content columns border-top border-tertiary full-height">
       <div class="padding padding-left-large full-height full-width background-white scrollable">
 
         <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">

@@ -7,7 +7,7 @@
     <section class="two columns full-height border-right">
       <app-sidebar></app-sidebar>
     </section>
-    <section class="full-main-content columns border-top full-height">
+    <section class="full-main-content columns border-top border-tertiary full-height">
       <div class="full-height full-width background-white scrollable">
 
         <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
