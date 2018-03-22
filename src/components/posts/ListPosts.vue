@@ -18,6 +18,8 @@
             <label for="compact"><span class="text-small">Compact Size</span></label>
             <hr class="margin"/>
 
+            <input type="checkbox" id="showAuthor" v-model="option.showAuthor" />
+            <label for="showAuthor"><span class="text-small"><i class="icon-user"></i>&nbsp;Show Author</span></label>
             <input type="checkbox" id="showDesc" v-model="option.showDesc" />
             <label for="showDesc"><span class="text-small"><i class="icon-eye"></i>&nbsp;Show Descriptions</span></label>
             <input type="checkbox" id="showStar" v-model="option.showStar" />
@@ -56,13 +58,15 @@
             <p class="margin-none text-nowrap">
               <span v-if="option.showStar && post.featured" class="icon-star-full right margin-right"></span>
               {{ post.title | shorten(45) }}<br/>
-              <span v-if="option.showDesc" class="text-small text-nowrap">{{ post.description | shorten(60) }}<br/></span>
+              <span v-if="option.showDesc" class="text-darkgrey text-nowrap">{{ post.description | shorten(60) }}<br/></span>
+              <span v-if="option.showAuthor" class="text-darkgrey">{{ post.authorId || '?' }}</span>
+              <span v-if="option.showAuthor && (option.showCat || option.showTags)" class="text-grey">&nbsp;|&nbsp;</span>
               <span v-if="option.showCat" class="text-small text-nowrap" title="category">
-                <code>{{ post.category || ' ' }}</code>
+                <code>{{ post.category || '?' }}</code>
               </span>
               <span v-if="option.showCat && option.showTags" class="text-grey">&nbsp;|&nbsp;</span>
               <span v-if="option.showTags" class="text-small text-nowrap" title="tags">
-                <code v-for="tag in post.tags">{{ tag || ' ' }}</code>
+                <code v-for="tag in post.tags">{{ tag || '?' }}</code>
               </span>
             </p>
           </div>
@@ -83,6 +87,7 @@ export default {
       text: '',
       option: {
         mode: 0,
+        showAuthor: false,
         showDesc: true,
         showStar: true,
         showCat: false,

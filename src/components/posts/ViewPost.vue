@@ -32,13 +32,13 @@
           <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
         </p>
         <p class="four columns">
-          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || 'null' }}</code><br/>
-          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag }}</code><br/>
+          <i class="icon-folder"></i>&nbsp;Category: <code>{{ post.category || '' }}</code><br/>
+          <i class="icon-price-tag"></i>&nbsp;Tags: <code v-for="tag in post.tags">{{ tag || '' }}</code><br/>
         </p>
         <p class="four columns">
-          <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || 'null' }}</code><br/>
-          <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || 'null' }}</code><br/>
-          <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || 'null' }}</code><br/>
+          <i class="icon-clock"></i>&nbsp;Created: <code>{{ post.createDate || '' }}</code><br/>
+          <i class="icon-clock"></i>&nbsp;Modified: <code>{{ post.modifyDate || '' }}</code><br/>
+          <i class="icon-clock2"></i>&nbsp;Published: <code>{{ post.publishDate || '' }}</code><br/>
         </p>
       </div>
     </div>

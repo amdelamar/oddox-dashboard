@@ -59,10 +59,8 @@
                 <div v-if="author.thumbnail.length == 0" class="left margin-right background-solid-white circle border" style="height:25px;width:25px"></div>
               </span>
               {{ author.name | shorten(45) }}<br/>
-              <span v-if="option.showDesc" class="text-small text-nowrap">{{ author.description | shorten(60) }}<br/></span>
-              <span v-if="option.showUser" class="text-small text-nowrap" title="username">
-                <code>{{ author._id || '?' }}</code>
-              </span>
+              <span v-if="option.showDesc" class="text-darkgrey text-nowrap">{{ author.description | shorten(60) }}<br/></span>
+              <span v-if="option.showUser" class="text-darkgrey text-nowrap" title="username">{{ author._id || '?' }}</span>
               <span v-if="option.showUser && option.showRole" class="text-grey">&nbsp;|&nbsp;</span>
               <span v-if="option.showRole" class="text-small text-nowrap" title="role">
                 <code>{{ author.role || '?' }}</code>
