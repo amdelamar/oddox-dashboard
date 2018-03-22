@@ -11,8 +11,8 @@
   <div id="post-view" class="background-solid-white scrollable">
 
     <p class="super-center text-center" v-if="post === null">
-      <i class="icon-radio-unchecked text-lightgrey text-largest"></i><br/>
-      <em class="text-grey">No post selected.</em>
+      <i class="icon-radio-unchecked text-grey text-largest"></i><br/>
+      <em class="text-darkgrey">No post selected.</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null">

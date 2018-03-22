@@ -24,9 +24,8 @@
 
     <footer class="full-width text-darkgrey text-center">
       <p class="text-small text-nowrap" title="Total disk size of your database">
-        <span>Storage:</span> <code>{{ dbsize }}</code>
-        <br/>
-        <em><a class="text-grey" :href="link">{{ name }} {{ version }}</a></em>
+        Storage: <code>{{ dbsize }}</code><br/>
+        <a class="text-darkgrey" :href="link">{{ name }} {{ version }}</a>
       </p>
     </footer>
   </nav>
@@ -38,7 +37,7 @@ export default {
   data () {
     return {
       name: 'Oddox',
-      link: 'https://oddox.org/',
+      link: 'https://oddox.org',
       version: 'v1.0.0',
       dbsize: '15 MB'
     }

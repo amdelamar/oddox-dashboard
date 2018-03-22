@@ -36,9 +36,14 @@
     <div id="post-list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="posts === null || posts.length < 1">
-        <i class="icon-search text-grey text-largest"></i><br/>
-        <em class="text-darkgrey" v-if="text === null">No posts found.</em>
-        <em class="text-darkgrey" v-if="text !== null">No results found for '{{ text }}'.</em>
+        <span v-if="text === null || text.length == 0">
+          <i class="icon-stack text-grey text-largest"></i><br/>
+          <em class="text-darkgrey">No posts found.</em>
+        </span>
+        <span v-if="text !== null && text.length > 0">
+          <i class="icon-search text-grey text-largest"></i><br/>
+          <em class="text-darkgrey">No results found for '{{ text }}'.</em>
+        </span>
       </p>
       <p class="super-center text-center animated fadeIn" v-if="message.length > 0">
         <i class="icon-notification text-red text-largest"></i><br/>
