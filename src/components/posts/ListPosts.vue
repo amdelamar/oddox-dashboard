@@ -54,7 +54,7 @@
 
       <div v-for="post in posts" class="post-item" v-bind:class="{ 'active': currentPost !== null && post._id === currentPost._id }">
         <router-link :to="{ name:'view-post', params:{ id:post._id }}">
-          <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
+          <div class="row padding-left border-bottom border-tertiary margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
               <span v-if="option.showStar && post.featured" class="icon-star-full right margin-right"></span>
               {{ post.title | shorten(45) }}<br/>

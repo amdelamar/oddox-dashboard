@@ -33,7 +33,7 @@ html, body {
   overflow: hidden;
   align-items: center;
   align-content: center;
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 .contextbar {
   min-height: 6.5rem;
@@ -84,13 +84,13 @@ html, body {
   height: 100%;
 }
 input:hover, input:active, input:focus {
-  background-color: var(--white);
+  background-color: var(--white) !important;
 }
 .shadow, .hover-shadow:hover {
-  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.15) !important;
 }
 .shadow-outline, .hover-shadow-outline:hover {
-  box-shadow: 0 0 4px 1px rgba(0,0,0,0.15);
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.15) !important;
 }
 .dialog {
   /* display: none; */
@@ -102,12 +102,12 @@ input:hover, input:active, input:focus {
   left: 50%;
   margin: -125px 0 0 -200px;
 }
-.background-transparent { background: transparent !important; }
+
 .text-capitalize { text-transform: capitalize; }
 .text-lightgrey { color: #fafafa; }
 .text-grey { color: #d3d3d3; }
 .text-darkgrey { color: #8c8c8c; }
-
+.background-transparent { background: transparent !important; }
 .background-white, .hover-background-white:hover {
   background-color: var(--white) !important;
 }

@@ -52,7 +52,7 @@
 
       <div v-for="author in authors" class="author-item" v-bind:class="{ 'active': currentAuthor !== null && author._id === currentAuthor._id }">
         <router-link :to="{ name:'view-author', params:{ id:author._id }}">
-          <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
+          <div class="row padding-left border-bottom border-tertiary margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
               <span v-if="option.showThumb" class="text-small text-nowrap" title="profile picture">
                 <img v-if="author.thumbnail.length > 0" class="left margin-right background-white circle border" height="25" width="25" alt="" :src="author.thumbnail" />
