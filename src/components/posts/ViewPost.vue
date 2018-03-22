@@ -15,7 +15,7 @@
       <em class="text-darkgrey">No post selected.</em>
     </p>
 
-    <div class="full-height padding-large animated fadeIn" v-if="post !== null">
+    <div class="full-height padding-large" v-if="post !== null">
       <img v-if="post.banner !== null && post.banner.length > 0" class="margin-bottom-large shadow round full-width" alt="" :src="post.banner" />
 
       <h1 v-if="post.title !== null && post.title.length > 0">{{ post.title }}</h1>

@@ -51,17 +51,8 @@ html, body {
   width: 86.6666666667% !important;
   margin: 0 !important;
 }
-.text-red {
-  color: var(--red);
-}
-.text-green {
-  color: var(--green);
-}
 .text-white {
-  color: var(--white);
-}
-.text-theme {
-  color: #67d9b8;
+  color: var(--white) !important;
 }
 .button {
   transition: all 0.1s ease;

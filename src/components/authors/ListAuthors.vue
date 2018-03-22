@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div id="author-list" class="background-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="author-list" class="background-white border-left border-right full-height scrollable text-left">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
         <span v-if="text === null || text.length == 0">
@@ -140,7 +140,7 @@ export default {
 #author-list .author-item.active code {
   background: transparent;
 }
-#author-list .author-item.active, #author-list .author-item.active a {
+#author-list .author-item.active, #author-list .author-item.active a, #author-list .author-item.active span {
   color: var(--white);
 }
 #author-list .author-item:hover {

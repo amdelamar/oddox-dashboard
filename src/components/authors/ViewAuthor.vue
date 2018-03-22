@@ -15,7 +15,7 @@
       <em class="text-darkgrey">No author selected.</em>
     </p>
 
-    <div class="full-height padding-large animated fadeIn" v-if="author !== null">
+    <div class="full-height padding-large" v-if="author !== null">
       <img v-if="author.thumbnail.length > 0" class="margin-bottom-large shadow round left margin-right-large" height="150" width="150" alt="" :src="author.thumbnail" />
 
       <h1>{{ author.name }}</h1>

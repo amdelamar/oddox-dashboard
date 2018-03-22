@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div id="post-list" class="background-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="post-list" class="background-white border-left border-right full-height scrollable text-left">
 
       <p class="super-center text-center" v-if="posts === null || posts.length < 1">
         <span v-if="text === null || text.length == 0">
@@ -175,7 +175,7 @@ export default {
 #post-list .post-item.active {
   background: var(--primary);
 }
-#post-list .post-item.active, #post-list .post-item.active a {
+#post-list .post-item.active, #post-list .post-item.active a, #post-list .post-item.active span {
   color: var(--white);
 }
 #post-list .post-item.active code {

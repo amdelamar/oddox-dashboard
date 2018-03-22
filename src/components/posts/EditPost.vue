@@ -19,16 +19,16 @@
 
   <div id="post-edit" class="border-left background-white scrollable">
 
-    <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
+    <p class="super-center text-center text-darkgrey" v-if="loading">
       <i class="icon-spinner9 animated spin"></i><br/>
       <em>Loading...</em>
     </p>
-    <p class="super-center text-center animated fadeIn" v-if="post === null && message.length > 0">
+    <p class="super-center text-center" v-if="post === null && message.length > 0">
       <i class="icon-notification text-danger text-largest"></i><br/>
       <em class="text-danger text-bold">{{ message }}</em>
     </p>
 
-    <div class="full-height padding-large animated fadeIn" v-if="post !== null && !loading">
+    <div class="full-height padding-large" v-if="post !== null && !loading">
 
       <div class="row full-height" v-if="tab == 0">
         <!-- Content -->
