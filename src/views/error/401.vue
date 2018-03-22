@@ -1,20 +1,20 @@
 <template>
-<div id="unauthorized" class="background-solid-lightgrey">
+<div id="unauthorized" class="background-lightgrey">
 
   <app-logobar></app-logobar>
 
   <div class="row section padding-top-large">
-    <div id="error-dialog" class="padding-large shadow border round background-solid-white animated shake">
+    <div id="error-dialog" class="padding-large shadow border round background-white animated shake">
       <h3>401 Unauthorized</h3>
       <div class="row">
         Oops! The page you are looking for is for Server Admins only.</p>
       </div>
       <div class="row padding-top">
         <div class="six columns margin-top">
-          <button class="button full-width" v-on:click="goBack"><i class="icon-arrow-left2"></i>&nbsp;Go Back</button>
+          <button class="button button-secondary full-width" v-on:click="goBack"><i class="icon-arrow-left2"></i>&nbsp;Go Back</button>
         </div>
         <div class="six columns margin-top">
-          <button class="button button-blue full-width" v-on:click="returnToHome" autofocus><i class="icon-home"></i>&nbsp; Dashboard</button>
+          <button class="button full-width" v-on:click="returnToHome" autofocus><i class="icon-home"></i>&nbsp; Dashboard</button>
         </div>
       </div>
     </div>

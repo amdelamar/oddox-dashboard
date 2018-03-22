@@ -1,4 +1,4 @@
-# <img src="https://oddox.org/assets/logo-dark.png" width="150px" alt="Oddox" /> DASHBOARD
+# Oddox Dashboard
 
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
@@ -8,15 +8,15 @@
 
 Offline-first dashboard for authors to manage their Oddox blog
 
-> https://dashboard.oddox.org/
+> https://dashboard.oddox.org
 
-## Usage
+## About
 
-Dashboard is a SPA (single page app) for authors with an [Oddox](https://github.com/oddoxorg/oddox) blog to write, sync, and manage their content.
+Dashboard is an offline-first web app for authors with an [Oddox](https://github.com/oddoxorg/oddox) blog to write, sync, and manage their content.
 
-This project is still in development but stay tuned. The first version will be made available once the main features are complete.
+Its a SPA (single page app) built on [Vuejs](https://vuejs.org/) and [PouchDB](https://pouchdb.com/). Users login to their CouchDB database with their URL, Username, and Password. Then they replicate the content to PouchDB which saves their posts in localstorage. After making edits or publishing new content, they can click 'Sync' to update CouchDB with PouchDB's replication ability.
 
-Oddox Dashboard should be included with your deployment of the [server](https://github.com/oddoxorg/oddox). Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
+This project is still in development but stay tuned. The first version will be made available once the main features are complete. Please see [Oddox's README](https://github.com/oddoxorg/oddox) for full deployment details.
 
 ## Build and Deploy
 
@@ -32,29 +32,26 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
 # run all tests
 npm test
+
+# run just unit tests
+npm run unit
+
+# run just e2e tests
+npm run e2e
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Tech Stack
 
- * [Vuejs 2](https://vuejs.org/) JavaScript Framework
- * [PouchDB 6](https://pouchdb.com/) NoSQL Database
- * [Osseous](https://austindelamar.com/osseous/) CSS Framework
+ * [Vuejs 2.+](https://vuejs.org/) JavaScript Framework
+ * [PouchDB 6.+](https://pouchdb.com/) NoSQL Database
+ * [Osseous 2.+](https://austindelamar.com/osseous/) CSS Framework
  * [Icomoon](http://icomoon.io/) Icons
- * [Webpack 3](https://webpack.js.org/) Module Bundler
- * [Node.js 8](https://nodejs.org/) for local dev and testing
+ * [Webpack 3.+](https://webpack.js.org/) Module Bundler
+ * [Node.js 8.+](https://nodejs.org/) for local dev and testing
 
 ## License
 

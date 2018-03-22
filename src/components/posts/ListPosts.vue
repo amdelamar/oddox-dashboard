@@ -1,14 +1,14 @@
 <template>
   <div class="full-height">
 
-    <div class="contextbar border-bottom background-solid-lightgrey">
+    <div class="contextbar border-bottom background-lightgrey">
       <div class="row padding">
         <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />
-        <button class="button button-small margin-left border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+        <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
 
         <div class="right">
-        <span class="button button-small dropdown border-none background-solid-grey hover-shadow">&#9662;
-          <div class="dropdown-body padding border round text-left background-solid-white">
+        <span class="button button-small dropdown border-none background-grey hover-shadow">&#9662;
+          <div class="dropdown-body padding border round text-left background-white">
             <span class="text-darkgrey">View Options</span>
             <hr class="margin"/>
 
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div id="post-list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="post-list" class="background-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="posts === null || posts.length < 1">
         <span v-if="text === null || text.length == 0">
@@ -173,7 +173,7 @@ export default {
   overflow: hidden;
 }
 #post-list .post-item.active {
-  background: var(--blue);
+  background: var(--primary);
 }
 #post-list .post-item.active, #post-list .post-item.active a {
   color: var(--white);
@@ -185,7 +185,7 @@ export default {
   background: var(--light-grey);
 }
 #post-list .post-item.active:hover {
-  background: var(--light-blue);
+  background: var(--primary);
 }
 .contextbar .dropdown-body {
   min-width: 21rem;

@@ -1,10 +1,10 @@
 <template>
-<div id="login" class="background-solid-lightgrey">
+<div id="login" class="background-lightgrey">
 
   <app-logobar></app-logobar>
 
   <div class="row section padding-top-large">
-    <div id="login-dialog" class="padding-large shadow border round background-solid-white animated fadeIn">
+    <div id="login-dialog" class="padding-large shadow border round background-white animated fadeIn">
       <h3 class="text-center">Login</h3>
 
       <form v-on:submit="login">
@@ -33,11 +33,11 @@
         </div>
       </div>
       <div class="row text-center" v-if="message.length > 1">
-        <span class="text-red text-bold animated fadeIn"><span class="icon-blocked"></span>&nbsp;{{message}}</span>
+        <span class="text-danger text-bold animated fadeIn"><span class="icon-blocked"></span>&nbsp;{{message}}</span>
       </div>
 
       <div class="row">
-        <input type="submit" class="button button-blue full-width margin-top" v-on:submit="login" :disabled="disableLogin" value="Login" />
+        <input type="submit" class="button button-primary full-width margin-top" v-on:submit="login" :disabled="disableLogin" value="Login" />
       </div>
       <div class="row padding-top margin-top left">
         <input type="checkbox" id="c1" v-model="rememberMe" class="full-width" />

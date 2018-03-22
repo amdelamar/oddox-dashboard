@@ -1,10 +1,10 @@
 <template>
-  <nav id="app-logobar" class="navbar background-solid-lightgrey">
+  <nav id="app-logobar" class="navbar background-lightgrey">
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
             <router-link to="/">
-              <img class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
+              <img class="background-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">Dashboard</span>
             </router-link>
         </div>

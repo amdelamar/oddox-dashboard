@@ -8,15 +8,15 @@
       <app-sidebar></app-sidebar>
     </section>
     <section class="full-main-content columns border-top full-height">
-      <div class="full-height full-width background-solid-white scrollable">
+      <div class="full-height full-width background-white scrollable">
 
         <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
           <i class="icon-spinner9 animated spin"></i><br/>
           <em>Loading...</em>
         </p>
         <p class="super-center text-center animated fadeIn" v-if="appConfig === null && message.length > 0">
-          <i class="icon-notification text-red text-largest"></i><br/>
-          <em class="text-red text-bold">{{ message }}</em>
+          <i class="icon-notification text-danger text-largest"></i><br/>
+          <em class="text-danger text-bold">{{ message }}</em>
         </p>
 
         <div class="full-height padding-large" v-if="appConfig !== null && appFirewall !== null">
@@ -85,7 +85,7 @@
           </div>
 
             <div class="row padding-top-large padding-bottom-large">
-              <button class="button button-green" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
+              <button class="button button-success" v-on:click="saveChanges"><i class="icon-checkmark"></i>&nbsp;Save Changes</button>
               &nbsp;<code v-if="message.length > 0">{{ message }}</code>
             </div>
           </div>
@@ -211,14 +211,14 @@
           <div class="row padding-top padding-bottom">
           <h3>Danger Zone</h3>
             <p>Careful! These actions may permanently destroy data.</p>
-            <div class="button button-red dropdown"><i class="icon-database"></i>&nbsp;Destroy Databases
+            <div class="button button-danger dropdown"><i class="icon-database"></i>&nbsp;Destroy Databases
               <div class="dropdown-body padding-none">
-                <button class="button button-red" v-on:click="destroyDatabases">Are you sure?</button>
+                <button class="button button-danger" v-on:click="destroyDatabases">Are you sure?</button>
               </div>
             </div>
-            <div class="button button-red dropdown"><i class="icon-fire"></i>&nbsp;Destroy everything
+            <div class="button button-danger dropdown"><i class="icon-fire"></i>&nbsp;Destroy everything
               <div class="dropdown-body padding-none">
-                <button class="button button-red" v-on:click="destroyEverything">Are you sure?</button>
+                <button class="button button-danger" v-on:click="destroyEverything">Are you sure?</button>
               </div>
             </div>
             <br/><br/><br/>

@@ -66,12 +66,6 @@ html, body {
 .button {
   transition: all 0.1s ease;
 }
-.button-small {
-  font-size: .75em;
-  height: 3rem;
-  padding: 0 1em;
-  line-height: 2.8rem;
-}
 .super-center {
   position: relative;
   width: 200px;
@@ -100,13 +94,6 @@ input:hover, input:active, input:focus {
 .shadow, .hover-shadow:hover {
   box-shadow: 0 0 8px 5px #efefef;
 }
-.dropdown-body {
-  font-size: initial;
-  font-weight: initial;
-  line-height: initial;
-  letter-spacing: initial;
-  text-transform: initial;
-}
 .dialog {
   /* display: none; */
   z-index: 1;
@@ -117,42 +104,27 @@ input:hover, input:active, input:focus {
   left: 50%;
   margin: -125px 0 0 -200px;
 }
-.background-solid-theme, hover-background-solid-theme:hover {
-  background-color: #67d9b8 !important;
-}
 .background-transparent { background: transparent !important; }
 .text-capitalize { text-transform: capitalize; }
 .text-lightgrey { color: #fafafa; }
 .text-grey { color: #d3d3d3; }
 .text-darkgrey { color: #8c8c8c; }
 
-.background-solid-white, .hover-background-solid-white:hover {
+.background-white, .hover-background-white:hover {
   background-color: var(--white) !important;
 }
-.background-solid-lightgrey, .hover-background-solid-lightgrey:hover {
+.background-lightgrey, .hover-background-lightgrey:hover {
   background-color: #fafafa !important;
 }
-.background-solid-grey, .hover-background-solid-grey:hover {
+.background-grey, .hover-background-grey:hover {
   background-color: #d3d3d3 !important;
 }
-.background-solid-darkgrey, .hover-background-solid-darkgrey:hover {
+.background-darkgrey, .hover-background-darkgrey:hover {
   background-color: #8c8c8c !important;
 }
 .background-gradient-grey, .hover-background-gradient-grey:hover {
   background-color: unset !important;
   background-image: linear-gradient(180deg, var(--white) 50%, #fafafa 100%) !important;
-}
-.button-blue-outline {
-  background: transparent;
-  color: var(--blue);
-}
-.button-red-outline {
-  background: transparent;
-  color: var(--red);
-}
-.button-green-outline {
-  background: transparent;
-  color: var(--green);
 }
 
 .animated.spin {
@@ -197,33 +169,6 @@ i.animated.spin, span.animated.spin, i.animated.rewind, span.animated.rewind {
   text-align: center;
   height: 16px !important;
   width: 16px !important;
-}
-.tabs {
-  padding: 0;
-  margin: auto;
-  align-items: flex-end;
-  height: 100%;
-  min-height: 6.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.tabs .tab {
-  background: transparent;
-  border: 1px solid var(--grey);
-  border-bottom: unset;
-  border-right: unset;
-  margin: 0;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.tabs .tab:last-child {
-  border-right: 1px solid var(--grey);
-}
-.tabs .tab:hover {
-  background: var(--white) !important;
 }
 .tabs .tab.router-link-exact-active, .tabs .tab.active {
   background: var(--white);

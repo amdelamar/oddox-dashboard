@@ -1,7 +1,7 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar border-bottom background-solid-lightgrey">
+  <div class="contextbar border-bottom background-lightgrey">
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Content</button>
       <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Preview</button>
@@ -10,22 +10,22 @@
     </div>
     <div class="eight columns padding text-right" v-if="post !== null">
       <code v-if="message.length > 0">{{ message }}</code>&nbsp;
-      <button class="button button-blue button-blue-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;{{ newFlag ? 'Create' : 'Save' }}</button>
-      <button class="button" v-bind:class="{ 'button-blue button-blue-outline': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>
-      <button class="button" v-bind:class="{ 'button-red button-red-outline': !post.deleted }" v-if="!newFlag" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>
+      <button class="button button-primary button-primary-outline" v-on:click="save"><i class="icon-checkmark"></i>&nbsp;{{ newFlag ? 'Create' : 'Save' }}</button>
+      <button class="button" v-bind:class="{ 'button-primary': !post.published }" v-on:click="publish"><i class="icon-pushpin"></i>&nbsp;{{ !post.published ? 'Publish' : 'Unpublish' }}</button>
+      <button class="button" v-bind:class="{ 'button-danger': !post.deleted }" v-if="!newFlag" v-on:click="trash"><i class="icon-cross"></i>&nbsp;{{ !post.deleted ? 'Trash' : 'Recover' }}</button>
       <button class="button" v-on:click="close">Cancel</button>
     </div>
   </div>
 
-  <div id="post-edit" class="border-left background-solid-white scrollable">
+  <div id="post-edit" class="border-left background-white scrollable">
 
     <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
       <i class="icon-spinner9 animated spin"></i><br/>
       <em>Loading...</em>
     </p>
     <p class="super-center text-center animated fadeIn" v-if="post === null && message.length > 0">
-      <i class="icon-notification text-red text-largest"></i><br/>
-      <em class="text-red text-bold">{{ message }}</em>
+      <i class="icon-notification text-danger text-largest"></i><br/>
+      <em class="text-danger text-bold">{{ message }}</em>
     </p>
 
     <div class="full-height padding-large animated fadeIn" v-if="post !== null && !loading">
@@ -126,7 +126,7 @@
         <div class="row padding-top padding-bottom">
           <h3>Danger Zone</h3>
           <p>Careful! These actions may permanently destroy data.</p>
-          <button class="button button-red" v-on:click="destroy"><i class="icon-cross"></i>&nbsp;Delete</button>
+          <button class="button button-danger" v-on:click="destroy"><i class="icon-cross"></i>&nbsp;Delete</button>
         </div>
       </div> <!-- end of tabs -->
 

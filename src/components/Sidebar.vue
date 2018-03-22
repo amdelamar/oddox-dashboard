@@ -3,7 +3,7 @@
 
     <div class="full-width">
       <div class="contextbar padding">
-        <button class="full-width button button-blue" v-on:click="newPost">New Post</button>
+        <button class="full-width button button-primary" v-on:click="newPost">New Post</button>
       </div>
 
       <nav class="nav-list padding">
@@ -76,18 +76,18 @@ export default {
   color: initial;
 }
 #app-sidebar nav a:hover {
-  color: var(--blue);
+  color: var(--primary);
   text-decoration: none;
 }
 #app-sidebar footer a:hover {
-  color: var(--blue);
+  color: var(--primary);
 }
 #app-sidebar .router-link-active, #app-sidebar .router-link-exact-active {
   font-weight: 700;
-  color: var(--blue) !important;
+  color: var(--primary) !important;
 }
 #app-sidebar .router-link-active:hover, #app-sidebar .router-link-exact-active:hover {
   font-weight: 700;
-  color: var(--light-blue) !important;
+  color: var(--light-primary) !important;
 }
 </style>

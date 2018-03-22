@@ -1,12 +1,12 @@
 <template>
-  <nav id="app-navbar" class="navbar background-solid-lightgrey">
+  <nav id="app-navbar" class="navbar background-lightgrey">
 
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
             <a v-on:click="sync" :disabled="disableFlag">
-              <img v-if="!iconSpin" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
-              <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-solid-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
+              <img v-if="!iconSpin" class="background-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
+              <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title | shorten(15) }}</span>
             </a>
         </div>
@@ -36,7 +36,7 @@
               <router-link :to="{name:'my-profile'}" class="nav-item"><i class="icon-profile"></i>&nbsp;My Profile</router-link>
               <router-link :to="{name:'settings'}" class="nav-item"><i class="icon-cog"></i>&nbsp;Settings</router-link>
               <hr class="margin"/>
-              <button class="nav-item button button-red full-width" v-on:click="logout">Logout</button>
+              <button class="nav-item button button-danger full-width" v-on:click="logout">Logout</button>
             </div>
           </a>
 

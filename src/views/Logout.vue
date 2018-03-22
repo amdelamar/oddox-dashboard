@@ -1,16 +1,16 @@
 <template>
-<div id="logout" class="background-solid-lightgrey">
+<div id="logout" class="background-lightgrey">
 
   <app-logobar></app-logobar>
 
   <div class="row section padding-top-large ">
-    <div id="logout-dialog" class="padding-large shadow border round background-solid-white animated fadeIn">
+    <div id="logout-dialog" class="padding-large shadow border round background-white animated fadeIn">
       <h3>Goodbye!</h3>
       <div class="row">
         <p>You have been logged out.</p>
       </div>
       <div class="row">
-        <button class="button button-blue margin-top full-width" v-on:click="returnToLogin" autofocus>Return to Login</button>
+        <button class="button button-primary margin-top full-width" v-on:click="returnToLogin" autofocus>Return to Login</button>
       </div>
     </div>
   </div>

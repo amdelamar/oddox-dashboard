@@ -8,7 +8,7 @@
       <app-sidebar></app-sidebar>
     </section>
     <section class="full-main-content columns border-top full-height">
-      <div class="padding padding-left-large full-height full-width background-solid-white scrollable">
+      <div class="padding padding-left-large full-height full-width background-white scrollable">
 
         <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
           <i class="icon-spinner9 animated spin"></i><br/>

@@ -1,14 +1,14 @@
 <template>
   <div class="full-height">
 
-    <div class="contextbar border-bottom background-solid-lightgrey">
+    <div class="contextbar border-bottom background-lightgrey">
       <div class="row padding">
         <input type="text" style="margin:0;" placeholder="Search..." v-model="text" v-on:keyup="search" />
-        <button class="button button-small margin-left border-none background-solid-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
+        <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="clearSearch" v-if="text.length > 0"><i class="icon-cross"></i></button>
 
         <div class="right margin-left">
-        <span class="button button-small dropdown border-none background-solid-grey hover-shadow">&#9662;
-          <div class="dropdown-body padding border round text-left background-solid-white">
+        <span class="button button-small dropdown border-none background-grey hover-shadow">&#9662;
+          <div class="dropdown-body padding border round text-left background-white">
             <span class="text-darkgrey">View Options</span>
             <hr class="margin"/>
 
@@ -29,11 +29,11 @@
           </div>
         </span>
         </div>
-        <button class="button button-blue button-blue-outline right" v-on:click="newAuthor"><i class="icon-plus"></i>&nbsp;New</button>
+        <button class="button button-primary right" v-on:click="newAuthor"><i class="icon-plus"></i>&nbsp;New</button>
       </div>
     </div>
 
-    <div id="author-list" class="background-solid-white border-left border-right full-height scrollable text-left animated fadeIn">
+    <div id="author-list" class="background-white border-left border-right full-height scrollable text-left animated fadeIn">
 
       <p class="super-center text-center" v-if="authors === null || authors.length < 1">
         <span v-if="text === null || text.length == 0">
@@ -55,8 +55,8 @@
           <div class="row padding-left border-bottom margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
               <span v-if="option.showThumb" class="text-small text-nowrap" title="profile picture">
-                <img v-if="author.thumbnail.length > 0" class="left margin-right background-solid-white circle border" height="25" width="25" alt="" :src="author.thumbnail" />
-                <div v-if="author.thumbnail.length == 0" class="left margin-right background-solid-white circle border" style="height:25px;width:25px"></div>
+                <img v-if="author.thumbnail.length > 0" class="left margin-right background-white circle border" height="25" width="25" alt="" :src="author.thumbnail" />
+                <div v-if="author.thumbnail.length == 0" class="left margin-right background-white circle border" style="height:25px;width:25px"></div>
               </span>
               {{ author.name | shorten(45) }}<br/>
               <span v-if="option.showDesc" class="text-darkgrey text-nowrap">{{ author.description | shorten(60) }}<br/></span>
@@ -135,7 +135,7 @@ export default {
   overflow: hidden;
 }
 #author-list .author-item.active {
-  background: var(--blue);
+  background: var(--primary);
 }
 #author-list .author-item.active code {
   background: transparent;
@@ -147,6 +147,6 @@ export default {
   background: var(--light-grey);
 }
 #author-list .author-item.active:hover {
-  background: var(--light-blue);
+  background: var(--primary);
 }
 </style>

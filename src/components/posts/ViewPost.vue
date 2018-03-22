@@ -1,14 +1,14 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar border-bottom background-solid-lightgrey">
+  <div class="contextbar border-bottom background-lightgrey">
     <div class="padding text-right" v-if="post !== null">
       <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>
-      <button class="button button-small margin-left border-none background-solid-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>
+      <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>
     </div>
   </div>
 
-  <div id="post-view" class="background-solid-white scrollable">
+  <div id="post-view" class="background-white scrollable">
 
     <p class="super-center text-center" v-if="post === null">
       <i class="icon-radio-unchecked text-grey text-largest"></i><br/>
