@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="author-view" class="background-white scrollable">
+  <div id="author-view" class="border-right border-tertiary background-white scrollable">
 
     <p class="super-center text-center" v-if="author === null">
       <i class="icon-radio-unchecked text-grey text-largest"></i><br/>

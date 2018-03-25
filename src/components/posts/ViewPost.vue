@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div id="post-view" class="background-white scrollable">
+  <div id="post-view" class="border-right border-tertiary background-white scrollable">
 
     <p class="super-center text-center" v-if="post === null">
       <i class="icon-radio-unchecked text-grey text-largest"></i><br/>

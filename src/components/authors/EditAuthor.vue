@@ -1,7 +1,7 @@
 <template>
 <div class="full-height">
 
-  <div class="contextbar border-bottom background-lightgrey">
+  <div class="contextbar border-bottom border-tertiary background-lightgrey">
     <div class="four columns tabs">
       <button class="tab button" v-bind:class="{ 'active': tab == 0 }" v-on:click="setTab(0)">Profile</button>
       <button class="tab button" v-bind:class="{ 'active': tab == 1 }" v-on:click="setTab(1)">Preview</button>
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div id="author-edit" class="border-left background-white scrollable">
+  <div id="author-edit" class="border-left border-right border-tertiary background-white scrollable">
 
     <p class="super-center text-center text-darkgrey" v-if="loading">
       <i class="icon-spinner9 animated spin"></i><br/>

@@ -70,12 +70,17 @@ html, body {
   margin: -25px 0 0 -100px;
 }
 .scrollable {
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
 }
-.scollable-none {
-  overflow-y: hidden;
-  overflow-x: hidden;
+.scroll-y {
+  overflow-y: scroll;
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+.overflow-hidden {
+  overflow: hidden;
 }
 .overflow-none {
   overflow: none;

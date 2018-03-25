@@ -4,11 +4,11 @@
   <app-navbar></app-navbar>
 
   <main id="main" role="main">
-    <section class="two columns full-height border-right">
+    <section class="two columns full-height border-right border-tertiary">
       <app-sidebar></app-sidebar>
     </section>
-    <section class="full-main-content columns border-top border-tertiary full-height">
-      <div class="full-height full-width background-white scrollable">
+    <section class="full-main-content columns full-height">
+      <div class="full-height full-width border-top border-right border-tertiary background-white scrollable">
 
         <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
           <i class="icon-spinner9 animated spin"></i><br/>
