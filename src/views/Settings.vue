@@ -292,8 +292,6 @@ export default {
       // get time ISO-8601
       this.appConfig.settings.modifyDate = new Date().toJSON()
 
-      console.log(this.appConfig)
-
       this.$store.dispatch('updateAppConfig', this.appConfig).then((result) => {
         console.log('Saved settings.')
         this.message = 'Saved (' + moment(this.syncTime).fromNow() + ')'
