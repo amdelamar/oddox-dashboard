@@ -169,15 +169,15 @@ export default {
     })
   },
 
-  readAuthor (id, cb, errcb) {
-    db.authorsdb.get(id).then(result => {
+  getAuthor (id, cb, errcb) {
+    db.authorsdb.get(id, {conflicts: true}).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err.message)
     })
   },
 
-  updateAuthor (author, cb, errcb) {
+  putAuthor (author, cb, errcb) {
     db.authorsdb.put(author).then(result => {
       cb(result)
     }).catch(err => {
@@ -185,7 +185,7 @@ export default {
     })
   },
 
-  updateUser (user, cb, errcb) {
+  putUser (user, cb, errcb) {
     db._usersdb.put(user).then(result => {
       cb(result)
     }).catch(err => {
@@ -323,15 +323,15 @@ export default {
     })
   },
 
-  readPost (id, cb, errcb) {
-    db.postsdb.get(id).then(result => {
+  getPost (id, cb, errcb) {
+    db.postsdb.get(id, {conflicts: true}).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err.message)
     })
   },
 
-  updatePost (post, cb, errcb) {
+  putPost (post, cb, errcb) {
     db.postsdb.put(post).then(result => {
       cb(result)
     }).catch(err => {
@@ -347,15 +347,15 @@ export default {
     })
   },
 
-  readAppDoc (id, cb, errcb) {
-    db.applicationdb.get(id).then(result => {
+  getAppDoc (id, cb, errcb) {
+    db.applicationdb.get(id, {conflicts: true}).then(result => {
       cb(result)
     }).catch(err => {
       errcb(err.message)
     })
   },
 
-  updateAppDoc (doc, cb, errcb) {
+  putAppDoc (doc, cb, errcb) {
     db.applicationdb.put(doc).then(result => {
       cb(result)
     }).catch(err => {

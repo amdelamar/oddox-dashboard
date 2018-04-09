@@ -34,7 +34,7 @@ const actions = {
         commit(types.SET_AUTHOR, null)
         resolve()
       } else {
-        database.readAuthor(id, author => {
+        database.getAuthor(id, author => {
           commit(types.SET_AUTHOR, author)
           resolve()
         }, err => {
@@ -47,7 +47,7 @@ const actions = {
 
   updateAuthor ({ commit }, data) {
     return new Promise((resolve, reject) => {
-      database.updateAuthor(data, author => {
+      database.putAuthor(data, author => {
         resolve(author)
       }, err => {
         reject(err)
@@ -57,7 +57,7 @@ const actions = {
 
   updateUser ({ commit }, data) {
     return new Promise((resolve, reject) => {
-      database.updateUser(data, user => {
+      database.putUser(data, user => {
         resolve()
       }, err => {
         reject(err)

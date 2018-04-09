@@ -82,7 +82,7 @@ const actions = {
         commit(types.SET_POST, null)
         resolve()
       } else {
-        database.readPost(id, post => {
+        database.getPost(id, post => {
           commit(types.SET_POST, post)
           resolve()
         }, err => {
@@ -95,7 +95,7 @@ const actions = {
 
   updatePost ({ commit }, data) {
     return new Promise((resolve, reject) => {
-      database.updatePost(data, post => {
+      database.putPost(data, post => {
         resolve(post)
       }, err => {
         reject(err)

@@ -18,7 +18,7 @@ const actions = {
 
   loadAppConfig ({ commit }) {
     return new Promise((resolve, reject) => {
-      database.readAppDoc('APPCONFIG', result => {
+      database.getAppDoc('APPCONFIG', result => {
         commit(types.SET_APPCONFIG, result)
         resolve()
       }, err => {
@@ -30,7 +30,7 @@ const actions = {
 
   loadAppFirewall ({ commit }) {
     return new Promise((resolve, reject) => {
-      database.readAppDoc('APPFIREWALL', result => {
+      database.getAppDoc('APPFIREWALL', result => {
         commit(types.SET_APPFIREWALL, result)
         resolve()
       }, err => {
@@ -45,7 +45,7 @@ const actions = {
       if (data === null) {
         reject(new Error('Cannot delete app config.'))
       } else {
-        database.updateAppDoc('APPCONFIG', result => {
+        database.putAppDoc('APPCONFIG', result => {
           commit(types.SET_APPCONFIG, result)
           resolve(result)
         }, err => {
@@ -61,7 +61,7 @@ const actions = {
       if (data === null) {
         reject(new Error('Cannot delete app firewall.'))
       } else {
-        database.updateAppDoc('APPFIREWALL', result => {
+        database.putAppDoc('APPFIREWALL', result => {
           commit(types.SET_APPFIREWALL, result)
           resolve(result)
         }, err => {
