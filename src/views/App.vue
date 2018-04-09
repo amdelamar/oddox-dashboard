@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style>
+:root {
+  --primary:rgb(103,217,184); /*#67d9b8*/
+}
 #app {
   height: 100%;
   width: 100%;
