@@ -1,14 +1,12 @@
 <template>
   <nav id="app-navbar" class="navbar background-lightgrey">
-
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
-            <a v-on:click="sync" :disabled="disableFlag">
-              <img v-if="!iconSpin" class="background-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
-              <img v-if="iconSpin" v-bind:class="{ 'animated rewind': iconSpin }" class="background-darkgrey circle margin-left margin-right" src="static/img/icon-transparent-512.png" alt="Logo" />
+            <router-link to="/">
+              <img class="background-darkgrey circle margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">{{ title | shorten(15) }}</span>
-            </a>
+            </router-link>
         </div>
         <div class="nav-small-menu margin-right">
             <a class="nav-item" title="Open Menu" href="javascript:openSidebar()">
