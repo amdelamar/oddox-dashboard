@@ -148,7 +148,7 @@ export default {
   },
 
   searchAllAuthors (text, cb, errcb) {
-    db.authorsdb.allDocs({include_docs: true}).then(results => {
+    db.authorsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.name !== undefined) {
@@ -214,7 +214,7 @@ export default {
   },
 
   searchPosts (text, cb, errcb) {
-    db.postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.published && !results.rows[i].doc.deleted) {
@@ -236,7 +236,7 @@ export default {
   },
 
   searchAllPosts (text, cb, errcb) {
-    db.postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined) {
@@ -258,7 +258,7 @@ export default {
   },
 
   searchDrafts (text, cb, errcb) {
-    db.postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && !results.rows[i].doc.published && !results.rows[i].doc.deleted) {
@@ -280,7 +280,7 @@ export default {
   },
 
   searchFeatured (text, cb, errcb) {
-    db.postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.featured && !results.rows[i].doc.deleted) {
@@ -302,7 +302,7 @@ export default {
   },
 
   searchTrash (text, cb, errcb) {
-    db.postsdb.allDocs({include_docs: true}).then(results => {
+    db.postsdb.allDocs({include_docs: true, conflicts: true}).then(results => {
       let temp = []
       for (let i = 0; i < results.total_rows; i++) {
         if (results.rows[i].doc.title !== undefined && results.rows[i].doc.deleted) {

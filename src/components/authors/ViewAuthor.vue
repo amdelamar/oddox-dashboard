@@ -3,6 +3,10 @@
 
   <div class="contextbar border-bottom border-tertiary background-lightgrey">
     <div class="padding text-right" v-if="author !== null">
+      <button v-if="author._conflicts !== 'undefined' && author._conflicts != null && author._conflicts.length > 0" class="button button-danger margin-right">
+            <i class="icon-power"></i>&nbsp;
+            Save conflict!
+      </button>
       <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>
       <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>
     </div>

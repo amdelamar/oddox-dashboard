@@ -3,6 +3,10 @@
 
   <div class="contextbar border-bottom border-tertiary background-lightgrey">
     <div class="padding text-right" v-if="post !== null">
+      <button v-if="post._conflicts !== 'undefined' && post._conflicts != null && post._conflicts.length > 0" class="button button-danger margin-right">
+            <i class="icon-power"></i>&nbsp;
+            Save conflict!
+      </button>
       <button class="button" v-on:click="edit"><i class="icon-quill"></i>&nbsp;Edit</button>
       <button class="button button-small margin-left border-none background-grey hover-shadow" v-on:click="close"><i class="icon-cross"></i></button>
     </div>
@@ -27,7 +31,7 @@
           <i class="icon-users"></i>&nbsp;Co-Authors: <code v-for="coa in post.coauthorIds">{{ coa }}</code><br/>
           <i class="icon-users"></i>&nbsp;Editors: <code v-for="edt in post.editorIds">{{ edt }}</code><br/>
           <br/>
-          <i class="icon-star-empty"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
+          <i class="icon-star-full"></i>&nbsp;Is Featured: <code>{{ post.featured || 'false' }}</code><br/>
           <i class="icon-pushpin"></i>&nbsp;Is Published: <code>{{ post.published || 'false' }}</code><br/>
           <i class="icon-bin"></i>&nbsp;Is Deleted: <code>{{ post.deleted || 'false' }}</code>
         </p>

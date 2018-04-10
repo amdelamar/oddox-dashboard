@@ -28,7 +28,8 @@
             <label for="showCat"><span class="text-small"><i class="icon-folder"></i>&nbsp;Show Category</span></label>
             <input type="checkbox" id="showTags" v-model="option.showTags" />
             <label for="showTags"><span class="text-small"><i class="icon-price-tag"></i>&nbsp;Show Tags</span></label>
-
+            <input type="checkbox" id="showConflicts" v-model="option.showConflicts" />
+            <label for="showConflicts"><span class="text-small"><i class="icon-power"></i>&nbsp;Show Save Conflicts</span></label>
           </div>
         </span>
         </div>
@@ -56,10 +57,13 @@
         <router-link :to="{ name:'view-post', params:{ id:post._id }}">
           <div class="row padding-left border-bottom border-tertiary margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
-              <span v-if="option.showStar && post.featured" class="icon-star-full right margin-right"></span>
+              <span v-if="option.showConflicts && post._conflicts !== 'undefined' && post._conflicts != null && post._conflicts.length > 0"
+                class="icon-power text-danger right margin-right" title="Save conflict!">
+              </span>
+              <span v-if="option.showStar && post.featured" class="icon-star-full right margin-right" title="Featured"></span>
               {{ post.title | shorten(45) }}<br/>
               <span v-if="option.showDesc" class="text-darkgrey text-nowrap">{{ post.description | shorten(60) }}<br/></span>
-              <span v-if="option.showAuthor" class="text-darkgrey">{{ post.authorId || '?' }}</span>
+              <span v-if="option.showAuthor" class="text-darkgrey" title="Author">{{ post.authorId || '?' }}</span>
               <span v-if="option.showAuthor && (option.showCat || option.showTags)" class="text-grey">&nbsp;|&nbsp;</span>
               <span v-if="option.showCat" class="text-small text-nowrap" title="category">
                 <code>{{ post.category || '?' }}</code>
@@ -91,7 +95,8 @@ export default {
         showDesc: true,
         showStar: true,
         showCat: false,
-        showTags: false
+        showTags: false,
+        showConflicts: true
       },
       message: ''
     }

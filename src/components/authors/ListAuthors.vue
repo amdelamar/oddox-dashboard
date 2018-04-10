@@ -23,9 +23,11 @@
             <input type="checkbox" id="showDesc" v-model="option.showDesc" />
             <label for="showDesc"><span class="text-small"><i class="icon-eye"></i>&nbsp;Show Descriptions</span></label>
             <input type="checkbox" id="showUser" v-model="option.showUser" />
-            <label for="showUser"><span class="text-small"><i class="icon-star-full"></i>&nbsp;Show Username</span></label>
+            <label for="showUser"><span class="text-small"><i class="icon-user"></i>&nbsp;Show Username</span></label>
             <input type="checkbox" id="showRole" v-model="option.showRole" />
-            <label for="showRole"><span class="text-small"><i class="icon-star-full"></i>&nbsp;Show Role</span></label>
+            <label for="showRole"><span class="text-small"><i class="icon-price-tag"></i>&nbsp;Show Role</span></label>
+            <input type="checkbox" id="showConflicts" v-model="option.showConflicts" />
+            <label for="showConflicts"><span class="text-small"><i class="icon-power"></i>&nbsp;Show Save Conflicts</span></label>
           </div>
         </span>
         </div>
@@ -54,6 +56,9 @@
         <router-link :to="{ name:'view-author', params:{ id:author._id }}">
           <div class="row padding-left border-bottom border-tertiary margin-none" v-bind:class="{ 'padding': option.mode == 0 }">
             <p class="margin-none text-nowrap">
+              <span v-if="option.showConflicts && author._conflicts !== 'undefined' && author._conflicts != null && author._conflicts.length > 0"
+                class="icon-power text-danger right margin-right" title="Save conflict!">
+              </span>
               <span v-if="option.showThumb" class="text-small text-nowrap" title="profile picture">
                 <img v-if="author.thumbnail.length > 0" class="left margin-right background-white circle border" height="25" width="25" alt="" :src="author.thumbnail" />
                 <div v-if="author.thumbnail.length == 0" class="left margin-right background-white circle border" style="height:25px;width:25px"></div>
@@ -86,7 +91,8 @@ export default {
         showDesc: true,
         showThumb: true,
         showUser: false,
-        showRole: false
+        showRole: false,
+        showConflicts: true
       },
       message: ''
     }
