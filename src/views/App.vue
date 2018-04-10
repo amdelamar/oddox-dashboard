@@ -57,7 +57,7 @@ html, body {
 .text-white {
   color: var(--white) !important;
 }
-.button {
+.button, a {
   transition: all 0.1s ease;
 }
 .super-center {

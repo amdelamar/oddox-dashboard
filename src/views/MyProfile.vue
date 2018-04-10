@@ -10,13 +10,13 @@
     <section class="full-main-content columns border-top border-tertiary full-height">
       <div class="padding padding-left-large full-height full-width background-white scrollable">
 
-        <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading">
+        <p class="super-center text-center text-darkgrey animated fadeIn" v-if="loading && message.length == 0">
           <i class="icon-spinner9 animated spin"></i><br/>
           <em>Loading...</em>
         </p>
         <p class="super-center text-center animated fadeIn" v-if="message.length > 0">
-          <i class="icon-notification text-red text-largest"></i><br/>
-          <em class="text-red text-bold">{{ message }}</em>
+          <i class="icon-notification text-danger text-largest"></i><br/>
+          <em class="text-danger text-bold">{{ message }}</em>
         </p>
 
       </div>
