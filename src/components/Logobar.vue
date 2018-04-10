@@ -26,18 +26,15 @@ export default { }
   position: relative;
   display: block;
 }
-#app-logobar .nav-item-logo {
-  filter: grayscale(100%);
-  opacity: 0.8;
-  transition: all 0.5s ease;
-}
 #app-logobar .nav-item-logo a {
   text-decoration: none;
   cursor: pointer;
 }
+#app-logobar .nav-item-logo {
+  transition: all 0.5s ease;
+}
 #app-logobar .nav-item-logo:hover, #app-logobar .nav-item-logo:focus {
-  filter: grayscale(0%);
-  opacity: 1;
+  box-shadow:inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 #app-logobar .dropdown-body {
   min-width: 21rem;

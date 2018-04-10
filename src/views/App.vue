@@ -60,10 +60,6 @@ html, body {
 .button {
   transition: all 0.1s ease;
 }
-.button:hover {
-  opacity: 1 !important;
-  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
-}
 .super-center {
   position: relative;
   width: 200px;
@@ -88,18 +84,20 @@ html, body {
 .overflow-none {
   overflow: none;
 }
-.full-height {
-  height: 100%;
-}
-input:hover, input:active, input:focus {
+
+input[type="email"]:active,input[type="number"]:active,input[type="search"]:active,input[type="text"]:active,input[type="tel"]:active,input[type="url"]:active,input[type="password"]:active,input[type="date"]:active,input[type="time"]:active,textarea:active,select:active,
+input[type="email"]:focus,input[type="number"]:focus,input[type="search"]:focus,input[type="text"]:focus,input[type="tel"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="date"]:focus,input[type="time"]:focus,textarea:focus,select:focus,
+input[type="email"]:hover,input[type="number"]:hover,input[type="search"]:hover,input[type="text"]:hover,input[type="tel"]:hover,input[type="url"]:hover,input[type="password"]:hover,input[type="date"]:hover,input[type="time"]:hover,textarea:hover,select:hover{
   background-color: var(--white) !important;
 }
+
 .shadow, .hover-shadow:hover {
   box-shadow: 0 4px 4px 0 rgba(0,0,0,0.15) !important;
 }
 .shadow-outline, .hover-shadow-outline:hover {
   box-shadow: 0 0 4px 1px rgba(0,0,0,0.15) !important;
 }
+
 .dialog {
   /* display: none; */
   z-index: 1;
@@ -111,7 +109,6 @@ input:hover, input:active, input:focus {
   margin: -125px 0 0 -200px;
 }
 
-.text-capitalize { text-transform: capitalize; }
 .text-lightgrey { color: #fafafa; }
 .text-grey { color: #d3d3d3; }
 .text-darkgrey { color: #8c8c8c; }

@@ -7,8 +7,8 @@ import store from './store'
 import { shorten } from './filters/shorten'
 
 // Require css framework files
-import './assets/vendor/osseous/2.0.0/osseous.min.css'
-// import './assets/vendor/osseous/2.0.0/osseous.min.js'
+import './assets/vendor/osseous/2.0.1/osseous.min.css'
+// import './assets/vendor/osseous/2.0.1/osseous.min.js'
 import './assets/vendor/animate/3.5.2/animate.min.css'
 // import './assets/vendor/highlight/9.12.0/highlight.pack.js'
 import './assets/vendor/highlight/9.12.0/styles/default.min.css'

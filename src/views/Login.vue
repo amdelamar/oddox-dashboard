@@ -13,7 +13,7 @@
           <i class="icon-database text-grey"></i>
         </div>
         <div class="ten columns">
-          <input class="full-width" placeholder="Database URL" v-model="authToken.url" type="text" required autocapitalize="off" autocorrect="off" autocomplete="off" />
+          <input name="url" class="full-width" placeholder="Database URL" v-model="authToken.url" type="text" required autocapitalize="off" autocorrect="off" autocomplete="off" />
         </div>
       </div>
       <div class="row">
@@ -21,7 +21,7 @@
           <i class="icon-user text-grey"></i>
         </div>
         <div class="ten columns">
-          <input class="full-width" placeholder="Username" v-model="authToken.username" type="text" required autofocus autocapitalize="off" autocorrect="off" />
+          <input name="username" class="full-width" placeholder="Username" v-model="authToken.username" type="text" required autofocus autocapitalize="off" autocorrect="off" />
         </div>
       </div>
       <div class="row">
@@ -29,7 +29,7 @@
           <i class="icon-key text-grey"></i>
         </div>
         <div class="ten columns">
-          <input class="full-width" placeholder="Password" v-model="authToken.password" type="password" required />
+          <input name="password" class="full-width" placeholder="Password" v-model="authToken.password" type="password" required />
         </div>
       </div>
       <div class="row text-center" v-if="message.length > 1">
@@ -46,7 +46,7 @@
       </form>
 
     </div>
-    <div class="twelve columns animated fadeInUp">
+    <div class="twelve columns animated fadeIn">
       <p class="text-center text-darkgrey">
         <a class="text-darkgrey" href="/#/forgot/username">Forgot Username?</a>&nbsp;/
         <a class="text-darkgrey" href="/#/forgot/password">Forgot Password?</a>

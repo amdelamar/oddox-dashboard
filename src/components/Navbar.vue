@@ -23,7 +23,7 @@
           <button class="button border-none hover-shadow-outline" v-on:click="sync" :disabled="disableFlag"><i v-if="!iconSpin" class="icon-loop2"></i><i v-if="iconSpin" v-bind:class="{ 'animated spin': iconSpin }" class="icon-spinner8"></i>&nbsp;{{ syncButton }}</button>
 
           <a href="javascript: void(0)" class="button border-none dropdown hover-shadow-outline margin-left"><i class="icon-user"></i>&nbsp;&#9662;
-            <div class="dropdown-body round border nav-list shadow">
+            <div class="dropdown-body round border nav-list background-white shadow">
               <div class="margin-none padding full-width text-center text-darkgrey">
                 Welcome <span class="text-bold" title="This is your username">{{ authToken.username }}</span><br/>
                 <small title="This is your role">
@@ -126,18 +126,15 @@ export default {
   position: relative;
   display: block;
 }
-#app-navbar .nav-item-logo {
-  /* filter: grayscale(100%); */
-  opacity: 0.8;
-  transition: all 0.5s ease;
-}
 #app-navbar .nav-item-logo a {
   text-decoration: none;
   cursor: pointer;
 }
+#app-navbar .nav-item-logo {
+  transition: all 0.5s ease;
+}
 #app-navbar .nav-item-logo:hover, #app-navbar .nav-item-logo:focus {
-  /* filter: grayscale(0%); */
-  opacity: 1;
+  box-shadow:inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 #app-navbar .dropdown-body {
   min-width: 21rem;
@@ -148,9 +145,5 @@ export default {
 }
 #app-navbar .router-link-active:hover, #app-navbar .router-link-exact-active:hover {
   text-decoration: none;
-}
-.greyscale {
-  filter: grayscale(100%);
-  transition: all 0.3s ease;
 }
 </style>
