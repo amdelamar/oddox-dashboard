@@ -3,7 +3,7 @@
       <div class="navbar-body padding-left padding-right">
 
         <div class="nav-item-logo">
-            <router-link to="/">
+            <router-link :to="{name:'home'}">
               <img class="background-darkgrey circle margin-left margin-right" src="static/img/icon-circle-light-512.png" alt="Logo" />
               <span class="text-medium text-thin text-uppercase text-wide">Dashboard</span>
             </router-link>
