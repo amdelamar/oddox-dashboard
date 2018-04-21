@@ -1,0 +1,24 @@
+# Docker Ignored files and folders
+
+# Npm
+node_modules/
+
+# Webpack
+config/
+build/
+test/
+webpack.config.js
+
+# Git
+.git/
+.github/
+.gitattributes
+.gitignore
+
+# Miscellaneous
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.postcssrc.js
+.travis.yml
