@@ -3,8 +3,8 @@
 [![Build](https://img.shields.io/travis/oddoxorg/dashboard.svg)](https://travis-ci.org/oddoxorg/dashboard)
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/oddoxorg/dashboard.svg)](https://codecov.io/gh/oddoxorg/dashboard)
+[![Known Vulnerabilities](https://snyk.io/test/github/oddoxorg/dashboard/badge.svg)](https://snyk.io/test/github/oddoxorg/dashboard)
 [![Greenkeeper badge](https://badges.greenkeeper.io/oddoxorg/dashboard.svg)](https://greenkeeper.io/)
-[![License](https://img.shields.io/:license-apache-blue.svg)](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
 
 Offline-first dashboard for authors to manage their Oddox blog
 
@@ -53,6 +53,4 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
  * [Webpack 3.+](https://webpack.js.org/) Module Bundler
  * [Node.js 8.+](https://nodejs.org/) for local dev and testing
 
-## License
-
-[Apache 2.0](https://github.com/oddoxorg/dashboard/blob/master/LICENSE)
+[Apache 2.0](https://github.com/oddoxorg/dashboard/blob/master/LICENSE) License
