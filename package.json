@@ -41,7 +41,7 @@
     "codecov": "^3.0.2",
     "copy-webpack-plugin": "^4.5.1",
     "cross-spawn": "^6.0.5",
-    "css-loader": "^0.28.11",
+    "css-loader": "^1.0.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-friendly-formatter": "^4.0.1",
