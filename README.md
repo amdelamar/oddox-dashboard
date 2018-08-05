@@ -49,6 +49,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
  * [Osseous 2.+](https://austindelamar.com/osseous/) CSS Framework
  * [Icomoon](http://icomoon.io/) Icons
  * [Webpack 3.+](https://webpack.js.org/) Module Bundler
- * [Node.js 8.+](https://nodejs.org/) for local dev and testing
+ * [Node.js 10.+](https://nodejs.org/) for local dev and testing
+ * [Nginx 1.+](https://nginx.org/) for production
 
 [Apache 2.0](https://github.com/oddoxorg/dashboard/blob/master/LICENSE) License
