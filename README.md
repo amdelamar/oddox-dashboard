@@ -4,9 +4,7 @@
 [![Codacy grade](https://img.shields.io/codacy/grade/5442d4e80cdf462584e74cdbe9d82063.svg)](https://www.codacy.com/app/amdelamar/oddox-dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/amdelamar/oddox-dashboard.svg)](https://codecov.io/gh/amdelamar/oddox-dashboard)
 
-Offline-first dashboard for authors to manage their Oddox blog
-
-> https://dashboard.oddox.org
+Offline-first dashboard for authors to manage their Oddox blog.
 
 ## About
 
